@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="events_wrapper_height">19.0dip</dimen>
+    <dimen name="vakat_mins_icons_size">19.0sp</dimen>
+    <dimen name="vakat_mins_size">9.0sp</dimen>
+    <dimen name="vakat_time_size">30.0sp</dimen>
+    <dimen name="vakat_title_size">13.0sp</dimen>
+    <dimen name="ab_city_title_size">20.0dip</dimen>
+    <dimen name="abc_action_bar_default_height_material">48.0dip</dimen>
+    <dimen name="abc_action_bar_progress_bar_size">32.0dip</dimen>
+    <dimen name="abc_text_size_subtitle_material_toolbar">12.0dip</dimen>
+    <dimen name="abc_text_size_title_material_toolbar">14.0dip</dimen>
+</resources>

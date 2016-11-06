@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:id="@id/widget_layout_keyguard_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="5.0dip" android:text="Učitavam..." android:layout_alignParentTop="true" android:layout_centerHorizontal="true" />
+        <TextView android:id="@id/widget_layout_keyguard_prevNext" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="5.0dip" android:text="" android:layout_below="@id/widget_layout_keyguard_info" android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</FrameLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference android:title="@string/location" android:key="locationName" />
+    <PreferenceCategory android:title="@string/notifications" android:key="notifications">
+        <CheckBoxPreference android:title="@string/statusbar_notification" android:key="statusbarNotification" android:defaultValue="true" android:summaryOn="@string/statusbar_notification_on" android:summaryOff="@string/statusbar_notification_off" />
+        <CheckBoxPreference android:title="@string/all_prayers_in_notif" android:key="ALL_PRAYERS_IN_NOTIF" android:dependency="statusbarNotification" android:defaultValue="false" android:summaryOn="@string/all_prayers_shown_in_notif" android:summaryOff="@string/all_prayers_not_shown_in_notif" />
+        <Preference android:title="@string/prefs_notification_tone" android:key="notificationToneUri" android:summary="@string/prefs_notification_tone_summary" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/prefs_alarms" android:key="alarms">
+        <Preference android:title="@string/prefs_alarm_tone" android:key="alarmToneUri" android:summary="@string/prefs_alarm_tone_summary" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/dhuhr_prayer" android:key="dhuhrTimeCounting">
+        <ListPreference android:entries="@array/dhuhrTimeEntries" android:title="@string/dhuhr_calculation" android:key="dhuhrTime" android:summary="@string/dhuhr_calculation_summary" android:entryValues="@array/dhuhrTimeValues" />
+        <CheckBoxPreference android:title="@string/prefs_separateJumaSettings_title" android:key="separateJumaSettings" android:defaultValue="true" android:summaryOn="@string/prefs_separateJumaSettings_enabled" android:summaryOff="@string/prefs_separateJumaSettings_disabled" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/application" android:key="app">
+        <CheckBoxPreference android:title="@string/prefs_showDate_title" android:key="showDate" android:defaultValue="false" android:summaryOn="@string/prefs_showDate_enabled" android:summaryOff="@string/prefs_showDate_disabled" />
+        <Preference android:title="@string/prefs_feedback_title" android:key="feedback" android:summary="@string/prefs_feedback_summary">
+            <intent android:action="android.intent.action.VIEW" android:data="@string/prefs_feedback_email_ready">
+                <extra android:name="android.intent.extra.SUBJECT" android:value="@string/prefs_feedback_subject" />
+            </intent>
+        </Preference>
+        <Preference android:title="@string/about_app" android:key="about" android:summary="@string/version_name">
+            <intent android:targetPackage="ba.vaktija.android" android:action="android.intent.action.VIEW" android:targetClass="ba.vaktija.android.prefs.AboutActivity" />
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

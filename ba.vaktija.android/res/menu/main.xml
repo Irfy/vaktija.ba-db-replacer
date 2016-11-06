@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@id/menu_main_date_picker" android:title="Odaberi datum..." app:showAsAction="never" />
+    <item android:id="@id/menu_main_share" android:title="Podijeli..." app:showAsAction="never" />
+    <item android:id="@id/menu_main_settings" android:title="Postavke" app:showAsAction="never" />
+    <item android:id="@id/menu_main_close" android:title="Ugasi aplikaciju" app:showAsAction="never" />
+</menu>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="abc_action_bar_home_description">Navigate home</string>
+    <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
+    <string name="abc_action_bar_home_subtitle_description_format">%1$s, %2$s, %3$s</string>
+    <string name="abc_action_bar_up_description">Navigate up</string>
+    <string name="abc_action_menu_overflow_description">More options</string>
+    <string name="abc_action_mode_done">Done</string>
+    <string name="abc_activity_chooser_view_see_all">See all</string>
+    <string name="abc_activitychooserview_choose_application">Choose an app</string>
+    <string name="abc_search_hint">Search…</string>
+    <string name="abc_searchview_description_clear">Clear query</string>
+    <string name="abc_searchview_description_query">Search query</string>
+    <string name="abc_searchview_description_search">Search</string>
+    <string name="abc_searchview_description_submit">Submit query</string>
+    <string name="abc_searchview_description_voice">Voice search</string>
+    <string name="abc_shareactionprovider_share_with">Share with</string>
+    <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
+    <string name="abc_toolbar_collapse_description">Collapse</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="about_app">O aplikaciji</string>
+    <string name="activity_settings">Postavke</string>
+    <string name="alarm">Alarm</string>
+    <string name="alarm_for_prayer">Alarm za %1$s</string>
+    <string name="alarm_is_missed_for">Propušten je alarm za %1$s</string>
+    <string name="alarm_missed">Alarm propušten</string>
+    <string name="alarm_missed_for">Propušten alarm za %1$s</string>
+    <string name="alarm_sound">Zvuk za alarm</string>
+    <string name="all_prayers_in_notif">Sva vremena u notifikaciji</string>
+    <string name="all_prayers_not_shown_in_notif">Sva vremena se ne prikazuju u notifikaciji</string>
+    <string name="all_prayers_shown_in_notif">Sva vremena se prikazuju u notifikaciji</string>
+    <string name="app_name">Vaktija.ba</string>
+    <string name="application">Aplikacija</string>
+    <string name="ask_no_more">Ne pitaj više</string>
+    <string name="back_button_label">Back</string>
+    <string name="cancel">Odustani</string>
+    <string name="cant_use_selected_tone">Odabrani zvuk se ne može koristiti, odaberite drugi.</string>
+    <string name="changelog">"1.1.8 
+\u0009• Ispravka za alarm za Android 7 
+\u0009• Gašenje alarma pritiskom na HOME/VOLUME tipku 
+1.1.7 
+\u0009• Doze mode optimizacije 
+1.1.6 
+\u0009• Ispravka vremena za februar 
+1.1.5 
+\u0009• Isključen prikaz hidžretskog datuma osim kada se koristi opcija Odaberi datum... iz glavnog menija 
+1.1.4 
+\u0009• Opcija isključivanja vibracije prilikom gašenja zvukova onemogućena do daljnjeg na Androidima 5.0 i novijim 
+1.1.3 
+\u0009• Ispravljeno rušenje aplikacije prilikom odabira nekih zvukova 
+1.1.2 
+\u0009• Ispravljeno rušenje aplikacije na Androidu 4.0.4 nakon odabira grada 
+1.1.1 
+\u0009• Manja poboljšanja 
+1.1 
+\u0009• Dodana opcija za prikaz svih vremena u notifikaciji 
+\u0009• Dodano prikazivanje hidžretskog datuma 
+1.0-beta 
+\u0009• Prva verzija"</string>
+    <string name="crash_toast_text">Vaktija crashed. Send report please.</string>
+    <string name="date_in_subtitle">Datum ispod naziva lokacije</string>
+    <string name="dev_email">android@vaktija.ba</string>
+    <string name="dhuhr_calculation">Vrijeme podne namaza</string>
+    <string name="dhuhr_calculation_summary">Računanje vremena za podne namaz</string>
+    <string name="dhuhr_counting">Vrijeme podne namaza</string>
+    <string name="dhuhr_prayer">Podne namaz</string>
+    <string name="dialog_message_analytics_opt_out">"Vaktija koristi Google Analytics za izvještavanje o korištenju aplikacije.
+
+Da li želite isključiti izvještavanje?"</string>
+    <string name="dialog_no">Ne</string>
+    <string name="dialog_title_analytics_opt_out_title">Google Analytics</string>
+    <string name="dialog_yes">Da</string>
+    <string name="done">GOTOVO</string>
+    <string name="doze_mode">Vaktija i Doze Mode</string>
+    <string name="doze_mode_message">Da bi alarmi radili ispravno Vaktiju je potrebno dodati u listu aplikacija za koje se ne primjenjuju optimizacije za potrošnju baterije.</string>
+    <string name="feedback">Feedback</string>
+    <string name="friday">Petak</string>
+    <string name="google_analytics">Google Analytics</string>
+    <string name="location">Lokacija</string>
+    <string name="monday">Ponedjeljak</string>
+    <string name="next_button_label">Next</string>
+    <string name="no_sounds_till">Bez zvukova do %1$s</string>
+    <string name="notification_sound">Zvuk za notifikacije</string>
+    <string name="notifications">Notifikacije</string>
+    <string name="ok">Uredu</string>
+    <string name="open_settings">Otvori postavke</string>
+    <string name="play_url">https://play.google.com/store/apps/details?id=ba.vaktija.android</string>
+    <string name="prayer_times_for_date">Vaktija za %1$s</string>
+    <string name="prefs_alarm_tone">Zvuk za alarm</string>
+    <string name="prefs_alarm_tone_summary">Zvuk za alarm…</string>
+    <string name="prefs_alarms">Alarm</string>
+    <string name="prefs_export_title">Eksportuj postavke</string>
+    <string name="prefs_feedback_email_ready">mailto:android@vaktija.ba</string>
+    <string name="prefs_feedback_subject">Vaktija za Android (v1.1.8)</string>
+    <string name="prefs_feedback_summary">Pošalji prijedlog, prijavi bug…</string>
+    <string name="prefs_feedback_title">Dojam</string>
+    <string name="prefs_ga_disabled">Google Analytics je isključen</string>
+    <string name="prefs_ga_enabled">Google Analytics je uključen</string>
+    <string name="prefs_ga_title">Google Analytics</string>
+    <string name="prefs_import_title">Importuj postavke</string>
+    <string name="prefs_notification_tone">Zvuk za notifikacije</string>
+    <string name="prefs_notification_tone_summary">Klikni da odabereš zvuk…</string>
+    <string name="prefs_separateJumaSettings_disabled">Neće biti razlike između postavki za podne i džumu</string>
+    <string name="prefs_separateJumaSettings_enabled">Koristit će se posebne postavke za džumu. Npr.: zvukovi će biti ugašeni duže nego za podne.</string>
+    <string name="prefs_separateJumaSettings_title">Posebne postavke za džumu</string>
+    <string name="prefs_showDate_disabled">Datum se neće prikazivati</string>
+    <string name="prefs_showDate_enabled">Datum će se prikazivati</string>
+    <string name="prefs_showDate_title">Datum ispod naziva grada</string>
+    <string name="preparing_please_wait">Pripremam vaktiju, pričekaj molim...</string>
+    <string name="real_time">Stvarno vrijeme</string>
+    <string name="saturday">Subota</string>
+    <string name="separate_juma_settings">Posebne postavke za džumu</string>
+    <string name="share_using">Podijeli koristeći...</string>
+    <string name="silent_description">Zvukovi se isključuju nastupanjem namaza</string>
+    <string name="silent_description_sunrise">Zvukovi se uključuju sa izlaskom sunca</string>
+    <string name="silent_disabled_manually">Zvukovi uključeni ručno</string>
+    <string name="silent_set_manually">Zvukovi isključeni ručno</string>
+    <string name="skip_alarm">Preskoči alarm</string>
+    <string name="skip_button_label">Skip</string>
+    <string name="skip_notification">Preskoči notifikaciju</string>
+    <string name="skip_silent">Preskoči gašenje zvukova</string>
+    <string name="standard_time">Standardno vrijeme</string>
+    <string name="standard_time_12_13">Standardno vrijeme (12h/13h)</string>
+    <string name="statusbar_notification">Stalna notifikacija</string>
+    <string name="statusbar_notification_off">Stalna notifikacija isključena</string>
+    <string name="statusbar_notification_on">Stalna notifikacija će se prikazivati u statusnoj traci</string>
+    <string name="sunday">Nedjelja</string>
+    <string name="thursday">Četvrtak</string>
+    <string name="tuesday">Utorak</string>
+    <string name="turn_alarm_on">Uključi alarm</string>
+    <string name="turn_notification_on">Uključi notifikaciju</string>
+    <string name="turn_off">Ugasi</string>
+    <string name="turn_on">Uključi</string>
+    <string name="turn_silent_on">Uključi gašenje zvukova</string>
+    <string name="vaktija_url">vaktija.ba</string>
+    <string name="version_name">1.1.8</string>
+    <string name="wednesday">Srijeda</string>
+</resources>

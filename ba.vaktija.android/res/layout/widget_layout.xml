@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:padding="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/widget_layout_root" android:background="@drawable/widget_bg_light" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:layout_gravity="left" android:id="@id/widget_layout_city" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" />
+            <ImageView android:layout_gravity="right" android:id="@id/widget_layout_app" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" />
+        </FrameLayout>
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="@dimen/widget_row_height" android:layout_marginRight="5.0dip">
+            <ImageView android:id="@id/widget_layout_fajr_current" android:layout_width="@dimen/widget_current_indicator_width" android:layout_height="@dimen/widget_row_height" android:layout_alignParentLeft="true" />
+            <ImageView android:id="@id/widget_layout_fajr_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="5.0dip" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <LinearLayout android:orientation="horizontal" android:id="@id/icons_wrapper" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerHorizontal="true" android:layout_centerVertical="true">
+                <ImageView android:id="@id/widget_layout_fajr_alarm" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_alarm" />
+                <ImageView android:id="@id/widget_layout_fajr_notif" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_info" />
+                <ImageView android:id="@id/widget_layout_fajr_silent" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_sound_off" />
+            </LinearLayout>
+            <ImageView android:id="@id/widget_layout_fajr_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="@dimen/widget_row_height" android:layout_marginRight="5.0dip">
+            <ImageView android:id="@id/widget_layout_sunrise_current" android:layout_width="@dimen/widget_current_indicator_width" android:layout_height="@dimen/widget_row_height" android:layout_alignParentLeft="true" />
+            <ImageView android:id="@id/widget_layout_sunrise_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="5.0dip" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <LinearLayout android:orientation="horizontal" android:id="@id/icons_wrapper" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerHorizontal="true" android:layout_centerVertical="true">
+                <ImageView android:id="@id/widget_layout_sunrise_alarm" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_alarm" />
+                <ImageView android:id="@id/widget_layout_sunrise_notif" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_info" />
+                <ImageView android:id="@id/widget_layout_sunrise_silent" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_sound_off" />
+            </LinearLayout>
+            <ImageView android:id="@id/widget_layout_sunrise_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="@dimen/widget_row_height" android:layout_marginRight="5.0dip">
+            <ImageView android:id="@id/widget_layout_dhuhr_current" android:layout_width="@dimen/widget_current_indicator_width" android:layout_height="@dimen/widget_row_height" android:layout_alignParentLeft="true" />
+            <ImageView android:id="@id/widget_layout_dhuhr_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="5.0dip" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <LinearLayout android:orientation="horizontal" android:id="@id/icons_wrapper" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerHorizontal="true" android:layout_centerVertical="true">
+                <ImageView android:id="@id/widget_layout_dhuhr_alarm" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_alarm" />
+                <ImageView android:id="@id/widget_layout_dhuhr_notif" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_info" />
+                <ImageView android:id="@id/widget_layout_dhuhr_silent" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_sound_off" />
+            </LinearLayout>
+            <ImageView android:id="@id/widget_layout_dhuhr_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="@dimen/widget_row_height" android:layout_marginRight="5.0dip">
+            <ImageView android:id="@id/widget_layout_asr_current" android:layout_width="@dimen/widget_current_indicator_width" android:layout_height="@dimen/widget_row_height" android:layout_alignParentLeft="true" />
+            <ImageView android:id="@id/widget_layout_asr_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="5.0dip" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <LinearLayout android:orientation="horizontal" android:id="@id/icons_wrapper" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerHorizontal="true" android:layout_centerVertical="true">
+                <ImageView android:id="@id/widget_layout_asr_alarm" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_alarm" />
+                <ImageView android:id="@id/widget_layout_asr_notif" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_info" />
+                <ImageView android:id="@id/widget_layout_asr_silent" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_sound_off" />
+            </LinearLayout>
+            <ImageView android:id="@id/widget_layout_asr_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="@dimen/widget_row_height" android:layout_marginRight="5.0dip">
+            <ImageView android:id="@id/widget_layout_maghrib_current" android:layout_width="@dimen/widget_current_indicator_width" android:layout_height="@dimen/widget_row_height" android:layout_alignParentLeft="true" />
+            <ImageView android:id="@id/widget_layout_maghrib_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="5.0dip" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <LinearLayout android:orientation="horizontal" android:id="@id/icons_wrapper" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerHorizontal="true" android:layout_centerVertical="true">
+                <ImageView android:id="@id/widget_layout_maghrib_alarm" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_alarm" />
+                <ImageView android:id="@id/widget_layout_maghrib_notif" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_info" />
+                <ImageView android:id="@id/widget_layout_maghrib_silent" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_sound_off" />
+            </LinearLayout>
+            <ImageView android:id="@id/widget_layout_maghrib_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="@dimen/widget_row_height" android:layout_marginRight="5.0dip">
+            <ImageView android:id="@id/widget_layout_ishaa_current" android:layout_width="@dimen/widget_current_indicator_width" android:layout_height="@dimen/widget_row_height" android:layout_alignParentLeft="true" />
+            <ImageView android:id="@id/widget_layout_ishaa_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="5.0dip" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <LinearLayout android:orientation="horizontal" android:id="@id/icons_wrapper" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerHorizontal="true" android:layout_centerVertical="true">
+                <ImageView android:id="@id/widget_layout_ishaa_alarm" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_alarm" />
+                <ImageView android:id="@id/widget_layout_ishaa_notif" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_info" />
+                <ImageView android:id="@id/widget_layout_ishaa_silent" android:layout_width="@dimen/widget_icon_size" android:layout_height="@dimen/widget_icon_size" android:src="@drawable/ic_sound_off" />
+            </LinearLayout>
+            <ImageView android:id="@id/widget_layout_ishaa_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>

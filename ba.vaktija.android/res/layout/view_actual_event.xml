@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:id="@id/main_actual_event_wrapper" android:background="?colorAccent" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="?android:textAppearanceMedium" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@id/main_actual_event_message" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_margin="14.0dip" android:text="New Text" android:layout_weight="1.0" />
+    <TextView android:textColor="?colorAccent" android:layout_gravity="center_vertical" android:id="@id/main_actual_event_hide" android:background="@drawable/simple_button" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sakrij" />
+    <TextView android:textColor="?colorAccent" android:layout_gravity="center_vertical" android:id="@id/main_actual_event_action" android:background="@drawable/simple_button" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="14.0dip" android:text="Uključi" />
+</LinearLayout>

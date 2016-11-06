@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:id="@id/scrollView1" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+                <TextView android:textSize="15.0sp" android:textStyle="bold" android:textColor="@android:color/darker_gray" android:id="@id/textView3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="10.0dip" android:text="VRIJEME ZA PODNE NAMAZ" fontPath="fonts/RobotoCondensed-Regular.ttf" />
+                <RadioGroup android:id="@id/fragment_vakat_tweaks_radioGroup" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" fontPath="fonts/RobotoCondensed-Regular.ttf">
+                    <RadioButton android:textSize="18.0sp" android:id="@id/radioNormalized" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/standard_time" />
+                    <TextView android:id="@id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:text="Podne je u 12:00h za zimsko računanje ili u 13:00h za ljetno računanje vremena" fontPath="fonts/RobotoCondensed-Regular.ttf" />
+                    <RadioButton android:textSize="18.0sp" android:id="@id/radioReal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:text="@string/real_time" fontPath="fonts/RobotoCondensed-Regular.ttf" />
+                    <TextView android:id="@id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginBottom="20.0dip" android:text="Podne je tačno onda kada nastupi" fontPath="fonts/RobotoCondensed-Regular.ttf" />
+                </RadioGroup>
+                <TextView android:textSize="15.0sp" android:textStyle="bold" android:textColor="@android:color/darker_gray" android:id="@id/textView3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="10.0dip" android:text="PODNE I DŽUMA" fontPath="fonts/RobotoCondensed-Regular.ttf" />
+                <CheckBox android:textSize="18.0sp" android:id="@id/fragment_vakat_tweaks_jumaChbox" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:checked="true" android:text="Koristi posebne postavke za džumu" fontPath="fonts/RobotoCondensed-Regular.ttf" />
+                <TextView android:id="@id/fragment_vakat_tweaks_juma_explTxtView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginBottom="20.0dip" android:text="@string/prefs_separateJumaSettings_enabled" fontPath="fonts/RobotoCondensed-Regular.ttf" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <include layout="@layout/wizard_bottom_nav" />
+</LinearLayout>
