@@ -602,7 +602,7 @@
 
     const-string v4, "locationName"
 
-    const-string v5, "Sarajevo"
+    const-string v5, "Beč (Džemat Bosna)"
 
     invoke-interface {v3, v4, v5}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
@@ -693,7 +693,7 @@
 
     const-string v24, "locationName"
 
-    const-string v25, "Sarajevo"
+    const-string v25, "Beč (Džemat Bosna)"
 
     invoke-interface/range {v23 .. v25}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 

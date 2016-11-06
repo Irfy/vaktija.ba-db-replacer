@@ -10,7 +10,7 @@
 
 .field public static final LOCATION_ID:I = 0x6b
 
-.field public static final LOCATION_NAME:Ljava/lang/String; = "Sarajevo"
+.field public static final LOCATION_NAME:Ljava/lang/String; = "Beč (Džemat Bosna)"
 
 .field public static NOTIF_TONE_TITLE:Ljava/lang/String; = null
 

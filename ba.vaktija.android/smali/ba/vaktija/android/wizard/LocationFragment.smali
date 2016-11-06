@@ -62,7 +62,7 @@
     iput v0, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
 
     .line 50
-    const-string v0, "Sarajevo"
+    const-string v0, "Beč (Džemat Bosna)"
 
     iput-object v0, p0, Lba/vaktija/android/wizard/LocationFragment;->locationName:Ljava/lang/String;
 
