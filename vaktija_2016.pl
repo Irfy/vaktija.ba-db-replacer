@@ -86,7 +86,7 @@ sub gradient_sanity {
         print "[$id gradient change #$gradients{$id}{changes}!]" if $gradients{$id}{changes} > 2;
     }
     $gradients{$id}{sign} = $sign;
-    die if $gradients{$id}{changes} > 5;
+    die if ($gradients{$id}{changes} // 0) > 5;
 }
 
 sub sanity_check {
