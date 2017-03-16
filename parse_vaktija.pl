@@ -5,13 +5,18 @@ use warnings;
 use autodie;
 use Time::Local;
 use Data::Dumper;
+use File::Slurp;
+use JSON::XS;
 
-open (my $fh, $ARGV[0] // 'vaktija_2016.txt');
-open (my $csv, '>', $ARGV[1] // 'vaktija_2016.csv');
+my $year = $ARGV[0] // `echo -n \$(date +%Y)`;
+my $conf = decode_json(read_file('conf.json'))->{$year};
+
+open (my $fh, "vaktija_$year.txt");
+open (my $csv, '>', $ARGV[1] // "vaktija_$year.csv");
 
 my $month = 0;
 my %prev_times;
-my %overrides = ( '25-08-fajr' => { hours => 4, minutes => 19} );
+my $overrides = $conf->{overrides};
 my $nrecords = 0;
 while (my $line = <$fh>) {
     next unless $line =~ /^\s{1,5}\d{1,2}.*\d{2}$/;
@@ -38,11 +43,11 @@ while (my $line = <$fh>) {
         $times{$id}{hours} = $h // $prev_times{$id}{hours};
         $times{$id}{minutes} = $m;
         printf(" %02d:%02d", $times{$id}{hours}, $times{$id}{minutes});
-        if (my $override = $overrides{sprintf("%02d-%02d-%s", $day, $month, $id)}) {
+        if (my $override = $overrides->{sprintf("%02d-%02d-%s", $day, $month, $id)}) {
             $times{$id} = $override;
             printf("[override: %02d:%02d]", $times{$id}{hours}, $times{$id}{minutes});
         }
-        sanity_check(2016, $id, \%prev_times, \%times) if $prev_times{$id};
+        sanity_check($year, $id, \%prev_times, \%times) if $prev_times{$id};
         printf $csv ",%02d:%02d", $times{$id}{hours}, $times{$id}{minutes};
     }
     print "\n";
