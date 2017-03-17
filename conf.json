@@ -1,9 +1,16 @@
 {
+    "comment": "It's all about overrides.",
     "2016": {
-        "overrides": {
+        "single": {
             "25-08-fajr": { "hours": 4, "minutes": 19 }
         }
     },
     "2017": {
+        "ranges": {
+            "07-asr": { "start": 7, "end": 15, "hours": 17, "minutes": 14 }
+        },
+        "prototypes": {
+            "08": "  3     30   5 29             13 02    17 07       20 32    22 23"
+        }
     }
 }
