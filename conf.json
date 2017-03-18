@@ -6,7 +6,7 @@
         }
     },
     "2017": {
-        "ranges": {
+        "disabled-ranges": {
             "07-asr": { "start": 7, "end": 15, "hours": 17, "minutes": 14 }
         },
         "prototypes": {
