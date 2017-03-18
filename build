@@ -19,5 +19,5 @@ echo android | jarsigner -tsa http://timestamp.digicert.com ba.vaktija.android/d
 wait
 
 adb install ba.vaktija.android/dist/ba.vaktija.android.apk & # asyinc install app
-cp -v ba.vaktija.android/dist/ba.vaktija.android.apk /cygdrive/c/Users/root/Google\ Drive/ba.vaktija.android.irfan-$year.apk # copy to google drive
+cp -v ba.vaktija.android/dist/ba.vaktija.android.apk /cygdrive/c/Users/root/Google\ Drive/ba.vaktija.android.irfan/ba.vaktija.android.irfan-$year.apk # copy to google drive
 wait
