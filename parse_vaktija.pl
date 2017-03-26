@@ -7,6 +7,7 @@ use Time::Local;
 use Data::Dumper;
 use File::Slurp;
 use JSON::XS;
+use feature qw(switch);
 
 my @prayer_names = qw(fajr sunrise dhuhr asr maghrib isha);
 my $partial_times_regex = qr{( +\d\d){5}$};
@@ -24,6 +25,7 @@ my $month = 0;
 my %prev_times;
 my $nrecords = 0;
 my $prototype;
+my $dst = 0;
 while (my $line = <$fh>) {
     chomp $line;
     next unless $line =~ /^[\s.]{0,8}(\d...)/; # some lines may be split in two
@@ -85,7 +87,8 @@ while (my $line = <$fh>) {
             }
         }
         sanity_check($year, $prayer, \%prev_times, \%times);
-        printf $csv ",%02d:%02d", $times{$prayer}{hours}, $times{$prayer}{minutes};
+        printf $csv ",%02d:%02d", $times{$prayer}{hours}-$dst, $times{$prayer}{minutes};
+        # the app hardcodes DST and expects the times to be in the non-DST timezone.
     }
     print "\n";
     print $csv "\n";
@@ -120,25 +123,37 @@ sub deduce_prototype {
     return \%prototype;
 }
 
+sub get_diff_min0 { # needs timelocal or timegm as first arg
+    my ($function, $year, $prayer, $prev, $curr) = @_;
+    my $prev_sec = $function->(0, $prev->{$prayer}{minutes}, $prev->{$prayer}{hours}, $prev->{day}, $prev->{month}-1, $year-1900);
+    my $curr_sec = $function->(0, $curr->{$prayer}{minutes}, $curr->{$prayer}{hours}, $curr->{day}, $curr->{month}-1, $year-1900);
+    $prev_sec += 24*60*60; # cancel 1 day difference
+    return ($curr_sec - $prev_sec)/60; # return difference in minutes
+}
+
 sub get_diff_min {
-    my ($year, $prayer, $prev, $curr) = @_;
-    my $prev_sec = timelocal(0, $prev->{$prayer}{minutes}, $prev->{$prayer}{hours}, $prev->{day}, $prev->{month}-1, $year-1900);
-    my $curr_sec = timelocal(0, $curr->{$prayer}{minutes}, $curr->{$prayer}{hours}, $curr->{day}, $curr->{month}-1, $year-1900);
-    $prev_sec += 24*60*60;
-    return ($curr_sec - $prev_sec)/60;
+    my $difflocal = get_diff_min0 (\&timelocal, @_);
+    my $diffgm = get_diff_min0 (\&timegm, @_);
+    return $difflocal, $diffgm;
 }
 
 sub diff_sanity {
     my ($year, $prayer, $prev, $curr) = @_;
-    my $diff_min = &get_diff_min;
+    my ($diff_min, $diff_min_gm) = &get_diff_min;
     if (abs($diff_min) > 55) {
         my $hdiff = ($diff_min<=>0) * int((abs($diff_min) + 30) / 60); # rounding
         $curr->{$prayer}{hours} -= $hdiff;
-        $diff_min = &get_diff_min;
+        ($diff_min, $diff_min_gm) = &get_diff_min;
         printf("[autocorrected: %02d:%02d]", $curr->{$prayer}{hours}, $curr->{$prayer}{minutes});
     }
     if (abs($diff_min) > 4) {
         die "\nabnormal minutes diff to yesterday's $prayer $diff_min";
+    }
+    given ($diff_min_gm - $diff_min) {
+        when ($_ == 0) {}
+        when ($_ == 60) { print "[+DST]" unless $dst; $dst = 1; }
+        when ($_ == -60) { print "[-DST]" if $dst; $dst = 0; }
+        default { die "unexpected difference between local [$diff_min] and GMT diff [$diff_min_gm]"; }
     }
     return $diff_min;
 }
