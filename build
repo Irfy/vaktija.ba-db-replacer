@@ -1,24 +1,66 @@
 #!/bin/bash -e
 
-year=${1:-`date +%Y`}
-file="vaktija_$year"
+extract () {
+    pdftotext -layout -nopgbrk $file.pdf # generates $file.txt
+}
 
-pdftotext -layout -nopgbrk $file.pdf # generates $file.txt
+parse () {
+    ./parse_vaktija.pl $year # generates $file.csv
+}
 
-./parse_vaktija.pl $year # generates $file.csv
-
-sqlite3 ba.vaktija.android/assets/databases/vaktija.db <<EOF # update vaktija.db from $file.csv
+updatedb () {
+    sqlite3 ba.vaktija.android/assets/databases/vaktija.db <<EOF # update vaktija.db from $file.csv
 delete from schedule;
 .mode csv
 .import vaktija_$year.csv schedule
 EOF
+}
 
-# at the moment, adb install -r is not enough to reinstall the database, so full uninstall and install is performed
-adb uninstall ba.vaktija.android.irfan & # async uninstall app
-apktool b ba.vaktija.android # rebuild app
-echo android | jarsigner -tsa http://timestamp.digicert.com ba.vaktija.android/dist/ba.vaktija.android.apk android
-wait
+rebuild () {
+    apktool b ba.vaktija.android # rebuild app
+    echo android | jarsigner -tsa http://timestamp.digicert.com ba.vaktija.android/dist/ba.vaktija.android.apk android
+}
 
-adb install ba.vaktija.android/dist/ba.vaktija.android.apk & # asyinc install app
-cp -v ba.vaktija.android/dist/ba.vaktija.android.apk /cygdrive/c/Users/root/Google\ Drive/ba.vaktija.android.irfan/ba.vaktija.android.irfan-$year.apk # copy to google drive
-wait
+uninstall () {
+    # at the moment, adb install -r is not enough to reinstall the database, so all uninstall and install is performed
+    adb uninstall ba.vaktija.android.irfan
+}
+
+install () {
+    adb install ba.vaktija.android/dist/ba.vaktija.android.apk
+}
+
+reinstall () {
+    uninstall
+    install
+}
+
+copy () {
+    cp -v ba.vaktija.android/dist/ba.vaktija.android.apk /cygdrive/c/Users/root/Google\ Drive/ba.vaktija.android.irfan/ba.vaktija.android.irfan-$year.apk # copy to google drive
+}
+
+all () {
+    extract
+    parse
+    updatedb
+    uninstall &
+    rebuild
+    wait
+    install &
+    copy
+    wait
+    echo "Done!"
+}
+
+unset cmd
+for arg; do
+    case $arg in
+    [[:digit:]]*) year=$arg;;
+    extract|parse|updatedb|rebuild|uninstall|install|reinstall|copy|all) cmd=$arg;;
+    *) echo -e "Invalid command [$arg], usage: $0 [year] [extract|parse|updatedb|rebuild|[un|re]install|copy|all]\nDefault yearis current year, default command is 'all'"; exit 1;;
+    esac
+done
+
+[[ -n $year ]] || year=$(date +%Y)
+file="vaktija_$year"
+${cmd:-all}
