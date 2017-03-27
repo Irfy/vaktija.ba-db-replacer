@@ -13,6 +13,7 @@ delete from schedule;
 .import vaktija_$year.csv schedule
 EOF
 
+# at the moment, adb install -r is not enough to reinstall the database, so full uninstall and install is performed
 adb uninstall ba.vaktija.android.irfan & # async uninstall app
 apktool b ba.vaktija.android # rebuild app
 echo android | jarsigner -tsa http://timestamp.digicert.com ba.vaktija.android/dist/ba.vaktija.android.apk android
