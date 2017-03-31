@@ -87,7 +87,8 @@ while (my $line = <$fh>) {
             }
         }
         sanity_check($year, $prayer, \%prev_times, \%times);
-        printf $csv ",%02d:%02d", $times{$prayer}{hours}-$dst, $times{$prayer}{minutes};
+        #printf $csv ",%02d:%02d", $times{$prayer}{hours}-$dst, $times{$prayer}{minutes}; # generate times negating the DST offset
+        printf $csv ",%02d:%02d", $times{$prayer}{hours}, $times{$prayer}{minutes};
         # the app hardcodes DST and expects the times to be in the non-DST timezone.
     }
     print "\n";
