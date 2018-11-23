@@ -36,20 +36,17 @@ reinstall () {
 }
 
 copy () {
-    cp -v ba.vaktija.android/dist/ba.vaktija.android.apk /cygdrive/c/Users/root/Google\ Drive/ba.vaktija.android.irfan/ba.vaktija.android.irfan-$year.apk # copy to google drive
+    cp -v ba.vaktija.android/dist/ba.vaktija.android.apk /cygdrive/c/Users/root/Google\ Drive/Android/ba.vaktija.android.irfan-$year.apk # copy to google drive
 }
 
 all () {
     extract
     parse
     updatedb
-    uninstall &
     rebuild
-    wait
-    install &
     copy
-    wait
     echo "Done!"
+    echo "Use '$0 reinstall' to reinstall the app to a connected phone"
 }
 
 unset cmd
