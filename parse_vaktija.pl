@@ -7,7 +7,7 @@ use Time::Local;
 use Data::Dumper;
 use File::Slurp;
 use JSON::XS;
-use feature qw(switch);
+use experimental qw(switch);
 
 my @prayer_names = qw(fajr sunrise dhuhr asr maghrib isha);
 my $partial_times_regex = qr{( +\d\d){5}$};

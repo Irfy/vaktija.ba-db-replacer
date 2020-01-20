@@ -54,7 +54,7 @@ for arg; do
     case $arg in
     [[:digit:]]*) year=$arg;;
     extract|parse|updatedb|rebuild|uninstall|install|reinstall|copy|all) cmd=$arg;;
-    *) echo -e "Invalid command [$arg], usage: $0 [year] [extract|parse|updatedb|rebuild|[un|re]install|copy|all]\nDefault yearis current year, default command is 'all'"; exit 1;;
+    *) echo -e "Invalid command [$arg], usage: $0 [year] [extract|parse|updatedb|rebuild|[un|re]install|copy|all]\nDefault year is current year, default command is 'all'"; exit 1;;
     esac
 done
 
