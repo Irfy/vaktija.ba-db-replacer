@@ -46,6 +46,9 @@ while (my $line = <$fh>) {
     if ($day == 1) {
         $month++;
         $prototype = deduce_prototype($line, $month);
+    } elsif ($conf->{"refresh-prototype"}{sprintf("%02d-%02d", $month, $day)}){
+        print "refrehsing prototype on $day.$month. as instructed by config\n" if $debug;
+        $prototype = deduce_prototype($line, $month);
     }
     die "No prototype for first-ever line" unless $prototype;
 
@@ -112,7 +115,8 @@ sub deduce_prototype {
     my $override = $conf->{prototypes}{sprintf("%02d", $month)};
     $line = $override if $override;
 
-    $line =~ /  \d +\d\d(?: +\d\d? +\d\d){5}$/ or die "No match for full prayer times";
+    my $regex = qr/  (?: +\d\d? +\d\d){6}$/;
+    $line =~ /$regex/ or die "No match for full prayer times against regex $regex in line [$line]";
     my %prototype = ( length => $+[0] - $-[0] );
     $line = substr($line, -$prototype{length});
     for (@prayer_names) {
