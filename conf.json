@@ -12,5 +12,11 @@
         "prototypes": {
             "08": "  3     30   5 29             13 02    17 07       20 32    22 23"
         }
+    },
+    "2020": {
+        "refresh-prototype": {
+            "comment": "<month>-<day>: true",
+            "01-03": true
+        }
     }
 }
