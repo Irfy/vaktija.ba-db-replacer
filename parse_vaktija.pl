@@ -26,6 +26,7 @@ my %prev_times;
 my $nrecords = 0;
 my $prototype;
 my $dst = 0;
+my $matched_days = 0;
 while (my $line = <$fh>) {
     chomp $line;
     next unless $line =~ /^[\s.]{0,8}(\d...)/; # some lines may be split in two
@@ -33,6 +34,7 @@ while (my $line = <$fh>) {
     my $day = $1;
     $day =~ s/[^\d]//g; # day digits can have a space/dot interleaved
     print("matched day [$day]\n") if $debug;
+    $matched_days++;
 
     unless ($line =~ /$partial_times_regex/) {
         # line may be split in two, read and parse next line
@@ -94,6 +96,9 @@ while (my $line = <$fh>) {
     print "\n";
     print $csv "\n";
     %prev_times = %times;
+}
+if ($matched_days < 365) {
+    die "matched only [$matched_days] days\n";
 }
 
 close($csv);
