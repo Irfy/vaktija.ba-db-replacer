@@ -36,7 +36,7 @@ reinstall () {
 }
 
 copy () {
-    cp -v ba.vaktija.android/dist/ba.vaktija.android.apk /cygdrive/c/Users/root/Google\ Drive/Android/ba.vaktija.android.irfan-$year.apk # copy to google drive
+    cp -v ba.vaktija.android/dist/ba.vaktija.android.apk /d/GoogleDrive/Android/ba.vaktija.android.irfan-$year.apk # copy to google drive
 }
 
 all () {
