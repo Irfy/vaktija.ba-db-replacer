@@ -1,5 +1,24 @@
 #!/bin/bash -e
 
+pkg=ba.vaktija.android
+
+updateapk () {
+    apk=$(ls -t $pkg*apk | head -1)
+    echo "Latest APK: [$apk]"
+    rm -rf tmp
+    apktool d "$apk" -o tmp
+    sed -i "s/package=\"$pkg\"/package=\"$pkg.irfan\"/" tmp/AndroidManifest.xml
+    sed -i "s/apkFileName: .*/apkFileName: ba.vaktija.android.apk/" tmp/apktool.yml
+    echo "delete from locations where location != 'Beč (Džemat Bosna)';" | sqlite3 tmp/assets/databases/vaktija.db
+    echo "update locations set location = 'Beč (Džemat Bosna)';" | sqlite3 tmp/assets/databases/vaktija.db
+    sed -i 's/Beč (Džemat Bosna)/Beč (Džemat Bosna)/' $(grep -Ilr tmp)
+    if [[ -e $pkg ]]; then
+        rm -rf $pkg.bak
+        mv $pkg $pkg.bak
+    fi
+    mv tmp $pkg
+}
+
 extract () {
     pdftotext -layout -nopgbrk $file.pdf # generates $file.txt
 }
@@ -9,7 +28,7 @@ parse () {
 }
 
 updatedb () {
-    sqlite3 ba.vaktija.android/assets/databases/vaktija.db <<EOF # update vaktija.db from $file.csv
+    sqlite3 $pkg/assets/databases/vaktija.db <<EOF # update vaktija.db from $file.csv
 delete from schedule;
 .mode csv
 .import vaktija_$year.csv schedule
@@ -17,17 +36,17 @@ EOF
 }
 
 rebuild () {
-    apktool b ba.vaktija.android # rebuild app
-    echo android | jarsigner -tsa http://timestamp.digicert.com ba.vaktija.android/dist/ba.vaktija.android.apk android
+    apktool b $pkg # rebuild app
+    echo android | jarsigner -tsa http://timestamp.digicert.com $pkg/dist/$pkg.apk android
 }
 
 uninstall () {
     # at the moment, adb install -r is not enough to reinstall the database, so all uninstall and install is performed
-    adb uninstall ba.vaktija.android.irfan
+    adb uninstall $pkg.irfan
 }
 
 install () {
-    adb install ba.vaktija.android/dist/ba.vaktija.android.apk
+    adb install $pkg/dist/$pkg.apk
 }
 
 reinstall () {
@@ -36,7 +55,7 @@ reinstall () {
 }
 
 copy () {
-    cp -v ba.vaktija.android/dist/ba.vaktija.android.apk /d/GoogleDrive/Android/ba.vaktija.android.irfan-$year.apk # copy to google drive
+    cp -v $pkg/dist/$pkg.apk /d/GoogleDrive/Android/$pkg.irfan-$year.apk # copy to google drive
 }
 
 all () {
@@ -53,8 +72,8 @@ unset cmd
 for arg; do
     case $arg in
     [[:digit:]]*) year=$arg;;
-    extract|parse|updatedb|rebuild|uninstall|install|reinstall|copy|all) cmd=$arg;;
-    *) echo -e "Invalid command [$arg], usage: $0 [year] [extract|parse|updatedb|rebuild|[un|re]install|copy|all]\nDefault year is current year, default command is 'all'"; exit 1;;
+    updateapk|extract|parse|updatedb|rebuild|uninstall|install|reinstall|copy|all) cmd=$arg;;
+    *) echo -e "Invalid command [$arg], usage: $0 [year] [updateapk|extract|parse|updatedb|rebuild|[un|re]install|copy|all]\nDefault year is current year, default command is 'all'"; exit 1;;
     esac
 done
 
