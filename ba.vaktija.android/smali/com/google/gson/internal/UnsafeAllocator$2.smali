@@ -1,4 +1,4 @@
-.class final Lcom/google/gson/internal/UnsafeAllocator$2;
+.class Lcom/google/gson/internal/UnsafeAllocator$2;
 .super Lcom/google/gson/internal/UnsafeAllocator;
 .source "UnsafeAllocator.java"
 
@@ -9,7 +9,7 @@
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
-    accessFlags = 0x8
+    accessFlags = 0x0
     name = null
 .end annotation
 
@@ -24,8 +24,7 @@
 .method constructor <init>(Ljava/lang/reflect/Method;I)V
     .locals 0
 
-    .prologue
-    .line 67
+    .line 69
     iput-object p1, p0, Lcom/google/gson/internal/UnsafeAllocator$2;->val$newInstance:Ljava/lang/reflect/Method;
 
     iput p2, p0, Lcom/google/gson/internal/UnsafeAllocator$2;->val$constructorId:I
@@ -38,14 +37,14 @@
 
 # virtual methods
 .method public newInstance(Ljava/lang/Class;)Ljava/lang/Object;
-    .locals 5
+    .locals 3
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<T:",
             "Ljava/lang/Object;",
             ">(",
-            "Ljava/lang/Class",
-            "<TT;>;)TT;"
+            "Ljava/lang/Class<",
+            "TT;>;)TT;"
         }
     .end annotation
 
@@ -55,34 +54,35 @@
         }
     .end annotation
 
-    .prologue
-    .line 71
-    .local p1, "c":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
+    .line 73
+    invoke-static {p1}, Lcom/google/gson/internal/UnsafeAllocator$2;->assertInstantiable(Ljava/lang/Class;)V
+
+    .line 74
     iget-object v0, p0, Lcom/google/gson/internal/UnsafeAllocator$2;->val$newInstance:Ljava/lang/reflect/Method;
 
-    const/4 v1, 0x0
+    const/4 v1, 0x2
 
-    const/4 v2, 0x2
+    new-array v1, v1, [Ljava/lang/Object;
 
-    new-array v2, v2, [Ljava/lang/Object;
+    const/4 v2, 0x0
 
-    const/4 v3, 0x0
+    aput-object p1, v1, v2
 
-    aput-object p1, v2, v3
+    iget p1, p0, Lcom/google/gson/internal/UnsafeAllocator$2;->val$constructorId:I
 
-    const/4 v3, 0x1
+    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    iget v4, p0, Lcom/google/gson/internal/UnsafeAllocator$2;->val$constructorId:I
+    move-result-object p1
 
-    invoke-static {v4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    const/4 v2, 0x1
 
-    move-result-object v4
+    aput-object p1, v1, v2
 
-    aput-object v4, v2, v3
+    const/4 p1, 0x0
 
-    invoke-virtual {v0, v1, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v0, p1, v1}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object p1
 
-    return-object v0
+    return-object p1
 .end method

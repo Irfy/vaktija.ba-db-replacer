@@ -24,10 +24,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/FragmentPrayer;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/FragmentPrayer;
 
-    .prologue
-    .line 125
+    .line 127
     iput-object p1, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -38,233 +36,213 @@
 
 # virtual methods
 .method public onClick(Landroid/view/View;)V
-    .locals 6
-    .param p1, "v"    # Landroid/view/View;
+    .locals 4
 
-    .prologue
-    .line 128
-    new-instance v0, Landroid/support/v7/widget/PopupMenu;
+    .line 130
+    new-instance v0, Landroidx/appcompat/widget/PopupMenu;
 
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    iget-object v1, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mActivity:Landroid/support/v7/app/AppCompatActivity;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$000(Lba/vaktija/android/FragmentPrayer;)Landroid/support/v7/app/AppCompatActivity;
-
-    move-result-object v4
-
-    invoke-direct {v0, v4, p1}, Landroid/support/v7/widget/PopupMenu;-><init>(Landroid/content/Context;Landroid/view/View;)V
-
-    .line 129
-    .local v0, "popup":Landroid/support/v7/widget/PopupMenu;
-    const v4, 0x7f0f0003
-
-    invoke-virtual {v0, v4}, Landroid/support/v7/widget/PopupMenu;->inflate(I)V
-
-    .line 131
-    invoke-virtual {v0}, Landroid/support/v7/widget/PopupMenu;->getMenu()Landroid/view/Menu;
-
-    move-result-object v4
-
-    const v5, 0x7f0e00ef
-
-    invoke-interface {v4, v5}, Landroid/view/Menu;->findItem(I)Landroid/view/MenuItem;
+    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$000(Lba/vaktija/android/FragmentPrayer;)Landroidx/appcompat/app/AppCompatActivity;
 
     move-result-object v1
 
-    .line 132
-    .local v1, "skipAlarm":Landroid/view/MenuItem;
-    invoke-virtual {v0}, Landroid/support/v7/widget/PopupMenu;->getMenu()Landroid/view/Menu;
+    invoke-direct {v0, v1, p1}, Landroidx/appcompat/widget/PopupMenu;-><init>(Landroid/content/Context;Landroid/view/View;)V
 
-    move-result-object v4
+    const p1, 0x7f0c0003
 
-    const v5, 0x7f0e00f0
+    .line 131
+    invoke-virtual {v0, p1}, Landroidx/appcompat/widget/PopupMenu;->inflate(I)V
 
-    invoke-interface {v4, v5}, Landroid/view/Menu;->findItem(I)Landroid/view/MenuItem;
+    .line 133
+    invoke-virtual {v0}, Landroidx/appcompat/widget/PopupMenu;->getMenu()Landroid/view/Menu;
+
+    move-result-object p1
+
+    const v1, 0x7f0800d4
+
+    invoke-interface {p1, v1}, Landroid/view/Menu;->findItem(I)Landroid/view/MenuItem;
+
+    move-result-object p1
+
+    .line 134
+    invoke-virtual {v0}, Landroidx/appcompat/widget/PopupMenu;->getMenu()Landroid/view/Menu;
+
+    move-result-object v1
+
+    const v2, 0x7f0800d5
+
+    invoke-interface {v1, v2}, Landroid/view/Menu;->findItem(I)Landroid/view/MenuItem;
+
+    move-result-object v1
+
+    .line 135
+    invoke-virtual {v0}, Landroidx/appcompat/widget/PopupMenu;->getMenu()Landroid/view/Menu;
 
     move-result-object v2
 
-    .line 133
-    .local v2, "skipNotif":Landroid/view/MenuItem;
-    invoke-virtual {v0}, Landroid/support/v7/widget/PopupMenu;->getMenu()Landroid/view/Menu;
+    const v3, 0x7f0800d6
 
-    move-result-object v4
+    invoke-interface {v2, v3}, Landroid/view/Menu;->findItem(I)Landroid/view/MenuItem;
 
-    const v5, 0x7f0e00f1
+    move-result-object v2
 
-    invoke-interface {v4, v5}, Landroid/view/Menu;->findItem(I)Landroid/view/MenuItem;
+    .line 137
+    iget-object v3, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {v3}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
     move-result-object v3
 
-    .line 135
-    .local v3, "skipSilent":Landroid/view/MenuItem;
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->skipNextAlarm()Z
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+    move-result v3
 
-    move-result-object v4
+    if-nez v3, :cond_0
 
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->skipNextAlarm()Z
+    const v3, 0x7f0f007b
 
-    move-result v4
+    goto :goto_0
 
-    if-nez v4, :cond_0
-
-    const v4, 0x7f07005c
+    :cond_0
+    const v3, 0x7f0f0089
 
     :goto_0
-    invoke-interface {v1, v4}, Landroid/view/MenuItem;->setTitle(I)Landroid/view/MenuItem;
+    invoke-interface {p1, v3}, Landroid/view/MenuItem;->setTitle(I)Landroid/view/MenuItem;
 
-    .line 139
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    .line 141
+    iget-object v3, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+    invoke-static {v3}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
-    move-result-object v4
+    move-result-object v3
 
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->skipNextNotif()Z
+    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->skipNextNotif()Z
 
-    move-result v4
+    move-result v3
 
-    if-nez v4, :cond_1
+    if-nez v3, :cond_1
 
-    const v4, 0x7f07005e
-
-    :goto_1
-    invoke-interface {v2, v4}, Landroid/view/MenuItem;->setTitle(I)Landroid/view/MenuItem;
-
-    .line 143
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->skipNextSilent()Z
-
-    move-result v4
-
-    if-nez v4, :cond_2
-
-    const v4, 0x7f07005f
-
-    :goto_2
-    invoke-interface {v3, v4}, Landroid/view/MenuItem;->setTitle(I)Landroid/view/MenuItem;
-
-    .line 147
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
-
-    move-result v4
-
-    invoke-interface {v1, v4}, Landroid/view/MenuItem;->setEnabled(Z)Landroid/view/MenuItem;
-
-    .line 148
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
-
-    move-result v4
-
-    invoke-interface {v1, v4}, Landroid/view/MenuItem;->setVisible(Z)Landroid/view/MenuItem;
-
-    .line 150
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
-
-    move-result v4
-
-    invoke-interface {v2, v4}, Landroid/view/MenuItem;->setEnabled(Z)Landroid/view/MenuItem;
-
-    .line 151
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
-
-    move-result v4
-
-    invoke-interface {v2, v4}, Landroid/view/MenuItem;->setVisible(Z)Landroid/view/MenuItem;
-
-    .line 153
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
-
-    move-result v4
-
-    invoke-interface {v3, v4}, Landroid/view/MenuItem;->setEnabled(Z)Landroid/view/MenuItem;
-
-    .line 154
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
-
-    move-result v4
-
-    invoke-interface {v3, v4}, Landroid/view/MenuItem;->setVisible(Z)Landroid/view/MenuItem;
-
-    .line 156
-    new-instance v4, Lba/vaktija/android/FragmentPrayer$1$1;
-
-    invoke-direct {v4, p0}, Lba/vaktija/android/FragmentPrayer$1$1;-><init>(Lba/vaktija/android/FragmentPrayer$1;)V
-
-    invoke-virtual {v0, v4}, Landroid/support/v7/widget/PopupMenu;->setOnMenuItemClickListener(Landroid/support/v7/widget/PopupMenu$OnMenuItemClickListener;)V
-
-    .line 199
-    invoke-virtual {v0}, Landroid/support/v7/widget/PopupMenu;->show()V
-
-    .line 200
-    return-void
-
-    .line 135
-    :cond_0
-    const v4, 0x7f070068
-
-    goto/16 :goto_0
-
-    .line 139
-    :cond_1
-    const v4, 0x7f070069
+    const v3, 0x7f0f007c
 
     goto :goto_1
 
-    .line 143
-    :cond_2
-    const v4, 0x7f07006c
+    :cond_1
+    const v3, 0x7f0f008a
+
+    :goto_1
+    invoke-interface {v1, v3}, Landroid/view/MenuItem;->setTitle(I)Landroid/view/MenuItem;
+
+    .line 145
+    iget-object v3, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {v3}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+
+    move-result-object v3
+
+    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->skipNextSilent()Z
+
+    move-result v3
+
+    if-nez v3, :cond_2
+
+    const v3, 0x7f0f007d
 
     goto :goto_2
+
+    :cond_2
+    const v3, 0x7f0f008d
+
+    :goto_2
+    invoke-interface {v2, v3}, Landroid/view/MenuItem;->setTitle(I)Landroid/view/MenuItem;
+
+    .line 149
+    iget-object v3, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {v3}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+
+    move-result-object v3
+
+    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
+
+    move-result v3
+
+    invoke-interface {p1, v3}, Landroid/view/MenuItem;->setEnabled(Z)Landroid/view/MenuItem;
+
+    .line 150
+    iget-object v3, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {v3}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+
+    move-result-object v3
+
+    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
+
+    move-result v3
+
+    invoke-interface {p1, v3}, Landroid/view/MenuItem;->setVisible(Z)Landroid/view/MenuItem;
+
+    .line 152
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
+
+    move-result p1
+
+    invoke-interface {v1, p1}, Landroid/view/MenuItem;->setEnabled(Z)Landroid/view/MenuItem;
+
+    .line 153
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
+
+    move-result p1
+
+    invoke-interface {v1, p1}, Landroid/view/MenuItem;->setVisible(Z)Landroid/view/MenuItem;
+
+    .line 155
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
+
+    move-result p1
+
+    invoke-interface {v2, p1}, Landroid/view/MenuItem;->setEnabled(Z)Landroid/view/MenuItem;
+
+    .line 156
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
+
+    move-result p1
+
+    invoke-interface {v2, p1}, Landroid/view/MenuItem;->setVisible(Z)Landroid/view/MenuItem;
+
+    .line 158
+    new-instance p1, Lba/vaktija/android/FragmentPrayer$1$1;
+
+    invoke-direct {p1, p0}, Lba/vaktija/android/FragmentPrayer$1$1;-><init>(Lba/vaktija/android/FragmentPrayer$1;)V
+
+    invoke-virtual {v0, p1}, Landroidx/appcompat/widget/PopupMenu;->setOnMenuItemClickListener(Landroidx/appcompat/widget/PopupMenu$OnMenuItemClickListener;)V
+
+    .line 201
+    invoke-virtual {v0}, Landroidx/appcompat/widget/PopupMenu;->show()V
+
+    return-void
 .end method

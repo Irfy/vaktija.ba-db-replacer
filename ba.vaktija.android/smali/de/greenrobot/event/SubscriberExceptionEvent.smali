@@ -16,12 +16,7 @@
 # direct methods
 .method public constructor <init>(Lde/greenrobot/event/EventBus;Ljava/lang/Throwable;Ljava/lang/Object;Ljava/lang/Object;)V
     .locals 0
-    .param p1, "eventBus"    # Lde/greenrobot/event/EventBus;
-    .param p2, "throwable"    # Ljava/lang/Throwable;
-    .param p3, "causingEvent"    # Ljava/lang/Object;
-    .param p4, "causingSubscriber"    # Ljava/lang/Object;
 
-    .prologue
     .line 37
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -37,6 +32,5 @@
     .line 41
     iput-object p4, p0, Lde/greenrobot/event/SubscriberExceptionEvent;->causingSubscriber:Ljava/lang/Object;
 
-    .line 42
     return-void
 .end method

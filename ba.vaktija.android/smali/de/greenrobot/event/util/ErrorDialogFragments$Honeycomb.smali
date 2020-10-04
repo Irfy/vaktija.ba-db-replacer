@@ -7,10 +7,6 @@
 
 
 # annotations
-.annotation build Landroid/annotation/TargetApi;
-    value = 0xb
-.end annotation
-
 .annotation system Ldalvik/annotation/EnclosingClass;
     value = Lde/greenrobot/event/util/ErrorDialogFragments;
 .end annotation
@@ -25,7 +21,6 @@
 .method public constructor <init>()V
     .locals 0
 
-    .prologue
     .line 51
     invoke-direct {p0}, Landroid/app/DialogFragment;-><init>()V
 
@@ -36,10 +31,7 @@
 # virtual methods
 .method public onClick(Landroid/content/DialogInterface;I)V
     .locals 2
-    .param p1, "dialog"    # Landroid/content/DialogInterface;
-    .param p2, "which"    # I
 
-    .prologue
     .line 59
     invoke-virtual {p0}, Lde/greenrobot/event/util/ErrorDialogFragments$Honeycomb;->getActivity()Landroid/app/Activity;
 
@@ -51,27 +43,24 @@
 
     invoke-static {p1, p2, v0, v1}, Lde/greenrobot/event/util/ErrorDialogFragments;->handleOnClick(Landroid/content/DialogInterface;ILandroid/app/Activity;Landroid/os/Bundle;)V
 
-    .line 60
     return-void
 .end method
 
 .method public onCreateDialog(Landroid/os/Bundle;)Landroid/app/Dialog;
-    .locals 2
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
+    .locals 1
 
-    .prologue
     .line 54
     invoke-virtual {p0}, Lde/greenrobot/event/util/ErrorDialogFragments$Honeycomb;->getActivity()Landroid/app/Activity;
 
-    move-result-object v0
+    move-result-object p1
 
     invoke-virtual {p0}, Lde/greenrobot/event/util/ErrorDialogFragments$Honeycomb;->getArguments()Landroid/os/Bundle;
 
-    move-result-object v1
-
-    invoke-static {v0, v1, p0}, Lde/greenrobot/event/util/ErrorDialogFragments;->createDialog(Landroid/content/Context;Landroid/os/Bundle;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/Dialog;
-
     move-result-object v0
 
-    return-object v0
+    invoke-static {p1, v0, p0}, Lde/greenrobot/event/util/ErrorDialogFragments;->createDialog(Landroid/content/Context;Landroid/os/Bundle;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/Dialog;
+
+    move-result-object p1
+
+    return-object p1
 .end method

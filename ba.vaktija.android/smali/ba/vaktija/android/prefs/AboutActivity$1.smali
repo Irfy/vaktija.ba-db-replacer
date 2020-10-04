@@ -24,10 +24,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/prefs/AboutActivity;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/prefs/AboutActivity;
 
-    .prologue
-    .line 71
+    .line 76
     iput-object p1, p0, Lba/vaktija/android/prefs/AboutActivity$1;->this$0:Lba/vaktija/android/prefs/AboutActivity;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -38,44 +36,37 @@
 
 # virtual methods
 .method public onClick(Landroid/view/View;)V
-    .locals 4
-    .param p1, "v"    # Landroid/view/View;
+    .locals 2
 
-    .prologue
-    .line 75
+    .line 80
     :try_start_0
-    new-instance v1, Landroid/content/Intent;
+    new-instance p1, Landroid/content/Intent;
 
-    const-string v2, "android.intent.action.VIEW"
+    const-string v0, "android.intent.action.VIEW"
 
-    const-string v3, "http://www.vaktija.ba"
+    const-string v1, "http://www.vaktija.ba"
 
-    invoke-static {v3}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+    invoke-static {v1}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
 
-    move-result-object v3
+    move-result-object v1
 
-    invoke-direct {v1, v2, v3}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+    invoke-direct {p1, v0, v1}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
 
-    .line 76
-    .local v1, "myIntent":Landroid/content/Intent;
-    iget-object v2, p0, Lba/vaktija/android/prefs/AboutActivity$1;->this$0:Lba/vaktija/android/prefs/AboutActivity;
+    .line 81
+    iget-object v0, p0, Lba/vaktija/android/prefs/AboutActivity$1;->this$0:Lba/vaktija/android/prefs/AboutActivity;
 
-    invoke-virtual {v2, v1}, Lba/vaktija/android/prefs/AboutActivity;->startActivity(Landroid/content/Intent;)V
+    invoke-virtual {v0, p1}, Lba/vaktija/android/prefs/AboutActivity;->startActivity(Landroid/content/Intent;)V
     :try_end_0
     .catch Landroid/content/ActivityNotFoundException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 80
-    .end local v1    # "myIntent":Landroid/content/Intent;
+    goto :goto_0
+
+    :catch_0
+    move-exception p1
+
+    .line 83
+    invoke-virtual {p1}, Landroid/content/ActivityNotFoundException;->printStackTrace()V
+
     :goto_0
     return-void
-
-    .line 77
-    :catch_0
-    move-exception v0
-
-    .line 78
-    .local v0, "e":Landroid/content/ActivityNotFoundException;
-    invoke-virtual {v0}, Landroid/content/ActivityNotFoundException;->printStackTrace()V
-
-    goto :goto_0
 .end method

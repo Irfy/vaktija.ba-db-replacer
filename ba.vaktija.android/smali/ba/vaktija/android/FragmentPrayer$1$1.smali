@@ -3,7 +3,7 @@
 .source "FragmentPrayer.java"
 
 # interfaces
-.implements Landroid/support/v7/widget/PopupMenu$OnMenuItemClickListener;
+.implements Landroidx/appcompat/widget/PopupMenu$OnMenuItemClickListener;
 
 
 # annotations
@@ -24,10 +24,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/FragmentPrayer$1;)V
     .locals 0
-    .param p1, "this$1"    # Lba/vaktija/android/FragmentPrayer$1;
 
-    .prologue
-    .line 156
+    .line 158
     iput-object p1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -38,261 +36,186 @@
 
 # virtual methods
 .method public onMenuItemClick(Landroid/view/MenuItem;)Z
-    .locals 7
-    .param p1, "menuItem"    # Landroid/view/MenuItem;
+    .locals 4
 
-    .prologue
-    const/4 v3, 0x1
-
-    const/4 v2, 0x0
-
-    .line 160
-    const-string v0, "N/A"
-
-    .line 162
-    .local v0, "action":Ljava/lang/String;
+    .line 164
     invoke-interface {p1}, Landroid/view/MenuItem;->getItemId()I
 
-    move-result v4
+    move-result p1
 
-    packed-switch v4, :pswitch_data_0
+    const/4 v0, 0x1
 
-    .line 187
-    :goto_0
-    iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    packed-switch p1, :pswitch_data_0
 
-    iget-object v2, v2, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    const-string p1, "N/A"
 
-    # invokes: Lba/vaktija/android/FragmentPrayer;->updateIndicators()V
-    invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$400(Lba/vaktija/android/FragmentPrayer;)V
+    goto/16 :goto_3
 
-    .line 189
-    iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    .line 178
+    :pswitch_0
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    iget-object v2, v2, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    iget-object p1, p1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
-    move-result-object v2
+    move-result-object p1
 
-    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->save()V
+    iget-object v1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    .line 191
-    iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    iget-object v1, v1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    iget-object v2, v2, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mApp:Lba/vaktija/android/App;
-    invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$200(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/App;
-
-    move-result-object v2
-
-    invoke-static {v2}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Lba/vaktija/android/models/PrayersSchedule;->reset()V
-
-    .line 192
-    iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
-
-    iget-object v2, v2, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mActivity:Landroid/support/v7/app/AppCompatActivity;
-    invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$000(Lba/vaktija/android/FragmentPrayer;)Landroid/support/v7/app/AppCompatActivity;
-
-    move-result-object v2
-
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    sget-object v5, Lba/vaktija/android/FragmentPrayer;->TAG:Ljava/lang/String;
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    const-string v5, " onClick()"
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-static {v2, v4}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
     move-result-object v1
 
-    .line 193
-    .local v1, "service":Landroid/content/Intent;
-    invoke-virtual {v1, v0}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->skipNextSilent()Z
 
-    .line 194
-    iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    move-result v1
 
-    iget-object v2, v2, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    xor-int/2addr v1, v0
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mActivity:Landroid/support/v7/app/AppCompatActivity;
-    invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$000(Lba/vaktija/android/FragmentPrayer;)Landroid/support/v7/app/AppCompatActivity;
+    invoke-virtual {p1, v1}, Lba/vaktija/android/models/Prayer;->setSkipNextSilent(Z)V
 
-    move-result-object v2
+    .line 179
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    invoke-virtual {v2, v1}, Landroid/support/v7/app/AppCompatActivity;->startService(Landroid/content/Intent;)Landroid/content/ComponentName;
+    iget-object p1, p1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    .line 195
-    return v3
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$200(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/App;
 
-    .line 164
-    .end local v1    # "service":Landroid/content/Intent;
-    :pswitch_0
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    move-result-object p1
 
-    iget-object v4, v4, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    iget-object v1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+    iget-object v1, v1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    move-result-object v4
+    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
-    iget-object v5, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    move-result-object v1
 
-    iget-object v5, v5, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v5}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v5
-
-    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->skipNextAlarm()Z
-
-    move-result v5
-
-    if-nez v5, :cond_0
-
-    move v2, v3
-
-    :cond_0
-    invoke-virtual {v4, v2}, Lba/vaktija/android/models/Prayer;->setSkipNextAlarm(Z)V
-
-    .line 165
-    iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
-
-    iget-object v2, v2, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mApp:Lba/vaktija/android/App;
-    invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$200(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/App;
-
-    move-result-object v4
+    move-result-object v1
 
     iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
     iget-object v2, v2, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
     invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
     move-result-object v2
 
-    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v5
-
-    iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
-
-    iget-object v2, v2, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->skipNextAlarm()Z
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->skipNextSilent()Z
 
     move-result v2
 
-    if-eqz v2, :cond_1
+    if-eqz v2, :cond_0
 
-    const-string v2, "Skipping next alarm"
+    const-string v2, "Skipping next silent"
 
-    :goto_1
-    invoke-virtual {v4, v5, v2}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+    goto :goto_0
 
-    .line 167
-    const-string v0, "ACTION_ALARM_CHANGED"
+    :cond_0
+    const-string v2, "Restoring next silent"
 
-    .line 168
-    goto/16 :goto_0
+    :goto_0
+    invoke-virtual {p1, v1, v2}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 165
+    .line 181
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+
+    iget-object p1, p1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->skipNextSilent()Z
+
+    move-result p1
+
+    if-nez p1, :cond_1
+
+    .line 182
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+
+    iget-object p1, p1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$300(Lba/vaktija/android/FragmentPrayer;)Landroid/content/SharedPreferences;
+
+    move-result-object p1
+
+    invoke-interface {p1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object p1
+
+    const/4 v1, 0x0
+
+    const-string v2, "silentDisabledByUser"
+
+    invoke-interface {p1, v2, v1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object p1
+
+    invoke-interface {p1}, Landroid/content/SharedPreferences$Editor;->commit()Z
+
     :cond_1
-    const-string v2, "Restoring next alarm"
+    const-string p1, "ACTION_SILENT_CHANGED"
 
-    goto :goto_1
+    goto/16 :goto_3
 
-    .line 170
+    .line 172
     :pswitch_1
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    iget-object v4, v4, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    iget-object p1, p1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
-    move-result-object v4
+    move-result-object p1
 
-    iget-object v5, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    iget-object v1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    iget-object v5, v5, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    iget-object v1, v1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v5}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
-    move-result-object v5
+    move-result-object v1
 
-    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->skipNextNotif()Z
+    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->skipNextNotif()Z
 
-    move-result v5
+    move-result v1
 
-    if-nez v5, :cond_2
+    xor-int/2addr v1, v0
 
-    move v2, v3
+    invoke-virtual {p1, v1}, Lba/vaktija/android/models/Prayer;->setSkipNextNotif(Z)V
 
-    :cond_2
-    invoke-virtual {v4, v2}, Lba/vaktija/android/models/Prayer;->setSkipNextNotif(Z)V
+    .line 173
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    .line 171
-    iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    iget-object p1, p1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    iget-object v2, v2, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$200(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/App;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mApp:Lba/vaktija/android/App;
-    invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$200(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/App;
+    move-result-object p1
 
-    move-result-object v4
+    iget-object v1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    iget-object v1, v1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    iget-object v2, v2, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+    move-result-object v1
 
-    move-result-object v2
+    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
-    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v5
+    move-result-object v1
 
     iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
     iget-object v2, v2, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
     invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
     move-result-object v2
@@ -301,162 +224,178 @@
 
     move-result v2
 
-    if-eqz v2, :cond_3
+    if-eqz v2, :cond_2
 
     const-string v2, "Skipping next notification"
 
-    :goto_2
-    invoke-virtual {v4, v5, v2}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+    goto :goto_1
 
-    .line 173
-    const-string v0, "ACTION_NOTIF_CHANGED"
-
-    .line 174
-    goto/16 :goto_0
-
-    .line 171
-    :cond_3
+    :cond_2
     const-string v2, "Restoring next notification"
 
-    goto :goto_2
+    :goto_1
+    invoke-virtual {p1, v1, v2}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 176
+    const-string p1, "ACTION_NOTIF_CHANGED"
+
+    goto :goto_3
+
+    .line 166
     :pswitch_2
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    iget-object v4, v4, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    iget-object p1, p1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
-    move-result-object v5
+    move-result-object p1
 
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    iget-object v1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    iget-object v4, v4, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    iget-object v1, v1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
-    move-result-object v4
+    move-result-object v1
 
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->skipNextSilent()Z
+    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->skipNextAlarm()Z
 
-    move-result v4
+    move-result v1
 
-    if-nez v4, :cond_5
+    xor-int/2addr v1, v0
 
-    move v4, v3
+    invoke-virtual {p1, v1}, Lba/vaktija/android/models/Prayer;->setSkipNextAlarm(Z)V
 
-    :goto_3
-    invoke-virtual {v5, v4}, Lba/vaktija/android/models/Prayer;->setSkipNextSilent(Z)V
+    .line 167
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    .line 177
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    iget-object p1, p1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    iget-object v4, v4, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$200(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/App;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mApp:Lba/vaktija/android/App;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$200(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/App;
+    move-result-object p1
 
-    move-result-object v5
+    iget-object v1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    iget-object v1, v1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    iget-object v4, v4, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+    move-result-object v1
 
-    move-result-object v4
+    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+    move-result-object v1
 
-    move-result-object v6
+    iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
 
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+    iget-object v2, v2, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    iget-object v4, v4, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->skipNextSilent()Z
-
-    move-result v4
-
-    if-eqz v4, :cond_6
-
-    const-string v4, "Skipping next silent"
-
-    :goto_4
-    invoke-virtual {v5, v6, v4}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 179
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
-
-    iget-object v4, v4, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->skipNextSilent()Z
-
-    move-result v4
-
-    if-nez v4, :cond_4
-
-    .line 180
-    iget-object v4, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
-
-    iget-object v4, v4, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
-
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrefs:Landroid/content/SharedPreferences;
-    invoke-static {v4}, Lba/vaktija/android/FragmentPrayer;->access$300(Lba/vaktija/android/FragmentPrayer;)Landroid/content/SharedPreferences;
-
-    move-result-object v4
-
-    invoke-interface {v4}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v4
-
-    const-string v5, "silentDisabledByUser"
-
-    invoke-interface {v4, v5, v2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+    invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
     move-result-object v2
 
-    invoke-interface {v2}, Landroid/content/SharedPreferences$Editor;->commit()Z
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->skipNextAlarm()Z
 
-    .line 183
-    :cond_4
-    const-string v0, "ACTION_SILENT_CHANGED"
+    move-result v2
 
-    goto/16 :goto_0
+    if-eqz v2, :cond_3
 
-    :cond_5
-    move v4, v2
+    const-string v2, "Skipping next alarm"
 
-    .line 176
-    goto :goto_3
+    goto :goto_2
 
-    .line 177
-    :cond_6
-    const-string v4, "Restoring next silent"
+    :cond_3
+    const-string v2, "Restoring next alarm"
 
-    goto :goto_4
+    :goto_2
+    invoke-virtual {p1, v1, v2}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 162
-    nop
+    const-string p1, "ACTION_ALARM_CHANGED"
+
+    .line 189
+    :goto_3
+    iget-object v1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+
+    iget-object v1, v1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$400(Lba/vaktija/android/FragmentPrayer;)V
+
+    .line 191
+    iget-object v1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+
+    iget-object v1, v1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->save()V
+
+    .line 193
+    iget-object v1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+
+    iget-object v1, v1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$200(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/App;
+
+    move-result-object v1
+
+    invoke-static {v1}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lba/vaktija/android/models/PrayersSchedule;->reset()V
+
+    .line 194
+    iget-object v1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+
+    iget-object v1, v1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$000(Lba/vaktija/android/FragmentPrayer;)Landroidx/appcompat/app/AppCompatActivity;
+
+    move-result-object v1
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    sget-object v3, Lba/vaktija/android/FragmentPrayer;->TAG:Ljava/lang/String;
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v3, " onClick()"
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+
+    move-result-object v1
+
+    .line 195
+    invoke-virtual {v1, p1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+
+    .line 196
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$1$1;->this$1:Lba/vaktija/android/FragmentPrayer$1;
+
+    iget-object p1, p1, Lba/vaktija/android/FragmentPrayer$1;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$000(Lba/vaktija/android/FragmentPrayer;)Landroidx/appcompat/app/AppCompatActivity;
+
+    move-result-object p1
+
+    invoke-static {p1, v1}, Lba/vaktija/android/service/VaktijaServiceHelper;->startService(Landroid/content/Context;Landroid/content/Intent;)V
+
+    return v0
 
     :pswitch_data_0
-    .packed-switch 0x7f0e00ef
-        :pswitch_0
-        :pswitch_1
+    .packed-switch 0x7f0800d4
         :pswitch_2
+        :pswitch_1
+        :pswitch_0
     .end packed-switch
 .end method

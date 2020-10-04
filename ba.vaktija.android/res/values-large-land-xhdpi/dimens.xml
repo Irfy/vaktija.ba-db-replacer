@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="events_wrapper_height">30.0dip</dimen>
+    <dimen name="vakat_title_size">30.0sp</dimen>
+    <dimen name="ab_title_margin_left">20.0dip</dimen>
+    <dimen name="prayer_time_margin_left">25.0dip</dimen>
+    <dimen name="prayer_time_margin_right">15.0dip</dimen>
+</resources>

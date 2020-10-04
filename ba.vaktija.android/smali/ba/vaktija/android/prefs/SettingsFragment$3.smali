@@ -3,12 +3,12 @@
 .source "SettingsFragment.java"
 
 # interfaces
-.implements Landroid/widget/AdapterView$OnItemClickListener;
+.implements Landroidx/preference/Preference$OnPreferenceClickListener;
 
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lba/vaktija/android/prefs/SettingsFragment;->showToneSelectionDialog(Z)V
+    value = Lba/vaktija/android/prefs/SettingsFragment;->onCreatePreferences(Landroid/os/Bundle;Ljava/lang/String;)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -20,19 +20,13 @@
 # instance fields
 .field final synthetic this$0:Lba/vaktija/android/prefs/SettingsFragment;
 
-.field final synthetic val$alarmTone:Z
-
 
 # direct methods
-.method constructor <init>(Lba/vaktija/android/prefs/SettingsFragment;Z)V
+.method constructor <init>(Lba/vaktija/android/prefs/SettingsFragment;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/prefs/SettingsFragment;
 
-    .prologue
-    .line 391
+    .line 191
     iput-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment$3;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
-
-    iput-boolean p2, p0, Lba/vaktija/android/prefs/SettingsFragment$3;->val$alarmTone:Z
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -41,68 +35,31 @@
 
 
 # virtual methods
-.method public onItemClick(Landroid/widget/AdapterView;Landroid/view/View;IJ)V
-    .locals 2
-    .param p2, "view"    # Landroid/view/View;
-    .param p3, "position"    # I
-    .param p4, "id"    # J
-    .annotation system Ldalvik/annotation/Signature;
-        value = {
-            "(",
-            "Landroid/widget/AdapterView",
-            "<*>;",
-            "Landroid/view/View;",
-            "IJ)V"
-        }
-    .end annotation
+.method public onPreferenceClick(Landroidx/preference/Preference;)Z
+    .locals 3
 
-    .prologue
-    .line 394
-    .local p1, "parent":Landroid/widget/AdapterView;, "Landroid/widget/AdapterView<*>;"
-    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment$3;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
+    .line 194
+    iget-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment$3;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
 
-    # getter for: Lba/vaktija/android/prefs/SettingsFragment;->alertDialog:Landroid/app/AlertDialog;
-    invoke-static {v0}, Lba/vaktija/android/prefs/SettingsFragment;->access$000(Lba/vaktija/android/prefs/SettingsFragment;)Landroid/app/AlertDialog;
+    new-instance v0, Landroid/content/Intent;
 
-    move-result-object v0
+    iget-object v1, p0, Lba/vaktija/android/prefs/SettingsFragment$3;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
 
-    invoke-virtual {v0}, Landroid/app/AlertDialog;->dismiss()V
+    .line 195
+    invoke-virtual {v1}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
 
-    .line 395
-    packed-switch p3, :pswitch_data_0
+    move-result-object v1
 
-    .line 403
-    :goto_0
-    return-void
+    const-class v2, Lba/vaktija/android/SystemSettingsHelperActivity;
 
-    .line 397
-    :pswitch_0
-    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment$3;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
+    invoke-direct {v0, v1, v2}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
 
-    iget-boolean v1, p0, Lba/vaktija/android/prefs/SettingsFragment$3;->val$alarmTone:Z
+    const/4 v1, 0x3
 
-    # invokes: Lba/vaktija/android/prefs/SettingsFragment;->setDefaultTone(Z)V
-    invoke-static {v0, v1}, Lba/vaktija/android/prefs/SettingsFragment;->access$100(Lba/vaktija/android/prefs/SettingsFragment;Z)V
+    .line 194
+    invoke-virtual {p1, v0, v1}, Lba/vaktija/android/prefs/SettingsFragment;->startActivityForResult(Landroid/content/Intent;I)V
 
-    goto :goto_0
+    const/4 p1, 0x1
 
-    .line 400
-    :pswitch_1
-    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment$3;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
-
-    iget-boolean v1, p0, Lba/vaktija/android/prefs/SettingsFragment$3;->val$alarmTone:Z
-
-    # invokes: Lba/vaktija/android/prefs/SettingsFragment;->launchToneChooser(Z)V
-    invoke-static {v0, v1}, Lba/vaktija/android/prefs/SettingsFragment;->access$200(Lba/vaktija/android/prefs/SettingsFragment;Z)V
-
-    goto :goto_0
-
-    .line 395
-    nop
-
-    :pswitch_data_0
-    .packed-switch 0x0
-        :pswitch_0
-        :pswitch_1
-    .end packed-switch
+    return p1
 .end method

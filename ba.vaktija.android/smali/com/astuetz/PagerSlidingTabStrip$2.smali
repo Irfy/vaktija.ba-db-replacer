@@ -27,7 +27,6 @@
 .method constructor <init>(Lcom/astuetz/PagerSlidingTabStrip;I)V
     .locals 0
 
-    .prologue
     .line 248
     iput-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip$2;->this$0:Lcom/astuetz/PagerSlidingTabStrip;
 
@@ -41,22 +40,18 @@
 
 # virtual methods
 .method public onClick(Landroid/view/View;)V
-    .locals 2
-    .param p1, "v"    # Landroid/view/View;
+    .locals 1
 
-    .prologue
     .line 251
-    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip$2;->this$0:Lcom/astuetz/PagerSlidingTabStrip;
+    iget-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip$2;->this$0:Lcom/astuetz/PagerSlidingTabStrip;
 
-    # getter for: Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroid/support/v4/view/ViewPager;
-    invoke-static {v0}, Lcom/astuetz/PagerSlidingTabStrip;->access$200(Lcom/astuetz/PagerSlidingTabStrip;)Landroid/support/v4/view/ViewPager;
+    invoke-static {p1}, Lcom/astuetz/PagerSlidingTabStrip;->access$200(Lcom/astuetz/PagerSlidingTabStrip;)Landroidx/viewpager/widget/ViewPager;
 
-    move-result-object v0
+    move-result-object p1
 
-    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip$2;->val$position:I
+    iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip$2;->val$position:I
 
-    invoke-virtual {v0, v1}, Landroid/support/v4/view/ViewPager;->setCurrentItem(I)V
+    invoke-virtual {p1, v0}, Landroidx/viewpager/widget/ViewPager;->setCurrentItem(I)V
 
-    .line 252
     return-void
 .end method

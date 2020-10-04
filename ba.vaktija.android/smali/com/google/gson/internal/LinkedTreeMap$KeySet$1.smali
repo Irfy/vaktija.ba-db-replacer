@@ -15,10 +15,10 @@
 
 .annotation system Ldalvik/annotation/Signature;
     value = {
-        "Lcom/google/gson/internal/LinkedTreeMap",
-        "<TK;TV;>.",
-        "LinkedTreeMapIterator",
-        "<TK;>;"
+        "Lcom/google/gson/internal/LinkedTreeMap<",
+        "TK;TV;>.",
+        "LinkedTreeMapIterator<",
+        "TK;>;"
     }
 .end annotation
 
@@ -29,19 +29,14 @@
 
 # direct methods
 .method constructor <init>(Lcom/google/gson/internal/LinkedTreeMap$KeySet;)V
-    .locals 2
-    .param p1, "this$1"    # Lcom/google/gson/internal/LinkedTreeMap$KeySet;
+    .locals 0
 
-    .prologue
-    .line 598
-    .local p0, "this":Lcom/google/gson/internal/LinkedTreeMap$KeySet$1;, "Lcom/google/gson/internal/LinkedTreeMap$KeySet.1;"
+    .line 601
     iput-object p1, p0, Lcom/google/gson/internal/LinkedTreeMap$KeySet$1;->this$1:Lcom/google/gson/internal/LinkedTreeMap$KeySet;
 
-    iget-object v0, p1, Lcom/google/gson/internal/LinkedTreeMap$KeySet;->this$0:Lcom/google/gson/internal/LinkedTreeMap;
+    iget-object p1, p1, Lcom/google/gson/internal/LinkedTreeMap$KeySet;->this$0:Lcom/google/gson/internal/LinkedTreeMap;
 
-    const/4 v1, 0x0
-
-    invoke-direct {p0, v0, v1}, Lcom/google/gson/internal/LinkedTreeMap$LinkedTreeMapIterator;-><init>(Lcom/google/gson/internal/LinkedTreeMap;Lcom/google/gson/internal/LinkedTreeMap$1;)V
+    invoke-direct {p0, p1}, Lcom/google/gson/internal/LinkedTreeMap$LinkedTreeMapIterator;-><init>(Lcom/google/gson/internal/LinkedTreeMap;)V
 
     return-void
 .end method
@@ -56,9 +51,7 @@
         }
     .end annotation
 
-    .prologue
-    .line 600
-    .local p0, "this":Lcom/google/gson/internal/LinkedTreeMap$KeySet$1;, "Lcom/google/gson/internal/LinkedTreeMap$KeySet.1;"
+    .line 603
     invoke-virtual {p0}, Lcom/google/gson/internal/LinkedTreeMap$KeySet$1;->nextNode()Lcom/google/gson/internal/LinkedTreeMap$Node;
 
     move-result-object v0

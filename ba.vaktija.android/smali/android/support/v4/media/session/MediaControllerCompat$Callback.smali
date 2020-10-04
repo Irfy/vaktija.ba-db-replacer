@@ -26,39 +26,31 @@
 
 
 # instance fields
-.field private final mCallbackObj:Ljava/lang/Object;
+.field final mCallbackObj:Ljava/lang/Object;
 
-.field private mHandler:Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
+.field mHandler:Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
 
-.field private mRegistered:Z
+.field mIControllerCallback:Landroid/support/v4/media/session/IMediaControllerCallback;
 
 
 # direct methods
 .method public constructor <init>()V
-    .locals 3
+    .locals 2
 
-    .prologue
-    const/4 v2, 0x0
-
-    .line 345
+    .line 693
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 343
-    const/4 v0, 0x0
-
-    iput-boolean v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mRegistered:Z
-
-    .line 346
+    .line 694
     sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
 
     const/16 v1, 0x15
 
     if-lt v0, v1, :cond_0
 
-    .line 347
+    .line 695
     new-instance v0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$StubApi21;
 
-    invoke-direct {v0, p0, v2}, Landroid/support/v4/media/session/MediaControllerCompat$Callback$StubApi21;-><init>(Landroid/support/v4/media/session/MediaControllerCompat$Callback;Landroid/support/v4/media/session/MediaControllerCompat$1;)V
+    invoke-direct {v0, p0}, Landroid/support/v4/media/session/MediaControllerCompat$Callback$StubApi21;-><init>(Landroid/support/v4/media/session/MediaControllerCompat$Callback;)V
 
     invoke-static {v0}, Landroid/support/v4/media/session/MediaControllerCompatApi21;->createCallback(Landroid/support/v4/media/session/MediaControllerCompatApi21$Callback;)Ljava/lang/Object;
 
@@ -66,144 +58,73 @@
 
     iput-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mCallbackObj:Ljava/lang/Object;
 
-    .line 351
-    :goto_0
-    return-void
+    goto :goto_0
 
-    .line 349
+    .line 697
     :cond_0
     new-instance v0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$StubCompat;
 
-    invoke-direct {v0, p0, v2}, Landroid/support/v4/media/session/MediaControllerCompat$Callback$StubCompat;-><init>(Landroid/support/v4/media/session/MediaControllerCompat$Callback;Landroid/support/v4/media/session/MediaControllerCompat$1;)V
+    invoke-direct {v0, p0}, Landroid/support/v4/media/session/MediaControllerCompat$Callback$StubCompat;-><init>(Landroid/support/v4/media/session/MediaControllerCompat$Callback;)V
+
+    iput-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mIControllerCallback:Landroid/support/v4/media/session/IMediaControllerCallback;
 
     iput-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mCallbackObj:Ljava/lang/Object;
 
-    goto :goto_0
-.end method
-
-.method static synthetic access$200(Landroid/support/v4/media/session/MediaControllerCompat$Callback;)Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
-    .locals 1
-    .param p0, "x0"    # Landroid/support/v4/media/session/MediaControllerCompat$Callback;
-
-    .prologue
-    .line 339
-    iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mHandler:Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
-
-    return-object v0
-.end method
-
-.method static synthetic access$300(Landroid/support/v4/media/session/MediaControllerCompat$Callback;)Z
-    .locals 1
-    .param p0, "x0"    # Landroid/support/v4/media/session/MediaControllerCompat$Callback;
-
-    .prologue
-    .line 339
-    iget-boolean v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mRegistered:Z
-
-    return v0
-.end method
-
-.method static synthetic access$302(Landroid/support/v4/media/session/MediaControllerCompat$Callback;Z)Z
-    .locals 0
-    .param p0, "x0"    # Landroid/support/v4/media/session/MediaControllerCompat$Callback;
-    .param p1, "x1"    # Z
-
-    .prologue
-    .line 339
-    iput-boolean p1, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mRegistered:Z
-
-    return p1
-.end method
-
-.method static synthetic access$400(Landroid/support/v4/media/session/MediaControllerCompat$Callback;)Ljava/lang/Object;
-    .locals 1
-    .param p0, "x0"    # Landroid/support/v4/media/session/MediaControllerCompat$Callback;
-
-    .prologue
-    .line 339
-    iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mCallbackObj:Ljava/lang/Object;
-
-    return-object v0
-.end method
-
-.method static synthetic access$500(Landroid/support/v4/media/session/MediaControllerCompat$Callback;Landroid/os/Handler;)V
-    .locals 0
-    .param p0, "x0"    # Landroid/support/v4/media/session/MediaControllerCompat$Callback;
-    .param p1, "x1"    # Landroid/os/Handler;
-
-    .prologue
-    .line 339
-    invoke-direct {p0, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->setHandler(Landroid/os/Handler;)V
-
-    return-void
-.end method
-
-.method private setHandler(Landroid/os/Handler;)V
-    .locals 2
-    .param p1, "handler"    # Landroid/os/Handler;
-
-    .prologue
-    .line 435
-    new-instance v0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
-
-    invoke-virtual {p1}, Landroid/os/Handler;->getLooper()Landroid/os/Looper;
-
-    move-result-object v1
-
-    invoke-direct {v0, p0, v1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;-><init>(Landroid/support/v4/media/session/MediaControllerCompat$Callback;Landroid/os/Looper;)V
-
-    iput-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mHandler:Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
-
-    .line 436
+    :goto_0
     return-void
 .end method
 
 
 # virtual methods
 .method public binderDied()V
-    .locals 0
+    .locals 2
 
-    .prologue
-    .line 428
-    invoke-virtual {p0}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onSessionDestroyed()V
+    const/16 v0, 0x8
 
-    .line 429
+    const/4 v1, 0x0
+
+    .line 823
+    invoke-virtual {p0, v0, v1, v1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->postToHandler(ILjava/lang/Object;Landroid/os/Bundle;)V
+
     return-void
+.end method
+
+.method public getIControllerCallback()Landroid/support/v4/media/session/IMediaControllerCallback;
+    .locals 1
+
+    .line 818
+    iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mIControllerCallback:Landroid/support/v4/media/session/IMediaControllerCallback;
+
+    return-object v0
 .end method
 
 .method public onAudioInfoChanged(Landroid/support/v4/media/session/MediaControllerCompat$PlaybackInfo;)V
     .locals 0
-    .param p1, "info"    # Landroid/support/v4/media/session/MediaControllerCompat$PlaybackInfo;
 
-    .prologue
-    .line 424
+    return-void
+.end method
+
+.method public onCaptioningEnabledChanged(Z)V
+    .locals 0
+
     return-void
 .end method
 
 .method public onExtrasChanged(Landroid/os/Bundle;)V
     .locals 0
-    .param p1, "extras"    # Landroid/os/Bundle;
 
-    .prologue
-    .line 416
     return-void
 .end method
 
 .method public onMetadataChanged(Landroid/support/v4/media/MediaMetadataCompat;)V
     .locals 0
-    .param p1, "metadata"    # Landroid/support/v4/media/MediaMetadataCompat;
 
-    .prologue
-    .line 386
     return-void
 .end method
 
 .method public onPlaybackStateChanged(Landroid/support/v4/media/session/PlaybackStateCompat;)V
     .locals 0
-    .param p1, "state"    # Landroid/support/v4/media/session/PlaybackStateCompat;
 
-    .prologue
-    .line 377
     return-void
 .end method
 
@@ -212,42 +133,119 @@
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
-            "Ljava/util/List",
-            "<",
+            "Ljava/util/List<",
             "Landroid/support/v4/media/session/MediaSessionCompat$QueueItem;",
             ">;)V"
         }
     .end annotation
 
-    .prologue
-    .line 397
-    .local p1, "queue":Ljava/util/List;, "Ljava/util/List<Landroid/support/v4/media/session/MediaSessionCompat$QueueItem;>;"
     return-void
 .end method
 
 .method public onQueueTitleChanged(Ljava/lang/CharSequence;)V
     .locals 0
-    .param p1, "title"    # Ljava/lang/CharSequence;
 
-    .prologue
-    .line 407
+    return-void
+.end method
+
+.method public onRepeatModeChanged(I)V
+    .locals 0
+
     return-void
 .end method
 
 .method public onSessionDestroyed()V
     .locals 0
 
-    .prologue
-    .line 358
     return-void
 .end method
 
 .method public onSessionEvent(Ljava/lang/String;Landroid/os/Bundle;)V
     .locals 0
-    .param p1, "event"    # Ljava/lang/String;
-    .param p2, "extras"    # Landroid/os/Bundle;
 
-    .prologue
-    .line 369
+    return-void
+.end method
+
+.method public onSessionReady()V
+    .locals 0
+
+    return-void
+.end method
+
+.method public onShuffleModeChanged(I)V
+    .locals 0
+
+    return-void
+.end method
+
+.method postToHandler(ILjava/lang/Object;Landroid/os/Bundle;)V
+    .locals 1
+
+    .line 843
+    iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mHandler:Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
+
+    if-eqz v0, :cond_0
+
+    .line 844
+    invoke-virtual {v0, p1, p2}, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->obtainMessage(ILjava/lang/Object;)Landroid/os/Message;
+
+    move-result-object p1
+
+    .line 845
+    invoke-virtual {p1, p3}, Landroid/os/Message;->setData(Landroid/os/Bundle;)V
+
+    .line 846
+    invoke-virtual {p1}, Landroid/os/Message;->sendToTarget()V
+
+    :cond_0
+    return-void
+.end method
+
+.method setHandler(Landroid/os/Handler;)V
+    .locals 1
+
+    if-nez p1, :cond_0
+
+    .line 831
+    iget-object p1, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mHandler:Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
+
+    if-eqz p1, :cond_1
+
+    const/4 v0, 0x0
+
+    .line 832
+    iput-boolean v0, p1, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->mRegistered:Z
+
+    .line 833
+    iget-object p1, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mHandler:Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
+
+    const/4 v0, 0x0
+
+    invoke-virtual {p1, v0}, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->removeCallbacksAndMessages(Ljava/lang/Object;)V
+
+    .line 834
+    iput-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mHandler:Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
+
+    goto :goto_0
+
+    .line 837
+    :cond_0
+    new-instance v0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
+
+    invoke-virtual {p1}, Landroid/os/Handler;->getLooper()Landroid/os/Looper;
+
+    move-result-object p1
+
+    invoke-direct {v0, p0, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;-><init>(Landroid/support/v4/media/session/MediaControllerCompat$Callback;Landroid/os/Looper;)V
+
+    iput-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->mHandler:Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
+
+    const/4 p1, 0x1
+
+    .line 838
+    iput-boolean p1, v0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->mRegistered:Z
+
+    :cond_1
+    :goto_0
     return-void
 .end method

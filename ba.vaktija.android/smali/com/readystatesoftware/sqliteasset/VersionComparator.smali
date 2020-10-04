@@ -10,8 +10,7 @@
 .annotation system Ldalvik/annotation/Signature;
     value = {
         "Ljava/lang/Object;",
-        "Ljava/util/Comparator",
-        "<",
+        "Ljava/util/Comparator<",
         "Ljava/lang/String;",
         ">;"
     }
@@ -30,7 +29,6 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
     .line 25
     const-class v0, Lcom/readystatesoftware/sqliteasset/SQLiteAssetHelper;
 
@@ -46,13 +44,12 @@
 .method constructor <init>()V
     .locals 1
 
-    .prologue
     .line 23
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 27
     const-string v0, ".*_upgrade_([0-9]+)-([0-9]+).*"
 
+    .line 27
     invoke-static {v0}, Ljava/util/regex/Pattern;->compile(Ljava/lang/String;)Ljava/util/regex/Pattern;
 
     move-result-object v0
@@ -65,216 +62,184 @@
 
 # virtual methods
 .method public bridge synthetic compare(Ljava/lang/Object;Ljava/lang/Object;)I
-    .locals 1
-    .param p1, "x0"    # Ljava/lang/Object;
-    .param p2, "x1"    # Ljava/lang/Object;
+    .locals 0
 
-    .prologue
     .line 23
     check-cast p1, Ljava/lang/String;
 
-    .end local p1    # "x0":Ljava/lang/Object;
     check-cast p2, Ljava/lang/String;
 
-    .end local p2    # "x1":Ljava/lang/Object;
     invoke-virtual {p0, p1, p2}, Lcom/readystatesoftware/sqliteasset/VersionComparator;->compare(Ljava/lang/String;Ljava/lang/String;)I
 
-    move-result v0
+    move-result p1
 
-    return v0
+    return p1
 .end method
 
 .method public compare(Ljava/lang/String;Ljava/lang/String;)I
-    .locals 10
-    .param p1, "file0"    # Ljava/lang/String;
-    .param p2, "file1"    # Ljava/lang/String;
-
-    .prologue
-    const/4 v9, 0x2
-
-    const/4 v6, -0x1
-
-    const/4 v7, 0x1
+    .locals 5
 
     .line 51
-    iget-object v8, p0, Lcom/readystatesoftware/sqliteasset/VersionComparator;->pattern:Ljava/util/regex/Pattern;
+    iget-object v0, p0, Lcom/readystatesoftware/sqliteasset/VersionComparator;->pattern:Ljava/util/regex/Pattern;
 
-    invoke-virtual {v8, p1}, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+    invoke-virtual {v0, p1}, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
 
     move-result-object v0
 
     .line 52
-    .local v0, "m0":Ljava/util/regex/Matcher;
-    iget-object v8, p0, Lcom/readystatesoftware/sqliteasset/VersionComparator;->pattern:Ljava/util/regex/Pattern;
+    iget-object v1, p0, Lcom/readystatesoftware/sqliteasset/VersionComparator;->pattern:Ljava/util/regex/Pattern;
 
-    invoke-virtual {v8, p2}, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+    invoke-virtual {v1, p2}, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
 
     move-result-object v1
 
     .line 54
-    .local v1, "m1":Ljava/util/regex/Matcher;
     invoke-virtual {v0}, Ljava/util/regex/Matcher;->matches()Z
-
-    move-result v8
-
-    if-nez v8, :cond_0
-
-    .line 55
-    sget-object v6, Lcom/readystatesoftware/sqliteasset/VersionComparator;->TAG:Ljava/lang/String;
-
-    new-instance v7, Ljava/lang/StringBuilder;
-
-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v8, "could not parse upgrade script file: "
-
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    invoke-virtual {v7, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-static {v6, v7}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 56
-    new-instance v6, Lcom/readystatesoftware/sqliteasset/SQLiteAssetHelper$SQLiteAssetException;
-
-    const-string v7, "Invalid upgrade script file"
-
-    invoke-direct {v6, v7}, Lcom/readystatesoftware/sqliteasset/SQLiteAssetHelper$SQLiteAssetException;-><init>(Ljava/lang/String;)V
-
-    throw v6
-
-    .line 59
-    :cond_0
-    invoke-virtual {v1}, Ljava/util/regex/Matcher;->matches()Z
-
-    move-result v8
-
-    if-nez v8, :cond_1
-
-    .line 60
-    sget-object v6, Lcom/readystatesoftware/sqliteasset/VersionComparator;->TAG:Ljava/lang/String;
-
-    new-instance v7, Ljava/lang/StringBuilder;
-
-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v8, "could not parse upgrade script file: "
-
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    invoke-virtual {v7, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-static {v6, v7}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 61
-    new-instance v6, Lcom/readystatesoftware/sqliteasset/SQLiteAssetHelper$SQLiteAssetException;
-
-    const-string v7, "Invalid upgrade script file"
-
-    invoke-direct {v6, v7}, Lcom/readystatesoftware/sqliteasset/SQLiteAssetHelper$SQLiteAssetException;-><init>(Ljava/lang/String;)V
-
-    throw v6
-
-    .line 64
-    :cond_1
-    invoke-virtual {v0, v7}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-static {v8}, Ljava/lang/Integer;->valueOf(Ljava/lang/String;)Ljava/lang/Integer;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/Integer;->intValue()I
 
     move-result v2
 
+    const-string v3, "Invalid upgrade script file"
+
+    const-string v4, "could not parse upgrade script file: "
+
+    if-eqz v2, :cond_5
+
+    .line 59
+    invoke-virtual {v1}, Ljava/util/regex/Matcher;->matches()Z
+
+    move-result p1
+
+    if-eqz p1, :cond_4
+
+    const/4 p1, 0x1
+
+    .line 64
+    invoke-virtual {v0, p1}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
+
+    move-result-object p2
+
+    invoke-static {p2}, Ljava/lang/Integer;->valueOf(Ljava/lang/String;)Ljava/lang/Integer;
+
+    move-result-object p2
+
+    invoke-virtual {p2}, Ljava/lang/Integer;->intValue()I
+
+    move-result p2
+
     .line 65
-    .local v2, "v0_from":I
-    invoke-virtual {v1, v7}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
+    invoke-virtual {v1, p1}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
 
-    move-result-object v8
+    move-result-object v2
 
-    invoke-static {v8}, Ljava/lang/Integer;->valueOf(Ljava/lang/String;)Ljava/lang/Integer;
+    invoke-static {v2}, Ljava/lang/Integer;->valueOf(Ljava/lang/String;)Ljava/lang/Integer;
 
-    move-result-object v8
+    move-result-object v2
 
-    invoke-virtual {v8}, Ljava/lang/Integer;->intValue()I
+    invoke-virtual {v2}, Ljava/lang/Integer;->intValue()I
 
-    move-result v4
+    move-result v2
+
+    const/4 v3, 0x2
 
     .line 66
-    .local v4, "v1_from":I
-    invoke-virtual {v0, v9}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
+    invoke-virtual {v0, v3}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
 
-    move-result-object v8
+    move-result-object v0
 
-    invoke-static {v8}, Ljava/lang/Integer;->valueOf(Ljava/lang/String;)Ljava/lang/Integer;
+    invoke-static {v0}, Ljava/lang/Integer;->valueOf(Ljava/lang/String;)Ljava/lang/Integer;
 
-    move-result-object v8
+    move-result-object v0
 
-    invoke-virtual {v8}, Ljava/lang/Integer;->intValue()I
+    invoke-virtual {v0}, Ljava/lang/Integer;->intValue()I
 
-    move-result v3
+    move-result v0
 
     .line 67
-    .local v3, "v0_to":I
-    invoke-virtual {v1, v9}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
+    invoke-virtual {v1, v3}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
 
-    move-result-object v8
+    move-result-object v1
 
-    invoke-static {v8}, Ljava/lang/Integer;->valueOf(Ljava/lang/String;)Ljava/lang/Integer;
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(Ljava/lang/String;)Ljava/lang/Integer;
 
-    move-result-object v8
+    move-result-object v1
 
-    invoke-virtual {v8}, Ljava/lang/Integer;->intValue()I
+    invoke-virtual {v1}, Ljava/lang/Integer;->intValue()I
 
-    move-result v5
+    move-result v1
 
-    .line 69
-    .local v5, "v1_to":I
-    if-ne v2, v4, :cond_4
+    const/4 v3, -0x1
 
-    .line 72
-    if-ne v3, v5, :cond_3
+    if-ne p2, v2, :cond_2
 
-    .line 73
-    const/4 v6, 0x0
+    if-ne v0, v1, :cond_0
 
-    .line 79
+    const/4 p1, 0x0
+
+    return p1
+
+    :cond_0
+    if-ge v0, v1, :cond_1
+
+    const/4 p1, -0x1
+
+    :cond_1
+    return p1
+
     :cond_2
-    :goto_0
-    return v6
+    if-ge p2, v2, :cond_3
 
-    .line 76
+    const/4 p1, -0x1
+
     :cond_3
-    if-lt v3, v5, :cond_2
+    return p1
 
-    move v6, v7
-
-    goto :goto_0
-
-    .line 79
+    .line 60
     :cond_4
-    if-lt v2, v4, :cond_2
+    sget-object p1, Lcom/readystatesoftware/sqliteasset/VersionComparator;->TAG:Ljava/lang/String;
 
-    move v6, v7
+    new-instance v0, Ljava/lang/StringBuilder;
 
-    goto :goto_0
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p2
+
+    invoke-static {p1, p2}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 61
+    new-instance p1, Lcom/readystatesoftware/sqliteasset/SQLiteAssetHelper$SQLiteAssetException;
+
+    invoke-direct {p1, v3}, Lcom/readystatesoftware/sqliteasset/SQLiteAssetHelper$SQLiteAssetException;-><init>(Ljava/lang/String;)V
+
+    throw p1
+
+    .line 55
+    :cond_5
+    sget-object p2, Lcom/readystatesoftware/sqliteasset/VersionComparator;->TAG:Ljava/lang/String;
+
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-static {p2, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 56
+    new-instance p1, Lcom/readystatesoftware/sqliteasset/SQLiteAssetHelper$SQLiteAssetException;
+
+    invoke-direct {p1, v3}, Lcom/readystatesoftware/sqliteasset/SQLiteAssetHelper$SQLiteAssetException;-><init>(Ljava/lang/String;)V
+
+    throw p1
 .end method

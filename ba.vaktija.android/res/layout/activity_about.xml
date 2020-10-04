@@ -3,11 +3,9 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
     <ImageView android:id="@id/logo" android:layout_width="300.0dip" android:layout_height="100.0dip" android:src="@drawable/logo" android:layout_centerHorizontal="true" android:layout_centerVertical="true" />
     <LinearLayout android:id="@id/linearLayout1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="23.0dip" android:layout_alignRight="@id/logo" android:layout_alignBottom="@id/logo">
-        <TextView android:id="@id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:text="@string/version_name" />
+        <TextView android:id="@id/version_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" />
         <TextView android:textSize="20.0sp" android:id="@id/activity_about_copyleftSign" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:text="©" />
         <TextView android:layout_gravity="center_vertical" android:id="@id/activity_about_copyleft" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:text="copyleft" />
     </LinearLayout>
-    <ScrollView android:id="@id/scrollView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="20.0dip" android:layout_below="@id/logo" android:layout_alignParentLeft="true">
-        <TextView android:id="@id/activity_about_changelog" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/changelog" android:layout_below="@id/logo" />
-    </ScrollView>
+    <ScrollView android:id="@id/scrollView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="20.0dip" android:layout_below="@id/logo" android:layout_alignParentLeft="true" />
 </RelativeLayout>

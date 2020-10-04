@@ -19,8 +19,8 @@
 .annotation system Ldalvik/annotation/Signature;
     value = {
         "Ljava/lang/Object;",
-        "Lcom/google/gson/internal/ObjectConstructor",
-        "<TT;>;"
+        "Lcom/google/gson/internal/ObjectConstructor<",
+        "TT;>;"
     }
 .end annotation
 
@@ -32,10 +32,8 @@
 # direct methods
 .method constructor <init>(Lcom/google/gson/internal/ConstructorConstructor;)V
     .locals 0
-    .param p1, "this$0"    # Lcom/google/gson/internal/ConstructorConstructor;
 
-    .prologue
-    .line 176
+    .line 182
     iput-object p1, p0, Lcom/google/gson/internal/ConstructorConstructor$9;->this$0:Lcom/google/gson/internal/ConstructorConstructor;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -53,11 +51,10 @@
         }
     .end annotation
 
-    .prologue
-    .line 178
-    new-instance v0, Ljava/util/TreeMap;
+    .line 184
+    new-instance v0, Ljava/util/concurrent/ConcurrentSkipListMap;
 
-    invoke-direct {v0}, Ljava/util/TreeMap;-><init>()V
+    invoke-direct {v0}, Ljava/util/concurrent/ConcurrentSkipListMap;-><init>()V
 
     return-object v0
 .end method

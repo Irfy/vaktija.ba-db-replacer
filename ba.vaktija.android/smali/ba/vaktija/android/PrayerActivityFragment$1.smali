@@ -20,31 +20,29 @@
 # instance fields
 .field final synthetic this$0:Lba/vaktija/android/PrayerActivityFragment;
 
-.field final synthetic val$eventAction:Ljava/lang/String;
+.field final synthetic val$action:Ljava/lang/StringBuilder;
 
-.field final synthetic val$gaEventCategory:Ljava/lang/String;
+.field final synthetic val$gaEventAction:Ljava/lang/StringBuilder;
 
-.field final synthetic val$serviceAction:Ljava/lang/String;
+.field final synthetic val$isChecked:Z
 
-.field final synthetic val$serviceStartedFrom:Ljava/lang/String;
+.field final synthetic val$startedFrom:Ljava/lang/StringBuilder;
 
 
 # direct methods
-.method constructor <init>(Lba/vaktija/android/PrayerActivityFragment;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+.method constructor <init>(Lba/vaktija/android/PrayerActivityFragment;ZLjava/lang/StringBuilder;Ljava/lang/StringBuilder;Ljava/lang/StringBuilder;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/PrayerActivityFragment;
 
-    .prologue
-    .line 467
+    .line 452
     iput-object p1, p0, Lba/vaktija/android/PrayerActivityFragment$1;->this$0:Lba/vaktija/android/PrayerActivityFragment;
 
-    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$serviceStartedFrom:Ljava/lang/String;
+    iput-boolean p2, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$isChecked:Z
 
-    iput-object p3, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$serviceAction:Ljava/lang/String;
+    iput-object p3, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$startedFrom:Ljava/lang/StringBuilder;
 
-    iput-object p4, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$gaEventCategory:Ljava/lang/String;
+    iput-object p4, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$action:Ljava/lang/StringBuilder;
 
-    iput-object p5, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$eventAction:Ljava/lang/String;
+    iput-object p5, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$gaEventAction:Ljava/lang/StringBuilder;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -54,81 +52,111 @@
 
 # virtual methods
 .method public run()V
-    .locals 4
+    .locals 2
 
-    .prologue
-    .line 470
+    .line 455
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment$1;->this$0:Lba/vaktija/android/PrayerActivityFragment;
+
+    iget-object v0, v0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
+
+    iget-boolean v1, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$isChecked:Z
+
+    if-eqz v1, :cond_0
+
     iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment$1;->this$0:Lba/vaktija/android/PrayerActivityFragment;
 
-    invoke-virtual {v1}, Lba/vaktija/android/PrayerActivityFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    iget v1, v1, Lba/vaktija/android/PrayerActivityFragment;->colorEnabled:I
 
-    move-result-object v1
+    goto :goto_0
 
-    new-instance v2, Ljava/lang/StringBuilder;
-
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
-
-    sget-object v3, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    const-string v3, ":"
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$serviceStartedFrom:Ljava/lang/String;
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-static {v1, v2}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
-
-    move-result-object v0
-
-    .line 471
-    .local v0, "service":Landroid/content/Intent;
-    iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$serviceAction:Ljava/lang/String;
-
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
-
-    .line 472
+    :cond_0
     iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment$1;->this$0:Lba/vaktija/android/PrayerActivityFragment;
 
-    invoke-virtual {v1}, Lba/vaktija/android/PrayerActivityFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    iget v1, v1, Lba/vaktija/android/PrayerActivityFragment;->colorDisabled:I
 
-    move-result-object v1
+    :goto_0
+    invoke-virtual {v0, v1}, Landroid/widget/CheckBox;->setTextColor(I)V
 
-    invoke-virtual {v1, v0}, Landroid/support/v4/app/FragmentActivity;->startService(Landroid/content/Intent;)Landroid/content/ComponentName;
+    .line 456
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment$1;->this$0:Lba/vaktija/android/PrayerActivityFragment;
 
-    .line 474
+    iget-object v0, v0, Lba/vaktija/android/PrayerActivityFragment;->silent:Landroidx/cardview/widget/CardView;
+
+    iget-boolean v1, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$isChecked:Z
+
+    if-eqz v1, :cond_1
+
     iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment$1;->this$0:Lba/vaktija/android/PrayerActivityFragment;
 
-    invoke-virtual {v1}, Lba/vaktija/android/PrayerActivityFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    iget v1, v1, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
 
-    move-result-object v1
+    goto :goto_1
 
-    invoke-static {v1}, Lba/vaktija/android/util/Utils;->updateWidget(Landroid/content/Context;)V
-
-    .line 476
+    :cond_1
     iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment$1;->this$0:Lba/vaktija/android/PrayerActivityFragment;
 
-    iget-object v1, v1, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
+    iget v1, v1, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
 
-    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$gaEventCategory:Ljava/lang/String;
+    :goto_1
+    invoke-virtual {v0, v1}, Landroidx/cardview/widget/CardView;->setCardElevation(F)V
 
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$eventAction:Ljava/lang/String;
+    .line 458
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment$1;->this$0:Lba/vaktija/android/PrayerActivityFragment;
 
-    invoke-virtual {v1, v2, v3}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+    iget-object v0, v0, Lba/vaktija/android/PrayerActivityFragment;->soundOptionsWrapper:Landroid/view/View;
 
-    .line 477
+    iget-boolean v1, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$isChecked:Z
+
+    invoke-virtual {v0, v1}, Landroid/view/View;->setEnabled(Z)V
+
+    .line 460
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment$1;->this$0:Lba/vaktija/android/PrayerActivityFragment;
+
+    iget-object v0, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    const/4 v1, 0x0
+
+    invoke-virtual {v0, v1}, Lba/vaktija/android/models/Prayer;->setSkipNextSilent(Z)V
+
+    .line 461
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment$1;->this$0:Lba/vaktija/android/PrayerActivityFragment;
+
+    iget-object v0, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    iget-boolean v1, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$isChecked:Z
+
+    invoke-virtual {v0, v1}, Lba/vaktija/android/models/Prayer;->setSilentOn(Z)V
+
+    .line 463
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$startedFrom:Ljava/lang/StringBuilder;
+
+    const-string v1, "onCheckedChanged-activity_vakat_silentSwitch"
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 464
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$action:Ljava/lang/StringBuilder;
+
+    const-string v1, "ACTION_SILENT_CHANGED"
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 466
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$gaEventAction:Ljava/lang/StringBuilder;
+
+    iget-boolean v1, p0, Lba/vaktija/android/PrayerActivityFragment$1;->val$isChecked:Z
+
+    if-eqz v1, :cond_2
+
+    const-string v1, "Enabled silent mode"
+
+    goto :goto_2
+
+    :cond_2
+    const-string v1, "Disabled silent mode"
+
+    :goto_2
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
     return-void
 .end method

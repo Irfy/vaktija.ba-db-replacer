@@ -21,10 +21,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/service/VaktijaService;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/service/VaktijaService;
 
-    .prologue
-    .line 298
+    .line 322
     iput-object p1, p0, Lba/vaktija/android/service/VaktijaService$1;->this$0:Lba/vaktija/android/service/VaktijaService;
 
     invoke-direct {p0}, Landroid/content/BroadcastReceiver;-><init>()V
@@ -35,27 +33,23 @@
 
 # virtual methods
 .method public onReceive(Landroid/content/Context;Landroid/content/Intent;)V
-    .locals 2
-    .param p1, "context"    # Landroid/content/Context;
-    .param p2, "intent"    # Landroid/content/Intent;
+    .locals 0
 
-    .prologue
-    .line 302
-    sget-object v0, Lba/vaktija/android/service/VaktijaService;->TAG:Ljava/lang/String;
+    .line 326
+    sget-object p1, Lba/vaktija/android/service/VaktijaService;->TAG:Ljava/lang/String;
 
-    const-string v1, "mScreenOnReceiver onReceive"
+    const-string p2, "mScreenOnReceiver onReceive"
 
-    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-static {p1, p2}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 304
-    iget-object v0, p0, Lba/vaktija/android/service/VaktijaService$1;->this$0:Lba/vaktija/android/service/VaktijaService;
+    .line 328
+    iget-object p1, p0, Lba/vaktija/android/service/VaktijaService$1;->this$0:Lba/vaktija/android/service/VaktijaService;
 
-    invoke-static {v0}, Lba/vaktija/android/service/NotificationsManager;->getInstance(Landroid/content/Context;)Lba/vaktija/android/service/NotificationsManager;
+    invoke-static {p1}, Lba/vaktija/android/service/NotifManagerFactory;->getNotifManager(Landroid/content/Context;)Lba/vaktija/android/service/NotifManager;
 
-    move-result-object v0
+    move-result-object p1
 
-    invoke-virtual {v0}, Lba/vaktija/android/service/NotificationsManager;->updateNotification()V
+    invoke-interface {p1}, Lba/vaktija/android/service/NotifManager;->updateNotification()V
 
-    .line 305
     return-void
 .end method

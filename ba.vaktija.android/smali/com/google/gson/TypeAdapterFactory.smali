@@ -11,10 +11,10 @@
             "Ljava/lang/Object;",
             ">(",
             "Lcom/google/gson/Gson;",
-            "Lcom/google/gson/reflect/TypeToken",
-            "<TT;>;)",
-            "Lcom/google/gson/TypeAdapter",
-            "<TT;>;"
+            "Lcom/google/gson/reflect/TypeToken<",
+            "TT;>;)",
+            "Lcom/google/gson/TypeAdapter<",
+            "TT;>;"
         }
     .end annotation
 .end method

@@ -22,8 +22,7 @@
 .field final eventQueue:Ljava/util/List;
     .annotation system Ldalvik/annotation/Signature;
         value = {
-            "Ljava/util/List",
-            "<",
+            "Ljava/util/List<",
             "Ljava/lang/Object;",
             ">;"
         }
@@ -41,7 +40,6 @@
 .method constructor <init>()V
     .locals 1
 
-    .prologue
     .line 533
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 

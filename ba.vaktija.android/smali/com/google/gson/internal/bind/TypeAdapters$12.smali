@@ -1,4 +1,4 @@
-.class final Lcom/google/gson/internal/bind/TypeAdapters$12;
+.class Lcom/google/gson/internal/bind/TypeAdapters$12;
 .super Lcom/google/gson/TypeAdapter;
 .source "TypeAdapters.java"
 
@@ -9,15 +9,14 @@
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
-    accessFlags = 0x8
+    accessFlags = 0x0
     name = null
 .end annotation
 
 .annotation system Ldalvik/annotation/Signature;
     value = {
-        "Lcom/google/gson/TypeAdapter",
-        "<",
-        "Ljava/lang/Character;",
+        "Lcom/google/gson/TypeAdapter<",
+        "Ljava/lang/Number;",
         ">;"
     }
 .end annotation
@@ -27,8 +26,7 @@
 .method constructor <init>()V
     .locals 0
 
-    .prologue
-    .line 324
+    .line 315
     invoke-direct {p0}, Lcom/google/gson/TypeAdapter;-><init>()V
 
     return-void
@@ -36,137 +34,73 @@
 
 
 # virtual methods
-.method public read(Lcom/google/gson/stream/JsonReader;)Ljava/lang/Character;
-    .locals 4
-    .param p1, "in"    # Lcom/google/gson/stream/JsonReader;
+.method public read(Lcom/google/gson/stream/JsonReader;)Ljava/lang/Number;
+    .locals 2
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
-    .prologue
-    .line 327
+    .line 318
     invoke-virtual {p1}, Lcom/google/gson/stream/JsonReader;->peek()Lcom/google/gson/stream/JsonToken;
-
-    move-result-object v1
-
-    sget-object v2, Lcom/google/gson/stream/JsonToken;->NULL:Lcom/google/gson/stream/JsonToken;
-
-    if-ne v1, v2, :cond_0
-
-    .line 328
-    invoke-virtual {p1}, Lcom/google/gson/stream/JsonReader;->nextNull()V
-
-    .line 329
-    const/4 v1, 0x0
-
-    .line 335
-    :goto_0
-    return-object v1
-
-    .line 331
-    :cond_0
-    invoke-virtual {p1}, Lcom/google/gson/stream/JsonReader;->nextString()Ljava/lang/String;
 
     move-result-object v0
 
-    .line 332
-    .local v0, "str":Ljava/lang/String;
-    invoke-virtual {v0}, Ljava/lang/String;->length()I
+    sget-object v1, Lcom/google/gson/stream/JsonToken;->NULL:Lcom/google/gson/stream/JsonToken;
 
-    move-result v1
+    if-ne v0, v1, :cond_0
 
-    const/4 v2, 0x1
+    .line 319
+    invoke-virtual {p1}, Lcom/google/gson/stream/JsonReader;->nextNull()V
 
-    if-eq v1, v2, :cond_1
+    const/4 p1, 0x0
 
-    .line 333
-    new-instance v1, Lcom/google/gson/JsonSyntaxException;
+    return-object p1
 
-    new-instance v2, Ljava/lang/StringBuilder;
+    .line 322
+    :cond_0
+    invoke-virtual {p1}, Lcom/google/gson/stream/JsonReader;->nextDouble()D
 
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+    move-result-wide v0
 
-    const-string v3, "Expecting character, got: "
+    double-to-float p1, v0
 
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-static {p1}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;
 
-    move-result-object v2
+    move-result-object p1
 
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-direct {v1, v2}, Lcom/google/gson/JsonSyntaxException;-><init>(Ljava/lang/String;)V
-
-    throw v1
-
-    .line 335
-    :cond_1
-    const/4 v1, 0x0
-
-    invoke-virtual {v0, v1}, Ljava/lang/String;->charAt(I)C
-
-    move-result v1
-
-    invoke-static {v1}, Ljava/lang/Character;->valueOf(C)Ljava/lang/Character;
-
-    move-result-object v1
-
-    goto :goto_0
+    return-object p1
 .end method
 
 .method public bridge synthetic read(Lcom/google/gson/stream/JsonReader;)Ljava/lang/Object;
-    .locals 1
+    .locals 0
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
-    .prologue
-    .line 324
-    invoke-virtual {p0, p1}, Lcom/google/gson/internal/bind/TypeAdapters$12;->read(Lcom/google/gson/stream/JsonReader;)Ljava/lang/Character;
+    .line 315
+    invoke-virtual {p0, p1}, Lcom/google/gson/internal/bind/TypeAdapters$12;->read(Lcom/google/gson/stream/JsonReader;)Ljava/lang/Number;
 
-    move-result-object v0
+    move-result-object p1
 
-    return-object v0
+    return-object p1
 .end method
 
-.method public write(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Character;)V
-    .locals 1
-    .param p1, "out"    # Lcom/google/gson/stream/JsonWriter;
-    .param p2, "value"    # Ljava/lang/Character;
+.method public write(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Number;)V
+    .locals 0
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
-    .prologue
-    .line 339
-    if-nez p2, :cond_0
+    .line 326
+    invoke-virtual {p1, p2}, Lcom/google/gson/stream/JsonWriter;->value(Ljava/lang/Number;)Lcom/google/gson/stream/JsonWriter;
 
-    const/4 v0, 0x0
-
-    :goto_0
-    invoke-virtual {p1, v0}, Lcom/google/gson/stream/JsonWriter;->value(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;
-
-    .line 340
     return-void
-
-    .line 339
-    :cond_0
-    invoke-static {p2}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
-
-    move-result-object v0
-
-    goto :goto_0
 .end method
 
 .method public bridge synthetic write(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V
@@ -177,11 +111,10 @@
         }
     .end annotation
 
-    .prologue
-    .line 324
-    check-cast p2, Ljava/lang/Character;
+    .line 315
+    check-cast p2, Ljava/lang/Number;
 
-    invoke-virtual {p0, p1, p2}, Lcom/google/gson/internal/bind/TypeAdapters$12;->write(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Character;)V
+    invoke-virtual {p0, p1, p2}, Lcom/google/gson/internal/bind/TypeAdapters$12;->write(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Number;)V
 
     return-void
 .end method

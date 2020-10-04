@@ -1,5 +1,5 @@
 .class public Lba/vaktija/android/DateFragment;
-.super Landroid/support/v4/app/DialogFragment;
+.super Landroidx/fragment/app/DialogFragment;
 .source "DateFragment.java"
 
 
@@ -31,7 +31,6 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
     .line 27
     const-class v0, Lba/vaktija/android/DateFragment;
 
@@ -47,11 +46,10 @@
 .method public constructor <init>()V
     .locals 1
 
-    .prologue
-    const/4 v0, 0x0
-
     .line 26
-    invoke-direct {p0}, Landroid/support/v4/app/DialogFragment;-><init>()V
+    invoke-direct {p0}, Landroidx/fragment/app/DialogFragment;-><init>()V
+
+    const/4 v0, 0x0
 
     .line 40
     iput v0, p0, Lba/vaktija/android/DateFragment;->month:I
@@ -68,442 +66,390 @@
 
 # virtual methods
 .method public onActivityCreated(Landroid/os/Bundle;)V
-    .locals 10
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
-
-    .prologue
-    const/4 v9, -0x1
-
-    .line 88
-    invoke-super {p0, p1}, Landroid/support/v4/app/DialogFragment;->onActivityCreated(Landroid/os/Bundle;)V
+    .locals 7
 
     .line 89
-    sget-object v5, Lba/vaktija/android/DateFragment;->TAG:Ljava/lang/String;
+    invoke-super {p0, p1}, Landroidx/fragment/app/DialogFragment;->onActivityCreated(Landroid/os/Bundle;)V
 
-    const-string v6, "onActivityCreated"
+    .line 90
+    sget-object p1, Lba/vaktija/android/DateFragment;->TAG:Ljava/lang/String;
 
-    invoke-static {v5, v6}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    const-string v0, "onActivityCreated"
 
-    .line 91
-    new-instance v5, Landroid/os/Handler;
+    invoke-static {p1, v0}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    invoke-direct {v5}, Landroid/os/Handler;-><init>()V
+    .line 92
+    new-instance p1, Landroid/os/Handler;
 
-    iput-object v5, p0, Lba/vaktija/android/DateFragment;->uiHandler:Landroid/os/Handler;
+    invoke-direct {p1}, Landroid/os/Handler;-><init>()V
 
-    .line 93
-    invoke-virtual {p0}, Lba/vaktija/android/DateFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    iput-object p1, p0, Lba/vaktija/android/DateFragment;->uiHandler:Landroid/os/Handler;
 
-    move-result-object v5
+    .line 94
+    invoke-virtual {p0}, Lba/vaktija/android/DateFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
-    invoke-virtual {v5}, Landroid/support/v4/app/FragmentActivity;->getApplicationContext()Landroid/content/Context;
+    move-result-object p1
 
-    move-result-object v5
+    invoke-virtual {p1}, Landroidx/fragment/app/FragmentActivity;->getApplicationContext()Landroid/content/Context;
 
-    check-cast v5, Lba/vaktija/android/App;
+    move-result-object p1
 
-    iput-object v5, p0, Lba/vaktija/android/DateFragment;->app:Lba/vaktija/android/App;
+    check-cast p1, Lba/vaktija/android/App;
 
-    .line 96
+    iput-object p1, p0, Lba/vaktija/android/DateFragment;->app:Lba/vaktija/android/App;
+
+    const/4 p1, 0x0
+
     const/4 v0, 0x0
 
-    .local v0, "i":I
     :goto_0
-    const/4 v5, 0x5
+    const/4 v1, 0x5
 
-    if-gt v0, v5, :cond_1
+    if-gt v0, v1, :cond_1
 
-    .line 97
-    iget-object v5, p0, Lba/vaktija/android/DateFragment;->app:Lba/vaktija/android/App;
+    .line 98
+    iget-object v1, p0, Lba/vaktija/android/DateFragment;->app:Lba/vaktija/android/App;
 
-    invoke-static {v5}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
-
-    move-result-object v5
-
-    iget v6, p0, Lba/vaktija/android/DateFragment;->year:I
-
-    iget v7, p0, Lba/vaktija/android/DateFragment;->month:I
-
-    iget v8, p0, Lba/vaktija/android/DateFragment;->day:I
-
-    invoke-virtual {v5, v0, v6, v7, v8}, Lba/vaktija/android/models/PrayersSchedule;->getPrayerForDate(IIII)Lba/vaktija/android/models/Prayer;
+    invoke-static {v1}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
 
     move-result-object v1
 
-    .line 98
-    .local v1, "p":Lba/vaktija/android/models/Prayer;
-    iget-object v5, p0, Lba/vaktija/android/DateFragment;->mLayoutInflater:Landroid/view/LayoutInflater;
+    iget v2, p0, Lba/vaktija/android/DateFragment;->year:I
 
-    const v6, 0x7f030028
+    iget v3, p0, Lba/vaktija/android/DateFragment;->month:I
 
-    const/4 v7, 0x0
+    iget v4, p0, Lba/vaktija/android/DateFragment;->day:I
 
-    invoke-virtual {v5, v6, v7}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;)Landroid/view/View;
+    invoke-virtual {v1, v0, v2, v3, v4}, Lba/vaktija/android/models/PrayersSchedule;->getPrayerForDate(IIII)Lba/vaktija/android/models/Prayer;
 
-    move-result-object v4
+    move-result-object v1
 
     .line 99
-    .local v4, "view":Landroid/view/View;
-    const v5, 0x7f0e008d
+    iget-object v2, p0, Lba/vaktija/android/DateFragment;->mLayoutInflater:Landroid/view/LayoutInflater;
 
-    invoke-virtual {v4, v5}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    const v3, 0x7f0b002f
+
+    const/4 v4, 0x0
+
+    invoke-virtual {v2, v3, v4}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;)Landroid/view/View;
+
+    move-result-object v2
+
+    const v3, 0x7f080095
+
+    .line 100
+    invoke-virtual {v2, v3}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
     move-result-object v3
 
     check-cast v3, Landroid/widget/TextView;
 
-    .line 100
-    .local v3, "title":Landroid/widget/TextView;
-    const v5, 0x7f0e008c
+    const v4, 0x7f080094
 
-    invoke-virtual {v4, v5}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    .line 101
+    invoke-virtual {v2, v4}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    move-result-object v2
+    move-result-object v4
 
-    check-cast v2, Landroid/widget/TextView;
+    check-cast v4, Landroid/widget/TextView;
 
-    .line 102
-    .local v2, "time":Landroid/widget/TextView;
+    .line 103
     invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
     move-result-object v5
 
     invoke-virtual {v3, v5}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 103
+    .line 104
     invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->getRawPrayerTime()I
 
-    move-result v5
+    move-result v1
 
-    mul-int/lit16 v5, v5, 0x3e8
+    mul-int/lit16 v1, v1, 0x3e8
 
-    int-to-long v6, v5
+    int-to-long v5, v1
 
-    const/4 v5, 0x0
+    invoke-static {v5, v6, p1}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
 
-    invoke-static {v6, v7, v5}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
+    move-result-object v1
 
-    move-result-object v5
-
-    invoke-virtual {v2, v5}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
-
-    .line 105
-    sget v5, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v6, 0xb
-
-    if-ge v5, v6, :cond_0
+    invoke-virtual {v4, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     .line 106
-    invoke-virtual {v3, v9}, Landroid/widget/TextView;->setTextColor(I)V
+    sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v5, 0xb
+
+    if-ge v1, v5, :cond_0
+
+    const/4 v1, -0x1
 
     .line 107
-    invoke-virtual {v2, v9}, Landroid/widget/TextView;->setTextColor(I)V
+    invoke-virtual {v3, v1}, Landroid/widget/TextView;->setTextColor(I)V
 
-    .line 110
+    .line 108
+    invoke-virtual {v4, v1}, Landroid/widget/TextView;->setTextColor(I)V
+
+    .line 111
     :cond_0
-    iget-object v5, p0, Lba/vaktija/android/DateFragment;->rootLayout:Landroid/widget/LinearLayout;
+    iget-object v1, p0, Lba/vaktija/android/DateFragment;->rootLayout:Landroid/widget/LinearLayout;
 
-    invoke-virtual {v5, v4}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
+    invoke-virtual {v1, v2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    .line 96
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
-    .line 112
-    .end local v1    # "p":Lba/vaktija/android/models/Prayer;
-    .end local v2    # "time":Landroid/widget/TextView;
-    .end local v3    # "title":Landroid/widget/TextView;
-    .end local v4    # "view":Landroid/view/View;
     :cond_1
     return-void
 .end method
 
 .method public onCreate(Landroid/os/Bundle;)V
-    .locals 2
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
-
-    .prologue
-    .line 82
-    invoke-super {p0, p1}, Landroid/support/v4/app/DialogFragment;->onCreate(Landroid/os/Bundle;)V
+    .locals 1
 
     .line 83
-    sget-object v0, Lba/vaktija/android/DateFragment;->TAG:Ljava/lang/String;
-
-    const-string v1, "onCreate"
-
-    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-super {p0, p1}, Landroidx/fragment/app/DialogFragment;->onCreate(Landroid/os/Bundle;)V
 
     .line 84
-    const/4 v0, 0x1
+    sget-object p1, Lba/vaktija/android/DateFragment;->TAG:Ljava/lang/String;
 
-    invoke-virtual {p0, v0}, Lba/vaktija/android/DateFragment;->setHasOptionsMenu(Z)V
+    const-string v0, "onCreate"
+
+    invoke-static {p1, v0}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    const/4 p1, 0x1
 
     .line 85
+    invoke-virtual {p0, p1}, Lba/vaktija/android/DateFragment;->setHasOptionsMenu(Z)V
+
     return-void
 .end method
 
 .method public onCreateDialog(Landroid/os/Bundle;)Landroid/app/Dialog;
-    .locals 8
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
+    .locals 5
 
-    .prologue
-    const/4 v7, 0x2
+    .line 48
+    invoke-virtual {p0}, Lba/vaktija/android/DateFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
-    const/4 v6, 0x1
+    move-result-object p1
 
-    .line 47
-    invoke-virtual {p0}, Lba/vaktija/android/DateFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    invoke-static {p1}, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;
 
-    move-result-object v3
+    move-result-object p1
 
-    invoke-static {v3}, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;
+    iput-object p1, p0, Lba/vaktija/android/DateFragment;->mLayoutInflater:Landroid/view/LayoutInflater;
 
-    move-result-object v3
+    const v0, 0x7f0b002e
 
-    iput-object v3, p0, Lba/vaktija/android/DateFragment;->mLayoutInflater:Landroid/view/LayoutInflater;
+    const/4 v1, 0x0
 
-    .line 49
-    iget-object v3, p0, Lba/vaktija/android/DateFragment;->mLayoutInflater:Landroid/view/LayoutInflater;
+    .line 50
+    invoke-virtual {p1, v0, v1}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;)Landroid/view/View;
 
-    const v4, 0x7f030027
+    move-result-object p1
 
-    const/4 v5, 0x0
+    const v0, 0x7f080093
 
-    invoke-virtual {v3, v4, v5}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;)Landroid/view/View;
+    .line 51
+    invoke-virtual {p1, v0}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/widget/LinearLayout;
+
+    iput-object v0, p0, Lba/vaktija/android/DateFragment;->rootLayout:Landroid/widget/LinearLayout;
+
+    .line 53
+    invoke-virtual {p0}, Lba/vaktija/android/DateFragment;->getArguments()Landroid/os/Bundle;
+
+    move-result-object v0
+
+    const-string v1, "EXTRA_VALUES"
+
+    invoke-virtual {v0, v1}, Landroid/os/Bundle;->getStringArrayList(Ljava/lang/String;)Ljava/util/ArrayList;
+
+    move-result-object v0
+
+    const/4 v1, 0x1
+
+    .line 55
+    invoke-interface {v0, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v2
 
-    .line 50
-    .local v2, "view":Landroid/view/View;
-    const v3, 0x7f0e008b
+    check-cast v2, Ljava/lang/String;
 
-    invoke-virtual {v2, v3}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    invoke-static {v2}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
 
-    move-result-object v3
+    move-result v2
 
-    check-cast v3, Landroid/widget/LinearLayout;
+    iput v2, p0, Lba/vaktija/android/DateFragment;->month:I
 
-    iput-object v3, p0, Lba/vaktija/android/DateFragment;->rootLayout:Landroid/widget/LinearLayout;
-
-    .line 52
-    invoke-virtual {p0}, Lba/vaktija/android/DateFragment;->getArguments()Landroid/os/Bundle;
-
-    move-result-object v3
-
-    const-string v4, "EXTRA_VALUES"
-
-    invoke-virtual {v3, v4}, Landroid/os/Bundle;->getStringArrayList(Ljava/lang/String;)Ljava/util/ArrayList;
-
-    move-result-object v1
-
-    .line 54
-    .local v1, "values":Ljava/util/List;, "Ljava/util/List<Ljava/lang/String;>;"
-    invoke-interface {v1, v6}, Ljava/util/List;->get(I)Ljava/lang/Object;
-
-    move-result-object v3
-
-    check-cast v3, Ljava/lang/String;
-
-    invoke-static {v3}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v3
-
-    iput v3, p0, Lba/vaktija/android/DateFragment;->month:I
-
-    .line 55
-    const/4 v3, 0x0
-
-    invoke-interface {v1, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;
-
-    move-result-object v3
-
-    check-cast v3, Ljava/lang/String;
-
-    invoke-static {v3}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v3
-
-    iput v3, p0, Lba/vaktija/android/DateFragment;->day:I
+    const/4 v2, 0x0
 
     .line 56
-    invoke-interface {v1, v7}, Ljava/util/List;->get(I)Ljava/lang/Object;
+    invoke-interface {v0, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Ljava/lang/String;
+
+    invoke-static {v2}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v2
+
+    iput v2, p0, Lba/vaktija/android/DateFragment;->day:I
+
+    const/4 v2, 0x2
+
+    .line 57
+    invoke-interface {v0, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Ljava/lang/String;
+
+    invoke-static {v0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v0
+
+    iput v0, p0, Lba/vaktija/android/DateFragment;->year:I
+
+    .line 59
+    sget-object v0, Lba/vaktija/android/DateFragment;->TAG:Ljava/lang/String;
+
+    new-instance v3, Ljava/lang/StringBuilder;
+
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v4, "month="
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget v4, p0, Lba/vaktija/android/DateFragment;->month:I
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    const-string v4, " day="
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget v4, p0, Lba/vaktija/android/DateFragment;->day:I
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    const-string v4, " year="
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget v4, p0, Lba/vaktija/android/DateFragment;->year:I
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v3
 
-    check-cast v3, Ljava/lang/String;
+    invoke-static {v0, v3}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
 
-    invoke-static {v3}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+    .line 61
+    new-instance v0, Landroid/app/AlertDialog$Builder;
 
-    move-result v3
-
-    iput v3, p0, Lba/vaktija/android/DateFragment;->year:I
-
-    .line 58
-    sget-object v3, Lba/vaktija/android/DateFragment;->TAG:Ljava/lang/String;
-
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v5, "month="
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    iget v5, p0, Lba/vaktija/android/DateFragment;->month:I
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    const-string v5, " day="
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    iget v5, p0, Lba/vaktija/android/DateFragment;->day:I
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    const-string v5, " year="
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    iget v5, p0, Lba/vaktija/android/DateFragment;->year:I
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-static {v3, v4}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 60
-    new-instance v3, Landroid/app/AlertDialog$Builder;
-
-    invoke-virtual {p0}, Lba/vaktija/android/DateFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v4
-
-    invoke-direct {v3, v4}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
-
-    const v4, 0x7f07003b
-
-    new-instance v5, Lba/vaktija/android/DateFragment$1;
-
-    invoke-direct {v5, p0}, Lba/vaktija/android/DateFragment$1;-><init>(Lba/vaktija/android/DateFragment;)V
-
-    .line 62
-    invoke-virtual {v3, v4, v5}, Landroid/app/AlertDialog$Builder;->setNegativeButton(ILandroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
+    invoke-virtual {p0}, Lba/vaktija/android/DateFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
     move-result-object v3
 
-    iput-object v3, p0, Lba/vaktija/android/DateFragment;->mDialogBuilder:Landroid/app/AlertDialog$Builder;
+    invoke-direct {v0, v3}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
 
-    .line 69
+    new-instance v3, Lba/vaktija/android/DateFragment$1;
+
+    invoke-direct {v3, p0}, Lba/vaktija/android/DateFragment$1;-><init>(Lba/vaktija/android/DateFragment;)V
+
+    const v4, 0x7f0f0056
+
+    .line 63
+    invoke-virtual {v0, v4, v3}, Landroid/app/AlertDialog$Builder;->setNegativeButton(ILandroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
+
+    move-result-object v0
+
+    iput-object v0, p0, Lba/vaktija/android/DateFragment;->mDialogBuilder:Landroid/app/AlertDialog$Builder;
+
+    .line 70
     invoke-static {}, Ljava/util/Calendar;->getInstance()Ljava/util/Calendar;
 
     move-result-object v0
 
-    .line 70
-    .local v0, "calendar":Ljava/util/Calendar;
+    .line 71
     iget v3, p0, Lba/vaktija/android/DateFragment;->year:I
 
-    invoke-virtual {v0, v6, v3}, Ljava/util/Calendar;->set(II)V
-
-    .line 71
-    iget v3, p0, Lba/vaktija/android/DateFragment;->month:I
-
-    add-int/lit8 v3, v3, -0x1
-
-    invoke-virtual {v0, v7, v3}, Ljava/util/Calendar;->set(II)V
+    invoke-virtual {v0, v1, v3}, Ljava/util/Calendar;->set(II)V
 
     .line 72
-    const/4 v3, 0x5
+    iget v3, p0, Lba/vaktija/android/DateFragment;->month:I
 
-    iget v4, p0, Lba/vaktija/android/DateFragment;->day:I
+    sub-int/2addr v3, v1
 
-    invoke-virtual {v0, v3, v4}, Ljava/util/Calendar;->set(II)V
+    invoke-virtual {v0, v2, v3}, Ljava/util/Calendar;->set(II)V
 
-    .line 74
-    iget-object v3, p0, Lba/vaktija/android/DateFragment;->mDialogBuilder:Landroid/app/AlertDialog$Builder;
+    .line 73
+    iget v1, p0, Lba/vaktija/android/DateFragment;->day:I
 
-    new-instance v4, Ljava/lang/StringBuilder;
+    const/4 v2, 0x5
 
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-virtual {v0, v2, v1}, Ljava/util/Calendar;->set(II)V
 
-    iget v5, p0, Lba/vaktija/android/DateFragment;->day:I
+    .line 75
+    iget-object v1, p0, Lba/vaktija/android/DateFragment;->mDialogBuilder:Landroid/app/AlertDialog$Builder;
 
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    move-result-object v4
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v5, ". "
+    iget v3, p0, Lba/vaktija/android/DateFragment;->day:I
 
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    move-result-object v4
+    const-string v3, ". "
 
-    iget v5, p0, Lba/vaktija/android/DateFragment;->month:I
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    iget v4, p0, Lba/vaktija/android/DateFragment;->month:I
 
-    move-result-object v4
+    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    const-string v5, ". "
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    iget v3, p0, Lba/vaktija/android/DateFragment;->year:I
 
-    move-result-object v4
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    iget v5, p0, Lba/vaktija/android/DateFragment;->year:I
+    const-string v3, " / "
 
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    const-string v5, " / "
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     invoke-static {v0}, Lba/vaktija/android/util/HijriCalendar;->getSimpleDate(Ljava/util/Calendar;)Ljava/lang/String;
 
-    move-result-object v5
+    move-result-object v0
 
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v4
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v0
 
-    move-result-object v4
+    invoke-virtual {v1, v0}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
 
-    invoke-virtual {v3, v4}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
+    .line 76
+    iget-object v0, p0, Lba/vaktija/android/DateFragment;->mDialogBuilder:Landroid/app/AlertDialog$Builder;
 
-    .line 75
-    iget-object v3, p0, Lba/vaktija/android/DateFragment;->mDialogBuilder:Landroid/app/AlertDialog$Builder;
+    invoke-virtual {v0, p1}, Landroid/app/AlertDialog$Builder;->setView(Landroid/view/View;)Landroid/app/AlertDialog$Builder;
 
-    invoke-virtual {v3, v2}, Landroid/app/AlertDialog$Builder;->setView(Landroid/view/View;)Landroid/app/AlertDialog$Builder;
+    .line 78
+    iget-object p1, p0, Lba/vaktija/android/DateFragment;->mDialogBuilder:Landroid/app/AlertDialog$Builder;
 
-    .line 77
-    iget-object v3, p0, Lba/vaktija/android/DateFragment;->mDialogBuilder:Landroid/app/AlertDialog$Builder;
+    invoke-virtual {p1}, Landroid/app/AlertDialog$Builder;->create()Landroid/app/AlertDialog;
 
-    invoke-virtual {v3}, Landroid/app/AlertDialog$Builder;->create()Landroid/app/AlertDialog;
+    move-result-object p1
 
-    move-result-object v3
-
-    return-object v3
+    return-object p1
 .end method

@@ -5,7 +5,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lba/vaktija/android/AlarmActivity;->increaseVolume()V
+    value = Lba/vaktija/android/AlarmActivity;->startCountDownTimer()V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -21,12 +21,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/AlarmActivity;JJ)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/AlarmActivity;
-    .param p2, "x0"    # J
-    .param p4, "x1"    # J
 
-    .prologue
-    .line 236
+    .line 183
     iput-object p1, p0, Lba/vaktija/android/AlarmActivity$1;->this$0:Lba/vaktija/android/AlarmActivity;
 
     invoke-direct {p0, p2, p3, p4, p5}, Landroid/os/CountDownTimer;-><init>(JJ)V
@@ -37,95 +33,52 @@
 
 # virtual methods
 .method public onFinish()V
-    .locals 4
+    .locals 1
 
-    .prologue
-    .line 251
+    .line 195
     iget-object v0, p0, Lba/vaktija/android/AlarmActivity$1;->this$0:Lba/vaktija/android/AlarmActivity;
 
-    # getter for: Lba/vaktija/android/AlarmActivity;->mAudioManager:Landroid/media/AudioManager;
-    invoke-static {v0}, Lba/vaktija/android/AlarmActivity;->access$100(Lba/vaktija/android/AlarmActivity;)Landroid/media/AudioManager;
+    invoke-virtual {v0}, Lba/vaktija/android/AlarmActivity;->showAlarmMissedNotification()V
 
-    move-result-object v0
+    .line 196
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity$1;->this$0:Lba/vaktija/android/AlarmActivity;
 
-    const/4 v1, 0x4
+    invoke-static {v0}, Lba/vaktija/android/AlarmActivity;->access$000(Lba/vaktija/android/AlarmActivity;)V
 
-    iget-object v2, p0, Lba/vaktija/android/AlarmActivity$1;->this$0:Lba/vaktija/android/AlarmActivity;
+    .line 197
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity$1;->this$0:Lba/vaktija/android/AlarmActivity;
 
-    # getter for: Lba/vaktija/android/AlarmActivity;->mInitialStreamVolume:I
-    invoke-static {v2}, Lba/vaktija/android/AlarmActivity;->access$000(Lba/vaktija/android/AlarmActivity;)I
+    invoke-virtual {v0}, Lba/vaktija/android/AlarmActivity;->finish()V
 
-    move-result v2
-
-    const/4 v3, 0x0
-
-    invoke-virtual {v0, v1, v2, v3}, Landroid/media/AudioManager;->setStreamVolume(III)V
-
-    .line 252
     return-void
 .end method
 
 .method public onTick(J)V
-    .locals 5
-    .param p1, "millisUntilFinished"    # J
+    .locals 2
 
-    .prologue
-    .line 240
-    const-wide/16 v2, 0x3e8
+    long-to-int p2, p1
 
-    div-long v2, p1, v2
+    .line 188
+    div-int/lit16 p2, p2, 0x3e8
 
-    long-to-int v0, v2
+    .line 190
+    sget-object p1, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
 
-    .line 242
-    .local v0, "sec":I
-    iget-object v2, p0, Lba/vaktija/android/AlarmActivity$1;->this$0:Lba/vaktija/android/AlarmActivity;
+    new-instance v0, Ljava/lang/StringBuilder;
 
-    # getter for: Lba/vaktija/android/AlarmActivity;->mInitialStreamVolume:I
-    invoke-static {v2}, Lba/vaktija/android/AlarmActivity;->access$000(Lba/vaktija/android/AlarmActivity;)I
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 
-    move-result v2
+    const-string v1, "on tick "
 
-    sub-int v1, v2, v0
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 244
-    .local v1, "volume":I
-    sget-object v2, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    new-instance v3, Ljava/lang/StringBuilder;
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+    move-result-object p2
 
-    const-string v4, "volume: "
+    invoke-static {p1, p2}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-static {v2, v3}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 246
-    iget-object v2, p0, Lba/vaktija/android/AlarmActivity$1;->this$0:Lba/vaktija/android/AlarmActivity;
-
-    # getter for: Lba/vaktija/android/AlarmActivity;->mAudioManager:Landroid/media/AudioManager;
-    invoke-static {v2}, Lba/vaktija/android/AlarmActivity;->access$100(Lba/vaktija/android/AlarmActivity;)Landroid/media/AudioManager;
-
-    move-result-object v2
-
-    const/4 v3, 0x4
-
-    const/4 v4, 0x0
-
-    invoke-virtual {v2, v3, v1, v4}, Landroid/media/AudioManager;->setStreamVolume(III)V
-
-    .line 247
     return-void
 .end method

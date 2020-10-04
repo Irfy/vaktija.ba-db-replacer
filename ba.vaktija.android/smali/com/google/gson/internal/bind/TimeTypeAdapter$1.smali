@@ -1,4 +1,4 @@
-.class final Lcom/google/gson/internal/bind/TimeTypeAdapter$1;
+.class Lcom/google/gson/internal/bind/TimeTypeAdapter$1;
 .super Ljava/lang/Object;
 .source "TimeTypeAdapter.java"
 
@@ -12,7 +12,7 @@
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
-    accessFlags = 0x8
+    accessFlags = 0x0
     name = null
 .end annotation
 
@@ -21,7 +21,6 @@
 .method constructor <init>()V
     .locals 0
 
-    .prologue
     .line 41
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -31,41 +30,38 @@
 
 # virtual methods
 .method public create(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
-    .locals 2
-    .param p1, "gson"    # Lcom/google/gson/Gson;
+    .locals 0
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<T:",
             "Ljava/lang/Object;",
             ">(",
             "Lcom/google/gson/Gson;",
-            "Lcom/google/gson/reflect/TypeToken",
-            "<TT;>;)",
-            "Lcom/google/gson/TypeAdapter",
-            "<TT;>;"
+            "Lcom/google/gson/reflect/TypeToken<",
+            "TT;>;)",
+            "Lcom/google/gson/TypeAdapter<",
+            "TT;>;"
         }
     .end annotation
 
-    .prologue
     .line 44
-    .local p2, "typeToken":Lcom/google/gson/reflect/TypeToken;, "Lcom/google/gson/reflect/TypeToken<TT;>;"
     invoke-virtual {p2}, Lcom/google/gson/reflect/TypeToken;->getRawType()Ljava/lang/Class;
 
-    move-result-object v0
+    move-result-object p1
 
-    const-class v1, Ljava/sql/Time;
+    const-class p2, Ljava/sql/Time;
 
-    if-ne v0, v1, :cond_0
+    if-ne p1, p2, :cond_0
 
-    new-instance v0, Lcom/google/gson/internal/bind/TimeTypeAdapter;
+    new-instance p1, Lcom/google/gson/internal/bind/TimeTypeAdapter;
 
-    invoke-direct {v0}, Lcom/google/gson/internal/bind/TimeTypeAdapter;-><init>()V
-
-    :goto_0
-    return-object v0
-
-    :cond_0
-    const/4 v0, 0x0
+    invoke-direct {p1}, Lcom/google/gson/internal/bind/TimeTypeAdapter;-><init>()V
 
     goto :goto_0
+
+    :cond_0
+    const/4 p1, 0x0
+
+    :goto_0
+    return-object p1
 .end method

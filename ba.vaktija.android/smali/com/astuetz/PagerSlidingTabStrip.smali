@@ -24,7 +24,7 @@
 
 .field private defaultTabLayoutParams:Landroid/widget/LinearLayout$LayoutParams;
 
-.field public delegatePageListener:Landroid/support/v4/view/ViewPager$OnPageChangeListener;
+.field public delegatePageListener:Landroidx/viewpager/widget/ViewPager$OnPageChangeListener;
 
 .field private dividerColor:I
 
@@ -46,7 +46,7 @@
 
 .field private final pageListener:Lcom/astuetz/PagerSlidingTabStrip$PageListener;
 
-.field private pager:Landroid/support/v4/view/ViewPager;
+.field private pager:Landroidx/viewpager/widget/ViewPager;
 
 .field private rectPaint:Landroid/graphics/Paint;
 
@@ -81,12 +81,11 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
-    .line 53
     const/4 v0, 0x2
 
     new-array v0, v0, [I
 
+    .line 53
     fill-array-data v0, :array_0
 
     sput-object v0, Lcom/astuetz/PagerSlidingTabStrip;->ATTRS:[I
@@ -104,548 +103,509 @@
 
 .method public constructor <init>(Landroid/content/Context;)V
     .locals 1
-    .param p1, "context"    # Landroid/content/Context;
 
-    .prologue
-    .line 102
     const/4 v0, 0x0
 
+    .line 102
     invoke-direct {p0, p1, v0}, Lcom/astuetz/PagerSlidingTabStrip;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
 
-    .line 103
     return-void
 .end method
 
 .method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
     .locals 1
-    .param p1, "context"    # Landroid/content/Context;
-    .param p2, "attrs"    # Landroid/util/AttributeSet;
 
-    .prologue
-    .line 106
     const/4 v0, 0x0
 
+    .line 106
     invoke-direct {p0, p1, p2, v0}, Lcom/astuetz/PagerSlidingTabStrip;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
 
-    .line 107
     return-void
 .end method
 
 .method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
-    .locals 9
-    .param p1, "context"    # Landroid/content/Context;
-    .param p2, "attrs"    # Landroid/util/AttributeSet;
-    .param p3, "defStyle"    # I
-
-    .prologue
-    const v8, -0x99999a
-
-    const/4 v7, 0x2
-
-    const/4 v6, -0x1
-
-    const/4 v5, 0x0
-
-    const/4 v4, 0x1
+    .locals 7
 
     .line 110
     invoke-direct {p0, p1, p2, p3}, Landroid/widget/HorizontalScrollView;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
 
     .line 62
-    new-instance v2, Lcom/astuetz/PagerSlidingTabStrip$PageListener;
+    new-instance p3, Lcom/astuetz/PagerSlidingTabStrip$PageListener;
 
-    const/4 v3, 0x0
+    const/4 v0, 0x0
 
-    invoke-direct {v2, p0, v3}, Lcom/astuetz/PagerSlidingTabStrip$PageListener;-><init>(Lcom/astuetz/PagerSlidingTabStrip;Lcom/astuetz/PagerSlidingTabStrip$1;)V
+    invoke-direct {p3, p0, v0}, Lcom/astuetz/PagerSlidingTabStrip$PageListener;-><init>(Lcom/astuetz/PagerSlidingTabStrip;Lcom/astuetz/PagerSlidingTabStrip$1;)V
 
-    iput-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->pageListener:Lcom/astuetz/PagerSlidingTabStrip$PageListener;
+    iput-object p3, p0, Lcom/astuetz/PagerSlidingTabStrip;->pageListener:Lcom/astuetz/PagerSlidingTabStrip$PageListener;
+
+    const/4 p3, 0x0
 
     .line 70
-    iput v5, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
+    iput p3, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
+
+    const/4 v1, 0x0
 
     .line 71
-    const/4 v2, 0x0
+    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPositionOffset:F
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPositionOffset:F
+    const v1, -0x99999a
 
     .line 76
-    iput v8, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorColor:I
+    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorColor:I
 
-    .line 77
     const/high16 v2, 0x1a000000
 
+    .line 77
     iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineColor:I
 
     .line 78
-    const/high16 v2, 0x1a000000
-
     iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerColor:I
 
     .line 80
-    iput-boolean v5, p0, Lcom/astuetz/PagerSlidingTabStrip;->shouldExpand:Z
+    iput-boolean p3, p0, Lcom/astuetz/PagerSlidingTabStrip;->shouldExpand:Z
+
+    const/4 v2, 0x1
 
     .line 81
-    iput-boolean v4, p0, Lcom/astuetz/PagerSlidingTabStrip;->textAllCaps:Z
+    iput-boolean v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->textAllCaps:Z
+
+    const/16 v3, 0x34
 
     .line 83
-    const/16 v2, 0x34
+    iput v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
+    const/16 v3, 0x8
 
     .line 84
-    const/16 v2, 0x8
+    iput v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
+    const/4 v4, 0x2
 
     .line 85
-    iput v7, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
+    iput v4, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
+
+    const/16 v5, 0xc
 
     .line 86
-    const/16 v2, 0xc
+    iput v5, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
+    const/16 v6, 0x18
 
     .line 87
-    const/16 v2, 0x18
-
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
+    iput v6, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
 
     .line 88
-    iput v4, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerWidth:I
+    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerWidth:I
 
     .line 90
-    const/16 v2, 0xc
-
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
+    iput v5, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
 
     .line 91
-    iput v8, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextColor:I
+    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextColor:I
 
     .line 92
-    const/4 v2, 0x0
-
-    iput-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTypeface:Landroid/graphics/Typeface;
+    iput-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTypeface:Landroid/graphics/Typeface;
 
     .line 93
-    iput v4, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTypefaceStyle:I
+    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTypefaceStyle:I
 
     .line 95
-    iput v5, p0, Lcom/astuetz/PagerSlidingTabStrip;->lastScrollX:I
+    iput p3, p0, Lcom/astuetz/PagerSlidingTabStrip;->lastScrollX:I
 
     .line 97
-    sget v2, Lcom/astuetz/pagerslidingtabstrip/R$drawable;->background_tab:I
+    sget v0, Lcom/astuetz/pagerslidingtabstrip/R$drawable;->background_tab:I
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabBackgroundResId:I
+    iput v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabBackgroundResId:I
 
     .line 112
-    invoke-virtual {p0, v4}, Lcom/astuetz/PagerSlidingTabStrip;->setFillViewport(Z)V
+    invoke-virtual {p0, v2}, Lcom/astuetz/PagerSlidingTabStrip;->setFillViewport(Z)V
 
     .line 113
-    invoke-virtual {p0, v5}, Lcom/astuetz/PagerSlidingTabStrip;->setWillNotDraw(Z)V
+    invoke-virtual {p0, p3}, Lcom/astuetz/PagerSlidingTabStrip;->setWillNotDraw(Z)V
 
     .line 115
-    new-instance v2, Landroid/widget/LinearLayout;
+    new-instance v0, Landroid/widget/LinearLayout;
 
-    invoke-direct {v2, p1}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
+    invoke-direct {v0, p1}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
 
-    iput-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
+    iput-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
 
     .line 116
-    iget-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
-
-    invoke-virtual {v2, v5}, Landroid/widget/LinearLayout;->setOrientation(I)V
+    invoke-virtual {v0, p3}, Landroid/widget/LinearLayout;->setOrientation(I)V
 
     .line 117
-    iget-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
+    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
 
-    new-instance v3, Landroid/widget/FrameLayout$LayoutParams;
+    new-instance v1, Landroid/widget/FrameLayout$LayoutParams;
 
-    invoke-direct {v3, v6, v6}, Landroid/widget/FrameLayout$LayoutParams;-><init>(II)V
+    const/4 v5, -0x1
 
-    invoke-virtual {v2, v3}, Landroid/widget/LinearLayout;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
+    invoke-direct {v1, v5, v5}, Landroid/widget/FrameLayout$LayoutParams;-><init>(II)V
+
+    invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
 
     .line 118
-    iget-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
+    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
 
-    invoke-virtual {p0, v2}, Lcom/astuetz/PagerSlidingTabStrip;->addView(Landroid/view/View;)V
+    invoke-virtual {p0, v0}, Lcom/astuetz/PagerSlidingTabStrip;->addView(Landroid/view/View;)V
 
     .line 120
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->getResources()Landroid/content/res/Resources;
 
-    move-result-object v2
+    move-result-object v0
 
-    invoke-virtual {v2}, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;
+    invoke-virtual {v0}, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;
 
-    move-result-object v1
+    move-result-object v0
 
     .line 122
-    .local v1, "dm":Landroid/util/DisplayMetrics;
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
+    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
 
-    int-to-float v2, v2
+    int-to-float v1, v1
 
-    invoke-static {v4, v2, v1}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
+    invoke-static {v2, v1, v0}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
 
-    move-result v2
+    move-result v1
 
-    float-to-int v2, v2
+    float-to-int v1, v1
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
+    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
 
     .line 123
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
+    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
 
-    int-to-float v2, v2
+    int-to-float v1, v1
 
-    invoke-static {v4, v2, v1}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
+    invoke-static {v2, v1, v0}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
 
-    move-result v2
+    move-result v1
 
-    float-to-int v2, v2
+    float-to-int v1, v1
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
+    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
 
     .line 124
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
+    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
 
-    int-to-float v2, v2
+    int-to-float v1, v1
 
-    invoke-static {v4, v2, v1}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
+    invoke-static {v2, v1, v0}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
 
-    move-result v2
+    move-result v1
 
-    float-to-int v2, v2
+    float-to-int v1, v1
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
+    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
 
     .line 125
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
+    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
 
-    int-to-float v2, v2
+    int-to-float v1, v1
 
-    invoke-static {v4, v2, v1}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
+    invoke-static {v2, v1, v0}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
 
-    move-result v2
+    move-result v1
 
-    float-to-int v2, v2
+    float-to-int v1, v1
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
+    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
 
     .line 126
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
+    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
 
-    int-to-float v2, v2
+    int-to-float v1, v1
 
-    invoke-static {v4, v2, v1}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
+    invoke-static {v2, v1, v0}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
 
-    move-result v2
+    move-result v1
 
-    float-to-int v2, v2
+    float-to-int v1, v1
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
+    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
 
     .line 127
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerWidth:I
+    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerWidth:I
 
-    int-to-float v2, v2
+    int-to-float v1, v1
 
-    invoke-static {v4, v2, v1}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
+    invoke-static {v2, v1, v0}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
 
-    move-result v2
+    move-result v1
 
-    float-to-int v2, v2
+    float-to-int v1, v1
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerWidth:I
+    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerWidth:I
 
     .line 128
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
+    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
 
-    int-to-float v2, v2
+    int-to-float v1, v1
 
-    invoke-static {v7, v2, v1}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
+    invoke-static {v4, v1, v0}, Landroid/util/TypedValue;->applyDimension(IFLandroid/util/DisplayMetrics;)F
 
-    move-result v2
+    move-result v0
 
-    float-to-int v2, v2
+    float-to-int v0, v0
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
+    iput v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
 
     .line 132
-    sget-object v2, Lcom/astuetz/PagerSlidingTabStrip;->ATTRS:[I
+    sget-object v0, Lcom/astuetz/PagerSlidingTabStrip;->ATTRS:[I
 
-    invoke-virtual {p1, p2, v2}, Landroid/content/Context;->obtainStyledAttributes(Landroid/util/AttributeSet;[I)Landroid/content/res/TypedArray;
+    invoke-virtual {p1, p2, v0}, Landroid/content/Context;->obtainStyledAttributes(Landroid/util/AttributeSet;[I)Landroid/content/res/TypedArray;
 
     move-result-object v0
 
     .line 134
-    .local v0, "a":Landroid/content/res/TypedArray;
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
+    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
 
-    invoke-virtual {v0, v5, v2}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I
+    invoke-virtual {v0, p3, v1}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I
 
-    move-result v2
+    move-result v1
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
+    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
 
     .line 135
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextColor:I
+    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextColor:I
 
-    invoke-virtual {v0, v4, v2}, Landroid/content/res/TypedArray;->getColor(II)I
+    invoke-virtual {v0, v2, v1}, Landroid/content/res/TypedArray;->getColor(II)I
 
-    move-result v2
+    move-result v1
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextColor:I
+    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextColor:I
 
     .line 137
     invoke-virtual {v0}, Landroid/content/res/TypedArray;->recycle()V
 
     .line 141
-    sget-object v2, Lcom/astuetz/pagerslidingtabstrip/R$styleable;->PagerSlidingTabStrip:[I
+    sget-object v0, Lcom/astuetz/pagerslidingtabstrip/R$styleable;->PagerSlidingTabStrip:[I
 
-    invoke-virtual {p1, p2, v2}, Landroid/content/Context;->obtainStyledAttributes(Landroid/util/AttributeSet;[I)Landroid/content/res/TypedArray;
+    invoke-virtual {p1, p2, v0}, Landroid/content/Context;->obtainStyledAttributes(Landroid/util/AttributeSet;[I)Landroid/content/res/TypedArray;
 
-    move-result-object v0
+    move-result-object p1
 
     .line 143
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorColor:I
+    iget p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorColor:I
 
-    invoke-virtual {v0, v5, v2}, Landroid/content/res/TypedArray;->getColor(II)I
+    invoke-virtual {p1, p3, p2}, Landroid/content/res/TypedArray;->getColor(II)I
 
-    move-result v2
+    move-result p2
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorColor:I
+    iput p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorColor:I
 
     .line 144
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineColor:I
+    iget p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineColor:I
 
-    invoke-virtual {v0, v4, v2}, Landroid/content/res/TypedArray;->getColor(II)I
+    invoke-virtual {p1, v2, p2}, Landroid/content/res/TypedArray;->getColor(II)I
 
-    move-result v2
+    move-result p2
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineColor:I
+    iput p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineColor:I
 
     .line 145
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerColor:I
+    iget p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerColor:I
 
-    invoke-virtual {v0, v7, v2}, Landroid/content/res/TypedArray;->getColor(II)I
+    invoke-virtual {p1, v4, p2}, Landroid/content/res/TypedArray;->getColor(II)I
 
-    move-result v2
+    move-result p2
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerColor:I
+    iput p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerColor:I
 
     .line 146
-    const/4 v2, 0x3
+    iget p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
 
-    iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
+    const/4 v0, 0x3
 
-    invoke-virtual {v0, v2, v3}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I
+    invoke-virtual {p1, v0, p2}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I
 
-    move-result v2
+    move-result p2
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
+    iput p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
 
     .line 147
-    const/4 v2, 0x4
+    iget p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
 
-    iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
+    const/4 v0, 0x4
 
-    invoke-virtual {v0, v2, v3}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I
+    invoke-virtual {p1, v0, p2}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I
 
-    move-result v2
+    move-result p2
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
+    iput p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
 
     .line 148
-    const/4 v2, 0x5
+    iget p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
 
-    iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
+    const/4 v0, 0x5
 
-    invoke-virtual {v0, v2, v3}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I
+    invoke-virtual {p1, v0, p2}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I
 
-    move-result v2
+    move-result p2
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
+    iput p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
 
     .line 149
-    const/4 v2, 0x6
+    iget p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
 
-    iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
+    const/4 v0, 0x6
 
-    invoke-virtual {v0, v2, v3}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I
+    invoke-virtual {p1, v0, p2}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I
 
-    move-result v2
+    move-result p2
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
+    iput p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
 
     .line 150
-    const/16 v2, 0x8
+    iget p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabBackgroundResId:I
 
-    iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabBackgroundResId:I
+    invoke-virtual {p1, v3, p2}, Landroid/content/res/TypedArray;->getResourceId(II)I
 
-    invoke-virtual {v0, v2, v3}, Landroid/content/res/TypedArray;->getResourceId(II)I
+    move-result p2
 
-    move-result v2
-
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabBackgroundResId:I
+    iput p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabBackgroundResId:I
 
     .line 151
-    const/16 v2, 0x9
+    iget-boolean p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->shouldExpand:Z
 
-    iget-boolean v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->shouldExpand:Z
+    const/16 v0, 0x9
 
-    invoke-virtual {v0, v2, v3}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z
+    invoke-virtual {p1, v0, p2}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z
 
-    move-result v2
+    move-result p2
 
-    iput-boolean v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->shouldExpand:Z
+    iput-boolean p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->shouldExpand:Z
 
     .line 152
-    const/4 v2, 0x7
+    iget p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
 
-    iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
+    const/4 v0, 0x7
 
-    invoke-virtual {v0, v2, v3}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I
+    invoke-virtual {p1, v0, p2}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I
 
-    move-result v2
+    move-result p2
 
-    iput v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
+    iput p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
 
     .line 153
-    const/16 v2, 0xa
+    iget-boolean p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->textAllCaps:Z
 
-    iget-boolean v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->textAllCaps:Z
+    const/16 v0, 0xa
 
-    invoke-virtual {v0, v2, v3}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z
+    invoke-virtual {p1, v0, p2}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z
 
-    move-result v2
+    move-result p2
 
-    iput-boolean v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->textAllCaps:Z
+    iput-boolean p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->textAllCaps:Z
 
     .line 155
-    invoke-virtual {v0}, Landroid/content/res/TypedArray;->recycle()V
+    invoke-virtual {p1}, Landroid/content/res/TypedArray;->recycle()V
 
     .line 157
-    new-instance v2, Landroid/graphics/Paint;
+    new-instance p1, Landroid/graphics/Paint;
 
-    invoke-direct {v2}, Landroid/graphics/Paint;-><init>()V
+    invoke-direct {p1}, Landroid/graphics/Paint;-><init>()V
 
-    iput-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
+    iput-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
 
     .line 158
-    iget-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
-
-    invoke-virtual {v2, v4}, Landroid/graphics/Paint;->setAntiAlias(Z)V
+    invoke-virtual {p1, v2}, Landroid/graphics/Paint;->setAntiAlias(Z)V
 
     .line 159
-    iget-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
+    iget-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
 
-    sget-object v3, Landroid/graphics/Paint$Style;->FILL:Landroid/graphics/Paint$Style;
+    sget-object p2, Landroid/graphics/Paint$Style;->FILL:Landroid/graphics/Paint$Style;
 
-    invoke-virtual {v2, v3}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V
+    invoke-virtual {p1, p2}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V
 
     .line 161
-    new-instance v2, Landroid/graphics/Paint;
+    new-instance p1, Landroid/graphics/Paint;
 
-    invoke-direct {v2}, Landroid/graphics/Paint;-><init>()V
+    invoke-direct {p1}, Landroid/graphics/Paint;-><init>()V
 
-    iput-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPaint:Landroid/graphics/Paint;
+    iput-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPaint:Landroid/graphics/Paint;
 
     .line 162
-    iget-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPaint:Landroid/graphics/Paint;
-
-    invoke-virtual {v2, v4}, Landroid/graphics/Paint;->setAntiAlias(Z)V
+    invoke-virtual {p1, v2}, Landroid/graphics/Paint;->setAntiAlias(Z)V
 
     .line 163
-    iget-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPaint:Landroid/graphics/Paint;
+    iget-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPaint:Landroid/graphics/Paint;
 
-    iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerWidth:I
+    iget p2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerWidth:I
 
-    int-to-float v3, v3
+    int-to-float p2, p2
 
-    invoke-virtual {v2, v3}, Landroid/graphics/Paint;->setStrokeWidth(F)V
+    invoke-virtual {p1, p2}, Landroid/graphics/Paint;->setStrokeWidth(F)V
 
     .line 165
-    new-instance v2, Landroid/widget/LinearLayout$LayoutParams;
+    new-instance p1, Landroid/widget/LinearLayout$LayoutParams;
 
-    const/4 v3, -0x2
+    const/4 p2, -0x2
 
-    invoke-direct {v2, v3, v6}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
+    invoke-direct {p1, p2, v5}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
 
-    iput-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->defaultTabLayoutParams:Landroid/widget/LinearLayout$LayoutParams;
+    iput-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->defaultTabLayoutParams:Landroid/widget/LinearLayout$LayoutParams;
 
     .line 166
-    new-instance v2, Landroid/widget/LinearLayout$LayoutParams;
+    new-instance p1, Landroid/widget/LinearLayout$LayoutParams;
 
-    const/high16 v3, 0x3f800000    # 1.0f
+    const/high16 p2, 0x3f800000    # 1.0f
 
-    invoke-direct {v2, v5, v6, v3}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V
+    invoke-direct {p1, p3, v5, p2}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V
 
-    iput-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->expandedTabLayoutParams:Landroid/widget/LinearLayout$LayoutParams;
+    iput-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->expandedTabLayoutParams:Landroid/widget/LinearLayout$LayoutParams;
 
     .line 168
-    iget-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->locale:Ljava/util/Locale;
+    iget-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->locale:Ljava/util/Locale;
 
-    if-nez v2, :cond_0
+    if-nez p1, :cond_0
 
     .line 169
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->getResources()Landroid/content/res/Resources;
 
-    move-result-object v2
+    move-result-object p1
 
-    invoke-virtual {v2}, Landroid/content/res/Resources;->getConfiguration()Landroid/content/res/Configuration;
+    invoke-virtual {p1}, Landroid/content/res/Resources;->getConfiguration()Landroid/content/res/Configuration;
 
-    move-result-object v2
+    move-result-object p1
 
-    iget-object v2, v2, Landroid/content/res/Configuration;->locale:Ljava/util/Locale;
+    iget-object p1, p1, Landroid/content/res/Configuration;->locale:Ljava/util/Locale;
 
-    iput-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->locale:Ljava/util/Locale;
+    iput-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->locale:Ljava/util/Locale;
 
-    .line 171
     :cond_0
     return-void
 .end method
 
 .method static synthetic access$100(Lcom/astuetz/PagerSlidingTabStrip;)I
-    .locals 1
-    .param p0, "x0"    # Lcom/astuetz/PagerSlidingTabStrip;
+    .locals 0
 
-    .prologue
     .line 46
-    iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
+    iget p0, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
 
-    return v0
+    return p0
 .end method
 
 .method static synthetic access$102(Lcom/astuetz/PagerSlidingTabStrip;I)I
     .locals 0
-    .param p0, "x0"    # Lcom/astuetz/PagerSlidingTabStrip;
-    .param p1, "x1"    # I
 
-    .prologue
     .line 46
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
 
     return p1
 .end method
 
-.method static synthetic access$200(Lcom/astuetz/PagerSlidingTabStrip;)Landroid/support/v4/view/ViewPager;
-    .locals 1
-    .param p0, "x0"    # Lcom/astuetz/PagerSlidingTabStrip;
+.method static synthetic access$200(Lcom/astuetz/PagerSlidingTabStrip;)Landroidx/viewpager/widget/ViewPager;
+    .locals 0
 
-    .prologue
     .line 46
-    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroid/support/v4/view/ViewPager;
+    iget-object p0, p0, Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroidx/viewpager/widget/ViewPager;
 
-    return-object v0
+    return-object p0
 .end method
 
 .method static synthetic access$300(Lcom/astuetz/PagerSlidingTabStrip;II)V
     .locals 0
-    .param p0, "x0"    # Lcom/astuetz/PagerSlidingTabStrip;
-    .param p1, "x1"    # I
-    .param p2, "x2"    # I
 
-    .prologue
     .line 46
     invoke-direct {p0, p1, p2}, Lcom/astuetz/PagerSlidingTabStrip;->scrollToChild(II)V
 
@@ -654,10 +614,7 @@
 
 .method static synthetic access$402(Lcom/astuetz/PagerSlidingTabStrip;F)F
     .locals 0
-    .param p0, "x0"    # Lcom/astuetz/PagerSlidingTabStrip;
-    .param p1, "x1"    # F
 
-    .prologue
     .line 46
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPositionOffset:F
 
@@ -665,22 +622,17 @@
 .end method
 
 .method static synthetic access$500(Lcom/astuetz/PagerSlidingTabStrip;)Landroid/widget/LinearLayout;
-    .locals 1
-    .param p0, "x0"    # Lcom/astuetz/PagerSlidingTabStrip;
+    .locals 0
 
-    .prologue
     .line 46
-    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
+    iget-object p0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
 
-    return-object v0
+    return-object p0
 .end method
 
 .method private addIconTab(II)V
     .locals 2
-    .param p1, "position"    # I
-    .param p2, "resId"    # I
 
-    .prologue
     .line 239
     new-instance v0, Landroid/widget/ImageButton;
 
@@ -691,27 +643,20 @@
     invoke-direct {v0, v1}, Landroid/widget/ImageButton;-><init>(Landroid/content/Context;)V
 
     .line 240
-    .local v0, "tab":Landroid/widget/ImageButton;
     invoke-virtual {v0, p2}, Landroid/widget/ImageButton;->setImageResource(I)V
 
     .line 242
     invoke-direct {p0, p1, v0}, Lcom/astuetz/PagerSlidingTabStrip;->addTab(ILandroid/view/View;)V
 
-    .line 244
     return-void
 .end method
 
 .method private addTab(ILandroid/view/View;)V
-    .locals 3
-    .param p1, "position"    # I
-    .param p2, "tab"    # Landroid/view/View;
+    .locals 2
 
-    .prologue
-    const/4 v2, 0x0
-
-    .line 247
     const/4 v0, 0x1
 
+    .line 247
     invoke-virtual {p2, v0}, Landroid/view/View;->setFocusable(Z)V
 
     .line 248
@@ -724,38 +669,33 @@
     .line 255
     iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
 
-    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
+    const/4 v1, 0x0
 
-    invoke-virtual {p2, v0, v2, v1, v2}, Landroid/view/View;->setPadding(IIII)V
-
-    .line 256
-    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
-
-    iget-boolean v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->shouldExpand:Z
-
-    if-eqz v0, :cond_0
-
-    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->expandedTabLayoutParams:Landroid/widget/LinearLayout$LayoutParams;
-
-    :goto_0
-    invoke-virtual {v1, p2, p1, v0}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;ILandroid/view/ViewGroup$LayoutParams;)V
-
-    .line 257
-    return-void
+    invoke-virtual {p2, v0, v1, v0, v1}, Landroid/view/View;->setPadding(IIII)V
 
     .line 256
-    :cond_0
-    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->defaultTabLayoutParams:Landroid/widget/LinearLayout$LayoutParams;
+    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
+
+    iget-boolean v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->shouldExpand:Z
+
+    if-eqz v1, :cond_0
+
+    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->expandedTabLayoutParams:Landroid/widget/LinearLayout$LayoutParams;
 
     goto :goto_0
+
+    :cond_0
+    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->defaultTabLayoutParams:Landroid/widget/LinearLayout$LayoutParams;
+
+    :goto_0
+    invoke-virtual {v0, p2, p1, v1}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;ILandroid/view/ViewGroup$LayoutParams;)V
+
+    return-void
 .end method
 
 .method private addTextTab(ILjava/lang/String;)V
     .locals 2
-    .param p1, "position"    # I
-    .param p2, "title"    # Ljava/lang/String;
 
-    .prologue
     .line 229
     new-instance v0, Landroid/widget/TextView;
 
@@ -766,13 +706,12 @@
     invoke-direct {v0, v1}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
 
     .line 230
-    .local v0, "tab":Landroid/widget/TextView;
     invoke-virtual {v0, p2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 231
-    const/16 v1, 0x11
+    const/16 p2, 0x11
 
-    invoke-virtual {v0, v1}, Landroid/widget/TextView;->setGravity(I)V
+    .line 231
+    invoke-virtual {v0, p2}, Landroid/widget/TextView;->setGravity(I)V
 
     .line 232
     invoke-virtual {v0}, Landroid/widget/TextView;->setSingleLine()V
@@ -780,91 +719,82 @@
     .line 234
     invoke-direct {p0, p1, v0}, Lcom/astuetz/PagerSlidingTabStrip;->addTab(ILandroid/view/View;)V
 
-    .line 235
     return-void
 .end method
 
 .method private scrollToChild(II)V
-    .locals 2
-    .param p1, "position"    # I
-    .param p2, "offset"    # I
+    .locals 1
 
-    .prologue
     .line 290
-    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
+    iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
 
-    if-nez v1, :cond_1
+    if-nez v0, :cond_0
 
-    .line 305
-    :cond_0
-    :goto_0
     return-void
 
     .line 294
-    :cond_1
-    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
+    :cond_0
+    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
 
-    invoke-virtual {v1, p1}, Landroid/widget/LinearLayout;->getChildAt(I)Landroid/view/View;
+    invoke-virtual {v0, p1}, Landroid/widget/LinearLayout;->getChildAt(I)Landroid/view/View;
 
-    move-result-object v1
+    move-result-object v0
 
-    invoke-virtual {v1}, Landroid/view/View;->getLeft()I
+    invoke-virtual {v0}, Landroid/view/View;->getLeft()I
 
-    move-result v1
+    move-result v0
 
-    add-int v0, v1, p2
+    add-int/2addr v0, p2
 
-    .line 296
-    .local v0, "newScrollX":I
-    if-gtz p1, :cond_2
+    if-gtz p1, :cond_1
 
-    if-lez p2, :cond_3
+    if-lez p2, :cond_2
 
     .line 297
-    :cond_2
-    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
+    :cond_1
+    iget p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
 
-    sub-int/2addr v0, v1
+    sub-int/2addr v0, p1
 
     .line 300
-    :cond_3
-    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->lastScrollX:I
+    :cond_2
+    iget p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->lastScrollX:I
 
-    if-eq v0, v1, :cond_0
+    if-eq v0, p1, :cond_3
 
     .line 301
     iput v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->lastScrollX:I
 
+    const/4 p1, 0x0
+
     .line 302
-    const/4 v1, 0x0
+    invoke-virtual {p0, v0, p1}, Lcom/astuetz/PagerSlidingTabStrip;->scrollTo(II)V
 
-    invoke-virtual {p0, v0, v1}, Lcom/astuetz/PagerSlidingTabStrip;->scrollTo(II)V
-
-    goto :goto_0
+    :cond_3
+    return-void
 .end method
 
 .method private updateTabStyles()V
     .locals 5
 
-    .prologue
-    .line 261
     const/4 v0, 0x0
 
-    .local v0, "i":I
-    :goto_0
-    iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
+    const/4 v1, 0x0
 
-    if-ge v0, v3, :cond_2
+    .line 261
+    :goto_0
+    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
+
+    if-ge v1, v2, :cond_2
 
     .line 263
-    iget-object v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
+    iget-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
 
-    invoke-virtual {v3, v0}, Landroid/widget/LinearLayout;->getChildAt(I)Landroid/view/View;
+    invoke-virtual {v2, v1}, Landroid/widget/LinearLayout;->getChildAt(I)Landroid/view/View;
 
     move-result-object v2
 
     .line 265
-    .local v2, "v":Landroid/view/View;
     iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabBackgroundResId:I
 
     invoke-virtual {v2, v3}, Landroid/view/View;->setBackgroundResource(I)V
@@ -872,64 +802,52 @@
     .line 267
     instance-of v3, v2, Landroid/widget/TextView;
 
-    if-eqz v3, :cond_0
-
-    move-object v1, v2
+    if-eqz v3, :cond_1
 
     .line 269
-    check-cast v1, Landroid/widget/TextView;
+    check-cast v2, Landroid/widget/TextView;
 
     .line 270
-    .local v1, "tab":Landroid/widget/TextView;
-    const/4 v3, 0x0
+    iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
 
-    iget v4, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
+    int-to-float v3, v3
 
-    int-to-float v4, v4
-
-    invoke-virtual {v1, v3, v4}, Landroid/widget/TextView;->setTextSize(IF)V
+    invoke-virtual {v2, v0, v3}, Landroid/widget/TextView;->setTextSize(IF)V
 
     .line 271
     iget-object v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTypeface:Landroid/graphics/Typeface;
 
     iget v4, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTypefaceStyle:I
 
-    invoke-virtual {v1, v3, v4}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;I)V
+    invoke-virtual {v2, v3, v4}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;I)V
 
     .line 272
     iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextColor:I
 
-    invoke-virtual {v1, v3}, Landroid/widget/TextView;->setTextColor(I)V
+    invoke-virtual {v2, v3}, Landroid/widget/TextView;->setTextColor(I)V
 
     .line 276
     iget-boolean v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->textAllCaps:Z
 
-    if-eqz v3, :cond_0
+    if-eqz v3, :cond_1
 
     .line 277
     sget v3, Landroid/os/Build$VERSION;->SDK_INT:I
 
     const/16 v4, 0xe
 
-    if-lt v3, v4, :cond_1
+    if-lt v3, v4, :cond_0
 
-    .line 278
     const/4 v3, 0x1
 
-    invoke-virtual {v1, v3}, Landroid/widget/TextView;->setAllCaps(Z)V
+    .line 278
+    invoke-virtual {v2, v3}, Landroid/widget/TextView;->setAllCaps(Z)V
 
-    .line 261
-    .end local v1    # "tab":Landroid/widget/TextView;
-    :cond_0
-    :goto_1
-    add-int/lit8 v0, v0, 0x1
-
-    goto :goto_0
+    goto :goto_1
 
     .line 280
-    .restart local v1    # "tab":Landroid/widget/TextView;
-    :cond_1
-    invoke-virtual {v1}, Landroid/widget/TextView;->getText()Ljava/lang/CharSequence;
+    :cond_0
+    invoke-virtual {v2}, Landroid/widget/TextView;->getText()Ljava/lang/CharSequence;
 
     move-result-object v3
 
@@ -943,13 +861,14 @@
 
     move-result-object v3
 
-    invoke-virtual {v1, v3}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    invoke-virtual {v2, v3}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    goto :goto_1
+    :cond_1
+    :goto_1
+    add-int/lit8 v1, v1, 0x1
 
-    .line 286
-    .end local v1    # "tab":Landroid/widget/TextView;
-    .end local v2    # "v":Landroid/view/View;
+    goto :goto_0
+
     :cond_2
     return-void
 .end method
@@ -959,7 +878,6 @@
 .method public getDividerColor()I
     .locals 1
 
-    .prologue
     .line 438
     iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerColor:I
 
@@ -969,7 +887,6 @@
 .method public getDividerPadding()I
     .locals 1
 
-    .prologue
     .line 456
     iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
 
@@ -979,7 +896,6 @@
 .method public getIndicatorColor()I
     .locals 1
 
-    .prologue
     .line 401
     iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorColor:I
 
@@ -989,7 +905,6 @@
 .method public getIndicatorHeight()I
     .locals 1
 
-    .prologue
     .line 410
     iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
 
@@ -999,7 +914,6 @@
 .method public getScrollOffset()I
     .locals 1
 
-    .prologue
     .line 465
     iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
 
@@ -1009,7 +923,6 @@
 .method public getShouldExpand()Z
     .locals 1
 
-    .prologue
     .line 474
     iget-boolean v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->shouldExpand:Z
 
@@ -1019,7 +932,6 @@
 .method public getTabBackground()I
     .locals 1
 
-    .prologue
     .line 519
     iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabBackgroundResId:I
 
@@ -1029,7 +941,6 @@
 .method public getTabPaddingLeftRight()I
     .locals 1
 
-    .prologue
     .line 528
     iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
 
@@ -1039,7 +950,6 @@
 .method public getTextColor()I
     .locals 1
 
-    .prologue
     .line 505
     iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextColor:I
 
@@ -1049,7 +959,6 @@
 .method public getTextSize()I
     .locals 1
 
-    .prologue
     .line 491
     iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
 
@@ -1059,7 +968,6 @@
 .method public getUnderlineColor()I
     .locals 1
 
-    .prologue
     .line 424
     iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineColor:I
 
@@ -1069,7 +977,6 @@
 .method public getUnderlineHeight()I
     .locals 1
 
-    .prologue
     .line 447
     iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
 
@@ -1079,7 +986,6 @@
 .method public isTextAllCaps()Z
     .locals 1
 
-    .prologue
     .line 478
     iget-boolean v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->textAllCaps:Z
 
@@ -1087,40 +993,38 @@
 .end method
 
 .method public notifyDataSetChanged()V
-    .locals 3
+    .locals 2
 
-    .prologue
     .line 191
-    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
+    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
 
-    invoke-virtual {v1}, Landroid/widget/LinearLayout;->removeAllViews()V
+    invoke-virtual {v0}, Landroid/widget/LinearLayout;->removeAllViews()V
 
     .line 193
-    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroid/support/v4/view/ViewPager;
+    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroidx/viewpager/widget/ViewPager;
 
-    invoke-virtual {v1}, Landroid/support/v4/view/ViewPager;->getAdapter()Landroid/support/v4/view/PagerAdapter;
+    invoke-virtual {v0}, Landroidx/viewpager/widget/ViewPager;->getAdapter()Landroidx/viewpager/widget/PagerAdapter;
 
-    move-result-object v1
+    move-result-object v0
 
-    invoke-virtual {v1}, Landroid/support/v4/view/PagerAdapter;->getCount()I
+    invoke-virtual {v0}, Landroidx/viewpager/widget/PagerAdapter;->getCount()I
 
-    move-result v1
+    move-result v0
 
-    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
+    iput v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
 
-    .line 195
     const/4 v0, 0x0
 
-    .local v0, "i":I
+    .line 195
     :goto_0
     iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
 
     if-ge v0, v1, :cond_1
 
     .line 197
-    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroid/support/v4/view/ViewPager;
+    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroidx/viewpager/widget/ViewPager;
 
-    invoke-virtual {v1}, Landroid/support/v4/view/ViewPager;->getAdapter()Landroid/support/v4/view/PagerAdapter;
+    invoke-virtual {v1}, Landroidx/viewpager/widget/ViewPager;->getAdapter()Landroidx/viewpager/widget/PagerAdapter;
 
     move-result-object v1
 
@@ -1129,9 +1033,9 @@
     if-eqz v1, :cond_0
 
     .line 198
-    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroid/support/v4/view/ViewPager;
+    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroidx/viewpager/widget/ViewPager;
 
-    invoke-virtual {v1}, Landroid/support/v4/view/ViewPager;->getAdapter()Landroid/support/v4/view/PagerAdapter;
+    invoke-virtual {v1}, Landroidx/viewpager/widget/ViewPager;->getAdapter()Landroidx/viewpager/widget/PagerAdapter;
 
     move-result-object v1
 
@@ -1143,21 +1047,17 @@
 
     invoke-direct {p0, v0, v1}, Lcom/astuetz/PagerSlidingTabStrip;->addIconTab(II)V
 
-    .line 195
-    :goto_1
-    add-int/lit8 v0, v0, 0x1
-
-    goto :goto_0
+    goto :goto_1
 
     .line 200
     :cond_0
-    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroid/support/v4/view/ViewPager;
+    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroidx/viewpager/widget/ViewPager;
 
-    invoke-virtual {v1}, Landroid/support/v4/view/ViewPager;->getAdapter()Landroid/support/v4/view/PagerAdapter;
+    invoke-virtual {v1}, Landroidx/viewpager/widget/ViewPager;->getAdapter()Landroidx/viewpager/widget/PagerAdapter;
 
     move-result-object v1
 
-    invoke-virtual {v1, v0}, Landroid/support/v4/view/PagerAdapter;->getPageTitle(I)Ljava/lang/CharSequence;
+    invoke-virtual {v1, v0}, Landroidx/viewpager/widget/PagerAdapter;->getPageTitle(I)Ljava/lang/CharSequence;
 
     move-result-object v1
 
@@ -1167,7 +1067,10 @@
 
     invoke-direct {p0, v0, v1}, Lcom/astuetz/PagerSlidingTabStrip;->addTextTab(ILjava/lang/String;)V
 
-    goto :goto_1
+    :goto_1
+    add-int/lit8 v0, v0, 0x1
+
+    goto :goto_0
 
     .line 205
     :cond_1
@@ -1176,413 +1079,316 @@
     .line 207
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->getViewTreeObserver()Landroid/view/ViewTreeObserver;
 
-    move-result-object v1
+    move-result-object v0
 
-    new-instance v2, Lcom/astuetz/PagerSlidingTabStrip$1;
+    new-instance v1, Lcom/astuetz/PagerSlidingTabStrip$1;
 
-    invoke-direct {v2, p0}, Lcom/astuetz/PagerSlidingTabStrip$1;-><init>(Lcom/astuetz/PagerSlidingTabStrip;)V
+    invoke-direct {v1, p0}, Lcom/astuetz/PagerSlidingTabStrip$1;-><init>(Lcom/astuetz/PagerSlidingTabStrip;)V
 
-    invoke-virtual {v1, v2}, Landroid/view/ViewTreeObserver;->addOnGlobalLayoutListener(Landroid/view/ViewTreeObserver$OnGlobalLayoutListener;)V
+    invoke-virtual {v0, v1}, Landroid/view/ViewTreeObserver;->addOnGlobalLayoutListener(Landroid/view/ViewTreeObserver$OnGlobalLayoutListener;)V
 
-    .line 225
     return-void
 .end method
 
 .method protected onDraw(Landroid/graphics/Canvas;)V
-    .locals 18
-    .param p1, "canvas"    # Landroid/graphics/Canvas;
+    .locals 13
 
-    .prologue
     .line 309
-    invoke-super/range {p0 .. p1}, Landroid/widget/HorizontalScrollView;->onDraw(Landroid/graphics/Canvas;)V
+    invoke-super {p0, p1}, Landroid/widget/HorizontalScrollView;->onDraw(Landroid/graphics/Canvas;)V
 
     .line 311
-    invoke-virtual/range {p0 .. p0}, Lcom/astuetz/PagerSlidingTabStrip;->isInEditMode()Z
+    invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->isInEditMode()Z
 
-    move-result v1
+    move-result v0
 
-    if-nez v1, :cond_0
+    if-nez v0, :cond_2
 
-    move-object/from16 v0, p0
+    iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
 
-    iget v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
+    if-nez v0, :cond_0
 
-    if-nez v1, :cond_1
-
-    .line 351
-    :cond_0
-    return-void
+    goto/16 :goto_1
 
     .line 315
-    :cond_1
-    invoke-virtual/range {p0 .. p0}, Lcom/astuetz/PagerSlidingTabStrip;->getHeight()I
+    :cond_0
+    invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->getHeight()I
 
-    move-result v12
+    move-result v0
 
     .line 319
-    .local v12, "height":I
-    move-object/from16 v0, p0
+    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
 
-    iget-object v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
+    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorColor:I
 
-    move-object/from16 v0, p0
-
-    iget v3, v0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorColor:I
-
-    invoke-virtual {v1, v3}, Landroid/graphics/Paint;->setColor(I)V
+    invoke-virtual {v1, v2}, Landroid/graphics/Paint;->setColor(I)V
 
     .line 322
-    move-object/from16 v0, p0
+    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
 
-    iget-object v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
+    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
 
-    move-object/from16 v0, p0
+    invoke-virtual {v1, v2}, Landroid/widget/LinearLayout;->getChildAt(I)Landroid/view/View;
 
-    iget v3, v0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
-
-    invoke-virtual {v1, v3}, Landroid/widget/LinearLayout;->getChildAt(I)Landroid/view/View;
-
-    move-result-object v11
+    move-result-object v1
 
     .line 323
-    .local v11, "currentTab":Landroid/view/View;
-    invoke-virtual {v11}, Landroid/view/View;->getLeft()I
+    invoke-virtual {v1}, Landroid/view/View;->getLeft()I
 
-    move-result v1
+    move-result v2
 
-    int-to-float v2, v1
+    int-to-float v2, v2
 
     .line 324
-    .local v2, "lineLeft":F
-    invoke-virtual {v11}, Landroid/view/View;->getRight()I
+    invoke-virtual {v1}, Landroid/view/View;->getRight()I
 
     move-result v1
 
-    int-to-float v4, v1
+    int-to-float v1, v1
 
     .line 327
-    .local v4, "lineRight":F
-    move-object/from16 v0, p0
+    iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPositionOffset:F
 
-    iget v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->currentPositionOffset:F
+    const/4 v4, 0x0
 
-    const/4 v3, 0x0
+    cmpl-float v3, v3, v4
 
-    cmpl-float v1, v1, v3
+    if-lez v3, :cond_1
 
-    if-lez v1, :cond_2
+    iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
 
-    move-object/from16 v0, p0
+    iget v4, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
 
-    iget v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
+    add-int/lit8 v4, v4, -0x1
 
-    move-object/from16 v0, p0
-
-    iget v3, v0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
-
-    add-int/lit8 v3, v3, -0x1
-
-    if-ge v1, v3, :cond_2
+    if-ge v3, v4, :cond_1
 
     .line 329
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
-
-    move-object/from16 v0, p0
-
-    iget v3, v0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
+    iget-object v4, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
 
     add-int/lit8 v3, v3, 0x1
 
-    invoke-virtual {v1, v3}, Landroid/widget/LinearLayout;->getChildAt(I)Landroid/view/View;
+    invoke-virtual {v4, v3}, Landroid/widget/LinearLayout;->getChildAt(I)Landroid/view/View;
 
-    move-result-object v14
+    move-result-object v3
 
     .line 330
-    .local v14, "nextTab":Landroid/view/View;
-    invoke-virtual {v14}, Landroid/view/View;->getLeft()I
+    invoke-virtual {v3}, Landroid/view/View;->getLeft()I
 
-    move-result v1
+    move-result v4
 
-    int-to-float v15, v1
+    int-to-float v4, v4
 
     .line 331
-    .local v15, "nextTabLeft":F
-    invoke-virtual {v14}, Landroid/view/View;->getRight()I
+    invoke-virtual {v3}, Landroid/view/View;->getRight()I
 
-    move-result v1
+    move-result v3
 
-    int-to-float v0, v1
-
-    move/from16 v16, v0
+    int-to-float v3, v3
 
     .line 333
-    .local v16, "nextTabRight":F
-    move-object/from16 v0, p0
+    iget v5, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPositionOffset:F
 
-    iget v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->currentPositionOffset:F
+    mul-float v4, v4, v5
 
-    mul-float/2addr v1, v15
+    const/high16 v6, 0x3f800000    # 1.0f
 
-    const/high16 v3, 0x3f800000    # 1.0f
+    sub-float v7, v6, v5
 
-    move-object/from16 v0, p0
+    mul-float v7, v7, v2
 
-    iget v5, v0, Lcom/astuetz/PagerSlidingTabStrip;->currentPositionOffset:F
+    add-float v2, v4, v7
 
-    sub-float/2addr v3, v5
+    mul-float v3, v3, v5
 
-    mul-float/2addr v3, v2
+    sub-float/2addr v6, v5
 
-    add-float v2, v1, v3
+    mul-float v6, v6, v1
 
-    .line 334
-    move-object/from16 v0, p0
+    add-float v1, v3, v6
 
-    iget v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->currentPositionOffset:F
+    :cond_1
+    move v6, v1
 
-    mul-float v1, v1, v16
-
-    const/high16 v3, 0x3f800000    # 1.0f
-
-    move-object/from16 v0, p0
-
-    iget v5, v0, Lcom/astuetz/PagerSlidingTabStrip;->currentPositionOffset:F
-
-    sub-float/2addr v3, v5
-
-    mul-float/2addr v3, v4
-
-    add-float v4, v1, v3
+    move v4, v2
 
     .line 337
-    .end local v14    # "nextTab":Landroid/view/View;
-    .end local v15    # "nextTabLeft":F
-    .end local v16    # "nextTabRight":F
-    :cond_2
-    move-object/from16 v0, p0
+    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
 
-    iget v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
+    sub-int v1, v0, v1
 
-    sub-int v1, v12, v1
+    int-to-float v5, v1
 
-    int-to-float v3, v1
+    int-to-float v11, v0
 
-    int-to-float v5, v12
+    iget-object v8, p0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
 
-    move-object/from16 v0, p0
+    move-object v3, p1
 
-    iget-object v6, v0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
+    move v7, v11
 
-    move-object/from16 v1, p1
-
-    invoke-virtual/range {v1 .. v6}, Landroid/graphics/Canvas;->drawRect(FFFFLandroid/graphics/Paint;)V
+    invoke-virtual/range {v3 .. v8}, Landroid/graphics/Canvas;->drawRect(FFFFLandroid/graphics/Paint;)V
 
     .line 341
-    move-object/from16 v0, p0
+    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
 
-    iget-object v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
+    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineColor:I
 
-    move-object/from16 v0, p0
+    invoke-virtual {v1, v2}, Landroid/graphics/Paint;->setColor(I)V
 
-    iget v3, v0, Lcom/astuetz/PagerSlidingTabStrip;->underlineColor:I
-
-    invoke-virtual {v1, v3}, Landroid/graphics/Paint;->setColor(I)V
+    const/4 v8, 0x0
 
     .line 342
-    const/4 v6, 0x0
+    iget v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
 
-    move-object/from16 v0, p0
+    sub-int v1, v0, v1
 
-    iget v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
+    int-to-float v9, v1
 
-    sub-int v1, v12, v1
-
-    int-to-float v7, v1
-
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
+    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
 
     invoke-virtual {v1}, Landroid/widget/LinearLayout;->getWidth()I
 
     move-result v1
 
-    int-to-float v8, v1
+    int-to-float v10, v1
 
-    int-to-float v9, v12
+    iget-object v12, p0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
 
-    move-object/from16 v0, p0
+    move-object v7, p1
 
-    iget-object v10, v0, Lcom/astuetz/PagerSlidingTabStrip;->rectPaint:Landroid/graphics/Paint;
-
-    move-object/from16 v5, p1
-
-    invoke-virtual/range {v5 .. v10}, Landroid/graphics/Canvas;->drawRect(FFFFLandroid/graphics/Paint;)V
+    invoke-virtual/range {v7 .. v12}, Landroid/graphics/Canvas;->drawRect(FFFFLandroid/graphics/Paint;)V
 
     .line 346
-    move-object/from16 v0, p0
+    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPaint:Landroid/graphics/Paint;
 
-    iget-object v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPaint:Landroid/graphics/Paint;
+    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerColor:I
 
-    move-object/from16 v0, p0
+    invoke-virtual {v1, v2}, Landroid/graphics/Paint;->setColor(I)V
 
-    iget v3, v0, Lcom/astuetz/PagerSlidingTabStrip;->dividerColor:I
-
-    invoke-virtual {v1, v3}, Landroid/graphics/Paint;->setColor(I)V
+    const/4 v1, 0x0
 
     .line 347
-    const/4 v13, 0x0
-
-    .local v13, "i":I
     :goto_0
-    move-object/from16 v0, p0
+    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
 
-    iget v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->tabCount:I
+    add-int/lit8 v2, v2, -0x1
 
-    add-int/lit8 v1, v1, -0x1
-
-    if-ge v13, v1, :cond_0
+    if-ge v1, v2, :cond_2
 
     .line 348
-    move-object/from16 v0, p0
+    iget-object v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
 
-    iget-object v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->tabsContainer:Landroid/widget/LinearLayout;
+    invoke-virtual {v2, v1}, Landroid/widget/LinearLayout;->getChildAt(I)Landroid/view/View;
 
-    invoke-virtual {v1, v13}, Landroid/widget/LinearLayout;->getChildAt(I)Landroid/view/View;
-
-    move-result-object v17
+    move-result-object v2
 
     .line 349
-    .local v17, "tab":Landroid/view/View;
-    invoke-virtual/range {v17 .. v17}, Landroid/view/View;->getRight()I
+    invoke-virtual {v2}, Landroid/view/View;->getRight()I
 
-    move-result v1
+    move-result v3
 
-    int-to-float v6, v1
+    int-to-float v5, v3
 
-    move-object/from16 v0, p0
+    iget v3, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
 
-    iget v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
+    int-to-float v6, v3
 
-    int-to-float v7, v1
+    invoke-virtual {v2}, Landroid/view/View;->getRight()I
 
-    invoke-virtual/range {v17 .. v17}, Landroid/view/View;->getRight()I
+    move-result v2
 
-    move-result v1
+    int-to-float v7, v2
 
-    int-to-float v8, v1
+    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
 
-    move-object/from16 v0, p0
+    sub-int v2, v0, v2
 
-    iget v1, v0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
+    int-to-float v8, v2
 
-    sub-int v1, v12, v1
+    iget-object v9, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPaint:Landroid/graphics/Paint;
 
-    int-to-float v9, v1
+    move-object v4, p1
 
-    move-object/from16 v0, p0
+    invoke-virtual/range {v4 .. v9}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V
 
-    iget-object v10, v0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPaint:Landroid/graphics/Paint;
-
-    move-object/from16 v5, p1
-
-    invoke-virtual/range {v5 .. v10}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V
-
-    .line 347
-    add-int/lit8 v13, v13, 0x1
+    add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
+
+    :cond_2
+    :goto_1
+    return-void
 .end method
 
 .method public onRestoreInstanceState(Landroid/os/Parcelable;)V
-    .locals 2
-    .param p1, "state"    # Landroid/os/Parcelable;
+    .locals 1
 
-    .prologue
     .line 533
-    move-object v0, p1
-
-    check-cast v0, Lcom/astuetz/PagerSlidingTabStrip$SavedState;
+    check-cast p1, Lcom/astuetz/PagerSlidingTabStrip$SavedState;
 
     .line 534
-    .local v0, "savedState":Lcom/astuetz/PagerSlidingTabStrip$SavedState;
-    invoke-virtual {v0}, Lcom/astuetz/PagerSlidingTabStrip$SavedState;->getSuperState()Landroid/os/Parcelable;
+    invoke-virtual {p1}, Lcom/astuetz/PagerSlidingTabStrip$SavedState;->getSuperState()Landroid/os/Parcelable;
 
-    move-result-object v1
+    move-result-object v0
 
-    invoke-super {p0, v1}, Landroid/widget/HorizontalScrollView;->onRestoreInstanceState(Landroid/os/Parcelable;)V
+    invoke-super {p0, v0}, Landroid/widget/HorizontalScrollView;->onRestoreInstanceState(Landroid/os/Parcelable;)V
 
     .line 535
-    iget v1, v0, Lcom/astuetz/PagerSlidingTabStrip$SavedState;->currentPosition:I
+    iget p1, p1, Lcom/astuetz/PagerSlidingTabStrip$SavedState;->currentPosition:I
 
-    iput v1, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
+    iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
 
     .line 536
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->requestLayout()V
 
-    .line 537
     return-void
 .end method
 
 .method public onSaveInstanceState()Landroid/os/Parcelable;
-    .locals 3
+    .locals 2
 
-    .prologue
     .line 541
     invoke-super {p0}, Landroid/widget/HorizontalScrollView;->onSaveInstanceState()Landroid/os/Parcelable;
 
-    move-result-object v1
+    move-result-object v0
 
     .line 542
-    .local v1, "superState":Landroid/os/Parcelable;
-    new-instance v0, Lcom/astuetz/PagerSlidingTabStrip$SavedState;
+    new-instance v1, Lcom/astuetz/PagerSlidingTabStrip$SavedState;
 
-    invoke-direct {v0, v1}, Lcom/astuetz/PagerSlidingTabStrip$SavedState;-><init>(Landroid/os/Parcelable;)V
+    invoke-direct {v1, v0}, Lcom/astuetz/PagerSlidingTabStrip$SavedState;-><init>(Landroid/os/Parcelable;)V
 
     .line 543
-    .local v0, "savedState":Lcom/astuetz/PagerSlidingTabStrip$SavedState;
-    iget v2, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
+    iget v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
 
-    iput v2, v0, Lcom/astuetz/PagerSlidingTabStrip$SavedState;->currentPosition:I
+    iput v0, v1, Lcom/astuetz/PagerSlidingTabStrip$SavedState;->currentPosition:I
 
-    .line 544
-    return-object v0
+    return-object v1
 .end method
 
 .method public setAllCaps(Z)V
     .locals 0
-    .param p1, "textAllCaps"    # Z
 
-    .prologue
     .line 482
     iput-boolean p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->textAllCaps:Z
 
-    .line 483
     return-void
 .end method
 
 .method public setDividerColor(I)V
     .locals 0
-    .param p1, "dividerColor"    # I
 
-    .prologue
     .line 428
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerColor:I
 
     .line 429
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->invalidate()V
 
-    .line 430
     return-void
 .end method
 
 .method public setDividerColorResource(I)V
     .locals 1
-    .param p1, "resId"    # I
 
-    .prologue
     .line 433
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->getResources()Landroid/content/res/Resources;
 
@@ -1590,52 +1396,43 @@
 
     invoke-virtual {v0, p1}, Landroid/content/res/Resources;->getColor(I)I
 
-    move-result v0
+    move-result p1
 
-    iput v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerColor:I
+    iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerColor:I
 
     .line 434
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->invalidate()V
 
-    .line 435
     return-void
 .end method
 
 .method public setDividerPadding(I)V
     .locals 0
-    .param p1, "dividerPaddingPx"    # I
 
-    .prologue
     .line 451
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->dividerPadding:I
 
     .line 452
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->invalidate()V
 
-    .line 453
     return-void
 .end method
 
 .method public setIndicatorColor(I)V
     .locals 0
-    .param p1, "indicatorColor"    # I
 
-    .prologue
     .line 391
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorColor:I
 
     .line 392
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->invalidate()V
 
-    .line 393
     return-void
 .end method
 
 .method public setIndicatorColorResource(I)V
     .locals 1
-    .param p1, "resId"    # I
 
-    .prologue
     .line 396
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->getResources()Landroid/content/res/Resources;
 
@@ -1643,121 +1440,97 @@
 
     invoke-virtual {v0, p1}, Landroid/content/res/Resources;->getColor(I)I
 
-    move-result v0
+    move-result p1
 
-    iput v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorColor:I
+    iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorColor:I
 
     .line 397
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->invalidate()V
 
-    .line 398
     return-void
 .end method
 
 .method public setIndicatorHeight(I)V
     .locals 0
-    .param p1, "indicatorLineHeightPx"    # I
 
-    .prologue
     .line 405
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->indicatorHeight:I
 
     .line 406
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->invalidate()V
 
-    .line 407
     return-void
 .end method
 
-.method public setOnPageChangeListener(Landroid/support/v4/view/ViewPager$OnPageChangeListener;)V
+.method public setOnPageChangeListener(Landroidx/viewpager/widget/ViewPager$OnPageChangeListener;)V
     .locals 0
-    .param p1, "listener"    # Landroid/support/v4/view/ViewPager$OnPageChangeListener;
 
-    .prologue
     .line 186
-    iput-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->delegatePageListener:Landroid/support/v4/view/ViewPager$OnPageChangeListener;
+    iput-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->delegatePageListener:Landroidx/viewpager/widget/ViewPager$OnPageChangeListener;
 
-    .line 187
     return-void
 .end method
 
 .method public setScrollOffset(I)V
     .locals 0
-    .param p1, "scrollOffsetPx"    # I
 
-    .prologue
     .line 460
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->scrollOffset:I
 
     .line 461
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->invalidate()V
 
-    .line 462
     return-void
 .end method
 
 .method public setShouldExpand(Z)V
     .locals 0
-    .param p1, "shouldExpand"    # Z
 
-    .prologue
     .line 469
     iput-boolean p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->shouldExpand:Z
 
     .line 470
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->requestLayout()V
 
-    .line 471
     return-void
 .end method
 
 .method public setTabBackground(I)V
     .locals 0
-    .param p1, "resId"    # I
 
-    .prologue
     .line 515
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabBackgroundResId:I
 
-    .line 516
     return-void
 .end method
 
 .method public setTabPaddingLeftRight(I)V
     .locals 0
-    .param p1, "paddingPx"    # I
 
-    .prologue
     .line 523
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabPadding:I
 
     .line 524
     invoke-direct {p0}, Lcom/astuetz/PagerSlidingTabStrip;->updateTabStyles()V
 
-    .line 525
     return-void
 .end method
 
 .method public setTextColor(I)V
     .locals 0
-    .param p1, "textColor"    # I
 
-    .prologue
     .line 495
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextColor:I
 
     .line 496
     invoke-direct {p0}, Lcom/astuetz/PagerSlidingTabStrip;->updateTabStyles()V
 
-    .line 497
     return-void
 .end method
 
 .method public setTextColorResource(I)V
     .locals 1
-    .param p1, "resId"    # I
 
-    .prologue
     .line 500
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->getResources()Landroid/content/res/Resources;
 
@@ -1765,38 +1538,31 @@
 
     invoke-virtual {v0, p1}, Landroid/content/res/Resources;->getColor(I)I
 
-    move-result v0
+    move-result p1
 
-    iput v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextColor:I
+    iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextColor:I
 
     .line 501
     invoke-direct {p0}, Lcom/astuetz/PagerSlidingTabStrip;->updateTabStyles()V
 
-    .line 502
     return-void
 .end method
 
 .method public setTextSize(I)V
     .locals 0
-    .param p1, "textSizePx"    # I
 
-    .prologue
     .line 486
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTextSize:I
 
     .line 487
     invoke-direct {p0}, Lcom/astuetz/PagerSlidingTabStrip;->updateTabStyles()V
 
-    .line 488
     return-void
 .end method
 
 .method public setTypeface(Landroid/graphics/Typeface;I)V
     .locals 0
-    .param p1, "typeface"    # Landroid/graphics/Typeface;
-    .param p2, "style"    # I
 
-    .prologue
     .line 509
     iput-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->tabTypeface:Landroid/graphics/Typeface;
 
@@ -1806,30 +1572,24 @@
     .line 511
     invoke-direct {p0}, Lcom/astuetz/PagerSlidingTabStrip;->updateTabStyles()V
 
-    .line 512
     return-void
 .end method
 
 .method public setUnderlineColor(I)V
     .locals 0
-    .param p1, "underlineColor"    # I
 
-    .prologue
     .line 414
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineColor:I
 
     .line 415
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->invalidate()V
 
-    .line 416
     return-void
 .end method
 
 .method public setUnderlineColorResource(I)V
     .locals 1
-    .param p1, "resId"    # I
 
-    .prologue
     .line 419
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->getResources()Landroid/content/res/Resources;
 
@@ -1837,65 +1597,58 @@
 
     invoke-virtual {v0, p1}, Landroid/content/res/Resources;->getColor(I)I
 
-    move-result v0
+    move-result p1
 
-    iput v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineColor:I
+    iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineColor:I
 
     .line 420
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->invalidate()V
 
-    .line 421
     return-void
 .end method
 
 .method public setUnderlineHeight(I)V
     .locals 0
-    .param p1, "underlineHeightPx"    # I
 
-    .prologue
     .line 442
     iput p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->underlineHeight:I
 
     .line 443
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->invalidate()V
 
-    .line 444
     return-void
 .end method
 
-.method public setViewPager(Landroid/support/v4/view/ViewPager;)V
-    .locals 2
-    .param p1, "pager"    # Landroid/support/v4/view/ViewPager;
+.method public setViewPager(Landroidx/viewpager/widget/ViewPager;)V
+    .locals 1
 
-    .prologue
     .line 174
-    iput-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroid/support/v4/view/ViewPager;
+    iput-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroidx/viewpager/widget/ViewPager;
 
     .line 176
-    invoke-virtual {p1}, Landroid/support/v4/view/ViewPager;->getAdapter()Landroid/support/v4/view/PagerAdapter;
+    invoke-virtual {p1}, Landroidx/viewpager/widget/ViewPager;->getAdapter()Landroidx/viewpager/widget/PagerAdapter;
 
     move-result-object v0
 
-    if-nez v0, :cond_0
-
-    .line 177
-    new-instance v0, Ljava/lang/IllegalStateException;
-
-    const-string v1, "ViewPager does not have adapter instance."
-
-    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
-
-    throw v0
+    if-eqz v0, :cond_0
 
     .line 180
-    :cond_0
     iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip;->pageListener:Lcom/astuetz/PagerSlidingTabStrip$PageListener;
 
-    invoke-virtual {p1, v0}, Landroid/support/v4/view/ViewPager;->setOnPageChangeListener(Landroid/support/v4/view/ViewPager$OnPageChangeListener;)V
+    invoke-virtual {p1, v0}, Landroidx/viewpager/widget/ViewPager;->setOnPageChangeListener(Landroidx/viewpager/widget/ViewPager$OnPageChangeListener;)V
 
     .line 182
     invoke-virtual {p0}, Lcom/astuetz/PagerSlidingTabStrip;->notifyDataSetChanged()V
 
-    .line 183
     return-void
+
+    .line 177
+    :cond_0
+    new-instance p1, Ljava/lang/IllegalStateException;
+
+    const-string v0, "ViewPager does not have adapter instance."
+
+    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+
+    throw p1
 .end method

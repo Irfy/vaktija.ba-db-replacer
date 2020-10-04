@@ -25,7 +25,6 @@
 .method constructor <init>(Lcom/astuetz/PagerSlidingTabStrip;)V
     .locals 0
 
-    .prologue
     .line 207
     iput-object p1, p0, Lcom/astuetz/PagerSlidingTabStrip$1;->this$0:Lcom/astuetz/PagerSlidingTabStrip;
 
@@ -38,13 +37,7 @@
 # virtual methods
 .method public onGlobalLayout()V
     .locals 3
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "NewApi"
-        }
-    .end annotation
 
-    .prologue
     .line 214
     sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
 
@@ -61,41 +54,7 @@
 
     invoke-virtual {v0, p0}, Landroid/view/ViewTreeObserver;->removeGlobalOnLayoutListener(Landroid/view/ViewTreeObserver$OnGlobalLayoutListener;)V
 
-    .line 220
-    :goto_0
-    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip$1;->this$0:Lcom/astuetz/PagerSlidingTabStrip;
-
-    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip$1;->this$0:Lcom/astuetz/PagerSlidingTabStrip;
-
-    # getter for: Lcom/astuetz/PagerSlidingTabStrip;->pager:Landroid/support/v4/view/ViewPager;
-    invoke-static {v1}, Lcom/astuetz/PagerSlidingTabStrip;->access$200(Lcom/astuetz/PagerSlidingTabStrip;)Landroid/support/v4/view/ViewPager;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Landroid/support/v4/view/ViewPager;->getCurrentItem()I
-
-    move-result v1
-
-    # setter for: Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
-    invoke-static {v0, v1}, Lcom/astuetz/PagerSlidingTabStrip;->access$102(Lcom/astuetz/PagerSlidingTabStrip;I)I
-
-    .line 221
-    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip$1;->this$0:Lcom/astuetz/PagerSlidingTabStrip;
-
-    iget-object v1, p0, Lcom/astuetz/PagerSlidingTabStrip$1;->this$0:Lcom/astuetz/PagerSlidingTabStrip;
-
-    # getter for: Lcom/astuetz/PagerSlidingTabStrip;->currentPosition:I
-    invoke-static {v1}, Lcom/astuetz/PagerSlidingTabStrip;->access$100(Lcom/astuetz/PagerSlidingTabStrip;)I
-
-    move-result v1
-
-    const/4 v2, 0x0
-
-    # invokes: Lcom/astuetz/PagerSlidingTabStrip;->scrollToChild(II)V
-    invoke-static {v0, v1, v2}, Lcom/astuetz/PagerSlidingTabStrip;->access$300(Lcom/astuetz/PagerSlidingTabStrip;II)V
-
-    .line 222
-    return-void
+    goto :goto_0
 
     .line 217
     :cond_0
@@ -107,5 +66,30 @@
 
     invoke-virtual {v0, p0}, Landroid/view/ViewTreeObserver;->removeOnGlobalLayoutListener(Landroid/view/ViewTreeObserver$OnGlobalLayoutListener;)V
 
-    goto :goto_0
+    .line 220
+    :goto_0
+    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip$1;->this$0:Lcom/astuetz/PagerSlidingTabStrip;
+
+    invoke-static {v0}, Lcom/astuetz/PagerSlidingTabStrip;->access$200(Lcom/astuetz/PagerSlidingTabStrip;)Landroidx/viewpager/widget/ViewPager;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Landroidx/viewpager/widget/ViewPager;->getCurrentItem()I
+
+    move-result v1
+
+    invoke-static {v0, v1}, Lcom/astuetz/PagerSlidingTabStrip;->access$102(Lcom/astuetz/PagerSlidingTabStrip;I)I
+
+    .line 221
+    iget-object v0, p0, Lcom/astuetz/PagerSlidingTabStrip$1;->this$0:Lcom/astuetz/PagerSlidingTabStrip;
+
+    invoke-static {v0}, Lcom/astuetz/PagerSlidingTabStrip;->access$100(Lcom/astuetz/PagerSlidingTabStrip;)I
+
+    move-result v1
+
+    const/4 v2, 0x0
+
+    invoke-static {v0, v1, v2}, Lcom/astuetz/PagerSlidingTabStrip;->access$300(Lcom/astuetz/PagerSlidingTabStrip;II)V
+
+    return-void
 .end method

@@ -30,9 +30,7 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/util/LogAppender;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/util/LogAppender;
 
-    .prologue
     .line 33
     iput-object p1, p0, Lba/vaktija/android/util/LogAppender$1;->this$0:Lba/vaktija/android/util/LogAppender;
 
@@ -50,233 +48,198 @@
 
 # virtual methods
 .method public run()V
-    .locals 10
+    .locals 7
 
-    .prologue
     .line 37
     invoke-static {}, Landroid/os/Environment;->getExternalStorageState()Ljava/lang/String;
 
-    move-result-object v5
+    move-result-object v0
 
-    const-string v6, "mounted"
+    const-string v1, "mounted"
 
-    invoke-virtual {v5, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v5
+    move-result v0
 
-    if-nez v5, :cond_0
+    if-nez v0, :cond_0
 
-    .line 73
-    :goto_0
     return-void
 
     .line 41
     :cond_0
-    new-instance v3, Ljava/io/File;
+    new-instance v0, Ljava/io/File;
 
     invoke-static {}, Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
 
-    move-result-object v5
+    move-result-object v1
 
-    const-string v6, "vaktija_log.txt"
+    const-string v2, "vaktija_log.txt"
 
-    invoke-direct {v3, v5, v6}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+    invoke-direct {v0, v1, v2}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
     .line 43
-    .local v3, "logFile":Ljava/io/File;
-    invoke-virtual {v3}, Ljava/io/File;->exists()Z
+    invoke-virtual {v0}, Ljava/io/File;->exists()Z
 
-    move-result v5
+    move-result v1
 
-    if-eqz v5, :cond_2
+    if-eqz v1, :cond_2
 
-    invoke-virtual {v3}, Ljava/io/File;->length()J
+    invoke-virtual {v0}, Ljava/io/File;->length()J
 
-    move-result-wide v6
+    move-result-wide v3
 
-    const-wide/32 v8, 0x200000
+    const-wide/32 v5, 0x200000
 
-    cmp-long v5, v6, v8
+    cmp-long v1, v3, v5
 
-    if-lez v5, :cond_2
+    if-lez v1, :cond_2
 
     .line 44
-    new-instance v4, Ljava/io/File;
+    new-instance v1, Ljava/io/File;
 
     invoke-static {}, Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
 
-    move-result-object v5
+    move-result-object v3
 
-    const-string v6, "vaktija_log.1.txt"
+    const-string v4, "vaktija_log.1.txt"
 
-    invoke-direct {v4, v5, v6}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+    invoke-direct {v1, v3, v4}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
     .line 46
-    .local v4, "prevLogFile":Ljava/io/File;
-    invoke-virtual {v4}, Ljava/io/File;->exists()Z
+    invoke-virtual {v1}, Ljava/io/File;->exists()Z
 
-    move-result v5
+    move-result v3
 
-    if-eqz v5, :cond_1
+    if-eqz v3, :cond_1
 
     .line 47
-    invoke-virtual {v4}, Ljava/io/File;->delete()Z
+    invoke-virtual {v1}, Ljava/io/File;->delete()Z
 
     .line 50
     :cond_1
-    new-instance v5, Ljava/io/File;
+    new-instance v1, Ljava/io/File;
 
     invoke-static {}, Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
 
-    move-result-object v6
+    move-result-object v3
 
-    const-string v7, "vaktija_log.1.txt"
+    invoke-direct {v1, v3, v4}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
-    invoke-direct {v5, v6, v7}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
-
-    invoke-virtual {v3, v5}, Ljava/io/File;->renameTo(Ljava/io/File;)Z
+    invoke-virtual {v0, v1}, Ljava/io/File;->renameTo(Ljava/io/File;)Z
 
     .line 52
-    new-instance v3, Ljava/io/File;
+    new-instance v0, Ljava/io/File;
 
-    .end local v3    # "logFile":Ljava/io/File;
     invoke-static {}, Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
 
-    move-result-object v5
+    move-result-object v1
 
-    const-string v6, "vaktija_log.txt"
-
-    invoke-direct {v3, v5, v6}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+    invoke-direct {v0, v1, v2}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
     .line 55
-    .end local v4    # "prevLogFile":Ljava/io/File;
-    .restart local v3    # "logFile":Ljava/io/File;
     :cond_2
-    invoke-virtual {v3}, Ljava/io/File;->exists()Z
+    invoke-virtual {v0}, Ljava/io/File;->exists()Z
 
-    move-result v5
+    move-result v1
 
-    if-nez v5, :cond_3
+    if-nez v1, :cond_3
 
     .line 57
     :try_start_0
-    invoke-virtual {v3}, Ljava/io/File;->createNewFile()Z
+    invoke-virtual {v0}, Ljava/io/File;->createNewFile()Z
     :try_end_0
-    .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_1
+    .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 64
-    :cond_3
-    :goto_1
-    :try_start_1
-    new-instance v0, Ljava/io/BufferedWriter;
+    goto :goto_0
 
-    new-instance v5, Ljava/io/FileWriter;
-
-    const/4 v6, 0x1
-
-    invoke-direct {v5, v3, v6}, Ljava/io/FileWriter;-><init>(Ljava/io/File;Z)V
-
-    invoke-direct {v0, v5}, Ljava/io/BufferedWriter;-><init>(Ljava/io/Writer;)V
-
-    .line 65
-    .local v0, "buf":Ljava/io/BufferedWriter;
-    new-instance v5, Ljava/lang/StringBuilder;
-
-    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
-
-    iget-object v6, p0, Lba/vaktija/android/util/LogAppender$1;->this$0:Lba/vaktija/android/util/LogAppender;
-
-    # getter for: Lba/vaktija/android/util/LogAppender;->mSimpleDateFormat:Ljava/text/SimpleDateFormat;
-    invoke-static {v6}, Lba/vaktija/android/util/LogAppender;->access$000(Lba/vaktija/android/util/LogAppender;)Ljava/text/SimpleDateFormat;
-
-    move-result-object v6
-
-    new-instance v7, Ljava/util/Date;
-
-    invoke-direct {v7}, Ljava/util/Date;-><init>()V
-
-    invoke-virtual {v6, v7}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    const-string v6, " ["
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    iget-object v6, p0, Lba/vaktija/android/util/LogAppender$1;->val$type:Ljava/lang/String;
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    const-string v6, "] ["
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    iget-object v6, p0, Lba/vaktija/android/util/LogAppender$1;->val$tag:Ljava/lang/String;
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    const-string v6, "] "
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    iget-object v6, p0, Lba/vaktija/android/util/LogAppender$1;->val$message:Ljava/lang/String;
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v2
-
-    .line 66
-    .local v2, "log":Ljava/lang/String;
-    invoke-virtual {v0, v2}, Ljava/io/BufferedWriter;->append(Ljava/lang/CharSequence;)Ljava/io/Writer;
-
-    .line 67
-    invoke-virtual {v0}, Ljava/io/BufferedWriter;->newLine()V
-
-    .line 68
-    invoke-virtual {v0}, Ljava/io/BufferedWriter;->close()V
-    :try_end_1
-    .catch Ljava/io/IOException; {:try_start_1 .. :try_end_1} :catch_0
-
-    goto/16 :goto_0
-
-    .line 70
-    .end local v0    # "buf":Ljava/io/BufferedWriter;
-    .end local v2    # "log":Ljava/lang/String;
     :catch_0
     move-exception v1
 
-    .line 71
-    .local v1, "e":Ljava/io/IOException;
-    invoke-virtual {v1}, Ljava/io/IOException;->printStackTrace()V
-
-    goto/16 :goto_0
-
     .line 59
-    .end local v1    # "e":Ljava/io/IOException;
-    :catch_1
-    move-exception v1
-
-    .line 60
-    .restart local v1    # "e":Ljava/io/IOException;
     invoke-virtual {v1}, Ljava/io/IOException;->printStackTrace()V
+
+    .line 63
+    :cond_3
+    :goto_0
+    :try_start_1
+    new-instance v1, Ljava/io/BufferedWriter;
+
+    new-instance v2, Ljava/io/FileWriter;
+
+    const/4 v3, 0x1
+
+    invoke-direct {v2, v0, v3}, Ljava/io/FileWriter;-><init>(Ljava/io/File;Z)V
+
+    invoke-direct {v1, v2}, Ljava/io/BufferedWriter;-><init>(Ljava/io/Writer;)V
+
+    .line 64
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    iget-object v2, p0, Lba/vaktija/android/util/LogAppender$1;->this$0:Lba/vaktija/android/util/LogAppender;
+
+    invoke-static {v2}, Lba/vaktija/android/util/LogAppender;->access$000(Lba/vaktija/android/util/LogAppender;)Ljava/text/SimpleDateFormat;
+
+    move-result-object v2
+
+    new-instance v3, Ljava/util/Date;
+
+    invoke-direct {v3}, Ljava/util/Date;-><init>()V
+
+    invoke-virtual {v2, v3}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v2, " ["
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v2, p0, Lba/vaktija/android/util/LogAppender$1;->val$type:Ljava/lang/String;
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v2, "] ["
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v2, p0, Lba/vaktija/android/util/LogAppender$1;->val$tag:Ljava/lang/String;
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v2, "] "
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v2, p0, Lba/vaktija/android/util/LogAppender$1;->val$message:Ljava/lang/String;
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 65
+    invoke-virtual {v1, v0}, Ljava/io/BufferedWriter;->append(Ljava/lang/CharSequence;)Ljava/io/Writer;
+
+    .line 66
+    invoke-virtual {v1}, Ljava/io/BufferedWriter;->newLine()V
+
+    .line 67
+    invoke-virtual {v1}, Ljava/io/BufferedWriter;->close()V
+    :try_end_1
+    .catch Ljava/io/IOException; {:try_start_1 .. :try_end_1} :catch_1
 
     goto :goto_1
+
+    :catch_1
+    move-exception v0
+
+    .line 69
+    invoke-virtual {v0}, Ljava/io/IOException;->printStackTrace()V
+
+    :goto_1
+    return-void
 .end method

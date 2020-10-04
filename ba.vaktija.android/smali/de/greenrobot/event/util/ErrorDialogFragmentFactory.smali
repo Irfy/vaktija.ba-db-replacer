@@ -28,17 +28,13 @@
 # direct methods
 .method protected constructor <init>(Lde/greenrobot/event/util/ErrorDialogConfig;)V
     .locals 0
-    .param p1, "config"    # Lde/greenrobot/event/util/ErrorDialogConfig;
 
-    .prologue
     .line 15
-    .local p0, "this":Lde/greenrobot/event/util/ErrorDialogFragmentFactory;, "Lde/greenrobot/event/util/ErrorDialogFragmentFactory<TT;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 16
     iput-object p1, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
 
-    .line 17
     return-void
 .end method
 
@@ -56,62 +52,50 @@
 .end method
 
 .method protected getMessageFor(Lde/greenrobot/event/util/ThrowableFailureEvent;Landroid/os/Bundle;)Ljava/lang/String;
-    .locals 3
-    .param p1, "event"    # Lde/greenrobot/event/util/ThrowableFailureEvent;
-    .param p2, "arguments"    # Landroid/os/Bundle;
+    .locals 0
 
-    .prologue
     .line 66
-    .local p0, "this":Lde/greenrobot/event/util/ErrorDialogFragmentFactory;, "Lde/greenrobot/event/util/ErrorDialogFragmentFactory<TT;>;"
-    iget-object v1, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
+    iget-object p2, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
 
-    iget-object v2, p1, Lde/greenrobot/event/util/ThrowableFailureEvent;->throwable:Ljava/lang/Throwable;
+    iget-object p1, p1, Lde/greenrobot/event/util/ThrowableFailureEvent;->throwable:Ljava/lang/Throwable;
 
-    invoke-virtual {v1, v2}, Lde/greenrobot/event/util/ErrorDialogConfig;->getMessageIdForThrowable(Ljava/lang/Throwable;)I
+    invoke-virtual {p2, p1}, Lde/greenrobot/event/util/ErrorDialogConfig;->getMessageIdForThrowable(Ljava/lang/Throwable;)I
 
-    move-result v0
+    move-result p1
 
     .line 67
-    .local v0, "msgResId":I
-    iget-object v1, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
+    iget-object p2, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
 
-    iget-object v1, v1, Lde/greenrobot/event/util/ErrorDialogConfig;->resources:Landroid/content/res/Resources;
+    iget-object p2, p2, Lde/greenrobot/event/util/ErrorDialogConfig;->resources:Landroid/content/res/Resources;
 
-    invoke-virtual {v1, v0}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+    invoke-virtual {p2, p1}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object p1
 
-    return-object v1
+    return-object p1
 .end method
 
 .method protected getTitleFor(Lde/greenrobot/event/util/ThrowableFailureEvent;Landroid/os/Bundle;)Ljava/lang/String;
-    .locals 2
-    .param p1, "event"    # Lde/greenrobot/event/util/ThrowableFailureEvent;
-    .param p2, "arguments"    # Landroid/os/Bundle;
+    .locals 0
 
-    .prologue
     .line 61
-    .local p0, "this":Lde/greenrobot/event/util/ErrorDialogFragmentFactory;, "Lde/greenrobot/event/util/ErrorDialogFragmentFactory<TT;>;"
-    iget-object v0, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
+    iget-object p1, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
 
-    iget-object v0, v0, Lde/greenrobot/event/util/ErrorDialogConfig;->resources:Landroid/content/res/Resources;
+    iget-object p1, p1, Lde/greenrobot/event/util/ErrorDialogConfig;->resources:Landroid/content/res/Resources;
 
-    iget-object v1, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
+    iget-object p2, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
 
-    iget v1, v1, Lde/greenrobot/event/util/ErrorDialogConfig;->defaultTitleId:I
+    iget p2, p2, Lde/greenrobot/event/util/ErrorDialogConfig;->defaultTitleId:I
 
-    invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+    invoke-virtual {p1, p2}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object p1
 
-    return-object v0
+    return-object p1
 .end method
 
 .method protected prepareErrorFragment(Lde/greenrobot/event/util/ThrowableFailureEvent;ZLandroid/os/Bundle;)Ljava/lang/Object;
-    .locals 5
-    .param p1, "event"    # Lde/greenrobot/event/util/ThrowableFailureEvent;
-    .param p2, "finishAfterDialog"    # Z
-    .param p3, "argumentsForErrorDialog"    # Landroid/os/Bundle;
+    .locals 2
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -122,158 +106,135 @@
         }
     .end annotation
 
-    .prologue
     .line 24
-    .local p0, "this":Lde/greenrobot/event/util/ErrorDialogFragmentFactory;, "Lde/greenrobot/event/util/ErrorDialogFragmentFactory<TT;>;"
     invoke-virtual {p1}, Lde/greenrobot/event/util/ThrowableFailureEvent;->isSuppressErrorUi()Z
 
-    move-result v3
+    move-result v0
 
-    if-eqz v3, :cond_0
+    if-eqz v0, :cond_0
 
-    .line 26
-    const/4 v3, 0x0
+    const/4 p1, 0x0
 
-    .line 53
-    :goto_0
-    return-object v3
+    return-object p1
 
-    .line 29
     :cond_0
-    if-eqz p3, :cond_6
+    if-eqz p3, :cond_1
 
     .line 30
     invoke-virtual {p3}, Landroid/os/Bundle;->clone()Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object p3
 
-    check-cast v0, Landroid/os/Bundle;
-
-    .line 35
-    .local v0, "bundle":Landroid/os/Bundle;
-    :goto_1
-    const-string v3, "de.greenrobot.eventbus.errordialog.title"
-
-    invoke-virtual {v0, v3}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
-
-    move-result v3
-
-    if-nez v3, :cond_1
-
-    .line 36
-    invoke-virtual {p0, p1, v0}, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->getTitleFor(Lde/greenrobot/event/util/ThrowableFailureEvent;Landroid/os/Bundle;)Ljava/lang/String;
-
-    move-result-object v2
-
-    .line 37
-    .local v2, "title":Ljava/lang/String;
-    const-string v3, "de.greenrobot.eventbus.errordialog.title"
-
-    invoke-virtual {v0, v3, v2}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 39
-    .end local v2    # "title":Ljava/lang/String;
-    :cond_1
-    const-string v3, "de.greenrobot.eventbus.errordialog.message"
-
-    invoke-virtual {v0, v3}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
-
-    move-result v3
-
-    if-nez v3, :cond_2
-
-    .line 40
-    invoke-virtual {p0, p1, v0}, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->getMessageFor(Lde/greenrobot/event/util/ThrowableFailureEvent;Landroid/os/Bundle;)Ljava/lang/String;
-
-    move-result-object v1
-
-    .line 41
-    .local v1, "message":Ljava/lang/String;
-    const-string v3, "de.greenrobot.eventbus.errordialog.message"
-
-    invoke-virtual {v0, v3, v1}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 43
-    .end local v1    # "message":Ljava/lang/String;
-    :cond_2
-    const-string v3, "de.greenrobot.eventbus.errordialog.finish_after_dialog"
-
-    invoke-virtual {v0, v3}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
-
-    move-result v3
-
-    if-nez v3, :cond_3
-
-    .line 44
-    const-string v3, "de.greenrobot.eventbus.errordialog.finish_after_dialog"
-
-    invoke-virtual {v0, v3, p2}, Landroid/os/Bundle;->putBoolean(Ljava/lang/String;Z)V
-
-    .line 46
-    :cond_3
-    const-string v3, "de.greenrobot.eventbus.errordialog.event_type_on_close"
-
-    invoke-virtual {v0, v3}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
-
-    move-result v3
-
-    if-nez v3, :cond_4
-
-    iget-object v3, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
-
-    iget-object v3, v3, Lde/greenrobot/event/util/ErrorDialogConfig;->defaultEventTypeOnDialogClosed:Ljava/lang/Class;
-
-    if-eqz v3, :cond_4
-
-    .line 48
-    const-string v3, "de.greenrobot.eventbus.errordialog.event_type_on_close"
-
-    iget-object v4, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
-
-    iget-object v4, v4, Lde/greenrobot/event/util/ErrorDialogConfig;->defaultEventTypeOnDialogClosed:Ljava/lang/Class;
-
-    invoke-virtual {v0, v3, v4}, Landroid/os/Bundle;->putSerializable(Ljava/lang/String;Ljava/io/Serializable;)V
-
-    .line 50
-    :cond_4
-    const-string v3, "de.greenrobot.eventbus.errordialog.icon_id"
-
-    invoke-virtual {v0, v3}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
-
-    move-result v3
-
-    if-nez v3, :cond_5
-
-    iget-object v3, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
-
-    iget v3, v3, Lde/greenrobot/event/util/ErrorDialogConfig;->defaultDialogIconId:I
-
-    if-eqz v3, :cond_5
-
-    .line 51
-    const-string v3, "de.greenrobot.eventbus.errordialog.icon_id"
-
-    iget-object v4, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
-
-    iget v4, v4, Lde/greenrobot/event/util/ErrorDialogConfig;->defaultDialogIconId:I
-
-    invoke-virtual {v0, v3, v4}, Landroid/os/Bundle;->putInt(Ljava/lang/String;I)V
-
-    .line 53
-    :cond_5
-    invoke-virtual {p0, p1, v0}, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->createErrorFragment(Lde/greenrobot/event/util/ThrowableFailureEvent;Landroid/os/Bundle;)Ljava/lang/Object;
-
-    move-result-object v3
+    check-cast p3, Landroid/os/Bundle;
 
     goto :goto_0
 
     .line 32
-    .end local v0    # "bundle":Landroid/os/Bundle;
+    :cond_1
+    new-instance p3, Landroid/os/Bundle;
+
+    invoke-direct {p3}, Landroid/os/Bundle;-><init>()V
+
+    :goto_0
+    const-string v0, "de.greenrobot.eventbus.errordialog.title"
+
+    .line 35
+    invoke-virtual {p3, v0}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_2
+
+    .line 36
+    invoke-virtual {p0, p1, p3}, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->getTitleFor(Lde/greenrobot/event/util/ThrowableFailureEvent;Landroid/os/Bundle;)Ljava/lang/String;
+
+    move-result-object v1
+
+    .line 37
+    invoke-virtual {p3, v0, v1}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    :cond_2
+    const-string v0, "de.greenrobot.eventbus.errordialog.message"
+
+    .line 39
+    invoke-virtual {p3, v0}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_3
+
+    .line 40
+    invoke-virtual {p0, p1, p3}, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->getMessageFor(Lde/greenrobot/event/util/ThrowableFailureEvent;Landroid/os/Bundle;)Ljava/lang/String;
+
+    move-result-object v1
+
+    .line 41
+    invoke-virtual {p3, v0, v1}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    :cond_3
+    const-string v0, "de.greenrobot.eventbus.errordialog.finish_after_dialog"
+
+    .line 43
+    invoke-virtual {p3, v0}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_4
+
+    .line 44
+    invoke-virtual {p3, v0, p2}, Landroid/os/Bundle;->putBoolean(Ljava/lang/String;Z)V
+
+    :cond_4
+    const-string p2, "de.greenrobot.eventbus.errordialog.event_type_on_close"
+
+    .line 46
+    invoke-virtual {p3, p2}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_5
+
+    iget-object v0, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
+
+    iget-object v0, v0, Lde/greenrobot/event/util/ErrorDialogConfig;->defaultEventTypeOnDialogClosed:Ljava/lang/Class;
+
+    if-eqz v0, :cond_5
+
+    .line 48
+    iget-object v0, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
+
+    iget-object v0, v0, Lde/greenrobot/event/util/ErrorDialogConfig;->defaultEventTypeOnDialogClosed:Ljava/lang/Class;
+
+    invoke-virtual {p3, p2, v0}, Landroid/os/Bundle;->putSerializable(Ljava/lang/String;Ljava/io/Serializable;)V
+
+    :cond_5
+    const-string p2, "de.greenrobot.eventbus.errordialog.icon_id"
+
+    .line 50
+    invoke-virtual {p3, p2}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_6
+
+    iget-object v0, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
+
+    iget v0, v0, Lde/greenrobot/event/util/ErrorDialogConfig;->defaultDialogIconId:I
+
+    if-eqz v0, :cond_6
+
+    .line 51
+    iget-object v0, p0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
+
+    iget v0, v0, Lde/greenrobot/event/util/ErrorDialogConfig;->defaultDialogIconId:I
+
+    invoke-virtual {p3, p2, v0}, Landroid/os/Bundle;->putInt(Ljava/lang/String;I)V
+
+    .line 53
     :cond_6
-    new-instance v0, Landroid/os/Bundle;
+    invoke-virtual {p0, p1, p3}, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->createErrorFragment(Lde/greenrobot/event/util/ThrowableFailureEvent;Landroid/os/Bundle;)Ljava/lang/Object;
 
-    invoke-direct {v0}, Landroid/os/Bundle;-><init>()V
+    move-result-object p1
 
-    .restart local v0    # "bundle":Landroid/os/Bundle;
-    goto :goto_1
+    return-object p1
 .end method

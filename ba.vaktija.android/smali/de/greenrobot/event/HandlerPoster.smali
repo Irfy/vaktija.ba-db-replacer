@@ -15,12 +15,8 @@
 
 # direct methods
 .method constructor <init>(Lde/greenrobot/event/EventBus;Landroid/os/Looper;I)V
-    .locals 1
-    .param p1, "eventBus"    # Lde/greenrobot/event/EventBus;
-    .param p2, "looper"    # Landroid/os/Looper;
-    .param p3, "maxMillisInsideHandleMessage"    # I
+    .locals 0
 
-    .prologue
     .line 31
     invoke-direct {p0, p2}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
 
@@ -31,236 +27,217 @@
     iput p3, p0, Lde/greenrobot/event/HandlerPoster;->maxMillisInsideHandleMessage:I
 
     .line 34
-    new-instance v0, Lde/greenrobot/event/PendingPostQueue;
+    new-instance p1, Lde/greenrobot/event/PendingPostQueue;
 
-    invoke-direct {v0}, Lde/greenrobot/event/PendingPostQueue;-><init>()V
+    invoke-direct {p1}, Lde/greenrobot/event/PendingPostQueue;-><init>()V
 
-    iput-object v0, p0, Lde/greenrobot/event/HandlerPoster;->queue:Lde/greenrobot/event/PendingPostQueue;
+    iput-object p1, p0, Lde/greenrobot/event/HandlerPoster;->queue:Lde/greenrobot/event/PendingPostQueue;
 
-    .line 35
     return-void
 .end method
 
 
 # virtual methods
 .method enqueue(Lde/greenrobot/event/Subscription;Ljava/lang/Object;)V
-    .locals 3
-    .param p1, "subscription"    # Lde/greenrobot/event/Subscription;
-    .param p2, "event"    # Ljava/lang/Object;
+    .locals 0
 
-    .prologue
     .line 38
     invoke-static {p1, p2}, Lde/greenrobot/event/PendingPost;->obtainPendingPost(Lde/greenrobot/event/Subscription;Ljava/lang/Object;)Lde/greenrobot/event/PendingPost;
 
-    move-result-object v0
+    move-result-object p1
 
     .line 39
-    .local v0, "pendingPost":Lde/greenrobot/event/PendingPost;
     monitor-enter p0
 
     .line 40
     :try_start_0
-    iget-object v1, p0, Lde/greenrobot/event/HandlerPoster;->queue:Lde/greenrobot/event/PendingPostQueue;
+    iget-object p2, p0, Lde/greenrobot/event/HandlerPoster;->queue:Lde/greenrobot/event/PendingPostQueue;
 
-    invoke-virtual {v1, v0}, Lde/greenrobot/event/PendingPostQueue;->enqueue(Lde/greenrobot/event/PendingPost;)V
+    invoke-virtual {p2, p1}, Lde/greenrobot/event/PendingPostQueue;->enqueue(Lde/greenrobot/event/PendingPost;)V
 
     .line 41
-    iget-boolean v1, p0, Lde/greenrobot/event/HandlerPoster;->handlerActive:Z
+    iget-boolean p1, p0, Lde/greenrobot/event/HandlerPoster;->handlerActive:Z
 
-    if-nez v1, :cond_0
+    if-nez p1, :cond_1
+
+    const/4 p1, 0x1
 
     .line 42
-    const/4 v1, 0x1
-
-    iput-boolean v1, p0, Lde/greenrobot/event/HandlerPoster;->handlerActive:Z
+    iput-boolean p1, p0, Lde/greenrobot/event/HandlerPoster;->handlerActive:Z
 
     .line 43
     invoke-virtual {p0}, Lde/greenrobot/event/HandlerPoster;->obtainMessage()Landroid/os/Message;
 
-    move-result-object v1
+    move-result-object p1
 
-    invoke-virtual {p0, v1}, Lde/greenrobot/event/HandlerPoster;->sendMessage(Landroid/os/Message;)Z
+    invoke-virtual {p0, p1}, Lde/greenrobot/event/HandlerPoster;->sendMessage(Landroid/os/Message;)Z
 
-    move-result v1
+    move-result p1
 
-    if-nez v1, :cond_0
+    if-eqz p1, :cond_0
+
+    goto :goto_0
 
     .line 44
-    new-instance v1, Lde/greenrobot/event/EventBusException;
+    :cond_0
+    new-instance p1, Lde/greenrobot/event/EventBusException;
 
-    const-string v2, "Could not send handler message"
+    const-string p2, "Could not send handler message"
 
-    invoke-direct {v1, v2}, Lde/greenrobot/event/EventBusException;-><init>(Ljava/lang/String;)V
+    invoke-direct {p1, p2}, Lde/greenrobot/event/EventBusException;-><init>(Ljava/lang/String;)V
 
-    throw v1
+    throw p1
 
     .line 47
+    :cond_1
+    :goto_0
+    monitor-exit p0
+
+    return-void
+
     :catchall_0
-    move-exception v1
+    move-exception p1
 
     monitor-exit p0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw v1
-
-    :cond_0
-    :try_start_1
-    monitor-exit p0
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
-
-    .line 48
-    return-void
+    throw p1
 .end method
 
 .method public handleMessage(Landroid/os/Message;)V
-    .locals 8
-    .param p1, "msg"    # Landroid/os/Message;
+    .locals 7
 
-    .prologue
-    .line 52
-    const/4 v1, 0x0
+    const/4 p1, 0x0
 
     .line 54
-    .local v1, "rescheduled":Z
     :try_start_0
     invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
 
-    move-result-wide v2
+    move-result-wide v0
 
     .line 56
-    .local v2, "started":J
     :cond_0
-    iget-object v6, p0, Lde/greenrobot/event/HandlerPoster;->queue:Lde/greenrobot/event/PendingPostQueue;
+    iget-object v2, p0, Lde/greenrobot/event/HandlerPoster;->queue:Lde/greenrobot/event/PendingPostQueue;
 
-    invoke-virtual {v6}, Lde/greenrobot/event/PendingPostQueue;->poll()Lde/greenrobot/event/PendingPost;
+    invoke-virtual {v2}, Lde/greenrobot/event/PendingPostQueue;->poll()Lde/greenrobot/event/PendingPost;
 
-    move-result-object v0
+    move-result-object v2
 
-    .line 57
-    .local v0, "pendingPost":Lde/greenrobot/event/PendingPost;
-    if-nez v0, :cond_2
+    if-nez v2, :cond_2
 
     .line 58
     monitor-enter p0
     :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
     .line 60
     :try_start_1
-    iget-object v6, p0, Lde/greenrobot/event/HandlerPoster;->queue:Lde/greenrobot/event/PendingPostQueue;
+    iget-object v2, p0, Lde/greenrobot/event/HandlerPoster;->queue:Lde/greenrobot/event/PendingPostQueue;
 
-    invoke-virtual {v6}, Lde/greenrobot/event/PendingPostQueue;->poll()Lde/greenrobot/event/PendingPost;
+    invoke-virtual {v2}, Lde/greenrobot/event/PendingPostQueue;->poll()Lde/greenrobot/event/PendingPost;
 
-    move-result-object v0
+    move-result-object v2
 
-    .line 61
-    if-nez v0, :cond_1
+    if-nez v2, :cond_1
 
     .line 62
-    const/4 v6, 0x0
-
-    iput-boolean v6, p0, Lde/greenrobot/event/HandlerPoster;->handlerActive:Z
+    iput-boolean p1, p0, Lde/greenrobot/event/HandlerPoster;->handlerActive:Z
 
     .line 63
     monitor-exit p0
     :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
     .line 78
-    iput-boolean v1, p0, Lde/greenrobot/event/HandlerPoster;->handlerActive:Z
+    iput-boolean p1, p0, Lde/greenrobot/event/HandlerPoster;->handlerActive:Z
 
-    :goto_0
     return-void
 
     .line 65
     :cond_1
     :try_start_2
     monitor-exit p0
+
+    goto :goto_0
+
+    :catchall_0
+    move-exception v0
+
+    monitor-exit p0
     :try_end_2
-    .catchall {:try_start_2 .. :try_end_2} :catchall_1
+    .catchall {:try_start_2 .. :try_end_2} :catchall_0
+
+    :try_start_3
+    throw v0
 
     .line 67
     :cond_2
-    :try_start_3
-    iget-object v6, p0, Lde/greenrobot/event/HandlerPoster;->eventBus:Lde/greenrobot/event/EventBus;
+    :goto_0
+    iget-object v3, p0, Lde/greenrobot/event/HandlerPoster;->eventBus:Lde/greenrobot/event/EventBus;
 
-    invoke-virtual {v6, v0}, Lde/greenrobot/event/EventBus;->invokeSubscriber(Lde/greenrobot/event/PendingPost;)V
+    invoke-virtual {v3, v2}, Lde/greenrobot/event/EventBus;->invokeSubscriber(Lde/greenrobot/event/PendingPost;)V
 
     .line 68
     invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
 
-    move-result-wide v6
+    move-result-wide v2
 
-    sub-long v4, v6, v2
+    sub-long/2addr v2, v0
 
     .line 69
-    .local v4, "timeInMethod":J
-    iget v6, p0, Lde/greenrobot/event/HandlerPoster;->maxMillisInsideHandleMessage:I
+    iget v4, p0, Lde/greenrobot/event/HandlerPoster;->maxMillisInsideHandleMessage:I
 
-    int-to-long v6, v6
+    int-to-long v4, v4
 
-    cmp-long v6, v4, v6
+    cmp-long v6, v2, v4
 
     if-ltz v6, :cond_0
 
     .line 70
     invoke-virtual {p0}, Lde/greenrobot/event/HandlerPoster;->obtainMessage()Landroid/os/Message;
 
-    move-result-object v6
+    move-result-object v0
 
-    invoke-virtual {p0, v6}, Lde/greenrobot/event/HandlerPoster;->sendMessage(Landroid/os/Message;)Z
+    invoke-virtual {p0, v0}, Lde/greenrobot/event/HandlerPoster;->sendMessage(Landroid/os/Message;)Z
 
-    move-result v6
-
-    if-nez v6, :cond_3
-
-    .line 71
-    new-instance v6, Lde/greenrobot/event/EventBusException;
-
-    const-string v7, "Could not send handler message"
-
-    invoke-direct {v6, v7}, Lde/greenrobot/event/EventBusException;-><init>(Ljava/lang/String;)V
-
-    throw v6
+    move-result v0
     :try_end_3
-    .catchall {:try_start_3 .. :try_end_3} :catchall_0
+    .catchall {:try_start_3 .. :try_end_3} :catchall_1
+
+    if-eqz v0, :cond_3
+
+    const/4 p1, 0x1
 
     .line 78
-    .end local v0    # "pendingPost":Lde/greenrobot/event/PendingPost;
-    .end local v2    # "started":J
-    .end local v4    # "timeInMethod":J
-    :catchall_0
-    move-exception v6
+    iput-boolean p1, p0, Lde/greenrobot/event/HandlerPoster;->handlerActive:Z
 
-    iput-boolean v1, p0, Lde/greenrobot/event/HandlerPoster;->handlerActive:Z
+    return-void
 
-    throw v6
-
-    .line 65
-    .restart local v0    # "pendingPost":Lde/greenrobot/event/PendingPost;
-    .restart local v2    # "started":J
-    :catchall_1
-    move-exception v6
-
+    .line 71
+    :cond_3
     :try_start_4
-    monitor-exit p0
+    new-instance v0, Lde/greenrobot/event/EventBusException;
+
+    const-string v1, "Could not send handler message"
+
+    invoke-direct {v0, v1}, Lde/greenrobot/event/EventBusException;-><init>(Ljava/lang/String;)V
+
+    throw v0
     :try_end_4
     .catchall {:try_start_4 .. :try_end_4} :catchall_1
 
-    :try_start_5
-    throw v6
-    :try_end_5
-    .catchall {:try_start_5 .. :try_end_5} :catchall_0
-
-    .line 73
-    .restart local v4    # "timeInMethod":J
-    :cond_3
-    const/4 v1, 0x1
+    :catchall_1
+    move-exception v0
 
     .line 78
-    iput-boolean v1, p0, Lde/greenrobot/event/HandlerPoster;->handlerActive:Z
+    iput-boolean p1, p0, Lde/greenrobot/event/HandlerPoster;->handlerActive:Z
 
-    goto :goto_0
+    goto :goto_2
+
+    :goto_1
+    throw v0
+
+    :goto_2
+    goto :goto_1
 .end method

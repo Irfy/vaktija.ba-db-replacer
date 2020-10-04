@@ -1,10 +1,9 @@
 .class public Lba/vaktija/android/AlarmActivity;
-.super Landroid/support/v7/app/AppCompatActivity;
+.super Landroidx/appcompat/app/AppCompatActivity;
 .source "AlarmActivity.java"
 
 # interfaces
 .implements Lba/vaktija/android/widgets/SlidingLayout$SlidingLayoutListener;
-.implements Landroid/media/MediaPlayer$OnPreparedListener;
 
 
 # static fields
@@ -18,6 +17,8 @@
 
 .field private static final ALARM_TIMEOUT:I = 0x1d4c0
 
+.field public static final EXTRA_PLAY_ALARM_SOUND:Ljava/lang/String; = "EXTRA_PLAY_ALARM_SOUND"
+
 .field public static final EXTRA_PRAYER_ID:Ljava/lang/String; = "EXTRA_PRAYER_ID"
 
 .field public static final LAUNCH_ALARM:Ljava/lang/String; = "LAUNCH_ALARM"
@@ -26,47 +27,26 @@
 
 
 # instance fields
-.field private mAlarmTimeHrs:Landroid/widget/TextView;
+.field private alarmSoundPlayer:Lba/vaktija/android/service/AlarmSoundPlayer;
 
-.field private mAlarmTimeMins:Landroid/widget/TextView;
+.field private app:Lba/vaktija/android/App;
 
-.field private mAlarmTimer:Landroid/os/CountDownTimer;
+.field private countDownTimer:Landroid/os/CountDownTimer;
 
-.field private mAlarmTitle:Landroid/widget/TextView;
+.field private notificationManager:Landroid/app/NotificationManager;
 
-.field private mApp:Lba/vaktija/android/App;
+.field private prayer:Lba/vaktija/android/models/Prayer;
 
-.field private mAudioManager:Landroid/media/AudioManager;
+.field private preferences:Landroid/content/SharedPreferences;
 
-.field private mClockIcon:Landroid/widget/ImageView;
-
-.field private mInitialStreamVolume:I
-
-.field private mMaxStreamVolume:I
-
-.field private mMediaPlayer:Landroid/media/MediaPlayer;
-
-.field private mNotificationManager:Landroid/app/NotificationManager;
-
-.field private mPowerManager:Landroid/os/PowerManager;
-
-.field private mPrayer:Lba/vaktija/android/models/Prayer;
-
-.field private mPrefs:Landroid/content/SharedPreferences;
-
-.field private mSlidingLayout:Lba/vaktija/android/widgets/SlidingLayout;
-
-.field private mVolumeTimer:Landroid/os/CountDownTimer;
-
-.field private mWakeLock:Landroid/os/PowerManager$WakeLock;
+.field private wakeLock:Landroid/os/PowerManager$WakeLock;
 
 
 # direct methods
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
-    .line 54
+    .line 51
     const-class v0, Lba/vaktija/android/AlarmActivity;
 
     invoke-virtual {v0}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
@@ -81,336 +61,133 @@
 .method public constructor <init>()V
     .locals 0
 
-    .prologue
-    .line 51
-    invoke-direct {p0}, Landroid/support/v7/app/AppCompatActivity;-><init>()V
+    .line 48
+    invoke-direct {p0}, Landroidx/appcompat/app/AppCompatActivity;-><init>()V
 
     return-void
 .end method
 
-.method static synthetic access$000(Lba/vaktija/android/AlarmActivity;)I
-    .locals 1
-    .param p0, "x0"    # Lba/vaktija/android/AlarmActivity;
-
-    .prologue
-    .line 51
-    iget v0, p0, Lba/vaktija/android/AlarmActivity;->mInitialStreamVolume:I
-
-    return v0
-.end method
-
-.method static synthetic access$100(Lba/vaktija/android/AlarmActivity;)Landroid/media/AudioManager;
-    .locals 1
-    .param p0, "x0"    # Lba/vaktija/android/AlarmActivity;
-
-    .prologue
-    .line 51
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mAudioManager:Landroid/media/AudioManager;
-
-    return-object v0
-.end method
-
-.method static synthetic access$200(Lba/vaktija/android/AlarmActivity;)V
+.method static synthetic access$000(Lba/vaktija/android/AlarmActivity;)V
     .locals 0
-    .param p0, "x0"    # Lba/vaktija/android/AlarmActivity;
 
-    .prologue
-    .line 51
-    invoke-direct {p0}, Lba/vaktija/android/AlarmActivity;->cancelAlarmAndFinish()V
+    .line 48
+    invoke-direct {p0}, Lba/vaktija/android/AlarmActivity;->cancelAlarm()V
+
+    return-void
+.end method
+
+.method private cancelAlarm()V
+    .locals 3
+
+    .line 236
+    sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
+
+    const-string v1, "[cancelAlarm]"
+
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 238
+    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v1, 0x1a
+
+    if-lt v0, v1, :cond_0
+
+    .line 239
+    invoke-static {p0}, Lba/vaktija/android/service/OngoingAlarmService;->getStopAlarmIntent(Landroid/content/Context;)Landroid/content/Intent;
+
+    move-result-object v0
+
+    invoke-virtual {p0, v0}, Lba/vaktija/android/AlarmActivity;->startForegroundService(Landroid/content/Intent;)Landroid/content/ComponentName;
+
+    .line 242
+    :cond_0
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->alarmSoundPlayer:Lba/vaktija/android/service/AlarmSoundPlayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/service/AlarmSoundPlayer;->cancel()V
+
+    .line 244
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->countDownTimer:Landroid/os/CountDownTimer;
+
+    if-eqz v0, :cond_1
+
+    .line 245
+    invoke-virtual {v0}, Landroid/os/CountDownTimer;->cancel()V
+
+    .line 248
+    :cond_1
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->notificationManager:Landroid/app/NotificationManager;
+
+    const/16 v1, 0x539
+
+    invoke-virtual {v0, v1}, Landroid/app/NotificationManager;->cancel(I)V
+
+    .line 250
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->preferences:Landroid/content/SharedPreferences;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const/4 v1, 0x0
+
+    const-string v2, "alarmActive"
+
+    invoke-interface {v0, v2, v1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    .line 252
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->wakeLock:Landroid/os/PowerManager$WakeLock;
+
+    invoke-virtual {v0}, Landroid/os/PowerManager$WakeLock;->release()V
 
     return-void
 .end method
 
 .method public static cancelAlarm(Landroid/app/Activity;)V
     .locals 2
-    .param p0, "activity"    # Landroid/app/Activity;
 
-    .prologue
-    .line 84
+    .line 72
     new-instance v0, Landroid/content/Intent;
 
     const-class v1, Lba/vaktija/android/AlarmActivity;
 
     invoke-direct {v0, p0, v1}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
 
-    .line 85
-    .local v0, "i":Landroid/content/Intent;
     const-string v1, "ACTION_CANCEL_ALARM"
 
+    .line 73
     invoke-virtual {v0, v1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
 
-    .line 87
+    .line 74
     invoke-virtual {p0, v0}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
 
-    .line 88
-    return-void
-.end method
-
-.method private cancelAlarmAndFinish()V
-    .locals 5
-
-    .prologue
-    const/4 v4, 0x4
-
-    const/4 v3, 0x0
-
-    .line 320
-    sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    const-string v1, "[cancelAlarmAndFinish]"
-
-    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 322
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mAudioManager:Landroid/media/AudioManager;
-
-    if-eqz v0, :cond_0
-
-    .line 323
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mAudioManager:Landroid/media/AudioManager;
-
-    iget v1, p0, Lba/vaktija/android/AlarmActivity;->mInitialStreamVolume:I
-
-    invoke-virtual {v0, v4, v1, v3}, Landroid/media/AudioManager;->setStreamVolume(III)V
-
-    .line 325
-    sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "restored STREAM_ALARM volume to "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    iget v2, p0, Lba/vaktija/android/AlarmActivity;->mInitialStreamVolume:I
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 328
-    :cond_0
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mMediaPlayer:Landroid/media/MediaPlayer;
-
-    if-eqz v0, :cond_1
-
-    .line 329
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mMediaPlayer:Landroid/media/MediaPlayer;
-
-    invoke-virtual {v0}, Landroid/media/MediaPlayer;->release()V
-
-    .line 331
-    :cond_1
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mAlarmTimer:Landroid/os/CountDownTimer;
-
-    if-eqz v0, :cond_2
-
-    .line 332
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mAlarmTimer:Landroid/os/CountDownTimer;
-
-    invoke-virtual {v0}, Landroid/os/CountDownTimer;->cancel()V
-
-    .line 334
-    :cond_2
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mVolumeTimer:Landroid/os/CountDownTimer;
-
-    if-eqz v0, :cond_3
-
-    .line 335
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mVolumeTimer:Landroid/os/CountDownTimer;
-
-    invoke-virtual {v0}, Landroid/os/CountDownTimer;->cancel()V
-
-    .line 337
-    :cond_3
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mNotificationManager:Landroid/app/NotificationManager;
-
-    const/16 v1, 0x539
-
-    invoke-virtual {v0, v1}, Landroid/app/NotificationManager;->cancel(I)V
-
-    .line 338
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mAudioManager:Landroid/media/AudioManager;
-
-    iget v1, p0, Lba/vaktija/android/AlarmActivity;->mInitialStreamVolume:I
-
-    invoke-virtual {v0, v4, v1, v3}, Landroid/media/AudioManager;->setStreamVolume(III)V
-
-    .line 340
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mPrefs:Landroid/content/SharedPreferences;
-
-    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v0
-
-    const-string v1, "alarmActive"
-
-    invoke-interface {v0, v1, v3}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v0
-
-    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->commit()Z
-
-    .line 343
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mWakeLock:Landroid/os/PowerManager$WakeLock;
-
-    invoke-virtual {v0}, Landroid/os/PowerManager$WakeLock;->release()V
-
-    .line 344
-    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->finish()V
-
-    .line 345
     return-void
 .end method
 
 
 # virtual methods
 .method protected attachBaseContext(Landroid/content/Context;)V
-    .locals 1
-    .param p1, "newBase"    # Landroid/content/Context;
+    .locals 0
 
-    .prologue
-    .line 181
-    invoke-static {p1}, Luk/co/chrisjenx/calligraphy/CalligraphyContextWrapper;->wrap(Landroid/content/Context;)Landroid/content/ContextWrapper;
+    .line 163
+    invoke-static {p1}, Lio/github/inflationx/viewpump/ViewPumpContextWrapper;->wrap(Landroid/content/Context;)Landroid/content/ContextWrapper;
 
-    move-result-object v0
+    move-result-object p1
 
-    invoke-super {p0, v0}, Landroid/support/v7/app/AppCompatActivity;->attachBaseContext(Landroid/content/Context;)V
+    invoke-super {p0, p1}, Landroidx/appcompat/app/AppCompatActivity;->attachBaseContext(Landroid/content/Context;)V
 
-    .line 182
-    return-void
-.end method
-
-.method increaseVolume()V
-    .locals 6
-
-    .prologue
-    const/4 v4, 0x0
-
-    const/4 v3, 0x4
-
-    .line 226
-    sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    const-string v1, "[increaseVolume]"
-
-    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 228
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mAudioManager:Landroid/media/AudioManager;
-
-    invoke-virtual {v0, v3}, Landroid/media/AudioManager;->getStreamVolume(I)I
-
-    move-result v0
-
-    iput v0, p0, Lba/vaktija/android/AlarmActivity;->mInitialStreamVolume:I
-
-    .line 229
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mAudioManager:Landroid/media/AudioManager;
-
-    invoke-virtual {v0, v3}, Landroid/media/AudioManager;->getStreamMaxVolume(I)I
-
-    move-result v0
-
-    iput v0, p0, Lba/vaktija/android/AlarmActivity;->mMaxStreamVolume:I
-
-    .line 231
-    sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "mInitialStreamVolume: "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    iget v2, p0, Lba/vaktija/android/AlarmActivity;->mInitialStreamVolume:I
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 232
-    sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "mMaxStreamVolume: "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    iget v2, p0, Lba/vaktija/android/AlarmActivity;->mMaxStreamVolume:I
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 234
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mAudioManager:Landroid/media/AudioManager;
-
-    invoke-virtual {v0, v3, v4, v4}, Landroid/media/AudioManager;->setStreamVolume(III)V
-
-    .line 236
-    new-instance v0, Lba/vaktija/android/AlarmActivity$1;
-
-    iget v1, p0, Lba/vaktija/android/AlarmActivity;->mInitialStreamVolume:I
-
-    mul-int/lit16 v1, v1, 0x3e8
-
-    int-to-long v2, v1
-
-    const-wide/16 v4, 0x3e8
-
-    move-object v1, p0
-
-    invoke-direct/range {v0 .. v5}, Lba/vaktija/android/AlarmActivity$1;-><init>(Lba/vaktija/android/AlarmActivity;JJ)V
-
-    iput-object v0, p0, Lba/vaktija/android/AlarmActivity;->mVolumeTimer:Landroid/os/CountDownTimer;
-
-    .line 255
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mVolumeTimer:Landroid/os/CountDownTimer;
-
-    invoke-virtual {v0}, Landroid/os/CountDownTimer;->start()Landroid/os/CountDownTimer;
-
-    .line 256
     return-void
 .end method
 
 .method public onBackPressed()V
     .locals 3
 
-    .prologue
-    .line 405
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mPrefs:Landroid/content/SharedPreferences;
+    .line 313
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->preferences:Landroid/content/SharedPreferences;
 
     invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
 
@@ -424,1492 +201,1137 @@
 
     move-result-object v0
 
-    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->commit()Z
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
 
-    .line 406
-    invoke-super {p0}, Landroid/support/v7/app/AppCompatActivity;->onBackPressed()V
+    .line 314
+    invoke-direct {p0}, Lba/vaktija/android/AlarmActivity;->cancelAlarm()V
 
-    .line 407
+    .line 315
+    invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onBackPressed()V
+
     return-void
 .end method
 
 .method protected onCreate(Landroid/os/Bundle;)V
-    .locals 11
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
+    .locals 9
 
-    .prologue
-    const/4 v10, 0x1
+    const-string v0, "power"
 
-    const/4 v9, 0x0
+    .line 79
+    invoke-virtual {p0, v0}, Lba/vaktija/android/AlarmActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
-    const/4 v8, -0x1
+    move-result-object v0
 
-    .line 92
-    const-string v5, "power"
+    check-cast v0, Landroid/os/PowerManager;
 
-    invoke-virtual {p0, v5}, Lba/vaktija/android/AlarmActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+    .line 80
+    sget-object v1, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
 
-    move-result-object v5
+    const v2, 0x10000001
 
-    check-cast v5, Landroid/os/PowerManager;
+    invoke-virtual {v0, v2, v1}, Landroid/os/PowerManager;->newWakeLock(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;
 
-    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->mPowerManager:Landroid/os/PowerManager;
+    move-result-object v0
 
-    .line 93
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mPowerManager:Landroid/os/PowerManager;
+    iput-object v0, p0, Lba/vaktija/android/AlarmActivity;->wakeLock:Landroid/os/PowerManager$WakeLock;
 
-    const v6, 0x10000001
+    const/4 v1, 0x0
 
-    sget-object v7, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
+    .line 81
+    invoke-virtual {v0, v1}, Landroid/os/PowerManager$WakeLock;->setReferenceCounted(Z)V
 
-    invoke-virtual {v5, v6, v7}, Landroid/os/PowerManager;->newWakeLock(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;
+    .line 83
+    new-instance v0, Lba/vaktija/android/service/AlarmSoundPlayer;
 
-    move-result-object v5
+    invoke-direct {v0, p0}, Lba/vaktija/android/service/AlarmSoundPlayer;-><init>(Landroid/content/Context;)V
 
-    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->mWakeLock:Landroid/os/PowerManager$WakeLock;
+    iput-object v0, p0, Lba/vaktija/android/AlarmActivity;->alarmSoundPlayer:Lba/vaktija/android/service/AlarmSoundPlayer;
 
-    .line 94
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mWakeLock:Landroid/os/PowerManager$WakeLock;
+    .line 85
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->wakeLock:Landroid/os/PowerManager$WakeLock;
 
-    invoke-virtual {v5, v9}, Landroid/os/PowerManager$WakeLock;->setReferenceCounted(Z)V
+    const-wide/32 v2, 0x1d4c0
 
-    .line 96
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mWakeLock:Landroid/os/PowerManager$WakeLock;
+    invoke-virtual {v0, v2, v3}, Landroid/os/PowerManager$WakeLock;->acquire(J)V
 
-    invoke-virtual {v5}, Landroid/os/PowerManager$WakeLock;->acquire()V
-
-    .line 98
+    .line 87
     invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->getWindow()Landroid/view/Window;
 
-    move-result-object v5
+    move-result-object v0
 
-    const v6, 0x680080
+    const v2, 0x680080
 
-    invoke-virtual {v5, v6}, Landroid/view/Window;->addFlags(I)V
+    invoke-virtual {v0, v2}, Landroid/view/Window;->addFlags(I)V
 
-    .line 105
-    invoke-super {p0, p1}, Landroid/support/v7/app/AppCompatActivity;->onCreate(Landroid/os/Bundle;)V
+    .line 94
+    invoke-super {p0, p1}, Landroidx/appcompat/app/AppCompatActivity;->onCreate(Landroid/os/Bundle;)V
 
-    .line 107
-    sget-object v5, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
+    .line 96
+    sget-object p1, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
 
-    const-string v6, "[*** onCreate ***]"
+    const-string v0, "[*** onCreate ***]"
 
-    invoke-static {v5, v6}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-static {p1, v0}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 109
-    new-instance v5, Luk/co/chrisjenx/calligraphy/CalligraphyConfig$Builder;
-
-    invoke-direct {v5}, Luk/co/chrisjenx/calligraphy/CalligraphyConfig$Builder;-><init>()V
-
-    const-string v6, "fonts/RobotoCondensed-Regular.ttf"
-
-    .line 110
-    invoke-virtual {v5, v6}, Luk/co/chrisjenx/calligraphy/CalligraphyConfig$Builder;->setDefaultFontPath(Ljava/lang/String;)Luk/co/chrisjenx/calligraphy/CalligraphyConfig$Builder;
-
-    move-result-object v5
-
-    const v6, 0x7f010001
-
-    .line 111
-    invoke-virtual {v5, v6}, Luk/co/chrisjenx/calligraphy/CalligraphyConfig$Builder;->setFontAttrId(I)Luk/co/chrisjenx/calligraphy/CalligraphyConfig$Builder;
-
-    move-result-object v5
-
-    .line 112
-    invoke-virtual {v5}, Luk/co/chrisjenx/calligraphy/CalligraphyConfig$Builder;->build()Luk/co/chrisjenx/calligraphy/CalligraphyConfig;
-
-    move-result-object v5
-
-    .line 109
-    invoke-static {v5}, Luk/co/chrisjenx/calligraphy/CalligraphyConfig;->initDefault(Luk/co/chrisjenx/calligraphy/CalligraphyConfig;)V
-
-    .line 115
+    .line 98
     invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->getApplicationContext()Landroid/content/Context;
 
-    move-result-object v5
+    move-result-object p1
 
-    check-cast v5, Lba/vaktija/android/App;
+    check-cast p1, Lba/vaktija/android/App;
 
-    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->mApp:Lba/vaktija/android/App;
+    iput-object p1, p0, Lba/vaktija/android/AlarmActivity;->app:Lba/vaktija/android/App;
 
-    .line 117
-    const-string v5, "audio"
+    const p1, 0x7f0b0021
 
-    invoke-virtual {p0, v5}, Lba/vaktija/android/AlarmActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+    .line 100
+    invoke-virtual {p0, p1}, Lba/vaktija/android/AlarmActivity;->setContentView(I)V
 
-    move-result-object v5
+    const p1, 0x7f080041
 
-    check-cast v5, Landroid/media/AudioManager;
+    .line 102
+    invoke-virtual {p0, p1}, Lba/vaktija/android/AlarmActivity;->findViewById(I)Landroid/view/View;
 
-    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->mAudioManager:Landroid/media/AudioManager;
+    move-result-object p1
 
-    .line 119
-    const v5, 0x7f03001d
+    check-cast p1, Landroid/widget/TextView;
 
-    invoke-virtual {p0, v5}, Lba/vaktija/android/AlarmActivity;->setContentView(I)V
+    const v0, 0x7f080042
 
-    .line 121
-    const v5, 0x7f0e0058
+    .line 103
+    invoke-virtual {p0, v0}, Lba/vaktija/android/AlarmActivity;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {p0, v5}, Lba/vaktija/android/AlarmActivity;->findViewById(I)Landroid/view/View;
+    move-result-object v0
 
-    move-result-object v5
+    check-cast v0, Landroid/widget/TextView;
 
-    check-cast v5, Landroid/widget/TextView;
+    const v2, 0x7f08003e
 
-    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->mAlarmTimeHrs:Landroid/widget/TextView;
+    .line 104
+    invoke-virtual {p0, v2}, Lba/vaktija/android/AlarmActivity;->findViewById(I)Landroid/view/View;
 
-    .line 122
-    const v5, 0x7f0e0059
+    move-result-object v2
 
-    invoke-virtual {p0, v5}, Lba/vaktija/android/AlarmActivity;->findViewById(I)Landroid/view/View;
+    check-cast v2, Landroid/widget/TextView;
 
-    move-result-object v5
+    const v3, 0x7f080040
 
-    check-cast v5, Landroid/widget/TextView;
+    .line 105
+    invoke-virtual {p0, v3}, Lba/vaktija/android/AlarmActivity;->findViewById(I)Landroid/view/View;
 
-    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->mAlarmTimeMins:Landroid/widget/TextView;
+    move-result-object v3
 
-    .line 123
-    const v5, 0x7f0e0057
+    check-cast v3, Lba/vaktija/android/widgets/SlidingLayout;
 
-    invoke-virtual {p0, v5}, Lba/vaktija/android/AlarmActivity;->findViewById(I)Landroid/view/View;
+    const v4, 0x7f08003f
 
-    move-result-object v5
+    .line 106
+    invoke-virtual {p0, v4}, Lba/vaktija/android/AlarmActivity;->findViewById(I)Landroid/view/View;
 
-    check-cast v5, Landroid/widget/TextView;
+    move-result-object v4
 
-    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->mAlarmTitle:Landroid/widget/TextView;
+    check-cast v4, Landroid/widget/ImageView;
 
-    .line 124
-    const v5, 0x7f0e005a
-
-    invoke-virtual {p0, v5}, Lba/vaktija/android/AlarmActivity;->findViewById(I)Landroid/view/View;
-
-    move-result-object v5
-
-    check-cast v5, Lba/vaktija/android/widgets/SlidingLayout;
-
-    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->mSlidingLayout:Lba/vaktija/android/widgets/SlidingLayout;
-
-    .line 125
-    const v5, 0x7f0e005b
-
-    invoke-virtual {p0, v5}, Lba/vaktija/android/AlarmActivity;->findViewById(I)Landroid/view/View;
+    .line 108
+    invoke-static {p0}, Landroidx/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object v5
 
-    check-cast v5, Landroid/widget/ImageView;
+    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->preferences:Landroid/content/SharedPreferences;
 
-    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->mClockIcon:Landroid/widget/ImageView;
-
-    .line 127
-    invoke-static {p0}, Landroid/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
-
-    move-result-object v5
-
-    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->mPrefs:Landroid/content/SharedPreferences;
-
-    .line 129
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mPrefs:Landroid/content/SharedPreferences;
-
+    .line 110
     invoke-interface {v5}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
 
     move-result-object v5
 
     const-string v6, "alarmActive"
 
-    invoke-interface {v5, v6, v10}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+    const/4 v7, 0x1
+
+    invoke-interface {v5, v6, v7}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
 
     move-result-object v5
 
-    invoke-interface {v5}, Landroid/content/SharedPreferences$Editor;->commit()Z
+    invoke-interface {v5}, Landroid/content/SharedPreferences$Editor;->apply()V
 
-    .line 131
     const-string v5, "notification"
 
+    .line 112
     invoke-virtual {p0, v5}, Lba/vaktija/android/AlarmActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object v5
 
     check-cast v5, Landroid/app/NotificationManager;
 
-    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->mNotificationManager:Landroid/app/NotificationManager;
+    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->notificationManager:Landroid/app/NotificationManager;
 
-    .line 133
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mSlidingLayout:Lba/vaktija/android/widgets/SlidingLayout;
+    .line 114
+    invoke-virtual {v3, p0}, Lba/vaktija/android/widgets/SlidingLayout;->setSlidingListener(Lba/vaktija/android/widgets/SlidingLayout$SlidingLayoutListener;)V
 
-    invoke-virtual {v5, p0}, Lba/vaktija/android/widgets/SlidingLayout;->setSlidingListener(Lba/vaktija/android/widgets/SlidingLayout$SlidingLayoutListener;)V
+    const v3, 0x7f010024
 
-    .line 135
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mClockIcon:Landroid/widget/ImageView;
+    .line 116
+    invoke-static {p0, v3}, Landroid/view/animation/AnimationUtils;->loadAnimation(Landroid/content/Context;I)Landroid/view/animation/Animation;
 
-    const v6, 0x7f04000f
+    move-result-object v3
 
-    invoke-static {p0, v6}, Landroid/view/animation/AnimationUtils;->loadAnimation(Landroid/content/Context;I)Landroid/view/animation/Animation;
+    invoke-virtual {v4, v3}, Landroid/widget/ImageView;->startAnimation(Landroid/view/animation/Animation;)V
 
-    move-result-object v6
-
-    invoke-virtual {v5, v6}, Landroid/widget/ImageView;->startAnimation(Landroid/view/animation/Animation;)V
-
-    .line 137
+    .line 118
     invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->getIntent()Landroid/content/Intent;
 
-    move-result-object v5
+    move-result-object v3
 
-    const-string v6, "EXTRA_PRAYER_ID"
+    const-string v4, "EXTRA_PRAYER_ID"
 
-    invoke-virtual {v5, v6, v8}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
+    const/4 v5, -0x1
+
+    invoke-virtual {v3, v4, v5}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
 
     move-result v3
 
-    .line 139
-    .local v3, "prayerId":I
+    .line 120
+    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->getIntent()Landroid/content/Intent;
+
+    move-result-object v4
+
+    const-string v8, "EXTRA_PLAY_ALARM_SOUND"
+
+    invoke-virtual {v4, v8, v7}, Landroid/content/Intent;->getBooleanExtra(Ljava/lang/String;Z)Z
+
+    move-result v4
+
+    .line 122
     invoke-static {p0}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
-
-    move-result-object v5
-
-    invoke-virtual {v5, v3}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v5
-
-    iput-object v5, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    .line 141
-    if-ne v3, v8, :cond_0
-
-    .line 142
-    sget-object v5, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    const-string v6, "Prayer is null"
-
-    invoke-static {v5, v6}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 143
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mPrefs:Landroid/content/SharedPreferences;
-
-    invoke-interface {v5}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v5
-
-    const-string v6, "alarmActive"
-
-    invoke-interface {v5, v6, v9}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v5
-
-    invoke-interface {v5}, Landroid/content/SharedPreferences$Editor;->commit()Z
-
-    .line 144
-    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->finish()V
-
-    .line 177
-    :goto_0
-    return-void
-
-    .line 148
-    :cond_0
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
-
-    move-result v5
-
-    invoke-static {}, Lba/vaktija/android/util/Utils;->getCurrentTimeSec()I
-
-    move-result v6
-
-    sub-int v4, v5, v6
-
-    .line 150
-    .local v4, "time":I
-    add-int/lit8 v4, v4, 0x5
-
-    .line 152
-    div-int/lit8 v5, v4, 0x3c
-
-    rem-int/lit8 v2, v5, 0x3c
-
-    .line 153
-    .local v2, "minutes":I
-    div-int/lit16 v5, v4, 0xe10
-
-    rem-int/lit8 v1, v5, 0x18
-
-    .line 155
-    .local v1, "hours":I
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mAlarmTimeHrs:Landroid/widget/TextView;
-
-    invoke-static {v1}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-virtual {v5, v6}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
-
-    .line 156
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mAlarmTimeMins:Landroid/widget/TextView;
-
-    invoke-static {v2}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-virtual {v5, v6}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
-
-    .line 157
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mAlarmTitle:Landroid/widget/TextView;
-
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    iget-object v7, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
 
     move-result-object v8
 
-    invoke-virtual {v7, v8}, Ljava/lang/String;->toUpperCase(Ljava/util/Locale;)Ljava/lang/String;
+    invoke-virtual {v8, v3}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
 
-    move-result-object v7
+    move-result-object v8
 
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    iput-object v8, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
 
-    move-result-object v6
+    if-ne v3, v5, :cond_0
 
-    const-string v7, " JE ZA"
+    .line 125
+    sget-object p1, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
 
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v0, "Prayer is null"
 
-    move-result-object v6
+    invoke-static {p1, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
 
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    .line 126
+    iget-object p1, p0, Lba/vaktija/android/AlarmActivity;->preferences:Landroid/content/SharedPreferences;
 
-    move-result-object v6
+    invoke-interface {p1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
 
-    invoke-virtual {v5, v6}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    move-result-object p1
 
-    .line 160
+    invoke-interface {p1, v6, v1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object p1
+
+    invoke-interface {p1}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    .line 127
+    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->finish()V
+
+    return-void
+
+    .line 131
+    :cond_0
+    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
+
+    move-result v3
+
+    invoke-static {}, Lba/vaktija/android/util/Utils;->getCurrentTimeSec()I
+
+    move-result v5
+
+    sub-int/2addr v3, v5
+
+    add-int/lit8 v3, v3, 0x5
+
+    .line 135
+    div-int/lit8 v5, v3, 0x3c
+
+    rem-int/lit8 v5, v5, 0x3c
+
+    .line 136
+    div-int/lit16 v3, v3, 0xe10
+
+    rem-int/lit8 v3, v3, 0x18
+
+    .line 138
+    invoke-static {v3}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-virtual {p1, v3}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    .line 139
+    invoke-static {v5}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-virtual {v0, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    new-array p1, v7, [Ljava/lang/Object;
+
+    .line 140
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
+
+    move-result-object v3
+
+    invoke-virtual {v0, v3}, Ljava/lang/String;->toUpperCase(Ljava/util/Locale;)Ljava/lang/String;
+
+    move-result-object v0
+
+    aput-object v0, p1, v1
+
+    const-string v0, "%s JE ZA"
+
+    invoke-static {v0, p1}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-virtual {v2, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    if-eqz v4, :cond_1
+
+    .line 144
     :try_start_0
-    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->playAlarmSound()V
+    sget-object p1, Lba/vaktija/android/App;->app:Lba/vaktija/android/App;
 
-    .line 161
-    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->increaseVolume()V
+    invoke-virtual {p1}, Lba/vaktija/android/App;->getAlarmSoundUri()Landroid/net/Uri;
 
-    .line 162
-    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->startCountDownTimer()V
+    move-result-object p1
 
-    .line 163
+    .line 145
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->alarmSoundPlayer:Lba/vaktija/android/service/AlarmSoundPlayer;
+
+    invoke-virtual {v0, p1, v7}, Lba/vaktija/android/service/AlarmSoundPlayer;->play(Landroid/net/Uri;Z)V
+
+    .line 146
     invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->showNotification()V
+
+    .line 148
+    :cond_1
+    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->startCountDownTimer()V
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 174
-    :goto_1
-    sget-object v5, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, "initial stream volume: "
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    iget v7, p0, Lba/vaktija/android/AlarmActivity;->mInitialStreamVolume:I
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-static {v5, v6}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 176
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mApp:Lba/vaktija/android/App;
-
-    const-string v6, "Alarm"
-
-    invoke-virtual {v5, v6}, Lba/vaktija/android/App;->sendScreenView(Ljava/lang/String;)V
-
     goto :goto_0
 
-    .line 165
     :catch_0
-    move-exception v0
+    move-exception p1
 
-    .line 166
-    .local v0, "e":Ljava/lang/Exception;
-    invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V
+    .line 150
+    invoke-virtual {p1}, Ljava/lang/Exception;->printStackTrace()V
 
-    .line 167
-    sget-object v5, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, "Cannot play alarm sound: "
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v0}, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-static {v5, v6}, Lba/vaktija/android/util/FileLog;->e(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 168
-    sget-object v5, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    invoke-virtual {v0}, Ljava/lang/Exception;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-static {v5, v6}, Lba/vaktija/android/util/FileLog;->e(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 169
-    sget-object v5, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, "exception: "
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
-
-    move-result-object v7
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    const-string v7, ": "
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-static {v5, v6}, Lba/vaktija/android/util/FileLog;->w(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 170
-    const-string v5, "Can\'t play alarm sound"
-
-    invoke-static {p0, v5, v10}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
-
-    move-result-object v5
-
-    invoke-virtual {v5}, Landroid/widget/Toast;->show()V
-
-    .line 171
-    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->finish()V
-
-    goto :goto_1
-.end method
-
-.method public onDestroy()V
-    .locals 2
-
-    .prologue
-    .line 283
-    invoke-super {p0}, Landroid/support/v7/app/AppCompatActivity;->onDestroy()V
-
-    .line 284
+    .line 151
     sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
 
-    const-string v1, "[onDestroy]"
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    .line 286
-    invoke-direct {p0}, Lba/vaktija/android/AlarmActivity;->cancelAlarmAndFinish()V
+    const-string v2, "Cannot play alarm sound: "
 
-    .line 287
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p1}, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->e(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 152
+    sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
+
+    invoke-virtual {p1}, Ljava/lang/Exception;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->e(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 153
+    sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "exception: "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p1}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    const-string v2, ": "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-static {v0, p1}, Lba/vaktija/android/util/FileLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string p1, "Can\'t play alarm sound"
+
+    .line 154
+    invoke-static {p0, p1, v7}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Landroid/widget/Toast;->show()V
+
+    .line 155
+    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->finish()V
+
+    .line 158
+    :goto_0
+    iget-object p1, p0, Lba/vaktija/android/AlarmActivity;->app:Lba/vaktija/android/App;
+
+    const-string v0, "Alarm"
+
+    invoke-virtual {p1, v0}, Lba/vaktija/android/App;->sendScreenView(Ljava/lang/String;)V
+
     return-void
 .end method
 
 .method public onKeyDown(ILandroid/view/KeyEvent;)Z
     .locals 1
-    .param p1, "keyCode"    # I
-    .param p2, "event"    # Landroid/view/KeyEvent;
 
-    .prologue
-    .line 424
     const/16 v0, 0x19
 
-    if-eq p1, v0, :cond_0
+    if-eq p1, v0, :cond_1
 
     const/16 v0, 0x18
 
-    if-eq p1, v0, :cond_0
+    if-eq p1, v0, :cond_1
 
     const/16 v0, 0x1a
 
-    if-ne p1, v0, :cond_1
-
-    .line 425
-    :cond_0
-    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->finish()V
-
-    .line 426
-    const/4 v0, 0x1
-
-    .line 428
-    :goto_0
-    return v0
-
-    :cond_1
-    invoke-super {p0, p1, p2}, Landroid/support/v7/app/AppCompatActivity;->onKeyDown(ILandroid/view/KeyEvent;)Z
-
-    move-result v0
+    if-ne p1, v0, :cond_0
 
     goto :goto_0
+
+    .line 333
+    :cond_0
+    invoke-super {p0, p1, p2}, Landroidx/appcompat/app/AppCompatActivity;->onKeyDown(ILandroid/view/KeyEvent;)Z
+
+    move-result p1
+
+    return p1
+
+    .line 330
+    :cond_1
+    :goto_0
+    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->finish()V
+
+    const/4 p1, 0x1
+
+    return p1
 .end method
 
 .method public onNewIntent(Landroid/content/Intent;)V
-    .locals 4
-    .param p1, "intent"    # Landroid/content/Intent;
+    .locals 3
 
-    .prologue
-    .line 186
-    sget-object v1, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
+    .line 168
+    invoke-super {p0, p1}, Landroidx/appcompat/app/AppCompatActivity;->onNewIntent(Landroid/content/Intent;)V
 
-    const-string v2, "[onNewIntent]"
-
-    invoke-static {v1, v2}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 187
-    invoke-virtual {p1}, Landroid/content/Intent;->getAction()Ljava/lang/String;
-
-    move-result-object v0
-
-    .line 188
-    .local v0, "action":Ljava/lang/String;
-    sget-object v1, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    new-instance v2, Ljava/lang/StringBuilder;
-
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v3, "action: "
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-static {v1, v2}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 190
-    if-eqz v0, :cond_0
-
-    const-string v1, "ACTION_CANCEL_ALARM"
-
-    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v1
-
-    if-eqz v1, :cond_0
-
-    .line 191
-    invoke-direct {p0}, Lba/vaktija/android/AlarmActivity;->cancelAlarmAndFinish()V
-
-    .line 193
-    :cond_0
-    return-void
-.end method
-
-.method public onPrepared(Landroid/media/MediaPlayer;)V
-    .locals 2
-    .param p1, "mp"    # Landroid/media/MediaPlayer;
-
-    .prologue
-    .line 411
+    .line 170
     sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
 
-    const-string v1, "onPrepared"
+    const-string v1, "[onNewIntent]"
 
-    invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 412
-    invoke-virtual {p1}, Landroid/media/MediaPlayer;->start()V
+    .line 171
+    invoke-virtual {p1}, Landroid/content/Intent;->getAction()Ljava/lang/String;
 
-    .line 413
+    move-result-object p1
+
+    .line 172
+    sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "action: "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    if-eqz p1, :cond_0
+
+    const-string v0, "ACTION_CANCEL_ALARM"
+
+    .line 174
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result p1
+
+    if-eqz p1, :cond_0
+
+    .line 175
+    invoke-direct {p0}, Lba/vaktija/android/AlarmActivity;->cancelAlarm()V
+
+    .line 176
+    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->finish()V
+
+    :cond_0
     return-void
 .end method
 
 .method public onSlidingCompleted()V
     .locals 2
 
-    .prologue
-    .line 314
+    .line 229
     sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
 
     const-string v1, "[onSlidingCompleted]"
 
     invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 316
-    invoke-direct {p0}, Lba/vaktija/android/AlarmActivity;->cancelAlarmAndFinish()V
+    .line 231
+    invoke-direct {p0}, Lba/vaktija/android/AlarmActivity;->cancelAlarm()V
 
-    .line 317
+    .line 232
+    invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->finish()V
+
     return-void
 .end method
 
 .method protected onUserLeaveHint()V
     .locals 2
 
-    .prologue
-    .line 417
+    .line 321
     sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
 
     const-string v1, "onUserLeaveHint"
 
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 418
+    .line 322
+    invoke-direct {p0}, Lba/vaktija/android/AlarmActivity;->cancelAlarm()V
+
+    .line 323
     invoke-virtual {p0}, Lba/vaktija/android/AlarmActivity;->finish()V
 
-    .line 419
-    invoke-super {p0}, Landroid/support/v7/app/AppCompatActivity;->onUserLeaveHint()V
+    .line 324
+    invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onUserLeaveHint()V
 
-    .line 420
-    return-void
-.end method
-
-.method playAlarmSound()V
-    .locals 6
-    .annotation system Ldalvik/annotation/Throws;
-        value = {
-            Ljava/lang/IllegalArgumentException;,
-            Ljava/lang/SecurityException;,
-            Ljava/lang/IllegalStateException;,
-            Ljava/io/IOException;
-        }
-    .end annotation
-
-    .prologue
-    const/4 v5, 0x1
-
-    .line 201
-    sget-object v2, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    const-string v3, "[playAlarmSound]"
-
-    invoke-static {v2, v3}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 203
-    iget-object v2, p0, Lba/vaktija/android/AlarmActivity;->mPrefs:Landroid/content/SharedPreferences;
-
-    const-string v3, "alarmToneUri"
-
-    .line 205
-    invoke-static {p0, v5}, Lba/vaktija/android/prefs/Defaults;->getDefaultTone(Landroid/content/Context;Z)Ljava/lang/String;
-
-    move-result-object v4
-
-    .line 203
-    invoke-interface {v2, v3, v4}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v0
-
-    .line 207
-    .local v0, "selectedAlarmTonePath":Ljava/lang/String;
-    iget-object v2, p0, Lba/vaktija/android/AlarmActivity;->mPrefs:Landroid/content/SharedPreferences;
-
-    const-string v3, "useVaktijaAlarmTone"
-
-    invoke-interface {v2, v3, v5}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
-
-    move-result v2
-
-    if-eqz v2, :cond_0
-
-    .line 208
-    invoke-static {p0, v5}, Lba/vaktija/android/prefs/Defaults;->getDefaultTone(Landroid/content/Context;Z)Ljava/lang/String;
-
-    move-result-object v0
-
-    .line 211
-    :cond_0
-    sget-object v2, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    new-instance v3, Ljava/lang/StringBuilder;
-
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v4, "selected alarm tone path: "
-
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-static {v2, v3}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 213
-    invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
-
-    move-result-object v1
-
-    .line 215
-    .local v1, "soundUri":Landroid/net/Uri;
-    sget-object v2, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    new-instance v3, Ljava/lang/StringBuilder;
-
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v4, "sound uri: "
-
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v1}, Landroid/net/Uri;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-static {v2, v3}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 217
-    new-instance v2, Landroid/media/MediaPlayer;
-
-    invoke-direct {v2}, Landroid/media/MediaPlayer;-><init>()V
-
-    iput-object v2, p0, Lba/vaktija/android/AlarmActivity;->mMediaPlayer:Landroid/media/MediaPlayer;
-
-    .line 218
-    iget-object v2, p0, Lba/vaktija/android/AlarmActivity;->mMediaPlayer:Landroid/media/MediaPlayer;
-
-    invoke-virtual {v2, p0}, Landroid/media/MediaPlayer;->setOnPreparedListener(Landroid/media/MediaPlayer$OnPreparedListener;)V
-
-    .line 219
-    iget-object v2, p0, Lba/vaktija/android/AlarmActivity;->mMediaPlayer:Landroid/media/MediaPlayer;
-
-    invoke-virtual {v2, p0, v1}, Landroid/media/MediaPlayer;->setDataSource(Landroid/content/Context;Landroid/net/Uri;)V
-
-    .line 220
-    iget-object v2, p0, Lba/vaktija/android/AlarmActivity;->mMediaPlayer:Landroid/media/MediaPlayer;
-
-    const/4 v3, 0x4
-
-    invoke-virtual {v2, v3}, Landroid/media/MediaPlayer;->setAudioStreamType(I)V
-
-    .line 221
-    iget-object v2, p0, Lba/vaktija/android/AlarmActivity;->mMediaPlayer:Landroid/media/MediaPlayer;
-
-    invoke-virtual {v2, v5}, Landroid/media/MediaPlayer;->setLooping(Z)V
-
-    .line 222
-    iget-object v2, p0, Lba/vaktija/android/AlarmActivity;->mMediaPlayer:Landroid/media/MediaPlayer;
-
-    invoke-virtual {v2}, Landroid/media/MediaPlayer;->prepareAsync()V
-
-    .line 223
     return-void
 .end method
 
 .method rescheduleAlarm()V
-    .locals 11
+    .locals 8
 
-    .prologue
-    const/4 v10, 0x0
+    .line 206
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->app:Lba/vaktija/android/App;
 
-    .line 291
-    iget-object v3, p0, Lba/vaktija/android/AlarmActivity;->mApp:Lba/vaktija/android/App;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    const-string v6, "Alarm rescheduled"
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    new-instance v7, Ljava/lang/StringBuilder;
+    const-string v2, "Rescheduled for "
 
-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const-string v8, "Rescheduled for "
+    iget-object v2, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
 
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    iget-object v8, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-virtual {v3, v6, v7}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 293
-    iget-object v3, p0, Lba/vaktija/android/AlarmActivity;->mPrefs:Landroid/content/SharedPreferences;
-
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, "ALARM_RESCHEDULED_ONCE_"
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    iget-object v7, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v7
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-interface {v3, v6, v10}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
-
-    move-result v0
-
-    .line 295
-    .local v0, "alreadyResheduled":Z
-    if-eqz v0, :cond_0
-
-    .line 296
-    iget-object v3, p0, Lba/vaktija/android/AlarmActivity;->mPrefs:Landroid/content/SharedPreferences;
-
-    invoke-interface {v3}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v3
-
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, "ALARM_RESCHEDULED_ONCE_"
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    iget-object v7, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v7
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-interface {v3, v6, v10}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v3
-
-    invoke-interface {v3}, Landroid/content/SharedPreferences$Editor;->commit()Z
-
-    .line 310
-    :goto_0
-    return-void
-
-    .line 300
-    :cond_0
-    invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
-
-    move-result-object v3
-
-    invoke-static {v3}, Ljava/util/Calendar;->getInstance(Ljava/util/Locale;)Ljava/util/Calendar;
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
     move-result-object v2
 
-    .line 301
-    .local v2, "cal":Ljava/util/Calendar;
-    const-string v3, "alarm"
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p0, v3}, Lba/vaktija/android/AlarmActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    const-string v2, "Alarm rescheduled"
+
+    invoke-virtual {v0, v2, v1}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 208
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->preferences:Landroid/content/SharedPreferences;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "ALARM_RESCHEDULED_ONCE_"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v3, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v3
+
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    const/4 v3, 0x0
+
+    invoke-interface {v0, v1, v3}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    .line 211
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->preferences:Landroid/content/SharedPreferences;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v2, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-interface {v0, v1, v3}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+
+    .line 215
+    :cond_0
+    invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/util/Calendar;->getInstance(Ljava/util/Locale;)Ljava/util/Calendar;
+
+    move-result-object v0
+
+    const-string v1, "alarm"
+
+    .line 216
+    invoke-virtual {p0, v1}, Lba/vaktija/android/AlarmActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object v1
 
     check-cast v1, Landroid/app/AlarmManager;
 
-    .line 303
-    .local v1, "am":Landroid/app/AlarmManager;
-    invoke-virtual {v2}, Ljava/util/Calendar;->getTimeInMillis()J
-
-    move-result-wide v6
-
-    const-wide/32 v8, 0x493e0
-
-    add-long v4, v6, v8
-
-    .line 305
-    .local v4, "triggerAtMillis":J
-    iget-object v3, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-static {p0, v3}, Lba/vaktija/android/models/Prayer;->getAlarmPendingIntent(Landroid/content/Context;Lba/vaktija/android/models/Prayer;)Landroid/app/PendingIntent;
-
-    move-result-object v3
-
-    invoke-virtual {v1, v10, v4, v5, v3}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
-
-    .line 306
-    iget-object v3, p0, Lba/vaktija/android/AlarmActivity;->mPrefs:Landroid/content/SharedPreferences;
-
-    invoke-interface {v3}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v3
-
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, "ALARM_RESCHEDULED_ONCE_"
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    iget-object v7, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v7
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    const/4 v7, 0x1
-
-    invoke-interface {v3, v6, v7}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v3
-
-    invoke-interface {v3}, Landroid/content/SharedPreferences$Editor;->commit()Z
-
-    .line 307
-    sget-object v3, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, "alarm resheduled at "
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    new-instance v7, Ljava/util/Date;
-
-    invoke-direct {v7, v4, v5}, Ljava/util/Date;-><init>(J)V
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-static {v3, v6}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 309
-    iget-object v3, p0, Lba/vaktija/android/AlarmActivity;->mWakeLock:Landroid/os/PowerManager$WakeLock;
-
-    invoke-virtual {v3}, Landroid/os/PowerManager$WakeLock;->release()V
-
-    goto :goto_0
-.end method
-
-.method showAlarmMissedNotification()V
-    .locals 11
-
-    .prologue
-    const/4 v10, 0x4
-
-    const/4 v9, 0x0
-
-    const/4 v8, 0x1
-
-    .line 371
-    sget-object v3, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
-
-    const-string v4, "[showAlarmMissedNotification]"
-
-    invoke-static {v3, v4}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 372
-    new-instance v0, Landroid/content/Intent;
-
-    const-class v3, Lba/vaktija/android/MainActivity;
-
-    invoke-direct {v0, p0, v3}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
-
-    .line 375
-    .local v0, "intent":Landroid/content/Intent;
-    invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
+    .line 218
+    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
 
     move-result-wide v4
 
-    long-to-int v3, v4
+    const-wide/32 v6, 0x493e0
 
-    const/high16 v4, 0x8000000
+    add-long/2addr v4, v6
 
-    .line 373
-    invoke-static {p0, v3, v0, v4}, Landroid/app/PendingIntent;->getActivity(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
+    .line 220
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-static {p0, v0}, Lba/vaktija/android/models/Prayer;->getAlarmPendingIntent(Landroid/content/Context;Lba/vaktija/android/models/Prayer;)Landroid/app/PendingIntent;
+
+    move-result-object v0
+
+    invoke-virtual {v1, v3, v4, v5, v0}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
+
+    .line 221
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->preferences:Landroid/content/SharedPreferences;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v2, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    const/4 v2, 0x1
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    .line 222
+    sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "alarm resheduled at "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    new-instance v2, Ljava/util/Date;
+
+    invoke-direct {v2, v4, v5}, Ljava/util/Date;-><init>(J)V
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 224
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->wakeLock:Landroid/os/PowerManager$WakeLock;
+
+    invoke-virtual {v0}, Landroid/os/PowerManager$WakeLock;->release()V
+
+    return-void
+.end method
+
+.method showAlarmMissedNotification()V
+    .locals 9
+
+    .line 279
+    sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
+
+    const-string v1, "[showAlarmMissedNotification]"
+
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 280
+    new-instance v0, Landroid/content/Intent;
+
+    const-class v1, Lba/vaktija/android/MainActivity;
+
+    invoke-direct {v0, p0, v1}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
+
+    .line 283
+    invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
+
+    move-result-wide v1
+
+    long-to-int v2, v1
+
+    const/high16 v1, 0x8000000
+
+    .line 281
+    invoke-static {p0, v2, v0, v1}, Landroid/app/PendingIntent;->getActivity(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
+
+    move-result-object v0
+
+    .line 287
+    new-instance v1, Landroidx/core/app/NotificationCompat$Builder;
+
+    const-string v2, "ALARMS_CHANNEL_3"
+
+    invoke-direct {v1, p0, v2}, Landroidx/core/app/NotificationCompat$Builder;-><init>(Landroid/content/Context;Ljava/lang/String;)V
+
+    const v2, 0x7f070091
+
+    .line 289
+    invoke-virtual {v1, v2}, Landroidx/core/app/NotificationCompat$Builder;->setSmallIcon(I)Landroidx/core/app/NotificationCompat$Builder;
 
     move-result-object v2
 
-    .line 379
-    .local v2, "pIntent":Landroid/app/PendingIntent;
-    new-instance v1, Landroid/support/v4/app/NotificationCompat$Builder;
+    const/4 v3, 0x1
 
-    invoke-direct {v1, p0}, Landroid/support/v4/app/NotificationCompat$Builder;-><init>(Landroid/content/Context;)V
+    .line 290
+    invoke-virtual {v2, v3}, Landroidx/core/app/NotificationCompat$Builder;->setOnlyAlertOnce(Z)Landroidx/core/app/NotificationCompat$Builder;
 
-    .line 380
-    .local v1, "notifBuilder":Landroid/support/v4/app/NotificationCompat$Builder;
-    const v3, 0x7f02006e
+    move-result-object v2
 
-    .line 381
-    invoke-virtual {v1, v3}, Landroid/support/v4/app/NotificationCompat$Builder;->setSmallIcon(I)Landroid/support/v4/app/NotificationCompat$Builder;
+    const/4 v4, 0x0
 
-    move-result-object v3
+    .line 291
+    invoke-virtual {v2, v4}, Landroidx/core/app/NotificationCompat$Builder;->setOngoing(Z)Landroidx/core/app/NotificationCompat$Builder;
 
-    .line 382
-    invoke-virtual {v3, v8}, Landroid/support/v4/app/NotificationCompat$Builder;->setOnlyAlertOnce(Z)Landroid/support/v4/app/NotificationCompat$Builder;
+    move-result-object v2
 
-    move-result-object v3
+    .line 292
+    invoke-virtual {v2, v0}, Landroidx/core/app/NotificationCompat$Builder;->setContentIntent(Landroid/app/PendingIntent;)Landroidx/core/app/NotificationCompat$Builder;
 
-    .line 383
-    invoke-virtual {v3, v9}, Landroid/support/v4/app/NotificationCompat$Builder;->setOngoing(Z)Landroid/support/v4/app/NotificationCompat$Builder;
+    move-result-object v0
 
-    move-result-object v3
+    .line 293
+    invoke-virtual {v0, v3}, Landroidx/core/app/NotificationCompat$Builder;->setVisibility(I)Landroidx/core/app/NotificationCompat$Builder;
 
-    .line 384
-    invoke-virtual {v3, v2}, Landroid/support/v4/app/NotificationCompat$Builder;->setContentIntent(Landroid/app/PendingIntent;)Landroid/support/v4/app/NotificationCompat$Builder;
+    move-result-object v0
 
-    move-result-object v3
+    const/4 v2, -0x1
 
-    .line 385
-    invoke-virtual {v3, v8}, Landroid/support/v4/app/NotificationCompat$Builder;->setVisibility(I)Landroid/support/v4/app/NotificationCompat$Builder;
+    .line 294
+    invoke-virtual {v0, v2}, Landroidx/core/app/NotificationCompat$Builder;->setDefaults(I)Landroidx/core/app/NotificationCompat$Builder;
 
-    move-result-object v3
+    move-result-object v0
 
-    const/4 v4, -0x1
+    new-array v2, v3, [Ljava/lang/Object;
 
-    .line 386
-    invoke-virtual {v3, v4}, Landroid/support/v4/app/NotificationCompat$Builder;->setDefaults(I)Landroid/support/v4/app/NotificationCompat$Builder;
+    new-instance v5, Ljava/lang/StringBuilder;
 
-    move-result-object v3
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
 
-    const v4, 0x7f070018
+    const-string v6, " "
 
-    new-array v5, v8, [Ljava/lang/Object;
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    new-instance v6, Ljava/lang/StringBuilder;
+    iget-object v7, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
 
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, " "
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    iget-object v7, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    .line 391
+    .line 299
     invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getId()I
 
     move-result v7
 
-    .line 390
-    invoke-static {v7, v10}, Lba/vaktija/android/util/FormattingUtils;->getCaseTitle(II)Ljava/lang/String;
+    const/4 v8, 0x4
+
+    .line 298
+    invoke-static {v7, v8}, Lba/vaktija/android/util/FormattingUtils;->getCaseTitle(II)Ljava/lang/String;
 
     move-result-object v7
 
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v5, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    aput-object v6, v5, v9
-
-    .line 388
-    invoke-virtual {p0, v4, v5}, Lba/vaktija/android/AlarmActivity;->getString(I[Ljava/lang/Object;)Ljava/lang/String;
-
-    move-result-object v4
-
-    .line 387
-    invoke-virtual {v3, v4}, Landroid/support/v4/app/NotificationCompat$Builder;->setTicker(Ljava/lang/CharSequence;)Landroid/support/v4/app/NotificationCompat$Builder;
-
-    move-result-object v3
-
-    const v4, 0x7f070017
-
-    .line 394
-    invoke-virtual {p0, v4}, Lba/vaktija/android/AlarmActivity;->getString(I)Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-virtual {v3, v4}, Landroid/support/v4/app/NotificationCompat$Builder;->setContentTitle(Ljava/lang/CharSequence;)Landroid/support/v4/app/NotificationCompat$Builder;
-
-    move-result-object v3
-
-    const v4, 0x7f070016
-
-    new-array v5, v8, [Ljava/lang/Object;
-
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, " "
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    iget-object v7, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    .line 397
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v7
-
-    .line 396
-    invoke-static {v7, v10}, Lba/vaktija/android/util/FormattingUtils;->getCaseTitle(II)Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    aput-object v6, v5, v9
-
-    .line 395
-    invoke-virtual {p0, v4, v5}, Lba/vaktija/android/AlarmActivity;->getString(I[Ljava/lang/Object;)Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-virtual {v3, v4}, Landroid/support/v4/app/NotificationCompat$Builder;->setContentText(Ljava/lang/CharSequence;)Landroid/support/v4/app/NotificationCompat$Builder;
-
-    .line 400
-    iget-object v3, p0, Lba/vaktija/android/AlarmActivity;->mNotificationManager:Landroid/app/NotificationManager;
-
-    const/16 v4, 0x921
-
-    invoke-virtual {v1}, Landroid/support/v4/app/NotificationCompat$Builder;->build()Landroid/app/Notification;
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v5
 
-    invoke-virtual {v3, v4, v5}, Landroid/app/NotificationManager;->notify(ILandroid/app/Notification;)V
+    aput-object v5, v2, v4
 
-    .line 401
+    const v5, 0x7f0f0021
+
+    .line 296
+    invoke-virtual {p0, v5, v2}, Lba/vaktija/android/AlarmActivity;->getString(I[Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 295
+    invoke-virtual {v0, v2}, Landroidx/core/app/NotificationCompat$Builder;->setTicker(Ljava/lang/CharSequence;)Landroidx/core/app/NotificationCompat$Builder;
+
+    move-result-object v0
+
+    const v2, 0x7f0f0020
+
+    .line 302
+    invoke-virtual {p0, v2}, Lba/vaktija/android/AlarmActivity;->getString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v0, v2}, Landroidx/core/app/NotificationCompat$Builder;->setContentTitle(Ljava/lang/CharSequence;)Landroidx/core/app/NotificationCompat$Builder;
+
+    move-result-object v0
+
+    new-array v2, v3, [Ljava/lang/Object;
+
+    new-instance v3, Ljava/lang/StringBuilder;
+
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v3, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
+
+    .line 305
+    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v5
+
+    .line 304
+    invoke-static {v5, v8}, Lba/vaktija/android/util/FormattingUtils;->getCaseTitle(II)Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v3
+
+    aput-object v3, v2, v4
+
+    const v3, 0x7f0f001f
+
+    .line 303
+    invoke-virtual {p0, v3, v2}, Lba/vaktija/android/AlarmActivity;->getString(I[Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v0, v2}, Landroidx/core/app/NotificationCompat$Builder;->setContentText(Ljava/lang/CharSequence;)Landroidx/core/app/NotificationCompat$Builder;
+
+    .line 308
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->notificationManager:Landroid/app/NotificationManager;
+
+    invoke-virtual {v1}, Landroidx/core/app/NotificationCompat$Builder;->build()Landroid/app/Notification;
+
+    move-result-object v1
+
+    const/16 v2, 0x921
+
+    invoke-virtual {v0, v2, v1}, Landroid/app/NotificationManager;->notify(ILandroid/app/Notification;)V
+
     return-void
 .end method
 
 .method showNotification()V
-    .locals 8
+    .locals 6
 
-    .prologue
-    const/4 v7, 0x0
+    .line 256
+    sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
 
-    const/4 v6, 0x1
+    const-string v1, "[showNotification]"
 
-    .line 348
-    sget-object v3, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    const-string v4, "[showNotification]"
-
-    invoke-static {v3, v4}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 349
+    .line 257
     new-instance v0, Landroid/content/Intent;
 
-    const-class v3, Lba/vaktija/android/AlarmActivity;
+    const-class v1, Lba/vaktija/android/AlarmActivity;
 
-    invoke-direct {v0, p0, v3}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
+    invoke-direct {v0, p0, v1}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
 
-    .line 352
-    .local v0, "intent":Landroid/content/Intent;
+    .line 260
     invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
 
-    move-result-wide v4
+    move-result-wide v1
 
-    long-to-int v3, v4
+    long-to-int v2, v1
 
-    const/high16 v4, 0x8000000
+    const/high16 v1, 0x8000000
 
-    .line 350
-    invoke-static {p0, v3, v0, v4}, Landroid/app/PendingIntent;->getActivity(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
+    .line 258
+    invoke-static {p0, v2, v0, v1}, Landroid/app/PendingIntent;->getActivity(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
+
+    move-result-object v0
+
+    .line 264
+    new-instance v1, Landroidx/core/app/NotificationCompat$Builder;
+
+    const-string v2, "ALARMS_CHANNEL_3"
+
+    invoke-direct {v1, p0, v2}, Landroidx/core/app/NotificationCompat$Builder;-><init>(Landroid/content/Context;Ljava/lang/String;)V
+
+    const v2, 0x7f07008d
+
+    .line 266
+    invoke-virtual {v1, v2}, Landroidx/core/app/NotificationCompat$Builder;->setSmallIcon(I)Landroidx/core/app/NotificationCompat$Builder;
 
     move-result-object v2
 
-    .line 356
-    .local v2, "pIntent":Landroid/app/PendingIntent;
-    new-instance v1, Landroid/support/v4/app/NotificationCompat$Builder;
+    const/4 v3, 0x1
 
-    invoke-direct {v1, p0}, Landroid/support/v4/app/NotificationCompat$Builder;-><init>(Landroid/content/Context;)V
+    .line 267
+    invoke-virtual {v2, v3}, Landroidx/core/app/NotificationCompat$Builder;->setOnlyAlertOnce(Z)Landroidx/core/app/NotificationCompat$Builder;
 
-    .line 357
-    .local v1, "notifBuilder":Landroid/support/v4/app/NotificationCompat$Builder;
-    const v3, 0x7f02006a
+    move-result-object v2
 
-    .line 358
-    invoke-virtual {v1, v3}, Landroid/support/v4/app/NotificationCompat$Builder;->setSmallIcon(I)Landroid/support/v4/app/NotificationCompat$Builder;
+    .line 268
+    invoke-virtual {v2, v3}, Landroidx/core/app/NotificationCompat$Builder;->setOngoing(Z)Landroidx/core/app/NotificationCompat$Builder;
 
-    move-result-object v3
+    move-result-object v2
 
-    .line 359
-    invoke-virtual {v3, v6}, Landroid/support/v4/app/NotificationCompat$Builder;->setOnlyAlertOnce(Z)Landroid/support/v4/app/NotificationCompat$Builder;
+    .line 269
+    invoke-virtual {v2, v0}, Landroidx/core/app/NotificationCompat$Builder;->setContentIntent(Landroid/app/PendingIntent;)Landroidx/core/app/NotificationCompat$Builder;
 
-    move-result-object v3
+    move-result-object v0
 
-    .line 360
-    invoke-virtual {v3, v6}, Landroid/support/v4/app/NotificationCompat$Builder;->setOngoing(Z)Landroid/support/v4/app/NotificationCompat$Builder;
+    .line 270
+    invoke-virtual {v0, v3}, Landroidx/core/app/NotificationCompat$Builder;->setVisibility(I)Landroidx/core/app/NotificationCompat$Builder;
 
-    move-result-object v3
+    move-result-object v0
 
-    .line 361
-    invoke-virtual {v3, v2}, Landroid/support/v4/app/NotificationCompat$Builder;->setContentIntent(Landroid/app/PendingIntent;)Landroid/support/v4/app/NotificationCompat$Builder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    move-result-object v3
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    .line 362
-    invoke-virtual {v3, v6}, Landroid/support/v4/app/NotificationCompat$Builder;->setVisibility(I)Landroid/support/v4/app/NotificationCompat$Builder;
+    iget-object v3, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
+
+    .line 271
+    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
     move-result-object v3
 
-    new-instance v4, Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
+    const-string v3, " je za "
 
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 363
-    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+    iget-object v4, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
 
-    move-result-object v5
+    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
 
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    const-string v5, " je za "
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
-
-    move-result v5
+    move-result v4
 
     invoke-static {}, Lba/vaktija/android/util/Utils;->getCurrentTimeSec()I
 
-    move-result v6
-
-    sub-int/2addr v5, v6
-
-    invoke-static {v5, v7}, Lba/vaktija/android/util/FormattingUtils;->getTimeString(IZ)Ljava/lang/String;
-
-    move-result-object v5
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-virtual {v3, v4}, Landroid/support/v4/app/NotificationCompat$Builder;->setTicker(Ljava/lang/CharSequence;)Landroid/support/v4/app/NotificationCompat$Builder;
-
-    move-result-object v3
-
-    const v4, 0x7f070014
-
-    .line 364
-    invoke-virtual {p0, v4}, Lba/vaktija/android/AlarmActivity;->getString(I)Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-virtual {v3, v4}, Landroid/support/v4/app/NotificationCompat$Builder;->setContentTitle(Ljava/lang/CharSequence;)Landroid/support/v4/app/NotificationCompat$Builder;
-
-    move-result-object v3
-
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    .line 365
-    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v5
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    const-string v5, " je za "
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    iget-object v5, p0, Lba/vaktija/android/AlarmActivity;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
-
     move-result v5
+
+    sub-int/2addr v4, v5
+
+    invoke-static {v4}, Lba/vaktija/android/util/FormattingUtils;->getTimeString(I)Ljava/lang/String;
+
+    move-result-object v4
+
+    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v0, v2}, Landroidx/core/app/NotificationCompat$Builder;->setTicker(Ljava/lang/CharSequence;)Landroidx/core/app/NotificationCompat$Builder;
+
+    move-result-object v0
+
+    const v2, 0x7f0f001d
+
+    .line 272
+    invoke-virtual {p0, v2}, Lba/vaktija/android/AlarmActivity;->getString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v0, v2}, Landroidx/core/app/NotificationCompat$Builder;->setContentTitle(Ljava/lang/CharSequence;)Landroidx/core/app/NotificationCompat$Builder;
+
+    move-result-object v0
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    iget-object v4, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
+
+    .line 273
+    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object v4
+
+    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v3, p0, Lba/vaktija/android/AlarmActivity;->prayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
+
+    move-result v3
 
     invoke-static {}, Lba/vaktija/android/util/Utils;->getCurrentTimeSec()I
 
-    move-result v6
+    move-result v4
 
-    sub-int/2addr v5, v6
+    sub-int/2addr v3, v4
 
-    invoke-static {v5, v7}, Lba/vaktija/android/util/FormattingUtils;->getTimeString(IZ)Ljava/lang/String;
+    invoke-static {v3}, Lba/vaktija/android/util/FormattingUtils;->getTimeString(I)Ljava/lang/String;
 
-    move-result-object v5
+    move-result-object v3
 
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v4
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v2
 
-    move-result-object v4
+    invoke-virtual {v0, v2}, Landroidx/core/app/NotificationCompat$Builder;->setContentText(Ljava/lang/CharSequence;)Landroidx/core/app/NotificationCompat$Builder;
 
-    invoke-virtual {v3, v4}, Landroid/support/v4/app/NotificationCompat$Builder;->setContentText(Ljava/lang/CharSequence;)Landroid/support/v4/app/NotificationCompat$Builder;
+    .line 275
+    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->notificationManager:Landroid/app/NotificationManager;
 
-    .line 367
-    iget-object v3, p0, Lba/vaktija/android/AlarmActivity;->mNotificationManager:Landroid/app/NotificationManager;
+    invoke-virtual {v1}, Landroidx/core/app/NotificationCompat$Builder;->build()Landroid/app/Notification;
 
-    const/16 v4, 0x539
+    move-result-object v1
 
-    invoke-virtual {v1}, Landroid/support/v4/app/NotificationCompat$Builder;->build()Landroid/app/Notification;
+    const/16 v2, 0x539
 
-    move-result-object v5
+    invoke-virtual {v0, v2, v1}, Landroid/app/NotificationManager;->notify(ILandroid/app/Notification;)V
 
-    invoke-virtual {v3, v4, v5}, Landroid/app/NotificationManager;->notify(ILandroid/app/Notification;)V
-
-    .line 368
     return-void
 .end method
 
 .method startCountDownTimer()V
-    .locals 6
+    .locals 8
 
-    .prologue
-    .line 259
+    .line 181
     sget-object v0, Lba/vaktija/android/AlarmActivity;->TAG:Ljava/lang/String;
 
     const-string v1, "[startCountDownTimer]"
 
     invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 261
-    new-instance v0, Lba/vaktija/android/AlarmActivity$2;
+    .line 183
+    new-instance v0, Lba/vaktija/android/AlarmActivity$1;
 
-    const-wide/32 v2, 0x1d4c0
+    const-wide/32 v4, 0x1d4c0
 
-    const-wide/16 v4, 0x3e8
+    const-wide/16 v6, 0x3e8
 
-    move-object v1, p0
+    move-object v2, v0
 
-    invoke-direct/range {v0 .. v5}, Lba/vaktija/android/AlarmActivity$2;-><init>(Lba/vaktija/android/AlarmActivity;JJ)V
+    move-object v3, p0
 
-    iput-object v0, p0, Lba/vaktija/android/AlarmActivity;->mAlarmTimer:Landroid/os/CountDownTimer;
+    invoke-direct/range {v2 .. v7}, Lba/vaktija/android/AlarmActivity$1;-><init>(Lba/vaktija/android/AlarmActivity;JJ)V
 
-    .line 278
-    iget-object v0, p0, Lba/vaktija/android/AlarmActivity;->mAlarmTimer:Landroid/os/CountDownTimer;
+    iput-object v0, p0, Lba/vaktija/android/AlarmActivity;->countDownTimer:Landroid/os/CountDownTimer;
 
+    .line 201
     invoke-virtual {v0}, Landroid/os/CountDownTimer;->start()Landroid/os/CountDownTimer;
 
-    .line 279
     return-void
 .end method

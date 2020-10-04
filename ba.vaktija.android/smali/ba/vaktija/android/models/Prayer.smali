@@ -14,8 +14,7 @@
 .field public static final CREATOR:Landroid/os/Parcelable$Creator;
     .annotation system Ldalvik/annotation/Signature;
         value = {
-            "Landroid/os/Parcelable$Creator",
-            "<",
+            "Landroid/os/Parcelable$Creator<",
             "Lba/vaktija/android/models/Prayer;",
             ">;"
         }
@@ -123,8 +122,7 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
-    .line 34
+    .line 36
     const-class v0, Lba/vaktija/android/models/Prayer;
 
     invoke-virtual {v0}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
@@ -133,7 +131,7 @@
 
     sput-object v0, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
 
-    .line 91
+    .line 46
     new-instance v0, Lba/vaktija/android/models/Prayer$1;
 
     invoke-direct {v0}, Lba/vaktija/android/models/Prayer$1;-><init>()V
@@ -146,92 +144,83 @@
 .method public constructor <init>()V
     .locals 3
 
-    .prologue
-    const/4 v1, 0x1
-
-    .line 141
+    .line 140
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 69
     const/4 v0, -0x1
 
+    .line 79
     iput v0, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    .line 76
     const-string v0, ""
 
+    .line 86
     iput-object v0, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
 
-    .line 82
-    const-string v0, ""
-
+    .line 92
     iput-object v0, p0, Lba/vaktija/android/models/Prayer;->notifSound:Ljava/lang/String;
 
-    .line 83
-    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
+    const/4 v0, 0x1
 
-    .line 84
-    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
+    .line 93
+    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
 
-    .line 89
+    .line 94
+    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
+
+    .line 99
     new-instance v0, Ljava/text/SimpleDateFormat;
-
-    const-string v1, "HH\'h\' mm\'m\'"
 
     invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
 
-    move-result-object v2
+    move-result-object v1
 
-    invoke-direct {v0, v1, v2}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;Ljava/util/Locale;)V
+    const-string v2, "HH\'h\' mm\'m\'"
+
+    invoke-direct {v0, v2, v1}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;Ljava/util/Locale;)V
 
     iput-object v0, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
 
-    .line 141
     return-void
 .end method
 
 .method public constructor <init>(II)V
     .locals 3
-    .param p1, "time"    # I
-    .param p2, "prayerTimeId"    # I
-
-    .prologue
-    const/4 v1, 0x1
 
     .line 143
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 69
     const/4 v0, -0x1
 
+    .line 79
     iput v0, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    .line 76
     const-string v0, ""
 
+    .line 86
     iput-object v0, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
 
-    .line 82
-    const-string v0, ""
-
+    .line 92
     iput-object v0, p0, Lba/vaktija/android/models/Prayer;->notifSound:Ljava/lang/String;
 
-    .line 83
-    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
+    const/4 v0, 0x1
 
-    .line 84
-    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
+    .line 93
+    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
 
-    .line 89
+    .line 94
+    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
+
+    .line 99
     new-instance v0, Ljava/text/SimpleDateFormat;
-
-    const-string v1, "HH\'h\' mm\'m\'"
 
     invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
 
-    move-result-object v2
+    move-result-object v1
 
-    invoke-direct {v0, v1, v2}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;Ljava/util/Locale;)V
+    const-string v2, "HH\'h\' mm\'m\'"
+
+    invoke-direct {v0, v2, v1}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;Ljava/util/Locale;)V
 
     iput-object v0, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
 
@@ -246,17 +235,11 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     const-string v2, ", time: "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-static {p1}, Lba/vaktija/android/util/FormattingUtils;->getTimeStringDots(I)Ljava/lang/String;
 
@@ -264,13 +247,9 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     const-string v2, "]"
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -290,317 +269,295 @@
     .line 150
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->initFromPreference()V
 
-    .line 151
     return-void
 .end method
 
 .method public constructor <init>(Landroid/os/Parcel;)V
-    .locals 5
-    .param p1, "in"    # Landroid/os/Parcel;
+    .locals 4
 
-    .prologue
-    const/4 v2, 0x0
-
-    const/4 v1, 0x1
-
-    .line 101
+    .line 102
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 69
     const/4 v0, -0x1
 
+    .line 79
     iput v0, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    .line 76
     const-string v0, ""
 
+    .line 86
     iput-object v0, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
 
-    .line 82
-    const-string v0, ""
-
+    .line 92
     iput-object v0, p0, Lba/vaktija/android/models/Prayer;->notifSound:Ljava/lang/String;
 
-    .line 83
-    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
+    const/4 v0, 0x1
 
-    .line 84
-    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
+    .line 93
+    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
 
-    .line 89
-    new-instance v0, Ljava/text/SimpleDateFormat;
+    .line 94
+    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
 
-    const-string v3, "HH\'h\' mm\'m\'"
+    .line 99
+    new-instance v1, Ljava/text/SimpleDateFormat;
 
     invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
 
-    move-result-object v4
+    move-result-object v2
 
-    invoke-direct {v0, v3, v4}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;Ljava/util/Locale;)V
+    const-string v3, "HH\'h\' mm\'m\'"
 
-    iput-object v0, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
+    invoke-direct {v1, v3, v2}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;Ljava/util/Locale;)V
 
-    .line 102
-    invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
-
-    move-result v0
-
-    iput v0, p0, Lba/vaktija/android/models/Prayer;->id:I
+    iput-object v1, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
 
     .line 103
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    if-ne v0, v1, :cond_0
-
-    move v0, v1
-
-    :goto_0
-    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
+    iput v1, p0, Lba/vaktija/android/models/Prayer;->id:I
 
     .line 104
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    if-ne v0, v1, :cond_1
+    const/4 v2, 0x0
 
-    move v0, v1
+    if-ne v1, v0, :cond_0
 
-    :goto_1
-    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
+    const/4 v1, 0x1
+
+    goto :goto_0
+
+    :cond_0
+    const/4 v1, 0x0
+
+    :goto_0
+    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
 
     .line 105
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    if-ne v0, v1, :cond_2
+    if-ne v1, v0, :cond_1
 
-    move v0, v1
+    const/4 v1, 0x1
 
-    :goto_2
-    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->alarmOn:Z
+    goto :goto_1
+
+    :cond_1
+    const/4 v1, 0x0
+
+    :goto_1
+    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
 
     .line 106
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    if-ne v0, v1, :cond_3
+    if-ne v1, v0, :cond_2
 
-    move v0, v1
+    const/4 v1, 0x1
 
-    :goto_3
-    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->silentOn:Z
+    goto :goto_2
+
+    :cond_2
+    const/4 v1, 0x0
+
+    :goto_2
+    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->alarmOn:Z
 
     .line 107
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    iput v0, p0, Lba/vaktija/android/models/Prayer;->alarmMins:I
+    if-ne v1, v0, :cond_3
+
+    const/4 v1, 0x1
+
+    goto :goto_3
+
+    :cond_3
+    const/4 v1, 0x0
+
+    :goto_3
+    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->silentOn:Z
 
     .line 108
-    invoke-virtual {p1}, Landroid/os/Parcel;->readString()Ljava/lang/String;
-
-    move-result-object v0
-
-    iput-object v0, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
-
-    .line 109
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    iput v0, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
+    iput v1, p0, Lba/vaktija/android/models/Prayer;->alarmMins:I
+
+    .line 109
+    invoke-virtual {p1}, Landroid/os/Parcel;->readString()Ljava/lang/String;
+
+    move-result-object v1
+
+    iput-object v1, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
 
     .line 110
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    if-ne v0, v1, :cond_4
-
-    move v0, v1
-
-    :goto_4
-    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifOn:Z
+    iput v1, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
 
     .line 111
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    iput v0, p0, Lba/vaktija/android/models/Prayer;->notifMins:I
+    if-ne v1, v0, :cond_4
+
+    const/4 v1, 0x1
+
+    goto :goto_4
+
+    :cond_4
+    const/4 v1, 0x0
+
+    :goto_4
+    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifOn:Z
 
     .line 112
-    invoke-virtual {p1}, Landroid/os/Parcel;->readString()Ljava/lang/String;
-
-    move-result-object v0
-
-    iput-object v0, p0, Lba/vaktija/android/models/Prayer;->notifSound:Ljava/lang/String;
-
-    .line 113
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    if-ne v0, v1, :cond_5
+    iput v1, p0, Lba/vaktija/android/models/Prayer;->notifMins:I
 
-    move v0, v1
+    .line 113
+    invoke-virtual {p1}, Landroid/os/Parcel;->readString()Ljava/lang/String;
 
-    :goto_5
-    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
+    move-result-object v1
+
+    iput-object v1, p0, Lba/vaktija/android/models/Prayer;->notifSound:Ljava/lang/String;
 
     .line 114
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    if-ne v0, v1, :cond_6
+    if-ne v1, v0, :cond_5
 
-    move v0, v1
+    const/4 v1, 0x1
 
-    :goto_6
-    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
+    goto :goto_5
+
+    :cond_5
+    const/4 v1, 0x0
+
+    :goto_5
+    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
 
     .line 115
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    if-ne v0, v1, :cond_7
+    if-ne v1, v0, :cond_6
 
-    move v0, v1
+    const/4 v1, 0x1
 
-    :goto_7
-    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifLedOn:Z
+    goto :goto_6
+
+    :cond_6
+    const/4 v1, 0x0
+
+    :goto_6
+    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
 
     .line 116
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    if-ne v0, v1, :cond_8
+    if-ne v1, v0, :cond_7
 
-    move v0, v1
+    const/4 v1, 0x1
 
-    :goto_8
-    invoke-virtual {p0, v0}, Lba/vaktija/android/models/Prayer;->setNextNotifOff(Z)V
+    goto :goto_7
 
-    .line 118
+    :cond_7
+    const/4 v1, 0x0
+
+    :goto_7
+    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifLedOn:Z
+
+    .line 117
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    if-ne v0, v1, :cond_9
+    if-ne v1, v0, :cond_8
 
-    :goto_9
-    iput-boolean v1, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
+    const/4 v1, 0x1
+
+    goto :goto_8
+
+    :cond_8
+    const/4 v1, 0x0
+
+    :goto_8
+    invoke-virtual {p0, v1}, Lba/vaktija/android/models/Prayer;->setNextNotifOff(Z)V
 
     .line 119
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
-    move-result v0
+    move-result v1
 
-    iput v0, p0, Lba/vaktija/android/models/Prayer;->prayerTime:I
+    if-ne v1, v0, :cond_9
 
-    .line 121
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->initCalendar()V
-
-    .line 123
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->initFromPreference()V
-
-    .line 124
-    return-void
-
-    :cond_0
-    move v0, v2
-
-    .line 103
-    goto :goto_0
-
-    :cond_1
-    move v0, v2
-
-    .line 104
-    goto :goto_1
-
-    :cond_2
-    move v0, v2
-
-    .line 105
-    goto :goto_2
-
-    :cond_3
-    move v0, v2
-
-    .line 106
-    goto :goto_3
-
-    :cond_4
-    move v0, v2
-
-    .line 110
-    goto :goto_4
-
-    :cond_5
-    move v0, v2
-
-    .line 113
-    goto :goto_5
-
-    :cond_6
-    move v0, v2
-
-    .line 114
-    goto :goto_6
-
-    :cond_7
-    move v0, v2
-
-    .line 115
-    goto :goto_7
-
-    :cond_8
-    move v0, v2
-
-    .line 116
-    goto :goto_8
+    goto :goto_9
 
     :cond_9
-    move v1, v2
+    const/4 v0, 0x0
 
-    .line 118
-    goto :goto_9
+    :goto_9
+    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
+
+    .line 120
+    invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
+
+    move-result p1
+
+    iput p1, p0, Lba/vaktija/android/models/Prayer;->prayerTime:I
+
+    .line 122
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->initCalendar()V
+
+    .line 124
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->initFromPreference()V
+
+    return-void
 .end method
 
 .method public static getAlarmPendingIntent(Landroid/content/Context;Lba/vaktija/android/models/Prayer;)Landroid/app/PendingIntent;
     .locals 3
-    .param p0, "context"    # Landroid/content/Context;
-    .param p1, "prayer"    # Lba/vaktija/android/models/Prayer;
 
-    .prologue
-    .line 187
+    .line 128
     new-instance v0, Landroid/content/Intent;
 
-    const-class v1, Lba/vaktija/android/AlarmActivity;
+    const-class v1, Lba/vaktija/android/receiver/AlarmReceiver;
 
     invoke-direct {v0, p0, v1}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
 
-    .line 188
-    .local v0, "activateAlarm":Landroid/content/Intent;
+    .line 129
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "LAUNCH_ALARM_"
+    const-string v2, "AlarmReceiver.ACTION_SHOW_ALARM_"
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->getId()I
 
@@ -608,174 +565,146 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v1
 
     invoke-virtual {v0, v1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
 
-    .line 189
-    const-string v1, "EXTRA_PRAYER_ID"
-
+    .line 131
     invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->getId()I
 
-    move-result v2
+    move-result p1
 
-    invoke-virtual {v0, v1, v2}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
+    const-string v1, "EXTRA_PRAYER_ID"
 
-    .line 191
-    const/16 v1, 0x350b
+    invoke-virtual {v0, v1, p1}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
 
-    const/high16 v2, 0x10000000
+    const/16 p1, 0x350b
 
-    invoke-static {p0, v1, v0, v2}, Landroid/app/PendingIntent;->getActivity(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
+    const/high16 v1, 0x10000000
 
-    move-result-object v1
+    .line 133
+    invoke-static {p0, p1, v0, v1}, Landroid/app/PendingIntent;->getBroadcast(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
 
-    return-object v1
+    move-result-object p0
+
+    return-object p0
 .end method
 
 .method public static getNextVakatTitle(I)Ljava/lang/String;
-    .locals 5
-    .param p0, "currentVakatId"    # I
-
-    .prologue
-    const/4 v2, 0x1
-
-    .line 215
-    invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
-
-    move-result-object v3
-
-    invoke-static {v3}, Ljava/util/Calendar;->getInstance(Ljava/util/Locale;)Ljava/util/Calendar;
-
-    move-result-object v3
-
-    const/4 v4, 0x7
-
-    invoke-virtual {v3, v4}, Ljava/util/Calendar;->get(I)I
-
-    move-result v3
-
-    const/4 v4, 0x6
-
-    if-ne v3, v4, :cond_0
-
-    move v0, v2
-
-    .line 216
-    .local v0, "friday":Z
-    :goto_0
-    sget-object v3, Lba/vaktija/android/App;->prefs:Landroid/content/SharedPreferences;
-
-    const-string v4, "separateJumaSettings"
-
-    invoke-interface {v3, v4, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
-
-    move-result v1
+    .locals 4
 
     .line 218
-    .local v1, "respectJuma":Z
-    if-eqz v0, :cond_1
+    invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
 
-    if-eqz v1, :cond_1
+    move-result-object v0
 
-    if-ne p0, v2, :cond_1
+    invoke-static {v0}, Ljava/util/Calendar;->getInstance(Ljava/util/Locale;)Ljava/util/Calendar;
 
-    .line 219
-    const-string v2, "D\u017euma"
+    move-result-object v0
 
-    .line 237
-    :goto_1
-    return-object v2
+    const/4 v1, 0x7
 
-    .line 215
-    .end local v0    # "friday":Z
-    .end local v1    # "respectJuma":Z
-    :cond_0
-    const/4 v0, 0x0
+    invoke-virtual {v0, v1}, Ljava/util/Calendar;->get(I)I
+
+    move-result v0
+
+    const/4 v1, 0x1
+
+    const/4 v2, 0x6
+
+    if-ne v0, v2, :cond_0
+
+    const/4 v0, 0x1
 
     goto :goto_0
 
-    .line 221
-    .restart local v0    # "friday":Z
-    .restart local v1    # "respectJuma":Z
+    :cond_0
+    const/4 v0, 0x0
+
+    .line 219
+    :goto_0
+    sget-object v2, Lba/vaktija/android/App;->prefs:Landroid/content/SharedPreferences;
+
+    const-string v3, "separateJumaSettings"
+
+    invoke-interface {v2, v3, v1}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v2
+
+    if-eqz v0, :cond_1
+
+    if-eqz v2, :cond_1
+
+    if-ne p0, v1, :cond_1
+
+    const-string p0, "D\u017euma"
+
+    return-object p0
+
     :cond_1
     packed-switch p0, :pswitch_data_0
 
-    .line 237
-    const-string v2, ""
+    const-string p0, ""
 
-    goto :goto_1
+    return-object p0
 
-    .line 223
     :pswitch_0
-    const-string v2, "Izlazak Sunca"
+    const-string p0, "Zora"
 
-    goto :goto_1
+    return-object p0
 
-    .line 225
     :pswitch_1
-    const-string v2, "Podne"
+    const-string p0, "Jacija"
 
-    goto :goto_1
+    return-object p0
 
-    .line 228
     :pswitch_2
-    const-string v2, "Ikindija"
+    const-string p0, "Ak\u0161am"
 
-    goto :goto_1
+    return-object p0
 
-    .line 230
     :pswitch_3
-    const-string v2, "Ak\u0161am"
+    const-string p0, "Ikindija"
 
-    goto :goto_1
+    return-object p0
 
-    .line 232
     :pswitch_4
-    const-string v2, "Jacija"
+    const-string p0, "Podne"
 
-    goto :goto_1
+    return-object p0
 
-    .line 234
     :pswitch_5
-    const-string v2, "Zora"
+    const-string p0, "Izlazak sunca"
 
-    goto :goto_1
+    return-object p0
 
-    .line 221
     nop
 
     :pswitch_data_0
     .packed-switch 0x0
-        :pswitch_0
-        :pswitch_1
-        :pswitch_2
-        :pswitch_3
-        :pswitch_4
         :pswitch_5
+        :pswitch_4
+        :pswitch_3
         :pswitch_2
+        :pswitch_1
+        :pswitch_0
+        :pswitch_3
     .end packed-switch
 .end method
 
 .method public static getNotifPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
     .locals 3
-    .param p0, "context"    # Landroid/content/Context;
-    .param p1, "vakatId"    # I
 
-    .prologue
-    .line 199
-    const-string v1, "NotifPendingIntent"
+    const-string v0, "NotifPendingIntent"
 
-    invoke-static {p0, v1}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+    .line 202
+    invoke-static {p0, v0}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
 
     move-result-object v0
 
-    .line 200
-    .local v0, "notifIntent":Landroid/content/Intent;
+    .line 203
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -784,45 +713,37 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object p1
 
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+    invoke-virtual {v0, p1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
 
-    .line 202
-    const/16 v1, 0x6068
+    const/16 p1, 0x6068
 
-    const/high16 v2, 0x10000000
+    const/high16 v1, 0x10000000
 
-    invoke-static {p0, v1, v0, v2}, Landroid/app/PendingIntent;->getService(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
+    .line 205
+    invoke-static {p0, p1, v0, v1}, Landroid/app/PendingIntent;->getService(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
 
-    move-result-object v1
+    move-result-object p0
 
-    return-object v1
+    return-object p0
 .end method
 
 .method public static getPrayerChangePendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
     .locals 3
-    .param p0, "context"    # Landroid/content/Context;
-    .param p1, "vakatId"    # I
 
-    .prologue
+    const-string v0, "PrayerChangePendingIntent"
+
     .line 154
-    const-string v1, "PrayerChangePendingIntent"
-
-    invoke-static {p0, v1}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+    invoke-static {p0, v0}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
 
     move-result-object v0
 
     .line 155
-    .local v0, "vakatChangeIntent":Landroid/content/Intent;
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -831,45 +752,37 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object p1
 
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+    invoke-virtual {v0, p1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+
+    const p1, 0x15194
+
+    const/high16 v1, 0x10000000
 
     .line 157
-    const v1, 0x15194
+    invoke-static {p0, p1, v0, v1}, Landroid/app/PendingIntent;->getService(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
 
-    const/high16 v2, 0x10000000
+    move-result-object p0
 
-    invoke-static {p0, v1, v0, v2}, Landroid/app/PendingIntent;->getService(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
-
-    move-result-object v1
-
-    return-object v1
+    return-object p0
 .end method
 
 .method public static getSilentOffPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
     .locals 3
-    .param p0, "context"    # Landroid/content/Context;
-    .param p1, "id"    # I
 
-    .prologue
+    const-string v0, "SilentOffPendingIntent"
+
     .line 176
-    const-string v1, "SilentOffPendingIntent"
-
-    invoke-static {p0, v1}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+    invoke-static {p0, v0}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
 
     move-result-object v0
 
     .line 177
-    .local v0, "silentOffIntent":Landroid/content/Intent;
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -878,45 +791,37 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object p1
 
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+    invoke-virtual {v0, p1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+
+    const p1, 0x17cfb
+
+    const/high16 v1, 0x10000000
 
     .line 179
-    const v1, 0x17cfb
+    invoke-static {p0, p1, v0, v1}, Landroid/app/PendingIntent;->getService(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
 
-    const/high16 v2, 0x10000000
+    move-result-object p0
 
-    invoke-static {p0, v1, v0, v2}, Landroid/app/PendingIntent;->getService(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
-
-    move-result-object v1
-
-    return-object v1
+    return-object p0
 .end method
 
 .method public static getSilentOnPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
     .locals 3
-    .param p0, "context"    # Landroid/content/Context;
-    .param p1, "id"    # I
 
-    .prologue
+    const-string v0, "SilentOnPendingIntent"
+
     .line 165
-    const-string v1, "SilentOnPendingIntent"
-
-    invoke-static {p0, v1}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+    invoke-static {p0, v0}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
 
     move-result-object v0
 
     .line 166
-    .local v0, "silentOnIntent":Landroid/content/Intent;
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -925,35 +830,30 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object p1
 
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+    invoke-virtual {v0, p1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+
+    const p1, 0x17ae8
+
+    const/high16 v1, 0x10000000
 
     .line 168
-    const v1, 0x17ae8
+    invoke-static {p0, p1, v0, v1}, Landroid/app/PendingIntent;->getService(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
 
-    const/high16 v2, 0x10000000
+    move-result-object p0
 
-    invoke-static {p0, v1, v0, v2}, Landroid/app/PendingIntent;->getService(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
-
-    move-result-object v1
-
-    return-object v1
+    return-object p0
 .end method
 
 .method public static isSummerTime()Z
     .locals 2
 
-    .prologue
-    .line 210
+    .line 213
     invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
 
     move-result-object v0
@@ -974,45 +874,44 @@
 .method public anyEventsOn()Z
     .locals 1
 
-    .prologue
-    .line 899
+    .line 900
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
 
     move-result v0
 
-    if-nez v0, :cond_0
+    if-nez v0, :cond_1
 
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
 
     move-result v0
 
-    if-nez v0, :cond_0
+    if-nez v0, :cond_1
 
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
 
     move-result v0
 
-    if-eqz v0, :cond_1
-
-    :cond_0
-    const/4 v0, 0x1
-
-    :goto_0
-    return v0
-
-    :cond_1
-    const/4 v0, 0x0
+    if-eqz v0, :cond_0
 
     goto :goto_0
+
+    :cond_0
+    const/4 v0, 0x0
+
+    goto :goto_1
+
+    :cond_1
+    :goto_0
+    const/4 v0, 0x1
+
+    :goto_1
+    return v0
 .end method
 
 .method public cancelAllAlarms(Landroid/content/Context;Landroid/app/AlarmManager;)V
     .locals 3
-    .param p1, "context"    # Landroid/content/Context;
-    .param p2, "alarmManager"    # Landroid/app/AlarmManager;
 
-    .prologue
-    .line 584
+    .line 587
     sget-object v0, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -1023,15 +922,11 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
     move-result-object v2
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -1039,14 +934,14 @@
 
     invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 586
+    .line 589
     invoke-static {p1, p0}, Lba/vaktija/android/models/Prayer;->getAlarmPendingIntent(Landroid/content/Context;Lba/vaktija/android/models/Prayer;)Landroid/app/PendingIntent;
 
     move-result-object v0
 
     invoke-virtual {p2, v0}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
 
-    .line 587
+    .line 590
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
 
     move-result v0
@@ -1057,7 +952,7 @@
 
     invoke-virtual {p2, v0}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
 
-    .line 588
+    .line 591
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
 
     move-result v0
@@ -1068,76 +963,69 @@
 
     invoke-virtual {p2, v0}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
 
-    .line 589
+    .line 592
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
 
     move-result v0
 
     invoke-static {p1, v0}, Lba/vaktija/android/models/Prayer;->getPrayerChangePendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
 
-    move-result-object v0
+    move-result-object p1
 
-    invoke-virtual {p2, v0}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
+    invoke-virtual {p2, p1}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
 
-    .line 590
     return-void
 .end method
 
 .method public describeContents()I
     .locals 1
 
-    .prologue
-    .line 357
     const/4 v0, 0x0
 
     return v0
 .end method
 
 .method public getAlarmActivationTime()Ljava/lang/String;
-    .locals 8
+    .locals 4
 
-    .prologue
-    .line 847
-    iget-object v3, p0, Lba/vaktija/android/models/Prayer;->mCalendar:Ljava/util/Calendar;
+    .line 848
+    iget-object v0, p0, Lba/vaktija/android/models/Prayer;->mCalendar:Ljava/util/Calendar;
 
-    invoke-virtual {v3}, Ljava/util/Calendar;->getTimeInMillis()J
+    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
 
-    move-result-wide v4
+    move-result-wide v0
 
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getAlarmMins()I
 
-    move-result v3
+    move-result v2
 
-    mul-int/lit8 v3, v3, 0x3c
+    mul-int/lit8 v2, v2, 0x3c
 
-    mul-int/lit16 v3, v3, 0x3e8
+    mul-int/lit16 v2, v2, 0x3e8
 
-    int-to-long v6, v3
+    int-to-long v2, v2
 
-    sub-long v0, v4, v6
+    sub-long/2addr v0, v2
 
-    .line 849
-    .local v0, "alarmOnAtMillis":J
+    .line 850
     new-instance v2, Ljava/util/Date;
 
     invoke-direct {v2, v0, v1}, Ljava/util/Date;-><init>(J)V
 
-    .line 850
-    .local v2, "d":Ljava/util/Date;
-    iget-object v3, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
+    .line 851
+    iget-object v0, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
 
-    invoke-virtual {v3, v2}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+    invoke-virtual {v0, v2}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object v0
 
-    return-object v3
+    return-object v0
 .end method
 
 .method public getAlarmMins()I
     .locals 1
 
-    .prologue
-    .line 453
+    .line 456
     iget v0, p0, Lba/vaktija/android/models/Prayer;->alarmMins:I
 
     return v0
@@ -1146,8 +1034,7 @@
 .method public getAlarmSound()Ljava/lang/String;
     .locals 1
 
-    .prologue
-    .line 461
+    .line 464
     iget-object v0, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
 
     return-object v0
@@ -1156,8 +1043,7 @@
 .method public getHours()I
     .locals 1
 
-    .prologue
-    .line 497
+    .line 500
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
 
     move-result v0
@@ -1170,38 +1056,32 @@
 .end method
 
 .method public getHrsString()Ljava/lang/String;
-    .locals 4
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "DefaultLocale"
-        }
-    .end annotation
+    .locals 3
 
-    .prologue
-    .line 506
-    const-string v0, "%02d"
+    const/4 v0, 0x1
 
-    const/4 v1, 0x1
+    new-array v0, v0, [Ljava/lang/Object;
 
-    new-array v1, v1, [Ljava/lang/Object;
+    .line 509
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
+
+    move-result v1
+
+    div-int/lit16 v1, v1, 0xe10
+
+    rem-int/lit8 v1, v1, 0x18
+
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v1
 
     const/4 v2, 0x0
 
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
+    aput-object v1, v0, v2
 
-    move-result v3
+    const-string v1, "%02d"
 
-    div-int/lit16 v3, v3, 0xe10
-
-    rem-int/lit8 v3, v3, 0x18
-
-    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v3
-
-    aput-object v3, v1, v2
-
-    invoke-static {v0, v1}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+    invoke-static {v1, v0}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 
     move-result-object v0
 
@@ -1211,46 +1091,39 @@
 .method public getId()I
     .locals 1
 
-    .prologue
-    .line 424
+    .line 427
     iget v0, p0, Lba/vaktija/android/models/Prayer;->id:I
 
     return v0
 .end method
 
 .method public getMinsString()Ljava/lang/String;
-    .locals 4
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "DefaultLocale"
-        }
-    .end annotation
+    .locals 3
 
-    .prologue
-    .line 511
-    const-string v0, "%02d"
+    const/4 v0, 0x1
 
-    const/4 v1, 0x1
+    new-array v0, v0, [Ljava/lang/Object;
 
-    new-array v1, v1, [Ljava/lang/Object;
+    .line 514
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
+
+    move-result v1
+
+    div-int/lit8 v1, v1, 0x3c
+
+    rem-int/lit8 v1, v1, 0x3c
+
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v1
 
     const/4 v2, 0x0
 
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
+    aput-object v1, v0, v2
 
-    move-result v3
+    const-string v1, "%02d"
 
-    div-int/lit8 v3, v3, 0x3c
-
-    rem-int/lit8 v3, v3, 0x3c
-
-    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v3
-
-    aput-object v3, v1, v2
-
-    invoke-static {v0, v1}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+    invoke-static {v1, v0}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 
     move-result-object v0
 
@@ -1260,8 +1133,7 @@
 .method public getMinutes()I
     .locals 1
 
-    .prologue
-    .line 501
+    .line 504
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
 
     move-result v0
@@ -1276,124 +1148,109 @@
 .method public getNotifMins()I
     .locals 1
 
-    .prologue
-    .line 524
+    .line 527
     iget v0, p0, Lba/vaktija/android/models/Prayer;->notifMins:I
 
     return v0
 .end method
 
 .method public getNotificationTime()Ljava/lang/String;
-    .locals 8
+    .locals 4
 
-    .prologue
-    .line 855
-    iget-object v1, p0, Lba/vaktija/android/models/Prayer;->mCalendar:Ljava/util/Calendar;
+    .line 856
+    iget-object v0, p0, Lba/vaktija/android/models/Prayer;->mCalendar:Ljava/util/Calendar;
 
-    invoke-virtual {v1}, Ljava/util/Calendar;->getTimeInMillis()J
+    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
 
-    move-result-wide v4
+    move-result-wide v0
 
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getNotifMins()I
 
-    move-result v1
+    move-result v2
 
-    mul-int/lit8 v1, v1, 0x3c
+    mul-int/lit8 v2, v2, 0x3c
 
-    mul-int/lit16 v1, v1, 0x3e8
+    mul-int/lit16 v2, v2, 0x3e8
 
-    int-to-long v6, v1
+    int-to-long v2, v2
 
-    sub-long v2, v4, v6
-
-    .line 857
-    .local v2, "notifOnAtMillis":J
-    new-instance v0, Ljava/util/Date;
-
-    invoke-direct {v0, v2, v3}, Ljava/util/Date;-><init>(J)V
+    sub-long/2addr v0, v2
 
     .line 858
-    .local v0, "d":Ljava/util/Date;
-    iget-object v1, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
+    new-instance v2, Ljava/util/Date;
 
-    invoke-virtual {v1, v0}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+    invoke-direct {v2, v0, v1}, Ljava/util/Date;-><init>(J)V
 
-    move-result-object v1
+    .line 859
+    iget-object v0, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
 
-    return-object v1
+    invoke-virtual {v0, v2}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public getPrayerTime()I
-    .locals 5
+    .locals 4
 
-    .prologue
-    .line 478
-    sget-object v2, Lba/vaktija/android/App;->prefs:Landroid/content/SharedPreferences;
+    .line 481
+    sget-object v0, Lba/vaktija/android/App;->prefs:Landroid/content/SharedPreferences;
 
-    const-string v3, "dhuhrTime"
+    const-string v1, "dhuhrTime"
 
-    const-string v4, "1"
+    const-string v2, "1"
 
-    invoke-interface {v2, v3, v4}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v0
 
-    const-string v3, "1"
-
-    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v1
-
-    .line 479
-    .local v1, "timeNormalized":Z
-    invoke-static {}, Lba/vaktija/android/models/Prayer;->isSummerTime()Z
+    invoke-virtual {v0, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
-    .line 481
-    .local v0, "summerTime":Z
+    .line 482
+    invoke-static {}, Lba/vaktija/android/models/Prayer;->isSummerTime()Z
+
+    move-result v1
+
+    .line 484
     iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
     const/4 v3, 0x2
 
     if-eq v2, v3, :cond_0
 
-    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
-
     const/4 v3, 0x6
 
     if-ne v2, v3, :cond_2
 
     :cond_0
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
-    .line 482
-    if-eqz v0, :cond_1
+    if-eqz v1, :cond_1
 
-    const v2, 0xb6d0
+    const v0, 0xb6d0
 
-    .line 485
-    :goto_0
-    return v2
+    goto :goto_0
 
-    .line 482
     :cond_1
-    const v2, 0xa8c0
+    const v0, 0xa8c0
 
-    goto :goto_0
+    :goto_0
+    return v0
 
-    .line 485
+    .line 488
     :cond_2
-    iget v2, p0, Lba/vaktija/android/models/Prayer;->prayerTime:I
+    iget v0, p0, Lba/vaktija/android/models/Prayer;->prayerTime:I
 
-    goto :goto_0
+    return v0
 .end method
 
 .method public getPrayerTimeString()Ljava/lang/String;
     .locals 2
 
-    .prologue
-    .line 489
+    .line 492
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1404,21 +1261,15 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     const-string v1, ":"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getMinsString()Ljava/lang/String;
 
     move-result-object v1
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -1430,8 +1281,7 @@
 .method public getRawPrayerTime()I
     .locals 1
 
-    .prologue
-    .line 493
+    .line 496
     iget v0, p0, Lba/vaktija/android/models/Prayer;->prayerTime:I
 
     return v0
@@ -1440,257 +1290,236 @@
 .method public getSettingsAsJson()Lcom/google/gson/JsonElement;
     .locals 3
 
-    .prologue
-    .line 127
+    .line 187
     new-instance v0, Lcom/google/gson/JsonObject;
 
     invoke-direct {v0}, Lcom/google/gson/JsonObject;-><init>()V
 
-    .line 128
-    .local v0, "settings":Lcom/google/gson/JsonObject;
-    const-string v1, "alarmOn"
+    .line 188
+    iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->alarmOn:Z
 
-    iget-boolean v2, p0, Lba/vaktija/android/models/Prayer;->alarmOn:Z
+    invoke-static {v1}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    move-result-object v1
 
-    move-result-object v2
+    const-string v2, "alarmOn"
 
-    invoke-virtual {v0, v1, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v0, v2, v1}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
-    .line 129
-    const-string v1, "silentOn"
+    .line 189
+    iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->silentOn:Z
 
-    iget-boolean v2, p0, Lba/vaktija/android/models/Prayer;->silentOn:Z
+    invoke-static {v1}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    move-result-object v1
 
-    move-result-object v2
+    const-string v2, "silentOn"
 
-    invoke-virtual {v0, v1, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v0, v2, v1}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
-    .line 130
-    const-string v1, "notifOn"
+    .line 190
+    iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifOn:Z
 
-    iget-boolean v2, p0, Lba/vaktija/android/models/Prayer;->notifOn:Z
+    invoke-static {v1}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    move-result-object v1
 
-    move-result-object v2
+    const-string v2, "notifOn"
 
-    invoke-virtual {v0, v1, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v0, v2, v1}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
-    .line 131
-    const-string v1, "alarmMins"
+    .line 191
+    iget v1, p0, Lba/vaktija/android/models/Prayer;->alarmMins:I
 
-    iget v2, p0, Lba/vaktija/android/models/Prayer;->alarmMins:I
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result-object v1
 
-    move-result-object v2
+    const-string v2, "alarmMins"
 
-    invoke-virtual {v0, v1, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
+    invoke-virtual {v0, v2, v1}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
 
-    .line 132
-    const-string v1, "silentTimeout"
+    .line 192
+    iget v1, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
 
-    iget v2, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result-object v1
 
-    move-result-object v2
+    const-string v2, "silentTimeout"
 
-    invoke-virtual {v0, v1, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
+    invoke-virtual {v0, v2, v1}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
 
-    .line 133
-    const-string v1, "notifSoundOn"
+    .line 193
+    iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
 
-    iget-boolean v2, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
+    invoke-static {v1}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    move-result-object v1
 
-    move-result-object v2
+    const-string v2, "notifSoundOn"
 
-    invoke-virtual {v0, v1, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v0, v2, v1}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
-    .line 134
-    const-string v1, "notifVibroOn"
+    .line 194
+    iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
 
-    iget-boolean v2, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
+    invoke-static {v1}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    move-result-object v1
 
-    move-result-object v2
+    const-string v2, "notifVibroOn"
 
-    invoke-virtual {v0, v1, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v0, v2, v1}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
-    .line 135
-    const-string v1, "notifTime"
+    .line 195
+    iget v1, p0, Lba/vaktija/android/models/Prayer;->notifMins:I
 
-    iget v2, p0, Lba/vaktija/android/models/Prayer;->notifMins:I
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result-object v1
 
-    move-result-object v2
+    const-string v2, "notifTime"
 
-    invoke-virtual {v0, v1, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
+    invoke-virtual {v0, v2, v1}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
 
-    .line 136
-    const-string v1, "silentVibroOff"
+    .line 196
+    iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
 
-    iget-boolean v2, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
+    invoke-static {v1}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    move-result-object v1
 
-    move-result-object v2
+    const-string v2, "silentVibroOff"
 
-    invoke-virtual {v0, v1, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v0, v2, v1}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
-    .line 138
     return-object v0
 .end method
 
 .method public getShortTitle()Ljava/lang/String;
     .locals 1
 
-    .prologue
-    .line 403
+    .line 406
     iget v0, p0, Lba/vaktija/android/models/Prayer;->id:I
 
     packed-switch v0, :pswitch_data_0
 
-    .line 420
     const-string v0, "No title"
 
-    :goto_0
     return-object v0
 
-    .line 405
     :pswitch_0
-    const-string v0, "Zora"
+    const-string v0, "D\u017euma"
 
-    goto :goto_0
+    return-object v0
 
-    .line 407
     :pswitch_1
-    const-string v0, "I. Sunca"
+    const-string v0, "Jacija"
 
-    goto :goto_0
+    return-object v0
 
-    .line 409
     :pswitch_2
-    const-string v0, "Podne"
+    const-string v0, "Ak\u0161am"
 
-    goto :goto_0
+    return-object v0
 
-    .line 411
     :pswitch_3
     const-string v0, "Ikindija"
 
-    goto :goto_0
+    return-object v0
 
-    .line 413
     :pswitch_4
-    const-string v0, "Ak\u0161am"
+    const-string v0, "Podne"
 
-    goto :goto_0
+    return-object v0
 
-    .line 415
     :pswitch_5
-    const-string v0, "Jacija"
+    const-string v0, "I. sunca"
 
-    goto :goto_0
+    return-object v0
 
-    .line 417
     :pswitch_6
-    const-string v0, "D\u017euma"
+    const-string v0, "Zora"
 
-    goto :goto_0
+    return-object v0
 
-    .line 403
     nop
 
     :pswitch_data_0
     .packed-switch 0x0
-        :pswitch_0
-        :pswitch_1
-        :pswitch_2
-        :pswitch_3
-        :pswitch_4
-        :pswitch_5
         :pswitch_6
+        :pswitch_5
+        :pswitch_4
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
     .end packed-switch
 .end method
 
 .method public getSilentDeactivationTime()Ljava/lang/String;
-    .locals 8
+    .locals 4
 
-    .prologue
-    .line 863
-    iget-object v1, p0, Lba/vaktija/android/models/Prayer;->mCalendar:Ljava/util/Calendar;
+    .line 864
+    iget-object v0, p0, Lba/vaktija/android/models/Prayer;->mCalendar:Ljava/util/Calendar;
 
-    invoke-virtual {v1}, Ljava/util/Calendar;->getTimeInMillis()J
+    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
 
-    move-result-wide v4
+    move-result-wide v0
 
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getSoundOnMins()I
 
-    move-result v1
+    move-result v2
 
-    mul-int/lit8 v1, v1, 0x3c
+    mul-int/lit8 v2, v2, 0x3c
 
-    mul-int/lit16 v1, v1, 0x3e8
+    mul-int/lit16 v2, v2, 0x3e8
 
-    int-to-long v6, v1
+    int-to-long v2, v2
 
-    add-long v2, v4, v6
-
-    .line 865
-    .local v2, "soundOnFutureTime":J
-    new-instance v0, Ljava/util/Date;
-
-    invoke-direct {v0, v2, v3}, Ljava/util/Date;-><init>(J)V
+    add-long/2addr v0, v2
 
     .line 866
-    .local v0, "d":Ljava/util/Date;
-    iget-object v1, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
+    new-instance v2, Ljava/util/Date;
 
-    invoke-virtual {v1, v0}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+    invoke-direct {v2, v0, v1}, Ljava/util/Date;-><init>(J)V
 
-    move-result-object v1
+    .line 867
+    iget-object v0, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
 
-    return-object v1
+    invoke-virtual {v0, v2}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public getSoundOffMins()I
     .locals 2
 
-    .prologue
-    .line 892
+    .line 893
     iget v0, p0, Lba/vaktija/android/models/Prayer;->id:I
 
     const/4 v1, 0x1
 
     if-ne v0, v1, :cond_0
 
-    .line 893
+    .line 894
     iget v0, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
 
-    .line 895
-    :goto_0
     return v0
 
     :cond_0
     const/4 v0, 0x0
 
-    goto :goto_0
+    return v0
 .end method
 
 .method public getSoundOnMins()I
     .locals 1
 
-    .prologue
-    .line 469
+    .line 472
     iget v0, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
 
     return v0
@@ -1699,80 +1528,68 @@
 .method public getTitle()Ljava/lang/String;
     .locals 1
 
-    .prologue
-    .line 382
+    .line 385
     iget v0, p0, Lba/vaktija/android/models/Prayer;->id:I
 
     packed-switch v0, :pswitch_data_0
 
-    .line 399
     const-string v0, "No title"
 
-    :goto_0
     return-object v0
 
-    .line 384
     :pswitch_0
-    const-string v0, "Zora"
+    const-string v0, "D\u017euma"
 
-    goto :goto_0
+    return-object v0
 
-    .line 386
     :pswitch_1
-    const-string v0, "Izlazak Sunca"
+    const-string v0, "Jacija"
 
-    goto :goto_0
+    return-object v0
 
-    .line 388
     :pswitch_2
-    const-string v0, "Podne"
+    const-string v0, "Ak\u0161am"
 
-    goto :goto_0
+    return-object v0
 
-    .line 390
     :pswitch_3
     const-string v0, "Ikindija"
 
-    goto :goto_0
+    return-object v0
 
-    .line 392
     :pswitch_4
-    const-string v0, "Ak\u0161am"
+    const-string v0, "Podne"
 
-    goto :goto_0
+    return-object v0
 
-    .line 394
     :pswitch_5
-    const-string v0, "Jacija"
+    const-string v0, "Izlazak sunca"
 
-    goto :goto_0
+    return-object v0
 
-    .line 396
     :pswitch_6
-    const-string v0, "D\u017euma"
+    const-string v0, "Zora"
 
-    goto :goto_0
+    return-object v0
 
-    .line 382
     nop
 
     :pswitch_data_0
     .packed-switch 0x0
-        :pswitch_0
-        :pswitch_1
-        :pswitch_2
-        :pswitch_3
-        :pswitch_4
-        :pswitch_5
         :pswitch_6
+        :pswitch_5
+        :pswitch_4
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
     .end packed-switch
 .end method
 
 .method protected initCalendar()V
     .locals 3
 
-    .prologue
-    .line 241
+    .line 244
     invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
 
     move-result-object v0
@@ -1783,29 +1600,27 @@
 
     iput-object v0, p0, Lba/vaktija/android/models/Prayer;->mCalendar:Ljava/util/Calendar;
 
-    .line 243
-    iget-object v0, p0, Lba/vaktija/android/models/Prayer;->mCalendar:Ljava/util/Calendar;
-
-    const/16 v1, 0xb
-
+    .line 246
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getHours()I
 
-    move-result v2
+    move-result v1
 
-    invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;->set(II)V
+    const/16 v2, 0xb
 
-    .line 244
+    invoke-virtual {v0, v2, v1}, Ljava/util/Calendar;->set(II)V
+
+    .line 247
     iget-object v0, p0, Lba/vaktija/android/models/Prayer;->mCalendar:Ljava/util/Calendar;
-
-    const/16 v1, 0xc
 
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getMinutes()I
 
-    move-result v2
+    move-result v1
 
-    invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;->set(II)V
+    const/16 v2, 0xc
 
-    .line 245
+    invoke-virtual {v0, v2, v1}, Ljava/util/Calendar;->set(II)V
+
+    .line 248
     iget-object v0, p0, Lba/vaktija/android/models/Prayer;->mCalendar:Ljava/util/Calendar;
 
     const/16 v1, 0xd
@@ -1814,27 +1629,22 @@
 
     invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;->set(II)V
 
-    .line 246
     return-void
 .end method
 
 .method public initFromJson(Lcom/google/gson/JsonObject;)Lba/vaktija/android/models/Prayer;
-    .locals 1
-    .param p1, "data"    # Lcom/google/gson/JsonObject;
+    .locals 2
 
-    .prologue
-    .line 287
     const-string v0, "skipNextAlarm"
 
+    .line 290
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->has(Ljava/lang/String;)Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_0
+    if-eqz v1, :cond_0
 
-    .line 288
-    const-string v0, "skipNextAlarm"
-
+    .line 291
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -1845,19 +1655,17 @@
 
     iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
 
-    .line 290
     :cond_0
     const-string v0, "skipNextNotif"
 
+    .line 293
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->has(Ljava/lang/String;)Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_1
+    if-eqz v1, :cond_1
 
-    .line 291
-    const-string v0, "skipNextNotif"
-
+    .line 294
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -1868,19 +1676,17 @@
 
     iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextNotif:Z
 
-    .line 293
     :cond_1
     const-string v0, "skipNextSilent"
 
+    .line 296
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->has(Ljava/lang/String;)Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_2
+    if-eqz v1, :cond_2
 
-    .line 294
-    const-string v0, "skipNextSilent"
-
+    .line 297
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -1891,10 +1697,10 @@
 
     iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
 
-    .line 296
     :cond_2
     const-string v0, "alarmOn"
 
+    .line 299
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -1905,9 +1711,9 @@
 
     iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->alarmOn:Z
 
-    .line 297
     const-string v0, "silentOn"
 
+    .line 300
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -1918,9 +1724,9 @@
 
     iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->silentOn:Z
 
-    .line 298
     const-string v0, "notifOn"
 
+    .line 301
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -1931,9 +1737,9 @@
 
     iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifOn:Z
 
-    .line 300
     const-string v0, "alarmMins"
 
+    .line 303
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -1944,9 +1750,9 @@
 
     iput v0, p0, Lba/vaktija/android/models/Prayer;->alarmMins:I
 
-    .line 301
     const-string v0, "silentTimeout"
 
+    .line 304
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -1957,9 +1763,9 @@
 
     iput v0, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
 
-    .line 302
     const-string v0, "notifTime"
 
+    .line 305
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -1970,18 +1776,16 @@
 
     iput v0, p0, Lba/vaktija/android/models/Prayer;->notifMins:I
 
-    .line 304
     const-string v0, "notifSound"
 
+    .line 307
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->has(Ljava/lang/String;)Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_3
+    if-eqz v1, :cond_3
 
-    .line 305
-    const-string v0, "notifSound"
-
+    .line 308
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -1992,19 +1796,17 @@
 
     iput-object v0, p0, Lba/vaktija/android/models/Prayer;->notifSound:Ljava/lang/String;
 
-    .line 307
     :cond_3
     const-string v0, "alarmSound"
 
+    .line 310
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->has(Ljava/lang/String;)Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_4
+    if-eqz v1, :cond_4
 
-    .line 308
-    const-string v0, "alarmSound"
-
+    .line 311
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -2015,10 +1817,10 @@
 
     iput-object v0, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
 
-    .line 310
     :cond_4
     const-string v0, "notifSoundOn"
 
+    .line 313
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -2029,9 +1831,9 @@
 
     iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
 
-    .line 311
     const-string v0, "notifVibroOn"
 
+    .line 314
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
     move-result-object v0
@@ -2042,308 +1844,273 @@
 
     iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
 
-    .line 312
     const-string v0, "silentVibroOff"
 
+    .line 315
     invoke-virtual {p1, v0}, Lcom/google/gson/JsonObject;->get(Ljava/lang/String;)Lcom/google/gson/JsonElement;
 
-    move-result-object v0
+    move-result-object p1
 
-    invoke-virtual {v0}, Lcom/google/gson/JsonElement;->getAsBoolean()Z
+    invoke-virtual {p1}, Lcom/google/gson/JsonElement;->getAsBoolean()Z
 
-    move-result v0
+    move-result p1
 
-    iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
+    iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
 
-    .line 314
     return-object p0
 .end method
 
 .method protected initFromPreference()V
-    .locals 7
+    .locals 5
 
-    .prologue
-    .line 251
-    new-instance v2, Lcom/google/gson/Gson;
+    .line 254
+    new-instance v0, Lcom/google/gson/Gson;
 
-    invoke-direct {v2}, Lcom/google/gson/Gson;-><init>()V
+    invoke-direct {v0}, Lcom/google/gson/Gson;-><init>()V
 
-    .line 253
-    .local v2, "gson":Lcom/google/gson/Gson;
+    .line 256
     new-instance v1, Lcom/google/gson/JsonObject;
 
     invoke-direct {v1}, Lcom/google/gson/JsonObject;-><init>()V
 
-    .line 254
-    .local v1, "defData":Lcom/google/gson/JsonObject;
-    const-string v4, "skipNextAlarm"
+    .line 257
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
+    const-string v3, "skipNextAlarm"
 
-    const-string v6, "skipNextAlarm"
+    invoke-static {v2, v3}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
 
-    invoke-static {v5, v6}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
+    move-result v2
 
-    move-result v5
+    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v5}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    move-result-object v2
 
-    move-result-object v5
-
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
-
-    .line 255
-    const-string v4, "skipNextNotif"
-
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
-
-    const-string v6, "skipNextNotif"
-
-    invoke-static {v5, v6}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
-
-    move-result v5
-
-    invoke-static {v5}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
-
-    move-result-object v5
-
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
-
-    .line 256
-    const-string v4, "skipNextSilent"
-
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
-
-    const-string v6, "skipNextSilent"
-
-    invoke-static {v5, v6}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
-
-    move-result v5
-
-    invoke-static {v5}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
-
-    move-result-object v5
-
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v1, v3, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
     .line 258
-    const-string v4, "alarmOn"
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
+    const-string v3, "skipNextNotif"
 
-    const-string v6, "alarmOn"
+    invoke-static {v2, v3}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
 
-    invoke-static {v5, v6}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
+    move-result v2
 
-    move-result v5
+    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v5}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    move-result-object v2
 
-    move-result-object v5
-
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v1, v3, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
     .line 259
-    const-string v4, "notifOn"
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
+    const-string v3, "skipNextSilent"
 
-    const-string v6, "notifOn"
+    invoke-static {v2, v3}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
 
-    invoke-static {v5, v6}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
+    move-result v2
 
-    move-result v5
+    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v5}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    move-result-object v2
 
-    move-result-object v5
+    invoke-virtual {v1, v3, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    .line 261
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    .line 260
-    const-string v4, "silentOn"
+    const-string v3, "alarmOn"
 
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
+    invoke-static {v2, v3}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
 
-    const-string v6, "silentOn"
+    move-result v2
 
-    invoke-static {v5, v6}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
+    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result v5
+    move-result-object v2
 
-    invoke-static {v5}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
-
-    move-result-object v5
-
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v1, v3, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
     .line 262
-    const-string v4, "alarmMins"
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
+    const-string v3, "notifOn"
 
-    const-string v6, "alarmMins"
+    invoke-static {v2, v3}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
 
-    invoke-static {v5, v6}, Lba/vaktija/android/prefs/Defaults;->getIntDefault(ILjava/lang/String;)I
+    move-result v2
 
-    move-result v5
+    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result-object v2
 
-    move-result-object v5
-
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
+    invoke-virtual {v1, v3, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
     .line 263
-    const-string v4, "silentTimeout"
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
+    const-string v3, "silentOn"
 
-    const-string v6, "silentTimeout"
+    invoke-static {v2, v3}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
 
-    invoke-static {v5, v6}, Lba/vaktija/android/prefs/Defaults;->getIntDefault(ILjava/lang/String;)I
+    move-result v2
 
-    move-result v5
+    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result-object v2
 
-    move-result-object v5
+    invoke-virtual {v1, v3, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
+    .line 265
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    .line 264
-    const-string v4, "notifTime"
+    const-string v3, "alarmMins"
 
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
+    invoke-static {v2, v3}, Lba/vaktija/android/prefs/Defaults;->getIntDefault(ILjava/lang/String;)I
 
-    const-string v6, "notifTime"
+    move-result v2
 
-    invoke-static {v5, v6}, Lba/vaktija/android/prefs/Defaults;->getIntDefault(ILjava/lang/String;)I
+    invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result v5
+    move-result-object v2
 
-    invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v5
-
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
+    invoke-virtual {v1, v3, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
 
     .line 266
-    const-string v4, "notifSound"
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    const-string v5, ""
+    const-string v3, "silentTimeout"
 
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-static {v2, v3}, Lba/vaktija/android/prefs/Defaults;->getIntDefault(ILjava/lang/String;)I
+
+    move-result v2
+
+    invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v3, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
 
     .line 267
-    const-string v4, "alarmSound"
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    const-string v5, ""
+    const-string v3, "notifTime"
 
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-static {v2, v3}, Lba/vaktija/android/prefs/Defaults;->getIntDefault(ILjava/lang/String;)I
+
+    move-result v2
+
+    invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v3, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
+
+    const-string v2, "notifSound"
+
+    const-string v3, ""
 
     .line 269
-    const-string v4, "notifSoundOn"
+    invoke-virtual {v1, v2, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/String;)V
 
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
-
-    const-string v6, "notifSoundOn"
-
-    invoke-static {v5, v6}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
-
-    move-result v5
-
-    invoke-static {v5}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
-
-    move-result-object v5
-
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    const-string v2, "alarmSound"
 
     .line 270
-    const-string v4, "notifVibroOn"
+    invoke-virtual {v1, v2, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/String;)V
 
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
+    .line 272
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    const-string v6, "notifVibroOn"
+    const-string v3, "notifSoundOn"
 
-    invoke-static {v5, v6}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
+    invoke-static {v2, v3}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
 
-    move-result v5
+    move-result v2
 
-    invoke-static {v5}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v5
+    move-result-object v2
 
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
-
-    .line 271
-    const-string v4, "silentVibroOff"
-
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
-
-    const-string v6, "silentVibroOff"
-
-    invoke-static {v5, v6}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
-
-    move-result v5
-
-    invoke-static {v5}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
-
-    move-result-object v5
-
-    invoke-virtual {v1, v4, v5}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v1, v3, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
     .line 273
-    sget-object v4, Lba/vaktija/android/App;->vakatPrefs:Landroid/content/SharedPreferences;
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    iget v5, p0, Lba/vaktija/android/models/Prayer;->id:I
+    const-string v3, "notifVibroOn"
 
-    invoke-static {v5}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+    invoke-static {v2, v3}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
 
-    move-result-object v5
+    move-result v2
 
-    const/4 v6, 0x0
+    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-interface {v4, v5, v6}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v2
+
+    invoke-virtual {v1, v3, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+
+    .line 274
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
+
+    const-string v3, "silentVibroOff"
+
+    invoke-static {v2, v3}, Lba/vaktija/android/prefs/Defaults;->getBooleanDefault(ILjava/lang/String;)Z
+
+    move-result v2
+
+    invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v3, v2}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+
+    .line 276
+    sget-object v2, Lba/vaktija/android/App;->vakatPrefs:Landroid/content/SharedPreferences;
+
+    iget v3, p0, Lba/vaktija/android/models/Prayer;->id:I
+
+    invoke-static {v3}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
 
     move-result-object v3
 
-    .line 277
-    .local v3, "saved":Ljava/lang/String;
-    if-nez v3, :cond_0
+    const/4 v4, 0x0
 
-    .line 278
+    invoke-interface {v2, v3, v4}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v2
+
+    if-nez v2, :cond_0
+
+    .line 281
     invoke-virtual {v1}, Lcom/google/gson/JsonObject;->toString()Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object v2
 
-    .line 280
+    .line 283
     :cond_0
-    const-class v4, Lcom/google/gson/JsonElement;
+    const-class v1, Lcom/google/gson/JsonElement;
 
-    invoke-virtual {v2, v3, v4}, Lcom/google/gson/Gson;->fromJson(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
-
-    move-result-object v4
-
-    check-cast v4, Lcom/google/gson/JsonElement;
-
-    invoke-virtual {v4}, Lcom/google/gson/JsonElement;->getAsJsonObject()Lcom/google/gson/JsonObject;
+    invoke-virtual {v0, v2, v1}, Lcom/google/gson/Gson;->fromJson(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
 
     move-result-object v0
 
-    .line 282
-    .local v0, "data":Lcom/google/gson/JsonObject;
+    check-cast v0, Lcom/google/gson/JsonElement;
+
+    invoke-virtual {v0}, Lcom/google/gson/JsonElement;->getAsJsonObject()Lcom/google/gson/JsonObject;
+
+    move-result-object v0
+
+    .line 285
     invoke-virtual {p0, v0}, Lba/vaktija/android/models/Prayer;->initFromJson(Lcom/google/gson/JsonObject;)Lba/vaktija/android/models/Prayer;
 
-    .line 284
     return-void
 .end method
 
 .method public isAlarmOn()Z
     .locals 1
 
-    .prologue
-    .line 436
+    .line 439
     iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->alarmOn:Z
 
     return v0
@@ -2352,8 +2119,7 @@
 .method public isNotifOn()Z
     .locals 1
 
-    .prologue
-    .line 515
+    .line 518
     iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifOn:Z
 
     return v0
@@ -2362,8 +2128,7 @@
 .method public isNotifSoundOn()Z
     .locals 1
 
-    .prologue
-    .line 536
+    .line 539
     iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
 
     return v0
@@ -2372,8 +2137,7 @@
 .method public isNotifVibroOn()Z
     .locals 1
 
-    .prologue
-    .line 540
+    .line 543
     iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
 
     return v0
@@ -2382,8 +2146,7 @@
 .method public isSilentOn()Z
     .locals 1
 
-    .prologue
-    .line 445
+    .line 448
     iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->silentOn:Z
 
     return v0
@@ -2392,321 +2155,328 @@
 .method public isSilentVibrationOff()Z
     .locals 1
 
-    .prologue
-    .line 560
+    .line 563
     iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
 
     return v0
 .end method
 
 .method public isSummerTime(II)Z
-    .locals 6
-    .param p1, "month"    # I
-    .param p2, "day"    # I
+    .locals 2
 
-    .prologue
-    .line 870
+    .line 871
     invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
-
-    move-result-object v1
-
-    invoke-static {v1}, Ljava/util/Calendar;->getInstance(Ljava/util/Locale;)Ljava/util/Calendar;
 
     move-result-object v0
 
-    .line 872
-    .local v0, "calendar":Ljava/util/Calendar;
+    invoke-static {v0}, Ljava/util/Calendar;->getInstance(Ljava/util/Locale;)Ljava/util/Calendar;
+
+    move-result-object v0
+
     const/4 v1, 0x2
 
+    .line 873
     invoke-virtual {v0, v1, p1}, Ljava/util/Calendar;->set(II)V
 
-    .line 873
-    const/4 v1, 0x7
+    const/4 p1, 0x7
 
-    invoke-virtual {v0, v1, p2}, Ljava/util/Calendar;->set(II)V
+    .line 874
+    invoke-virtual {v0, p1, p2}, Ljava/util/Calendar;->set(II)V
 
-    .line 875
+    .line 876
     invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
 
-    move-result-object v1
+    move-result-object p1
 
-    new-instance v2, Ljava/util/Date;
+    new-instance p2, Ljava/util/Date;
 
     invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
 
-    move-result-wide v4
+    move-result-wide v0
 
-    invoke-direct {v2, v4, v5}, Ljava/util/Date;-><init>(J)V
+    invoke-direct {p2, v0, v1}, Ljava/util/Date;-><init>(J)V
 
-    invoke-virtual {v1, v2}, Ljava/util/TimeZone;->inDaylightTime(Ljava/util/Date;)Z
+    invoke-virtual {p1, p2}, Ljava/util/TimeZone;->inDaylightTime(Ljava/util/Date;)Z
 
-    move-result v1
+    move-result p1
 
-    return v1
+    return p1
 .end method
 
 .method public resetSkips()V
     .locals 1
 
-    .prologue
     const/4 v0, 0x0
 
-    .line 903
+    .line 904
     iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextNotif:Z
 
-    .line 904
+    .line 905
     iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
 
-    .line 905
+    .line 906
     iput-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
 
-    .line 906
+    .line 907
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->save()V
 
-    .line 907
     return-void
 .end method
 
 .method public save()V
-    .locals 12
+    .locals 8
 
-    .prologue
-    .line 318
-    sget-object v1, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+    .line 321
+    sget-object v0, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
 
-    new-instance v6, Ljava/lang/StringBuilder;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v7, "save id="
+    const-string v2, "save id="
 
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v6
+    iget v2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    iget v7, p0, Lba/vaktija/android/models/Prayer;->id:I
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    const-string v2, " "
 
-    move-result-object v6
-
-    const-string v7, " "
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->toString()Ljava/lang/String;
 
-    move-result-object v7
+    move-result-object v2
 
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v6
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v1
 
-    move-result-object v6
-
-    invoke-static {v1, v6}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 319
-    invoke-static {}, Ljava/lang/System;->nanoTime()J
-
-    move-result-wide v4
-
-    .line 320
-    .local v4, "start":J
-    new-instance v0, Lcom/google/gson/JsonObject;
-
-    invoke-direct {v0}, Lcom/google/gson/JsonObject;-><init>()V
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
     .line 322
-    .local v0, "data":Lcom/google/gson/JsonObject;
-    const-string v1, "skipNextAlarm"
+    invoke-static {}, Ljava/lang/System;->nanoTime()J
 
-    iget-boolean v6, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
-
-    invoke-static {v6}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
-
-    move-result-object v6
-
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    move-result-wide v0
 
     .line 323
-    const-string v1, "skipNextSilent"
+    new-instance v2, Lcom/google/gson/JsonObject;
 
-    iget-boolean v6, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
+    invoke-direct {v2}, Lcom/google/gson/JsonObject;-><init>()V
 
-    invoke-static {v6}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    .line 325
+    iget-boolean v3, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
 
-    move-result-object v6
+    invoke-static {v3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    move-result-object v3
 
-    .line 324
-    const-string v1, "skipNextNotif"
+    const-string v4, "skipNextAlarm"
 
-    iget-boolean v6, p0, Lba/vaktija/android/models/Prayer;->skipNextNotif:Z
-
-    invoke-static {v6}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
-
-    move-result-object v6
-
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
     .line 326
-    const-string v1, "alarmOn"
+    iget-boolean v3, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
 
-    iget-boolean v6, p0, Lba/vaktija/android/models/Prayer;->alarmOn:Z
+    invoke-static {v3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v6}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    move-result-object v3
 
-    move-result-object v6
+    const-string v4, "skipNextSilent"
 
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
     .line 327
-    const-string v1, "silentOn"
+    iget-boolean v3, p0, Lba/vaktija/android/models/Prayer;->skipNextNotif:Z
 
-    iget-boolean v6, p0, Lba/vaktija/android/models/Prayer;->silentOn:Z
+    invoke-static {v3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v6}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    move-result-object v3
 
-    move-result-object v6
+    const-string v4, "skipNextNotif"
 
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
-    .line 328
-    const-string v1, "notifOn"
+    .line 329
+    iget-boolean v3, p0, Lba/vaktija/android/models/Prayer;->alarmOn:Z
 
-    iget-boolean v6, p0, Lba/vaktija/android/models/Prayer;->notifOn:Z
+    invoke-static {v3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v6}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    move-result-object v3
 
-    move-result-object v6
+    const-string v4, "alarmOn"
 
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
     .line 330
-    const-string v1, "alarmMins"
+    iget-boolean v3, p0, Lba/vaktija/android/models/Prayer;->silentOn:Z
 
-    iget v6, p0, Lba/vaktija/android/models/Prayer;->alarmMins:I
+    invoke-static {v3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v6}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result-object v3
 
-    move-result-object v6
+    const-string v4, "silentOn"
 
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
     .line 331
-    const-string v1, "notifTime"
+    iget-boolean v3, p0, Lba/vaktija/android/models/Prayer;->notifOn:Z
 
-    iget v6, p0, Lba/vaktija/android/models/Prayer;->notifMins:I
+    invoke-static {v3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-static {v6}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result-object v3
 
-    move-result-object v6
+    const-string v4, "notifOn"
 
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
-    .line 332
-    const-string v1, "silentTimeout"
+    .line 333
+    iget v3, p0, Lba/vaktija/android/models/Prayer;->alarmMins:I
 
-    iget v6, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
+    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    invoke-static {v6}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result-object v3
 
-    move-result-object v6
+    const-string v4, "alarmMins"
 
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
 
     .line 334
-    const-string v1, "alarmSound"
+    iget v3, p0, Lba/vaktija/android/models/Prayer;->notifMins:I
 
-    iget-object v6, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
+    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/String;)V
+    move-result-object v3
+
+    const-string v4, "notifTime"
+
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
 
     .line 335
-    const-string v1, "notifSound"
+    iget v3, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
 
-    iget-object v6, p0, Lba/vaktija/android/models/Prayer;->notifSound:Ljava/lang/String;
+    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/String;)V
+    move-result-object v3
+
+    const-string v4, "silentTimeout"
+
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Number;)V
 
     .line 337
-    const-string v1, "notifSoundOn"
+    iget-object v3, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
 
-    iget-boolean v6, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
+    const-string v4, "alarmSound"
 
-    invoke-static {v6}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
-
-    move-result-object v6
-
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/String;)V
 
     .line 338
-    const-string v1, "notifVibroOn"
+    iget-object v3, p0, Lba/vaktija/android/models/Prayer;->notifSound:Ljava/lang/String;
 
-    iget-boolean v6, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
+    const-string v4, "notifSound"
 
-    invoke-static {v6}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/String;)V
 
-    move-result-object v6
+    .line 340
+    iget-boolean v3, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
 
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-static {v3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    .line 339
-    const-string v1, "silentVibroOff"
+    move-result-object v3
 
-    iget-boolean v6, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
+    const-string v4, "notifSoundOn"
 
-    invoke-static {v6}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
-
-    move-result-object v6
-
-    invoke-virtual {v0, v1, v6}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
     .line 341
-    sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
+    iget-boolean v3, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
 
-    const/16 v6, 0x9
+    invoke-static {v3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    if-lt v1, v6, :cond_0
+    move-result-object v3
+
+    const-string v4, "notifVibroOn"
+
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
     .line 342
-    sget-object v1, Lba/vaktija/android/App;->vakatPrefs:Landroid/content/SharedPreferences;
+    iget-boolean v3, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
 
-    invoke-interface {v1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+    invoke-static {v3}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v1
+    move-result-object v3
 
-    iget v6, p0, Lba/vaktija/android/models/Prayer;->id:I
+    const-string v4, "silentVibroOff"
 
-    invoke-static {v6}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+    invoke-virtual {v2, v4, v3}, Lcom/google/gson/JsonObject;->addProperty(Ljava/lang/String;Ljava/lang/Boolean;)V
 
-    move-result-object v6
+    .line 344
+    sget v3, Landroid/os/Build$VERSION;->SDK_INT:I
 
-    invoke-virtual {v0}, Lcom/google/gson/JsonObject;->toString()Ljava/lang/String;
+    const/16 v4, 0x9
 
-    move-result-object v7
+    if-lt v3, v4, :cond_0
 
-    invoke-interface {v1, v6, v7}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+    .line 345
+    sget-object v3, Lba/vaktija/android/App;->vakatPrefs:Landroid/content/SharedPreferences;
 
-    move-result-object v1
+    invoke-interface {v3}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
 
-    invoke-interface {v1}, Landroid/content/SharedPreferences$Editor;->apply()V
+    move-result-object v3
+
+    iget v4, p0, Lba/vaktija/android/models/Prayer;->id:I
+
+    invoke-static {v4}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+
+    move-result-object v4
+
+    invoke-virtual {v2}, Lcom/google/gson/JsonObject;->toString()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-interface {v3, v4, v5}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v3
+
+    invoke-interface {v3}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    goto :goto_0
 
     .line 347
+    :cond_0
+    sget-object v3, Lba/vaktija/android/App;->vakatPrefs:Landroid/content/SharedPreferences;
+
+    invoke-interface {v3}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v3
+
+    iget v4, p0, Lba/vaktija/android/models/Prayer;->id:I
+
+    invoke-static {v4}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+
+    move-result-object v4
+
+    invoke-virtual {v2}, Lcom/google/gson/JsonObject;->toString()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-interface {v3, v4, v5}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v3
+
+    invoke-interface {v3}, Landroid/content/SharedPreferences$Editor;->commit()Z
+
+    .line 350
     :goto_0
     invoke-static {}, Ljava/lang/System;->nanoTime()J
 
-    move-result-wide v2
+    move-result-wide v3
 
-    .line 348
-    .local v2, "end":J
-    sget-object v1, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+    .line 351
+    sget-object v5, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
 
     new-instance v6, Ljava/lang/StringBuilder;
 
@@ -2716,949 +2486,1015 @@
 
     invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v6
-
-    invoke-virtual {v0}, Lcom/google/gson/JsonObject;->toString()Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-static {v1, v6}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 349
-    sget-object v1, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
-
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, "save data done in "
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    sub-long v8, v2, v4
-
-    long-to-double v8, v8
-
-    const-wide v10, 0x408f400000000000L    # 1000.0
-
-    div-double/2addr v8, v10
-
-    invoke-virtual {v6, v8, v9}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    const-string v7, " us"
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-static {v1, v6}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 350
-    return-void
-
-    .line 344
-    .end local v2    # "end":J
-    :cond_0
-    sget-object v1, Lba/vaktija/android/App;->vakatPrefs:Landroid/content/SharedPreferences;
-
-    invoke-interface {v1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v1
-
-    iget v6, p0, Lba/vaktija/android/models/Prayer;->id:I
-
-    invoke-static {v6}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-virtual {v0}, Lcom/google/gson/JsonObject;->toString()Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-interface {v1, v6, v7}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v1
-
-    invoke-interface {v1}, Landroid/content/SharedPreferences$Editor;->commit()Z
-
-    goto :goto_0
-.end method
-
-.method public scheduleAlarms(Landroid/content/Context;Landroid/app/AlarmManager;)V
-    .locals 13
-    .param p1, "conext"    # Landroid/content/Context;
-    .param p2, "alarmManager"    # Landroid/app/AlarmManager;
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "NewApi"
-        }
-    .end annotation
-
-    .prologue
-    const/16 v10, 0xc
-
-    const/4 v12, 0x0
-
-    .line 652
-    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
-
-    move-result-object v9
-
-    invoke-static {v9}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
-
-    move-result-object v1
-
-    .line 654
-    .local v1, "calendar":Ljava/util/Calendar;
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getHours()I
-
-    move-result v7
-
-    .line 655
-    .local v7, "prayerH":I
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getMinutes()I
-
-    move-result v8
-
-    .line 657
-    .local v8, "prayerM":I
-    const/16 v9, 0xb
-
-    invoke-virtual {v1, v9, v7}, Ljava/util/Calendar;->set(II)V
-
-    .line 658
-    invoke-virtual {v1, v10, v8}, Ljava/util/Calendar;->set(II)V
-
-    .line 659
-    const/16 v9, 0xd
-
-    invoke-virtual {v1, v9, v12}, Ljava/util/Calendar;->set(II)V
-
-    .line 661
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getAlarmMins()I
-
-    move-result v9
-
-    neg-int v9, v9
-
-    invoke-virtual {v1, v10, v9}, Ljava/util/Calendar;->add(II)V
-
-    .line 663
-    invoke-virtual {v1}, Ljava/util/Calendar;->getTimeInMillis()J
-
-    move-result-wide v2
-
-    .line 665
-    .local v2, "alarmOnAtMillis":J
-    new-instance v6, Ljava/util/Date;
-
-    invoke-direct {v6, v2, v3}, Ljava/util/Date;-><init>(J)V
-
-    .line 666
-    .local v6, "d":Ljava/util/Date;
-    iget-object v9, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
-
-    invoke-virtual {v9, v6}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
-
-    move-result-object v0
-
-    .line 668
-    .local v0, "alarmActivationTime":Ljava/lang/String;
-    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
-
-    move-result-object v9
-
-    invoke-static {v9}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
-
-    move-result-object v1
-
-    .line 669
-    invoke-virtual {v1}, Ljava/util/Calendar;->getTimeInMillis()J
-
-    move-result-wide v4
-
-    .line 671
-    .local v4, "currentTime":J
-    invoke-static {p1, p0}, Lba/vaktija/android/models/Prayer;->getAlarmPendingIntent(Landroid/content/Context;Lba/vaktija/android/models/Prayer;)Landroid/app/PendingIntent;
-
-    move-result-object v9
-
-    invoke-virtual {p2, v9}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
-
-    .line 673
-    sget-object v9, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
-
-    new-instance v10, Ljava/lang/StringBuilder;
-
-    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v11, "alarm for "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v11
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    const-string v11, " enabled: "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
-
-    move-result v11
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-static {v9, v10}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 674
-    sget-object v9, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
-
-    new-instance v10, Ljava/lang/StringBuilder;
-
-    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v11, "alarm for "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v11
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    const-string v11, " skipped: "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    iget-boolean v11, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-static {v9, v10}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 676
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
-
-    move-result v9
-
-    if-eqz v9, :cond_0
-
-    iget-boolean v9, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
-
-    if-nez v9, :cond_0
-
-    .line 678
-    cmp-long v9, v2, v4
-
-    if-gez v9, :cond_1
-
-    .line 679
-    sget-object v9, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
-
-    new-instance v10, Ljava/lang/StringBuilder;
-
-    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v11, "alarm activation time has passed for "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v11
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    const-string v11, ", not setting alarm"
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-static {v9, v10}, Lba/vaktija/android/util/FileLog;->w(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 710
-    :cond_0
-    :goto_0
-    return-void
-
-    .line 683
-    :cond_1
-    sget v9, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v10, 0x17
-
-    if-lt v9, v10, :cond_2
-
-    .line 687
-    invoke-static {p1, p0}, Lba/vaktija/android/models/Prayer;->getAlarmPendingIntent(Landroid/content/Context;Lba/vaktija/android/models/Prayer;)Landroid/app/PendingIntent;
-
-    move-result-object v9
-
-    .line 684
-    invoke-virtual {p2, v12, v2, v3, v9}, Landroid/app/AlarmManager;->setExactAndAllowWhileIdle(IJLandroid/app/PendingIntent;)V
-
-    .line 708
-    :goto_1
-    sget-object v9, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
-
-    new-instance v10, Ljava/lang/StringBuilder;
-
-    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v11, "alarm set for "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v11
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    const-string v11, ", activation time: "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-static {v9, v10}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    goto :goto_0
-
-    .line 688
-    :cond_2
-    sget v9, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v10, 0x13
-
-    if-lt v9, v10, :cond_3
-
-    .line 692
-    invoke-static {p1, p0}, Lba/vaktija/android/models/Prayer;->getAlarmPendingIntent(Landroid/content/Context;Lba/vaktija/android/models/Prayer;)Landroid/app/PendingIntent;
-
-    move-result-object v9
-
-    .line 689
-    invoke-virtual {p2, v12, v2, v3, v9}, Landroid/app/AlarmManager;->setExact(IJLandroid/app/PendingIntent;)V
-
-    goto :goto_1
-
-    .line 705
-    :cond_3
-    invoke-static {p1, p0}, Lba/vaktija/android/models/Prayer;->getAlarmPendingIntent(Landroid/content/Context;Lba/vaktija/android/models/Prayer;)Landroid/app/PendingIntent;
-
-    move-result-object v9
-
-    .line 702
-    invoke-virtual {p2, v12, v2, v3, v9}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
-
-    goto :goto_1
-.end method
-
-.method public scheduleNotifications(Landroid/content/Context;Landroid/app/AlarmManager;)V
-    .locals 12
-    .param p1, "context"    # Landroid/content/Context;
-    .param p2, "alarmManager"    # Landroid/app/AlarmManager;
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "NewApi"
-        }
-    .end annotation
-
-    .prologue
-    const/16 v10, 0xc
-
-    const/4 v11, 0x0
-
-    .line 715
-    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
-
-    move-result-object v9
-
-    invoke-static {v9}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
-
-    move-result-object v3
-
-    .line 717
-    .local v3, "mCalendar":Ljava/util/Calendar;
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getHours()I
-
-    move-result v5
-
-    .line 718
-    .local v5, "vakatH":I
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getMinutes()I
-
-    move-result v8
-
-    .line 720
-    .local v8, "vakatM":I
-    const/16 v9, 0xb
-
-    invoke-virtual {v3, v9, v5}, Ljava/util/Calendar;->set(II)V
-
-    .line 721
-    invoke-virtual {v3, v10, v8}, Ljava/util/Calendar;->set(II)V
-
-    .line 722
-    const/16 v9, 0xd
-
-    invoke-virtual {v3, v9, v11}, Ljava/util/Calendar;->set(II)V
-
-    .line 724
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getNotifMins()I
-
-    move-result v9
-
-    neg-int v9, v9
-
-    invoke-virtual {v3, v10, v9}, Ljava/util/Calendar;->add(II)V
-
-    .line 726
-    invoke-virtual {v3}, Ljava/util/Calendar;->getTimeInMillis()J
-
-    move-result-wide v6
-
-    .line 728
-    .local v6, "notifOnAtMillis":J
-    new-instance v2, Ljava/util/Date;
-
-    invoke-direct {v2, v6, v7}, Ljava/util/Date;-><init>(J)V
-
-    .line 729
-    .local v2, "d":Ljava/util/Date;
-    iget-object v9, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
-
-    invoke-virtual {v9, v2}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
-
-    move-result-object v4
-
-    .line 731
-    .local v4, "notifActivationTime":Ljava/lang/String;
-    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
-
-    move-result-object v9
-
-    invoke-static {v9}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
-
-    move-result-object v3
-
-    .line 732
-    invoke-virtual {v3}, Ljava/util/Calendar;->getTimeInMillis()J
-
-    move-result-wide v0
-
-    .line 734
-    .local v0, "currentTime":J
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v9
-
-    invoke-static {p1, v9}, Lba/vaktija/android/models/Prayer;->getNotifPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v9
-
-    invoke-virtual {p2, v9}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
-
-    .line 736
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
-
-    move-result v9
-
-    if-eqz v9, :cond_0
-
-    cmp-long v9, v6, v0
-
-    if-lez v9, :cond_0
-
-    .line 738
-    sget v9, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v10, 0x17
-
-    if-lt v9, v10, :cond_1
-
-    .line 742
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v9
-
-    invoke-static {p1, v9}, Lba/vaktija/android/models/Prayer;->getNotifPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v9
-
-    .line 739
-    invoke-virtual {p2, v11, v6, v7, v9}, Landroid/app/AlarmManager;->setExactAndAllowWhileIdle(IJLandroid/app/PendingIntent;)V
-
-    .line 755
-    :goto_0
-    sget-object v9, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
-
-    new-instance v10, Ljava/lang/StringBuilder;
-
-    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v11, "notif set for "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v11
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    const-string v11, ", activation time: "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-static {v9, v10}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 757
-    :cond_0
-    return-void
-
-    .line 743
-    :cond_1
-    sget v9, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v10, 0x13
-
-    if-lt v9, v10, :cond_2
-
-    .line 747
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v9
-
-    invoke-static {p1, v9}, Lba/vaktija/android/models/Prayer;->getNotifPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v9
-
-    .line 744
-    invoke-virtual {p2, v11, v6, v7, v9}, Landroid/app/AlarmManager;->setExact(IJLandroid/app/PendingIntent;)V
-
-    goto :goto_0
-
-    .line 752
-    :cond_2
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v9
-
-    invoke-static {p1, v9}, Lba/vaktija/android/models/Prayer;->getNotifPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v9
-
-    .line 749
-    invoke-virtual {p2, v11, v6, v7, v9}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
-
-    goto :goto_0
-.end method
-
-.method public schedulePrayerChangeAlarm(Landroid/content/Context;Landroid/app/AlarmManager;)V
-    .locals 11
-    .param p1, "context"    # Landroid/content/Context;
-    .param p2, "alarmManager"    # Landroid/app/AlarmManager;
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "NewApi"
-        }
-    .end annotation
-
-    .prologue
-    const/4 v10, 0x0
-
-    .line 762
-    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
-
-    move-result-object v5
-
-    invoke-static {v5}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
-
-    move-result-object v4
-
-    .line 764
-    .local v4, "mCalendar":Ljava/util/Calendar;
-    invoke-virtual {v4}, Ljava/util/Calendar;->getTimeInMillis()J
-
-    move-result-wide v2
-
-    .line 766
-    .local v2, "currentTime":J
-    const/16 v5, 0xb
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getHours()I
-
-    move-result v8
-
-    invoke-virtual {v4, v5, v8}, Ljava/util/Calendar;->set(II)V
-
-    .line 767
-    const/16 v5, 0xc
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getMinutes()I
-
-    move-result v8
-
-    invoke-virtual {v4, v5, v8}, Ljava/util/Calendar;->set(II)V
-
-    .line 768
-    const/16 v5, 0xd
-
-    invoke-virtual {v4, v5, v10}, Ljava/util/Calendar;->set(II)V
-
-    .line 770
-    invoke-virtual {v4}, Ljava/util/Calendar;->getTimeInMillis()J
-
-    move-result-wide v6
-
-    .line 772
-    .local v6, "vakatChangeTime":J
-    sget-object v5, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
-
-    new-instance v8, Ljava/lang/StringBuilder;
-
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v9, "prayer change time for "
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v9
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    const-string v9, ": "
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    new-instance v9, Ljava/util/Date;
-
-    invoke-direct {v9, v6, v7}, Ljava/util/Date;-><init>(J)V
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-static {v5, v8}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 774
-    new-instance v1, Ljava/util/Date;
-
-    invoke-direct {v1, v6, v7}, Ljava/util/Date;-><init>(J)V
-
-    .line 775
-    .local v1, "d":Ljava/util/Date;
-    iget-object v5, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
-
-    invoke-virtual {v5, v1}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
-
-    move-result-object v0
-
-    .line 777
-    .local v0, "activationTime":Ljava/lang/String;
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v5
-
-    invoke-static {p1, v5}, Lba/vaktija/android/models/Prayer;->getPrayerChangePendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v5
-
-    invoke-virtual {p2, v5}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
-
-    .line 779
-    cmp-long v5, v6, v2
-
-    if-lez v5, :cond_0
-
-    .line 781
-    sget v5, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v8, 0x17
-
-    if-lt v5, v8, :cond_1
-
-    .line 785
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v5
-
-    invoke-static {p1, v5}, Lba/vaktija/android/models/Prayer;->getPrayerChangePendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v5
-
-    .line 782
-    invoke-virtual {p2, v10, v6, v7, v5}, Landroid/app/AlarmManager;->setExactAndAllowWhileIdle(IJLandroid/app/PendingIntent;)V
-
-    .line 800
-    :goto_0
-    sget-object v5, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
-
-    new-instance v8, Ljava/lang/StringBuilder;
-
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v9, "vakat change set, activationTime: "
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-static {v5, v8}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 802
-    :cond_0
-    return-void
-
-    .line 786
-    :cond_1
-    sget v5, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v8, 0x13
-
-    if-lt v5, v8, :cond_2
-
-    .line 790
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v5
-
-    invoke-static {p1, v5}, Lba/vaktija/android/models/Prayer;->getPrayerChangePendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v5
-
-    .line 787
-    invoke-virtual {p2, v10, v6, v7, v5}, Landroid/app/AlarmManager;->setExact(IJLandroid/app/PendingIntent;)V
-
-    goto :goto_0
-
-    .line 795
-    :cond_2
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v5
-
-    invoke-static {p1, v5}, Lba/vaktija/android/models/Prayer;->getPrayerChangePendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v5
-
-    .line 792
-    invoke-virtual {p2, v10, v6, v7, v5}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
-
-    goto :goto_0
-.end method
-
-.method public scheduleSilentOffAlarm(Landroid/content/Context;Landroid/app/AlarmManager;)V
-    .locals 12
-    .param p1, "context"    # Landroid/content/Context;
-    .param p2, "alarmManager"    # Landroid/app/AlarmManager;
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "NewApi"
-        }
-    .end annotation
-
-    .prologue
-    const/16 v8, 0xc
-
-    const/4 v11, 0x0
-
-    .line 807
-    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
-
-    move-result-object v7
-
-    invoke-static {v7}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
+    invoke-virtual {v2}, Lcom/google/gson/JsonObject;->toString()Ljava/lang/String;
 
     move-result-object v2
 
-    .line 809
-    .local v2, "mCalendar":Ljava/util/Calendar;
+    invoke-virtual {v6, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-static {v5, v2}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 352
+    sget-object v2, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+
+    new-instance v5, Ljava/lang/StringBuilder;
+
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v6, "save data done in "
+
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    sub-long/2addr v3, v0
+
+    long-to-double v0, v3
+
+    const-wide v3, 0x408f400000000000L    # 1000.0
+
+    invoke-static {v0, v1}, Ljava/lang/Double;->isNaN(D)Z
+
+    div-double/2addr v0, v3
+
+    invoke-virtual {v5, v0, v1}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
+
+    const-string v0, " us"
+
+    invoke-virtual {v5, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v2, v0}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    return-void
+.end method
+
+.method public scheduleAlarms(Landroid/content/Context;Landroid/app/AlarmManager;)V
+    .locals 10
+
+    .line 655
+    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
+
+    move-result-object v0
+
+    .line 657
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getHours()I
+
+    move-result v1
+
+    .line 658
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getMinutes()I
+
+    move-result v2
+
+    const/16 v3, 0xb
+
+    .line 660
+    invoke-virtual {v0, v3, v1}, Ljava/util/Calendar;->set(II)V
+
+    const/16 v1, 0xc
+
+    .line 661
+    invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;->set(II)V
+
+    const/16 v2, 0xd
+
+    const/4 v3, 0x0
+
+    .line 662
+    invoke-virtual {v0, v2, v3}, Ljava/util/Calendar;->set(II)V
+
+    .line 664
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getAlarmMins()I
+
+    move-result v2
+
+    neg-int v2, v2
+
+    invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;->add(II)V
+
+    .line 666
+    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
+
+    move-result-wide v0
+
+    .line 668
+    new-instance v2, Ljava/util/Date;
+
+    invoke-direct {v2, v0, v1}, Ljava/util/Date;-><init>(J)V
+
+    .line 669
+    iget-object v4, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
+
+    invoke-virtual {v4, v2}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 671
+    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
+
+    move-result-object v4
+
+    invoke-static {v4}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
+
+    move-result-object v4
+
+    .line 672
+    invoke-virtual {v4}, Ljava/util/Calendar;->getTimeInMillis()J
+
+    move-result-wide v4
+
+    .line 674
+    invoke-static {p1, p0}, Lba/vaktija/android/models/Prayer;->getAlarmPendingIntent(Landroid/content/Context;Lba/vaktija/android/models/Prayer;)Landroid/app/PendingIntent;
+
+    move-result-object v6
+
+    invoke-virtual {p2, v6}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
+
+    .line 676
+    sget-object v6, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+
+    new-instance v7, Ljava/lang/StringBuilder;
+
+    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v8, "alarm for "
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object v9
+
+    invoke-virtual {v7, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v9, " enabled: "
+
+    invoke-virtual {v7, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
+
+    move-result v9
+
+    invoke-virtual {v7, v9}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v7
+
+    invoke-static {v6, v7}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 677
+    sget-object v6, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+
+    new-instance v7, Ljava/lang/StringBuilder;
+
+    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object v8
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v8, " skipped: "
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-boolean v8, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v7
+
+    invoke-static {v6, v7}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 679
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
+
+    move-result v6
+
+    if-eqz v6, :cond_3
+
+    iget-boolean v6, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
+
+    if-nez v6, :cond_3
+
+    cmp-long v6, v0, v4
+
+    if-gez v6, :cond_0
+
+    .line 682
+    sget-object p1, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+
+    new-instance p2, Ljava/lang/StringBuilder;
+
+    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v0, "alarm activation time has passed for "
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v0, ", not setting alarm"
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p2
+
+    invoke-static {p1, p2}, Lba/vaktija/android/util/FileLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+
+    return-void
+
+    .line 686
+    :cond_0
+    invoke-static {p1, p0}, Lba/vaktija/android/models/Prayer;->getAlarmPendingIntent(Landroid/content/Context;Lba/vaktija/android/models/Prayer;)Landroid/app/PendingIntent;
+
+    move-result-object p1
+
+    .line 688
+    sget v4, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v5, 0x17
+
+    if-lt v4, v5, :cond_1
+
+    .line 690
+    invoke-virtual {p2, v3, v0, v1, p1}, Landroid/app/AlarmManager;->setExactAndAllowWhileIdle(IJLandroid/app/PendingIntent;)V
+
+    goto :goto_0
+
+    .line 695
+    :cond_1
+    sget v4, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v5, 0x13
+
+    if-lt v4, v5, :cond_2
+
+    .line 697
+    invoke-virtual {p2, v3, v0, v1, p1}, Landroid/app/AlarmManager;->setExact(IJLandroid/app/PendingIntent;)V
+
+    goto :goto_0
+
+    .line 703
+    :cond_2
+    invoke-virtual {p2, v3, v0, v1, p1}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
+
+    .line 709
+    :goto_0
+    sget-object p1, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+
+    new-instance p2, Ljava/lang/StringBuilder;
+
+    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v0, "alarm set for "
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v0, ", activation time: "
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p2, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p2
+
+    invoke-static {p1, p2}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    :cond_3
+    return-void
+.end method
+
+.method public scheduleNotifications(Landroid/content/Context;Landroid/app/AlarmManager;)V
+    .locals 7
+
+    .line 716
+    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
+
+    move-result-object v0
+
+    .line 718
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getHours()I
+
+    move-result v1
+
+    .line 719
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getMinutes()I
+
+    move-result v2
+
+    const/16 v3, 0xb
+
+    .line 721
+    invoke-virtual {v0, v3, v1}, Ljava/util/Calendar;->set(II)V
+
+    const/16 v1, 0xc
+
+    .line 722
+    invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;->set(II)V
+
+    const/16 v2, 0xd
+
+    const/4 v3, 0x0
+
+    .line 723
+    invoke-virtual {v0, v2, v3}, Ljava/util/Calendar;->set(II)V
+
+    .line 725
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getNotifMins()I
+
+    move-result v2
+
+    neg-int v2, v2
+
+    invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;->add(II)V
+
+    .line 727
+    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
+
+    move-result-wide v0
+
+    .line 729
+    new-instance v2, Ljava/util/Date;
+
+    invoke-direct {v2, v0, v1}, Ljava/util/Date;-><init>(J)V
+
+    .line 730
+    iget-object v4, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
+
+    invoke-virtual {v4, v2}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 732
+    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
+
+    move-result-object v4
+
+    invoke-static {v4}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
+
+    move-result-object v4
+
+    .line 733
+    invoke-virtual {v4}, Ljava/util/Calendar;->getTimeInMillis()J
+
+    move-result-wide v4
+
+    .line 735
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v6
+
+    invoke-static {p1, v6}, Lba/vaktija/android/models/Prayer;->getNotifPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object v6
+
+    invoke-virtual {p2, v6}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
+
+    .line 737
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
+
+    move-result v6
+
+    if-eqz v6, :cond_2
+
+    cmp-long v6, v0, v4
+
+    if-lez v6, :cond_2
+
+    .line 739
+    sget v4, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v5, 0x17
+
+    if-lt v4, v5, :cond_0
+
+    .line 743
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v4
+
+    invoke-static {p1, v4}, Lba/vaktija/android/models/Prayer;->getNotifPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object p1
+
+    .line 740
+    invoke-virtual {p2, v3, v0, v1, p1}, Landroid/app/AlarmManager;->setExactAndAllowWhileIdle(IJLandroid/app/PendingIntent;)V
+
+    goto :goto_0
+
+    .line 744
+    :cond_0
+    sget v4, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v5, 0x13
+
+    if-lt v4, v5, :cond_1
+
+    .line 748
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v4
+
+    invoke-static {p1, v4}, Lba/vaktija/android/models/Prayer;->getNotifPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object p1
+
+    .line 745
+    invoke-virtual {p2, v3, v0, v1, p1}, Landroid/app/AlarmManager;->setExact(IJLandroid/app/PendingIntent;)V
+
+    goto :goto_0
+
+    .line 753
+    :cond_1
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v4
+
+    invoke-static {p1, v4}, Lba/vaktija/android/models/Prayer;->getNotifPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object p1
+
+    .line 750
+    invoke-virtual {p2, v3, v0, v1, p1}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
+
+    .line 756
+    :goto_0
+    sget-object p1, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+
+    new-instance p2, Ljava/lang/StringBuilder;
+
+    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v0, "notif set for "
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v0, ", activation time: "
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p2, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p2
+
+    invoke-static {p1, p2}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    :cond_2
+    return-void
+.end method
+
+.method public schedulePrayerChangeAlarm(Landroid/content/Context;Landroid/app/AlarmManager;)V
+    .locals 8
+
+    .line 763
+    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
+
+    move-result-object v0
+
+    .line 765
+    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
+
+    move-result-wide v1
+
+    .line 767
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getHours()I
 
     move-result v3
 
-    .line 810
-    .local v3, "vakatH":I
+    const/16 v4, 0xb
+
+    invoke-virtual {v0, v4, v3}, Ljava/util/Calendar;->set(II)V
+
+    .line 768
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getMinutes()I
 
-    move-result v6
+    move-result v3
 
-    .line 812
-    .local v6, "vakatM":I
-    invoke-virtual {v2}, Ljava/util/Calendar;->getTimeInMillis()J
+    const/16 v4, 0xc
+
+    invoke-virtual {v0, v4, v3}, Ljava/util/Calendar;->set(II)V
+
+    const/16 v3, 0xd
+
+    const/4 v4, 0x0
+
+    .line 769
+    invoke-virtual {v0, v3, v4}, Ljava/util/Calendar;->set(II)V
+
+    .line 771
+    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
+
+    move-result-wide v5
+
+    .line 773
+    sget-object v0, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+
+    new-instance v3, Ljava/lang/StringBuilder;
+
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v7, "prayer change time for "
+
+    invoke-virtual {v3, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object v7
+
+    invoke-virtual {v3, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v7, ": "
+
+    invoke-virtual {v3, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    new-instance v7, Ljava/util/Date;
+
+    invoke-direct {v7, v5, v6}, Ljava/util/Date;-><init>(J)V
+
+    invoke-virtual {v3, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-static {v0, v3}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 775
+    new-instance v0, Ljava/util/Date;
+
+    invoke-direct {v0, v5, v6}, Ljava/util/Date;-><init>(J)V
+
+    .line 776
+    iget-object v3, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
+
+    invoke-virtual {v3, v0}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 778
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v3
+
+    invoke-static {p1, v3}, Lba/vaktija/android/models/Prayer;->getPrayerChangePendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object v3
+
+    invoke-virtual {p2, v3}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
+
+    cmp-long v3, v5, v1
+
+    if-lez v3, :cond_2
+
+    .line 782
+    sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v2, 0x17
+
+    if-lt v1, v2, :cond_0
+
+    .line 786
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v1
+
+    invoke-static {p1, v1}, Lba/vaktija/android/models/Prayer;->getPrayerChangePendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object p1
+
+    .line 783
+    invoke-virtual {p2, v4, v5, v6, p1}, Landroid/app/AlarmManager;->setExactAndAllowWhileIdle(IJLandroid/app/PendingIntent;)V
+
+    goto :goto_0
+
+    .line 787
+    :cond_0
+    sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v2, 0x13
+
+    if-lt v1, v2, :cond_1
+
+    .line 791
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v1
+
+    invoke-static {p1, v1}, Lba/vaktija/android/models/Prayer;->getPrayerChangePendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object p1
+
+    .line 788
+    invoke-virtual {p2, v4, v5, v6, p1}, Landroid/app/AlarmManager;->setExact(IJLandroid/app/PendingIntent;)V
+
+    goto :goto_0
+
+    .line 796
+    :cond_1
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v1
+
+    invoke-static {p1, v1}, Lba/vaktija/android/models/Prayer;->getPrayerChangePendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object p1
+
+    .line 793
+    invoke-virtual {p2, v4, v5, v6, p1}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
+
+    .line 801
+    :goto_0
+    sget-object p1, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+
+    new-instance p2, Ljava/lang/StringBuilder;
+
+    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "vakat change set, activationTime: "
+
+    invoke-virtual {p2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p2
+
+    invoke-static {p1, p2}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    :cond_2
+    return-void
+.end method
+
+.method public scheduleSilentOffAlarm(Landroid/content/Context;Landroid/app/AlarmManager;)V
+    .locals 7
+
+    .line 808
+    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
+
+    move-result-object v0
+
+    .line 810
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getHours()I
+
+    move-result v1
+
+    .line 811
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getMinutes()I
+
+    move-result v2
+
+    .line 813
+    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
+
+    const/16 v3, 0xb
+
+    .line 815
+    invoke-virtual {v0, v3, v1}, Ljava/util/Calendar;->set(II)V
+
+    const/16 v1, 0xc
+
+    .line 816
+    invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;->set(II)V
+
+    const/16 v2, 0xd
+
+    const/4 v3, 0x0
+
+    .line 817
+    invoke-virtual {v0, v2, v3}, Ljava/util/Calendar;->set(II)V
+
+    .line 819
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getSoundOnMins()I
+
+    move-result v2
+
+    invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;->add(II)V
+
+    .line 821
+    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
 
     move-result-wide v0
 
-    .line 814
-    .local v0, "currentTime":J
-    const/16 v7, 0xb
+    .line 823
+    sget-object v2, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
 
-    invoke-virtual {v2, v7, v3}, Ljava/util/Calendar;->set(II)V
+    new-instance v4, Ljava/lang/StringBuilder;
 
-    .line 815
-    invoke-virtual {v2, v8, v6}, Ljava/util/Calendar;->set(II)V
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
 
-    .line 816
-    const/16 v7, 0xd
+    const-string v5, "silent deactivation for "
 
-    invoke-virtual {v2, v7, v11}, Ljava/util/Calendar;->set(II)V
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 818
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getSoundOnMins()I
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
-    move-result v7
+    move-result-object v5
 
-    invoke-virtual {v2, v8, v7}, Ljava/util/Calendar;->add(II)V
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 820
-    invoke-virtual {v2}, Ljava/util/Calendar;->getTimeInMillis()J
+    const-string v5, ": "
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v5, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
+
+    new-instance v6, Ljava/util/Date;
+
+    invoke-direct {v6, v0, v1}, Ljava/util/Date;-><init>(J)V
+
+    invoke-virtual {v5, v6}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v4
+
+    invoke-static {v2, v4}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 825
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v2
+
+    invoke-static {p1, v2}, Lba/vaktija/android/models/Prayer;->getSilentOffPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object v2
+
+    invoke-virtual {p2, v2}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
+
+    .line 827
+    sget v2, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v4, 0x17
+
+    if-lt v2, v4, :cond_0
+
+    .line 831
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v2
+
+    invoke-static {p1, v2}, Lba/vaktija/android/models/Prayer;->getSilentOffPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object p1
+
+    .line 828
+    invoke-virtual {p2, v3, v0, v1, p1}, Landroid/app/AlarmManager;->setExactAndAllowWhileIdle(IJLandroid/app/PendingIntent;)V
+
+    goto :goto_0
+
+    .line 832
+    :cond_0
+    sget v2, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v4, 0x13
+
+    if-lt v2, v4, :cond_1
+
+    .line 836
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v2
+
+    invoke-static {p1, v2}, Lba/vaktija/android/models/Prayer;->getSilentOffPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object p1
+
+    .line 833
+    invoke-virtual {p2, v3, v0, v1, p1}, Landroid/app/AlarmManager;->setExact(IJLandroid/app/PendingIntent;)V
+
+    goto :goto_0
+
+    .line 841
+    :cond_1
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v2
+
+    invoke-static {p1, v2}, Lba/vaktija/android/models/Prayer;->getSilentOffPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object p1
+
+    .line 838
+    invoke-virtual {p2, v3, v0, v1, p1}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
+
+    :goto_0
+    return-void
+.end method
+
+.method public scheduleSunriseSilent(Landroid/content/Context;Landroid/app/AlarmManager;)V
+    .locals 11
+
+    .line 597
+    sget-object v0, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "scheduleSunriseSilent for "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 598
+    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
+
+    move-result-object v0
+
+    .line 600
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getHours()I
+
+    move-result v1
+
+    .line 601
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getMinutes()I
+
+    move-result v2
+
+    const/16 v3, 0xb
+
+    .line 603
+    invoke-virtual {v0, v3, v1}, Ljava/util/Calendar;->set(II)V
+
+    const/16 v1, 0xc
+
+    .line 604
+    invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;->set(II)V
+
+    const/16 v2, 0xd
+
+    const/4 v3, 0x0
+
+    .line 605
+    invoke-virtual {v0, v2, v3}, Ljava/util/Calendar;->set(II)V
+
+    .line 607
+    sget-object v2, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+
+    new-instance v4, Ljava/lang/StringBuilder;
+
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v5, "sunrise sound off mins: "
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getSoundOffMins()I
+
+    move-result v5
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v4
+
+    invoke-static {v2, v4}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 609
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getSoundOffMins()I
+
+    move-result v2
+
+    invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;->add(II)V
+
+    .line 611
+    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
+
+    move-result-wide v0
+
+    .line 613
+    new-instance v2, Ljava/util/Date;
+
+    invoke-direct {v2, v0, v1}, Ljava/util/Date;-><init>(J)V
+
+    .line 614
+    iget-object v4, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
+
+    invoke-virtual {v4, v2}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 616
+    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
+
+    move-result-object v4
+
+    invoke-static {v4}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
+
+    move-result-object v4
+
+    .line 617
+    invoke-virtual {v4}, Ljava/util/Calendar;->getTimeInMillis()J
 
     move-result-wide v4
 
-    .line 822
-    .local v4, "soundOnFutureTime":J
+    const/4 v6, 0x1
+
+    .line 619
+    invoke-static {p1, v6}, Lba/vaktija/android/models/Prayer;->getSilentOnPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+
+    move-result-object v7
+
+    invoke-virtual {p2, v7}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
+
+    .line 621
     sget-object v7, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
 
     new-instance v8, Ljava/lang/StringBuilder;
 
     invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v9, "silent deactivation for "
+    const-string v9, "alarm for "
 
     invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
 
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
-    move-result-object v9
+    move-result-object v10
 
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v8
+    const-string v10, " enabled: "
 
-    const-string v9, ": "
+    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
 
-    move-result-object v8
+    move-result v10
 
-    iget-object v9, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
-
-    new-instance v10, Ljava/util/Date;
-
-    invoke-direct {v10, v4, v5}, Ljava/util/Date;-><init>(J)V
-
-    invoke-virtual {v9, v10}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
-
-    move-result-object v9
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
+    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
 
     invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -3666,655 +3502,297 @@
 
     invoke-static {v7, v8}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 824
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v7
-
-    invoke-static {p1, v7}, Lba/vaktija/android/models/Prayer;->getSilentOffPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v7
-
-    invoke-virtual {p2, v7}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
-
-    .line 826
-    sget v7, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v8, 0x17
-
-    if-lt v7, v8, :cond_0
-
-    .line 830
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v7
-
-    invoke-static {p1, v7}, Lba/vaktija/android/models/Prayer;->getSilentOffPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v7
-
-    .line 827
-    invoke-virtual {p2, v11, v4, v5, v7}, Landroid/app/AlarmManager;->setExactAndAllowWhileIdle(IJLandroid/app/PendingIntent;)V
-
-    .line 843
-    :goto_0
-    return-void
-
-    .line 831
-    :cond_0
-    sget v7, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v8, 0x13
-
-    if-lt v7, v8, :cond_1
-
-    .line 835
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v7
-
-    invoke-static {p1, v7}, Lba/vaktija/android/models/Prayer;->getSilentOffPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v7
-
-    .line 832
-    invoke-virtual {p2, v11, v4, v5, v7}, Landroid/app/AlarmManager;->setExact(IJLandroid/app/PendingIntent;)V
-
-    goto :goto_0
-
-    .line 840
-    :cond_1
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v7
-
-    invoke-static {p1, v7}, Lba/vaktija/android/models/Prayer;->getSilentOffPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v7
-
-    .line 837
-    invoke-virtual {p2, v11, v4, v5, v7}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
-
-    goto :goto_0
-.end method
-
-.method public scheduleSunriseSilent(Landroid/content/Context;Landroid/app/AlarmManager;)V
-    .locals 12
-    .param p1, "conext"    # Landroid/content/Context;
-    .param p2, "alarmManager"    # Landroid/app/AlarmManager;
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "NewApi"
-        }
-    .end annotation
-
-    .prologue
-    .line 594
+    .line 622
     sget-object v7, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
 
-    new-instance v10, Ljava/lang/StringBuilder;
+    new-instance v8, Ljava/lang/StringBuilder;
 
-    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v11, "scheduleSunriseSilent for "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
+    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
-    move-result-object v11
+    move-result-object v9
 
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v10
+    const-string v9, " skipped: "
 
-    invoke-virtual {v10}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v10
+    iget-boolean v9, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
 
-    invoke-static {v7, v10}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
 
-    .line 595
-    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
+    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v7
+    move-result-object v8
 
-    invoke-static {v7}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
+    invoke-static {v7, v8}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
 
-    move-result-object v1
-
-    .line 597
-    .local v1, "calendar":Ljava/util/Calendar;
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getHours()I
-
-    move-result v5
-
-    .line 598
-    .local v5, "prayerH":I
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getMinutes()I
-
-    move-result v6
-
-    .line 600
-    .local v6, "prayerM":I
-    const/16 v7, 0xb
-
-    invoke-virtual {v1, v7, v5}, Ljava/util/Calendar;->set(II)V
-
-    .line 601
-    const/16 v7, 0xc
-
-    invoke-virtual {v1, v7, v6}, Ljava/util/Calendar;->set(II)V
-
-    .line 602
-    const/16 v7, 0xd
-
-    const/4 v10, 0x0
-
-    invoke-virtual {v1, v7, v10}, Ljava/util/Calendar;->set(II)V
-
-    .line 604
-    sget-object v7, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
-
-    new-instance v10, Ljava/lang/StringBuilder;
-
-    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v11, "sunrise sound off mins: "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getSoundOffMins()I
-
-    move-result v11
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-static {v7, v10}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 606
-    const/16 v7, 0xc
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getSoundOffMins()I
-
-    move-result v10
-
-    invoke-virtual {v1, v7, v10}, Ljava/util/Calendar;->add(II)V
-
-    .line 608
-    invoke-virtual {v1}, Ljava/util/Calendar;->getTimeInMillis()J
-
-    move-result-wide v8
-
-    .line 610
-    .local v8, "silentOnAtMillis":J
-    new-instance v4, Ljava/util/Date;
-
-    invoke-direct {v4, v8, v9}, Ljava/util/Date;-><init>(J)V
-
-    .line 611
-    .local v4, "d":Ljava/util/Date;
-    iget-object v7, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
-
-    invoke-virtual {v7, v4}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
-
-    move-result-object v0
-
-    .line 613
-    .local v0, "alarmActivationTime":Ljava/lang/String;
-    invoke-static {}, Ljava/util/TimeZone;->getDefault()Ljava/util/TimeZone;
-
-    move-result-object v7
-
-    invoke-static {v7}, Ljava/util/Calendar;->getInstance(Ljava/util/TimeZone;)Ljava/util/Calendar;
-
-    move-result-object v1
-
-    .line 614
-    invoke-virtual {v1}, Ljava/util/Calendar;->getTimeInMillis()J
-
-    move-result-wide v2
-
-    .line 616
-    .local v2, "currentTime":J
-    const/4 v7, 0x1
-
-    invoke-static {p1, v7}, Lba/vaktija/android/models/Prayer;->getSilentOnPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v7
-
-    invoke-virtual {p2, v7}, Landroid/app/AlarmManager;->cancel(Landroid/app/PendingIntent;)V
-
-    .line 618
-    sget-object v7, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
-
-    new-instance v10, Ljava/lang/StringBuilder;
-
-    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v11, "alarm for "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v11
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    const-string v11, " enabled: "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
-
-    move-result v11
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-static {v7, v10}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 619
-    sget-object v7, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
-
-    new-instance v10, Ljava/lang/StringBuilder;
-
-    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v11, "alarm for "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v11
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    const-string v11, " skipped: "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    iget-boolean v11, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-static {v7, v10}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 621
+    .line 624
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
 
     move-result v7
 
-    if-eqz v7, :cond_0
+    if-eqz v7, :cond_3
 
     iget-boolean v7, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
 
-    if-nez v7, :cond_0
+    if-nez v7, :cond_3
 
-    .line 623
-    cmp-long v7, v8, v2
+    cmp-long v7, v0, v4
 
-    if-gez v7, :cond_1
+    if-gez v7, :cond_0
 
-    .line 624
-    sget-object v7, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
+    .line 627
+    sget-object p1, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
 
-    new-instance v10, Ljava/lang/StringBuilder;
+    new-instance p2, Ljava/lang/StringBuilder;
 
-    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v11, "alarm activation time has passed for "
+    const-string v0, "alarm activation time has passed for "
 
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
-    move-result-object v11
+    move-result-object v0
 
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v10
+    const-string v0, ", not setting alarm"
 
-    const-string v11, ", not setting alarm"
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v10
+    move-result-object p2
 
-    invoke-virtual {v10}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-static {p1, p2}, Lba/vaktija/android/util/FileLog;->w(Ljava/lang/String;Ljava/lang/String;)V
 
-    move-result-object v10
-
-    invoke-static {v7, v10}, Lba/vaktija/android/util/FileLog;->w(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 647
-    :cond_0
-    :goto_0
     return-void
 
-    .line 628
-    :cond_1
-    sget v7, Landroid/os/Build$VERSION;->SDK_INT:I
+    .line 631
+    :cond_0
+    sget v4, Landroid/os/Build$VERSION;->SDK_INT:I
 
-    const/16 v10, 0x17
+    const/16 v5, 0x17
 
-    if-lt v7, v10, :cond_2
+    if-lt v4, v5, :cond_1
 
-    .line 629
-    const/4 v7, 0x0
+    .line 635
+    invoke-static {p1, v6}, Lba/vaktija/android/models/Prayer;->getSilentOnPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
 
-    const/4 v10, 0x1
+    move-result-object p1
 
     .line 632
-    invoke-static {p1, v10}, Lba/vaktija/android/models/Prayer;->getSilentOnPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
-
-    move-result-object v10
-
-    .line 629
-    invoke-virtual {p2, v7, v8, v9, v10}, Landroid/app/AlarmManager;->setExactAndAllowWhileIdle(IJLandroid/app/PendingIntent;)V
-
-    .line 645
-    :goto_1
-    sget-object v7, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
-
-    new-instance v10, Ljava/lang/StringBuilder;
-
-    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v11, "alarm set for "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v11
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    const-string v11, ", activation time: "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-static {v7, v10}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-virtual {p2, v3, v0, v1, p1}, Landroid/app/AlarmManager;->setExactAndAllowWhileIdle(IJLandroid/app/PendingIntent;)V
 
     goto :goto_0
 
-    .line 633
-    :cond_2
-    sget v7, Landroid/os/Build$VERSION;->SDK_INT:I
+    .line 636
+    :cond_1
+    sget v4, Landroid/os/Build$VERSION;->SDK_INT:I
 
-    const/16 v10, 0x13
+    const/16 v5, 0x13
 
-    if-lt v7, v10, :cond_3
+    if-lt v4, v5, :cond_2
 
-    .line 634
-    const/4 v7, 0x0
+    .line 640
+    invoke-static {p1, v6}, Lba/vaktija/android/models/Prayer;->getSilentOnPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
 
-    const/4 v10, 0x1
+    move-result-object p1
 
     .line 637
-    invoke-static {p1, v10}, Lba/vaktija/android/models/Prayer;->getSilentOnPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+    invoke-virtual {p2, v3, v0, v1, p1}, Landroid/app/AlarmManager;->setExact(IJLandroid/app/PendingIntent;)V
 
-    move-result-object v10
+    goto :goto_0
 
-    .line 634
-    invoke-virtual {p2, v7, v8, v9, v10}, Landroid/app/AlarmManager;->setExact(IJLandroid/app/PendingIntent;)V
+    .line 645
+    :cond_2
+    invoke-static {p1, v6}, Lba/vaktija/android/models/Prayer;->getSilentOnPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
 
-    goto :goto_1
-
-    .line 639
-    :cond_3
-    const/4 v7, 0x0
-
-    const/4 v10, 0x1
+    move-result-object p1
 
     .line 642
-    invoke-static {p1, v10}, Lba/vaktija/android/models/Prayer;->getSilentOnPendingIntent(Landroid/content/Context;I)Landroid/app/PendingIntent;
+    invoke-virtual {p2, v3, v0, v1, p1}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
 
-    move-result-object v10
+    .line 648
+    :goto_0
+    sget-object p1, Lba/vaktija/android/models/Prayer;->TAG:Ljava/lang/String;
 
-    .line 639
-    invoke-virtual {p2, v7, v8, v9, v10}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
+    new-instance p2, Ljava/lang/StringBuilder;
 
-    goto :goto_1
+    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v0, "alarm set for "
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v0, ", activation time: "
+
+    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p2, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p2
+
+    invoke-static {p1, p2}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    :cond_3
+    return-void
 .end method
 
 .method public setAlarmMins(I)V
     .locals 0
-    .param p1, "alarmMins"    # I
 
-    .prologue
-    .line 457
+    .line 460
     iput p1, p0, Lba/vaktija/android/models/Prayer;->alarmMins:I
 
-    .line 458
     return-void
 .end method
 
 .method public setAlarmOn(Z)V
     .locals 0
-    .param p1, "alarmOn"    # Z
 
-    .prologue
-    .line 440
+    .line 443
     iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->alarmOn:Z
 
-    .line 442
     return-void
 .end method
 
 .method public setAlarmSound(Ljava/lang/String;)V
     .locals 0
-    .param p1, "alarmSound"    # Ljava/lang/String;
 
-    .prologue
-    .line 465
+    .line 468
     iput-object p1, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
 
-    .line 466
     return-void
 .end method
 
 .method public setId(I)V
     .locals 0
-    .param p1, "id"    # I
 
-    .prologue
-    .line 428
+    .line 431
     iput p1, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    .line 429
     return-void
 .end method
 
 .method public setNextNotifOff(Z)V
     .locals 0
-    .param p1, "skipNextNotif"    # Z
 
-    .prologue
-    .line 556
+    .line 559
     iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->skipNextNotif:Z
 
-    .line 557
     return-void
 .end method
 
 .method public setNotifMins(I)V
     .locals 0
-    .param p1, "notifMins"    # I
 
-    .prologue
-    .line 528
+    .line 531
     iput p1, p0, Lba/vaktija/android/models/Prayer;->notifMins:I
 
-    .line 529
     return-void
 .end method
 
 .method public setNotifOn(Z)V
     .locals 0
-    .param p1, "notifOn"    # Z
 
-    .prologue
-    .line 520
+    .line 523
     iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->notifOn:Z
 
-    .line 521
     return-void
 .end method
 
 .method public setNotifSoundOn(Z)V
     .locals 0
-    .param p1, "notifSoundOn"    # Z
 
-    .prologue
-    .line 532
+    .line 535
     iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
 
-    .line 533
     return-void
 .end method
 
 .method public setNotifVibroOn(Z)V
     .locals 0
-    .param p1, "notifVibroOn"    # Z
 
-    .prologue
-    .line 544
+    .line 547
     iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
 
-    .line 545
     return-void
 .end method
 
 .method public setSilentOn(Z)V
     .locals 0
-    .param p1, "silentOn"    # Z
 
-    .prologue
-    .line 449
+    .line 452
     iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->silentOn:Z
 
-    .line 450
     return-void
 .end method
 
 .method public setSilentVibrationOff(Z)V
     .locals 0
-    .param p1, "silentVibrationOff"    # Z
 
-    .prologue
-    .line 564
+    .line 567
     iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
 
-    .line 565
     return-void
 .end method
 
 .method public setSkipNextAlarm(Z)V
     .locals 0
-    .param p1, "skipNextAlarm"    # Z
 
-    .prologue
-    .line 552
+    .line 555
     iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
 
-    .line 553
     return-void
 .end method
 
 .method public setSkipNextNotif(Z)V
     .locals 0
-    .param p1, "skipNextNotif"    # Z
-
-    .prologue
-    .line 887
-    iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->skipNextNotif:Z
 
     .line 888
+    iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->skipNextNotif:Z
+
     return-void
 .end method
 
 .method public setSkipNextSilent(Z)V
     .locals 0
-    .param p1, "skipNextSilent"    # Z
-
-    .prologue
-    .line 883
-    iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
 
     .line 884
+    iput-boolean p1, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
+
     return-void
 .end method
 
 .method public setSoundOnMins(I)V
     .locals 0
-    .param p1, "soundOnMins"    # I
 
-    .prologue
-    .line 473
+    .line 476
     iput p1, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
 
-    .line 474
     return-void
 .end method
 
 .method public skipNextAlarm()Z
     .locals 1
 
-    .prologue
-    .line 432
+    .line 435
     iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
 
     return v0
@@ -4323,8 +3801,7 @@
 .method public skipNextNotif()Z
     .locals 1
 
-    .prologue
-    .line 548
+    .line 551
     iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextNotif:Z
 
     return v0
@@ -4333,8 +3810,7 @@
 .method public skipNextSilent()Z
     .locals 1
 
-    .prologue
-    .line 879
+    .line 880
     iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
 
     return v0
@@ -4343,8 +3819,7 @@
 .method public toString()Ljava/lang/String;
     .locals 2
 
-    .prologue
-    .line 569
+    .line 572
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -4353,223 +3828,149 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget v1, p0, Lba/vaktija/android/models/Prayer;->id:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", skipNextAlarm="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", skipNexSoundOff="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", skipNextNotif="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->skipNextNotif:Z
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", alarmOn="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->alarmOn:Z
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", silentOn="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->silentOn:Z
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", alarmMins="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget v1, p0, Lba/vaktija/android/models/Prayer;->alarmMins:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", alarmSound="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-object v1, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", soundOnMins="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget v1, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", notifOn="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifOn:Z
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", notifMins="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget v1, p0, Lba/vaktija/android/models/Prayer;->notifMins:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", notifSound="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-object v1, p0, Lba/vaktija/android/models/Prayer;->notifSound:Ljava/lang/String;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", notifSoundOn="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", notifVibroOn="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", notifLedOn="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->notifLedOn:Z
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", silentVibrationOff="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-boolean v1, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", prayerTime="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget v1, p0, Lba/vaktija/android/models/Prayer;->prayerTime:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", previousTime=, mDateFormat="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-object v1, p0, Lba/vaktija/android/models/Prayer;->mDateFormat:Ljava/text/SimpleDateFormat;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     const-string v1, "]"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -4579,210 +3980,94 @@
 .end method
 
 .method public writeToParcel(Landroid/os/Parcel;I)V
-    .locals 3
-    .param p1, "dest"    # Landroid/os/Parcel;
-    .param p2, "flags"    # I
-
-    .prologue
-    const/4 v1, 0x1
-
-    const/4 v2, 0x0
-
-    .line 362
-    iget v0, p0, Lba/vaktija/android/models/Prayer;->id:I
-
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
-
-    .line 363
-    iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
-
-    if-eqz v0, :cond_0
-
-    move v0, v1
-
-    :goto_0
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
-
-    .line 364
-    iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
-
-    if-eqz v0, :cond_1
-
-    move v0, v1
-
-    :goto_1
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+    .locals 0
 
     .line 365
-    iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->alarmOn:Z
+    iget p2, p0, Lba/vaktija/android/models/Prayer;->id:I
 
-    if-eqz v0, :cond_2
-
-    move v0, v1
-
-    :goto_2
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 366
-    iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->silentOn:Z
+    iget-boolean p2, p0, Lba/vaktija/android/models/Prayer;->skipNextAlarm:Z
 
-    if-eqz v0, :cond_3
-
-    move v0, v1
-
-    :goto_3
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 367
-    iget v0, p0, Lba/vaktija/android/models/Prayer;->alarmMins:I
+    iget-boolean p2, p0, Lba/vaktija/android/models/Prayer;->skipNextSilent:Z
 
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 368
-    iget-object v0, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
+    iget-boolean p2, p0, Lba/vaktija/android/models/Prayer;->alarmOn:Z
 
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 369
-    iget v0, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
+    iget-boolean p2, p0, Lba/vaktija/android/models/Prayer;->silentOn:Z
 
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 370
-    iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifOn:Z
+    iget p2, p0, Lba/vaktija/android/models/Prayer;->alarmMins:I
 
-    if-eqz v0, :cond_4
-
-    move v0, v1
-
-    :goto_4
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 371
-    iget v0, p0, Lba/vaktija/android/models/Prayer;->notifMins:I
+    iget-object p2, p0, Lba/vaktija/android/models/Prayer;->alarmSound:Ljava/lang/String;
 
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
 
     .line 372
-    iget-object v0, p0, Lba/vaktija/android/models/Prayer;->notifSound:Ljava/lang/String;
+    iget p2, p0, Lba/vaktija/android/models/Prayer;->soundOnMins:I
 
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 373
-    iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
+    iget-boolean p2, p0, Lba/vaktija/android/models/Prayer;->notifOn:Z
 
-    if-eqz v0, :cond_5
-
-    move v0, v1
-
-    :goto_5
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 374
-    iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
+    iget p2, p0, Lba/vaktija/android/models/Prayer;->notifMins:I
 
-    if-eqz v0, :cond_6
-
-    move v0, v1
-
-    :goto_6
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 375
-    iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->notifLedOn:Z
+    iget-object p2, p0, Lba/vaktija/android/models/Prayer;->notifSound:Ljava/lang/String;
 
-    if-eqz v0, :cond_7
-
-    move v0, v1
-
-    :goto_7
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
 
     .line 376
-    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->skipNextNotif()Z
+    iget-boolean p2, p0, Lba/vaktija/android/models/Prayer;->notifSoundOn:Z
 
-    move-result v0
-
-    if-eqz v0, :cond_8
-
-    move v0, v1
-
-    :goto_8
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 377
-    iget-boolean v0, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
+    iget-boolean p2, p0, Lba/vaktija/android/models/Prayer;->notifVibroOn:Z
 
-    if-eqz v0, :cond_9
-
-    :goto_9
-    invoke-virtual {p1, v1}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 378
-    iget v0, p0, Lba/vaktija/android/models/Prayer;->prayerTime:I
+    iget-boolean p2, p0, Lba/vaktija/android/models/Prayer;->notifLedOn:Z
 
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 379
+    invoke-virtual {p0}, Lba/vaktija/android/models/Prayer;->skipNextNotif()Z
+
+    move-result p2
+
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
+
+    .line 380
+    iget-boolean p2, p0, Lba/vaktija/android/models/Prayer;->silentVibrationOff:Z
+
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
+
+    .line 381
+    iget p2, p0, Lba/vaktija/android/models/Prayer;->prayerTime:I
+
+    invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeInt(I)V
+
     return-void
-
-    :cond_0
-    move v0, v2
-
-    .line 363
-    goto :goto_0
-
-    :cond_1
-    move v0, v2
-
-    .line 364
-    goto :goto_1
-
-    :cond_2
-    move v0, v2
-
-    .line 365
-    goto :goto_2
-
-    :cond_3
-    move v0, v2
-
-    .line 366
-    goto :goto_3
-
-    :cond_4
-    move v0, v2
-
-    .line 370
-    goto :goto_4
-
-    :cond_5
-    move v0, v2
-
-    .line 373
-    goto :goto_5
-
-    :cond_6
-    move v0, v2
-
-    .line 374
-    goto :goto_6
-
-    :cond_7
-    move v0, v2
-
-    .line 375
-    goto :goto_7
-
-    :cond_8
-    move v0, v2
-
-    .line 376
-    goto :goto_8
-
-    :cond_9
-    move v1, v2
-
-    .line 377
-    goto :goto_9
 .end method

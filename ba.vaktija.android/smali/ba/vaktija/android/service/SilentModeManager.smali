@@ -18,13 +18,14 @@
 
 .field private mPrefs:Landroid/content/SharedPreferences;
 
+.field private notificationManager:Landroid/app/NotificationManager;
+
 
 # direct methods
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
-    .line 17
+    .line 19
     const-class v0, Lba/vaktija/android/service/SilentModeManager;
 
     invoke-virtual {v0}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
@@ -38,18 +39,16 @@
 
 .method private constructor <init>(Landroid/content/Context;)V
     .locals 1
-    .param p1, "context"    # Landroid/content/Context;
 
-    .prologue
-    .line 25
+    .line 28
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 26
+    .line 29
     iput-object p1, p0, Lba/vaktija/android/service/SilentModeManager;->mContext:Landroid/content/Context;
 
-    .line 27
     const-string v0, "audio"
 
+    .line 30
     invoke-virtual {p1, v0}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object v0
@@ -58,9 +57,9 @@
 
     iput-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
 
-    .line 28
     const-string v0, "alarm"
 
+    .line 31
     invoke-virtual {p1, v0}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object v0
@@ -69,426 +68,139 @@
 
     iput-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mAlarmManager:Landroid/app/AlarmManager;
 
-    .line 30
-    invoke-static {p1}, Landroid/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
+    const-string v0, "notification"
+
+    .line 32
+    invoke-virtual {p1, v0}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object v0
 
-    iput-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mPrefs:Landroid/content/SharedPreferences;
+    check-cast v0, Landroid/app/NotificationManager;
 
-    .line 31
+    iput-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->notificationManager:Landroid/app/NotificationManager;
+
+    .line 34
+    invoke-static {p1}, Landroid/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
+
+    move-result-object p1
+
+    iput-object p1, p0, Lba/vaktija/android/service/SilentModeManager;->mPrefs:Landroid/content/SharedPreferences;
+
     return-void
 .end method
 
 .method public static getInstance(Landroid/content/Context;)Lba/vaktija/android/service/SilentModeManager;
     .locals 1
-    .param p0, "context"    # Landroid/content/Context;
 
-    .prologue
-    .line 34
+    .line 38
     sget-object v0, Lba/vaktija/android/service/SilentModeManager;->instance:Lba/vaktija/android/service/SilentModeManager;
 
     if-nez v0, :cond_0
 
-    .line 35
+    .line 39
     new-instance v0, Lba/vaktija/android/service/SilentModeManager;
 
     invoke-direct {v0, p0}, Lba/vaktija/android/service/SilentModeManager;-><init>(Landroid/content/Context;)V
 
     sput-object v0, Lba/vaktija/android/service/SilentModeManager;->instance:Lba/vaktija/android/service/SilentModeManager;
 
-    .line 37
+    .line 41
     :cond_0
-    sget-object v0, Lba/vaktija/android/service/SilentModeManager;->instance:Lba/vaktija/android/service/SilentModeManager;
+    sget-object p0, Lba/vaktija/android/service/SilentModeManager;->instance:Lba/vaktija/android/service/SilentModeManager;
 
-    return-object v0
+    return-object p0
 .end method
 
 .method private isVibrationOff()Z
-    .locals 12
-
-    .prologue
-    const/4 v8, 0x0
-
-    const/4 v7, 0x1
-
-    .line 119
-    iget-object v9, p0, Lba/vaktija/android/service/SilentModeManager;->mContext:Landroid/content/Context;
-
-    invoke-static {v9}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
-
-    move-result-object v9
-
-    invoke-virtual {v9}, Lba/vaktija/android/models/PrayersSchedule;->getCurrentPrayer()Lba/vaktija/android/models/Prayer;
-
-    move-result-object v2
-
-    .line 120
-    .local v2, "currentVakat":Lba/vaktija/android/models/Prayer;
-    invoke-static {}, Lba/vaktija/android/util/Utils;->getCurrentTimeSec()I
-
-    move-result v1
-
-    .line 121
-    .local v1, "currentTime":I
-    const/4 v5, 0x0
-
-    .line 122
-    .local v5, "standardVibrationOff":Z
-    const/4 v0, 0x0
-
-    .line 124
-    .local v0, "alternativeVibrationOff":Z
-    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->isSilentVibrationOff()Z
-
-    move-result v9
-
-    if-nez v9, :cond_0
-
-    .line 125
-    const/4 v5, 0x0
-
-    .line 137
-    :goto_0
-    sget-object v9, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
-
-    new-instance v10, Ljava/lang/StringBuilder;
-
-    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v11, "standard vibration off: "
-
-    invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10, v5}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    invoke-virtual {v10}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-static {v9, v10}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 139
-    if-eqz v5, :cond_4
-
-    .line 155
-    :goto_1
-    return v7
-
-    .line 127
-    :cond_0
-    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
-
-    move-result v9
-
-    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getSoundOnMins()I
-
-    move-result v10
-
-    mul-int/lit8 v10, v10, 0x3c
-
-    add-int v4, v9, v10
-
-    .line 129
-    .local v4, "silentTimeout":I
-    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v9
-
-    const/4 v10, 0x5
-
-    if-ne v9, v10, :cond_2
-
-    .line 130
-    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
-
-    move-result v9
-
-    if-gt v9, v1, :cond_1
-
-    if-ge v1, v4, :cond_1
-
-    move v5, v7
-
-    :goto_2
-    goto :goto_0
-
-    :cond_1
-    move v5, v8
-
-    goto :goto_2
-
-    .line 133
-    :cond_2
-    if-ge v1, v4, :cond_3
-
-    move v5, v7
-
-    :goto_3
-    goto :goto_0
-
-    :cond_3
-    move v5, v8
-
-    goto :goto_3
-
-    .line 141
-    .end local v4    # "silentTimeout":I
-    :cond_4
-    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v9
-
-    if-nez v9, :cond_5
-
-    .line 142
-    iget-object v9, p0, Lba/vaktija/android/service/SilentModeManager;->mContext:Landroid/content/Context;
-
-    invoke-static {v9}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
-
-    move-result-object v9
-
-    invoke-virtual {v9, v7}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v6
-
-    .line 144
-    .local v6, "sunrise":Lba/vaktija/android/models/Prayer;
-    invoke-virtual {v6}, Lba/vaktija/android/models/Prayer;->isSilentVibrationOff()Z
-
-    move-result v9
-
-    if-nez v9, :cond_6
-
-    .line 145
-    const/4 v0, 0x0
-
-    .line 153
-    .end local v6    # "sunrise":Lba/vaktija/android/models/Prayer;
-    :cond_5
-    :goto_4
-    sget-object v7, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
-
-    new-instance v8, Ljava/lang/StringBuilder;
-
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v9, "alternative vibration off: "
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8, v0}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-static {v7, v8}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    move v7, v0
-
-    .line 155
-    goto :goto_1
-
-    .line 148
-    .restart local v6    # "sunrise":Lba/vaktija/android/models/Prayer;
-    :cond_6
-    invoke-virtual {v6}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
-
-    move-result v9
-
-    invoke-virtual {v6}, Lba/vaktija/android/models/Prayer;->getSoundOffMins()I
-
-    move-result v10
-
-    mul-int/lit8 v10, v10, 0x3c
-
-    add-int v3, v9, v10
-
-    .line 150
-    .local v3, "silentActivationTime":I
-    if-gt v3, v1, :cond_7
-
-    move v0, v7
-
-    :goto_5
-    goto :goto_4
-
-    :cond_7
-    move v0, v8
-
-    goto :goto_5
-.end method
-
-
-# virtual methods
-.method public disableSilent()V
-    .locals 3
-
-    .prologue
-    const/4 v2, 0x0
-
-    .line 45
-    iget-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mPrefs:Landroid/content/SharedPreferences;
-
-    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v0
-
-    const-string v1, "silentByApp"
-
-    .line 46
-    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v0
-
-    const-string v1, "goingSilent"
-
-    .line 47
-    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v0
-
-    const-string v1, "COMMING_FROM_SILENT"
-
-    const/4 v2, 0x1
-
-    .line 48
-    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v0
-
-    .line 49
-    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->commit()Z
-
-    .line 50
-    iget-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
-
-    const/4 v1, 0x2
-
-    invoke-virtual {v0, v1}, Landroid/media/AudioManager;->setRingerMode(I)V
-
-    .line 51
-    return-void
-.end method
-
-.method public isSilentOn()Z
-    .locals 2
-
-    .prologue
-    .line 41
-    iget-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
-
-    invoke-virtual {v0}, Landroid/media/AudioManager;->getRingerMode()I
-
-    move-result v0
-
-    const/4 v1, 0x2
-
-    if-eq v0, v1, :cond_0
-
-    const/4 v0, 0x1
-
-    :goto_0
-    return v0
-
-    :cond_0
-    const/4 v0, 0x0
-
-    goto :goto_0
-.end method
-
-.method public isSunriseSilentModeOn()Z
     .locals 8
 
-    .prologue
-    const/4 v5, 0x1
+    .line 133
+    iget-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mContext:Landroid/content/Context;
 
-    .line 189
-    iget-object v6, p0, Lba/vaktija/android/service/SilentModeManager;->mContext:Landroid/content/Context;
+    invoke-static {v0}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
 
-    invoke-static {v6}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
+    move-result-object v0
 
-    move-result-object v6
+    invoke-virtual {v0}, Lba/vaktija/android/models/PrayersSchedule;->getCurrentPrayer()Lba/vaktija/android/models/Prayer;
 
-    invoke-virtual {v6}, Lba/vaktija/android/models/PrayersSchedule;->getCurrentPrayer()Lba/vaktija/android/models/Prayer;
+    move-result-object v0
 
-    move-result-object v2
-
-    .line 190
-    .local v2, "currentVakat":Lba/vaktija/android/models/Prayer;
+    .line 134
     invoke-static {}, Lba/vaktija/android/util/Utils;->getCurrentTimeSec()I
 
     move-result v1
 
-    .line 191
-    .local v1, "currentTime":I
-    const/4 v0, 0x0
+    .line 138
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->isSilentVibrationOff()Z
 
-    .line 193
-    .local v0, "alternativeSilentOn":Z
-    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getId()I
+    move-result v2
 
-    move-result v6
+    const/4 v3, 0x1
 
-    if-nez v6, :cond_1
+    const/4 v4, 0x0
 
-    .line 194
-    iget-object v6, p0, Lba/vaktija/android/service/SilentModeManager;->mContext:Landroid/content/Context;
+    if-nez v2, :cond_1
 
-    invoke-static {v6}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
-
-    move-result-object v6
-
-    invoke-virtual {v6, v5}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v4
-
-    .line 196
-    .local v4, "sunrise":Lba/vaktija/android/models/Prayer;
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
-
-    move-result v6
-
-    if-eqz v6, :cond_0
-
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->skipNextSilent()Z
-
-    move-result v6
-
-    if-eqz v6, :cond_2
-
-    .line 197
     :cond_0
-    const/4 v0, 0x0
+    const/4 v2, 0x0
 
-    .line 205
-    .end local v4    # "sunrise":Lba/vaktija/android/models/Prayer;
+    goto :goto_1
+
+    .line 141
     :cond_1
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
+
+    move-result v2
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getSoundOnMins()I
+
+    move-result v5
+
+    mul-int/lit8 v5, v5, 0x3c
+
+    add-int/2addr v2, v5
+
+    .line 143
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v5
+
+    const/4 v6, 0x5
+
+    if-ne v5, v6, :cond_2
+
+    .line 144
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
+
+    move-result v5
+
+    if-gt v5, v1, :cond_0
+
+    if-ge v1, v2, :cond_0
+
     :goto_0
+    const/4 v2, 0x1
+
+    goto :goto_1
+
+    :cond_2
+    if-ge v1, v2, :cond_0
+
+    goto :goto_0
+
+    .line 151
+    :goto_1
     sget-object v5, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
 
     new-instance v6, Ljava/lang/StringBuilder;
 
     invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v7, "alternative silent on: "
+    const-string v7, "standard vibration off: "
 
     invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v6
-
-    invoke-virtual {v6, v0}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v6
+    invoke-virtual {v6, v2}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
 
     invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -496,44 +208,244 @@
 
     invoke-static {v5, v6}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 207
-    return v0
+    if-eqz v2, :cond_3
 
-    .line 200
-    .restart local v4    # "sunrise":Lba/vaktija/android/models/Prayer;
-    :cond_2
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
+    return v3
 
-    move-result v6
+    .line 155
+    :cond_3
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getId()I
 
-    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->getSoundOffMins()I
+    move-result v0
 
-    move-result v7
+    if-nez v0, :cond_6
 
-    mul-int/lit8 v7, v7, 0x3c
+    .line 156
+    iget-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mContext:Landroid/content/Context;
 
-    add-int v3, v6, v7
+    invoke-static {v0}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
 
-    .line 202
-    .local v3, "silentActivationTime":I
-    if-gt v3, v1, :cond_3
+    move-result-object v0
 
-    move v0, v5
+    invoke-virtual {v0, v3}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
 
-    :goto_1
+    move-result-object v0
+
+    .line 158
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->isSilentVibrationOff()Z
+
+    move-result v2
+
+    if-nez v2, :cond_4
+
+    goto :goto_3
+
+    .line 162
+    :cond_4
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
+
+    move-result v2
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getSoundOffMins()I
+
+    move-result v0
+
+    mul-int/lit8 v0, v0, 0x3c
+
+    add-int/2addr v2, v0
+
+    if-gt v2, v1, :cond_5
+
+    goto :goto_2
+
+    :cond_5
+    const/4 v3, 0x0
+
+    :goto_2
+    move v4, v3
+
+    .line 167
+    :cond_6
+    :goto_3
+    sget-object v0, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "alternative vibration off: "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    return v4
+.end method
+
+
+# virtual methods
+.method public isSilentOn()Z
+    .locals 4
+
+    .line 45
+    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/4 v1, 0x1
+
+    const/4 v2, 0x0
+
+    const/16 v3, 0x18
+
+    if-lt v0, v3, :cond_1
+
+    .line 46
+    iget-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->notificationManager:Landroid/app/NotificationManager;
+
+    invoke-virtual {v0}, Landroid/app/NotificationManager;->getCurrentInterruptionFilter()I
+
+    move-result v0
+
+    const/4 v3, 0x3
+
+    if-ne v0, v3, :cond_0
+
     goto :goto_0
 
-    :cond_3
-    const/4 v0, 0x0
+    :cond_0
+    const/4 v1, 0x0
+
+    :goto_0
+    return v1
+
+    .line 48
+    :cond_1
+    iget-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
+
+    invoke-virtual {v0}, Landroid/media/AudioManager;->getRingerMode()I
+
+    move-result v0
+
+    const/4 v3, 0x2
+
+    if-eq v0, v3, :cond_2
 
     goto :goto_1
+
+    :cond_2
+    const/4 v1, 0x0
+
+    :goto_1
+    return v1
+.end method
+
+.method public isSunriseSilentModeOn()Z
+    .locals 5
+
+    .line 203
+    iget-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mContext:Landroid/content/Context;
+
+    invoke-static {v0}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/PrayersSchedule;->getCurrentPrayer()Lba/vaktija/android/models/Prayer;
+
+    move-result-object v0
+
+    .line 204
+    invoke-static {}, Lba/vaktija/android/util/Utils;->getCurrentTimeSec()I
+
+    move-result v1
+
+    .line 207
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v0
+
+    const/4 v2, 0x0
+
+    if-nez v0, :cond_1
+
+    .line 208
+    iget-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mContext:Landroid/content/Context;
+
+    invoke-static {v0}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
+
+    move-result-object v0
+
+    const/4 v3, 0x1
+
+    invoke-virtual {v0, v3}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
+
+    move-result-object v0
+
+    .line 210
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
+
+    move-result v4
+
+    if-eqz v4, :cond_1
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->skipNextSilent()Z
+
+    move-result v4
+
+    if-eqz v4, :cond_0
+
+    goto :goto_0
+
+    .line 214
+    :cond_0
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
+
+    move-result v4
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getSoundOffMins()I
+
+    move-result v0
+
+    mul-int/lit8 v0, v0, 0x3c
+
+    add-int/2addr v4, v0
+
+    if-gt v4, v1, :cond_1
+
+    const/4 v2, 0x1
+
+    .line 219
+    :cond_1
+    :goto_0
+    sget-object v0, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v3, "alternative silent on: "
+
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    return v2
 .end method
 
 .method public silentSetByApp()Z
     .locals 3
 
-    .prologue
-    .line 54
+    .line 53
     iget-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mPrefs:Landroid/content/SharedPreferences;
 
     const-string v1, "silentByApp"
@@ -548,482 +460,483 @@
 .end method
 
 .method public silentShoudBeActive()Z
-    .locals 8
+    .locals 7
 
-    .prologue
-    const/4 v5, 0x0
+    .line 175
+    iget-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mContext:Landroid/content/Context;
 
-    const/4 v4, 0x1
+    invoke-static {v0}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
 
-    .line 161
-    iget-object v6, p0, Lba/vaktija/android/service/SilentModeManager;->mContext:Landroid/content/Context;
+    move-result-object v0
 
-    invoke-static {v6}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
+    invoke-virtual {v0}, Lba/vaktija/android/models/PrayersSchedule;->getCurrentPrayer()Lba/vaktija/android/models/Prayer;
 
-    move-result-object v6
+    move-result-object v0
 
-    invoke-virtual {v6}, Lba/vaktija/android/models/PrayersSchedule;->getCurrentPrayer()Lba/vaktija/android/models/Prayer;
-
-    move-result-object v1
-
-    .line 162
-    .local v1, "currentVakat":Lba/vaktija/android/models/Prayer;
+    .line 176
     invoke-static {}, Lba/vaktija/android/util/Utils;->getCurrentTimeSec()I
+
+    move-result v1
+
+    .line 179
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
+
+    move-result v2
+
+    const/4 v3, 0x1
+
+    const/4 v4, 0x0
+
+    if-eqz v2, :cond_2
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->skipNextSilent()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_0
+
+    goto :goto_1
+
+    .line 182
+    :cond_0
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
+
+    move-result v2
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getSoundOnMins()I
+
+    move-result v5
+
+    mul-int/lit8 v5, v5, 0x3c
+
+    add-int/2addr v2, v5
+
+    .line 184
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v5
+
+    const/4 v6, 0x5
+
+    if-ne v5, v6, :cond_1
+
+    .line 185
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
 
     move-result v0
 
-    .line 163
-    .local v0, "currentTime":I
-    const/4 v3, 0x0
+    if-gt v0, v1, :cond_2
 
-    .line 165
-    .local v3, "standardSilentOn":Z
-    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
+    if-ge v1, v2, :cond_2
 
-    move-result v6
-
-    if-eqz v6, :cond_0
-
-    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->skipNextSilent()Z
-
-    move-result v6
-
-    if-eqz v6, :cond_1
-
-    .line 166
-    :cond_0
-    const/4 v3, 0x0
-
-    .line 178
     :goto_0
-    sget-object v5, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
-
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, "standard silent on: "
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6, v3}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-static {v5, v6}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 180
-    if-eqz v3, :cond_5
-
-    .line 183
-    :goto_1
-    return v4
-
-    .line 168
-    :cond_1
-    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
-
-    move-result v6
-
-    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->getSoundOnMins()I
-
-    move-result v7
-
-    mul-int/lit8 v7, v7, 0x3c
-
-    add-int v2, v6, v7
-
-    .line 170
-    .local v2, "silentTimeout":I
-    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v6
-
-    const/4 v7, 0x5
-
-    if-ne v6, v7, :cond_3
-
-    .line 171
-    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->getPrayerTime()I
-
-    move-result v6
-
-    if-gt v6, v0, :cond_2
-
-    if-ge v0, v2, :cond_2
-
-    move v3, v4
-
-    :goto_2
-    goto :goto_0
-
-    :cond_2
-    move v3, v5
-
-    goto :goto_2
-
-    .line 174
-    :cond_3
-    if-ge v0, v2, :cond_4
-
-    move v3, v4
-
-    :goto_3
-    goto :goto_0
-
-    :cond_4
-    move v3, v5
-
-    goto :goto_3
-
-    .line 183
-    .end local v2    # "silentTimeout":I
-    :cond_5
-    invoke-virtual {p0}, Lba/vaktija/android/service/SilentModeManager;->isSunriseSilentModeOn()Z
-
-    move-result v4
+    const/4 v4, 0x1
 
     goto :goto_1
+
+    :cond_1
+    if-ge v1, v2, :cond_2
+
+    goto :goto_0
+
+    .line 192
+    :cond_2
+    :goto_1
+    sget-object v0, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "standard silent on: "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    if-eqz v4, :cond_3
+
+    return v3
+
+    .line 197
+    :cond_3
+    invoke-virtual {p0}, Lba/vaktija/android/service/SilentModeManager;->isSunriseSilentModeOn()Z
+
+    move-result v0
+
+    return v0
 .end method
 
 .method public updateSilentMode(Landroid/content/Context;)V
     .locals 11
-    .param p1, "context"    # Landroid/content/Context;
 
-    .prologue
-    const/4 v10, 0x2
-
-    const/4 v5, 0x1
-
-    const/4 v6, 0x0
-
-    .line 60
+    .line 59
     invoke-static {p1}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
-
-    move-result-object v7
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/PrayersSchedule;->getCurrentPrayer()Lba/vaktija/android/models/Prayer;
 
     move-result-object v0
 
+    invoke-virtual {v0}, Lba/vaktija/android/models/PrayersSchedule;->getCurrentPrayer()Lba/vaktija/android/models/Prayer;
+
+    move-result-object v0
+
+    .line 60
+    iget-object v1, p0, Lba/vaktija/android/service/SilentModeManager;->mPrefs:Landroid/content/SharedPreferences;
+
+    const-string v2, "silentByApp"
+
+    const/4 v3, 0x0
+
+    invoke-interface {v1, v2, v3}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v1
+
     .line 61
-    .local v0, "currentVakat":Lba/vaktija/android/models/Prayer;
-    iget-object v7, p0, Lba/vaktija/android/service/SilentModeManager;->mPrefs:Landroid/content/SharedPreferences;
-
-    const-string v8, "silentByApp"
-
-    invoke-interface {v7, v8, v6}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
-
-    move-result v3
-
-    .line 62
-    .local v3, "silentSetByApp":Z
     invoke-virtual {p0}, Lba/vaktija/android/service/SilentModeManager;->silentShoudBeActive()Z
 
     move-result v4
 
-    .line 63
-    .local v4, "silentShouldBeActive":Z
-    iget-object v7, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
+    .line 62
+    iget-object v5, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
 
-    invoke-virtual {v7}, Landroid/media/AudioManager;->getRingerMode()I
+    invoke-virtual {v5}, Landroid/media/AudioManager;->getRingerMode()I
 
-    move-result v7
+    move-result v5
 
-    if-eq v7, v10, :cond_1
+    const/4 v6, 0x2
 
-    move v1, v5
+    const/4 v7, 0x1
 
-    .line 65
-    .local v1, "deviceInSilentMode":Z
-    :goto_0
-    sget-object v7, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
+    if-eq v5, v6, :cond_0
 
-    new-instance v8, Ljava/lang/StringBuilder;
+    const/4 v5, 0x1
 
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v9, "silent set by app: "
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8, v3}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-static {v7, v8}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 66
-    sget-object v7, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
-
-    new-instance v8, Ljava/lang/StringBuilder;
-
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v9, "silent should be on: "
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8, v4}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-static {v7, v8}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 67
-    sget-object v7, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
-
-    new-instance v8, Ljava/lang/StringBuilder;
-
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v9, "deviceInSilentMode: "
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-static {v7, v8}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 69
-    if-nez v3, :cond_2
-
-    if-eqz v1, :cond_2
-
-    .line 114
-    :cond_0
-    :goto_1
-    return-void
-
-    .end local v1    # "deviceInSilentMode":Z
-    :cond_1
-    move v1, v6
-
-    .line 63
     goto :goto_0
 
-    .line 73
-    .restart local v1    # "deviceInSilentMode":Z
-    :cond_2
-    if-eqz v4, :cond_6
+    :cond_0
+    const/4 v5, 0x0
 
-    .line 74
-    iget-object v7, p0, Lba/vaktija/android/service/SilentModeManager;->mPrefs:Landroid/content/SharedPreferences;
+    .line 64
+    :goto_0
+    sget-object v8, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
 
-    invoke-interface {v7}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+    new-instance v9, Ljava/lang/StringBuilder;
 
-    move-result-object v7
+    invoke-direct {v9}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v8, "silentByApp"
+    const-string v10, "silent set by app: "
 
-    .line 75
-    invoke-interface {v7, v8, v5}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+    invoke-virtual {v9, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v7
+    invoke-virtual {v9, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
 
-    const-string v8, "goingSilent"
+    invoke-virtual {v9}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    .line 76
-    invoke-interface {v7, v8, v5}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+    move-result-object v9
 
-    move-result-object v7
+    invoke-static {v8, v9}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 65
+    sget-object v8, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
+
+    new-instance v9, Ljava/lang/StringBuilder;
+
+    invoke-direct {v9}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v10, "silent should be on: "
+
+    invoke-virtual {v9, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v9, v4}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v9}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v9
+
+    invoke-static {v8, v9}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 66
+    sget-object v8, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
+
+    new-instance v9, Ljava/lang/StringBuilder;
+
+    invoke-direct {v9}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v10, "deviceInSilentMode: "
+
+    invoke-virtual {v9, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v9, v5}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v9}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v9
+
+    invoke-static {v8, v9}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    if-nez v1, :cond_1
+
+    if-eqz v5, :cond_1
+
+    return-void
+
+    :cond_1
+    const/16 v5, 0x18
 
     const-string v8, "COMMING_FROM_SILENT"
 
+    const-string v9, "goingSilent"
+
+    if-eqz v4, :cond_7
+
+    .line 73
+    iget-object v1, p0, Lba/vaktija/android/service/SilentModeManager;->mPrefs:Landroid/content/SharedPreferences;
+
+    invoke-interface {v1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v1
+
+    .line 74
+    invoke-interface {v1, v2, v7}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v1
+
+    .line 75
+    invoke-interface {v1, v9, v7}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v1
+
+    .line 76
+    invoke-interface {v1, v8, v3}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v1
+
     .line 77
-    invoke-interface {v7, v8, v6}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+    invoke-interface {v1}, Landroid/content/SharedPreferences$Editor;->commit()Z
 
-    move-result-object v7
+    .line 79
+    sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
 
-    .line 78
-    invoke-interface {v7}, Landroid/content/SharedPreferences$Editor;->commit()Z
+    if-lt v1, v5, :cond_2
+
+    .line 80
+    sget-object v1, Lba/vaktija/android/App;->app:Lba/vaktija/android/App;
+
+    iget-object v1, v1, Lba/vaktija/android/App;->notificationManager:Landroid/app/NotificationManager;
+
+    invoke-virtual {v1}, Landroid/app/NotificationManager;->isNotificationPolicyAccessGranted()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_5
 
     .line 81
-    sget v7, Landroid/os/Build$VERSION;->SDK_INT:I
+    iget-object v1, p0, Lba/vaktija/android/service/SilentModeManager;->notificationManager:Landroid/app/NotificationManager;
 
-    const/16 v8, 0x15
+    const/4 v2, 0x3
 
-    if-ne v7, v8, :cond_3
-
-    .line 82
-    iget-object v6, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
-
-    invoke-virtual {v6, v5}, Landroid/media/AudioManager;->setRingerMode(I)V
-
-    .line 83
-    sget-object v5, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
-
-    const-string v6, "set ringer mode to RINGER_MODE_VIBRATE"
-
-    invoke-static {v5, v6}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 95
-    :goto_2
-    invoke-virtual {p0}, Lba/vaktija/android/service/SilentModeManager;->isSunriseSilentModeOn()Z
-
-    move-result v5
-
-    if-nez v5, :cond_0
-
-    .line 98
-    iget-object v5, p0, Lba/vaktija/android/service/SilentModeManager;->mAlarmManager:Landroid/app/AlarmManager;
-
-    invoke-virtual {v0, p1, v5}, Lba/vaktija/android/models/Prayer;->scheduleSilentOffAlarm(Landroid/content/Context;Landroid/app/AlarmManager;)V
-
-    goto :goto_1
-
-    .line 85
-    :cond_3
-    iget-object v7, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
-
-    .line 86
-    invoke-direct {p0}, Lba/vaktija/android/service/SilentModeManager;->isVibrationOff()Z
-
-    move-result v8
-
-    if-eqz v8, :cond_4
-
-    .line 85
-    :goto_3
-    invoke-virtual {v7, v6}, Landroid/media/AudioManager;->setRingerMode(I)V
-
-    .line 89
-    sget-object v6, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
-
-    new-instance v5, Ljava/lang/StringBuilder;
-
-    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v7, "set ringer mode to "
-
-    invoke-virtual {v5, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    .line 90
-    invoke-direct {p0}, Lba/vaktija/android/service/SilentModeManager;->isVibrationOff()Z
-
-    move-result v5
-
-    if-eqz v5, :cond_5
-
-    const-string v5, "RINGER_MODE_SILENT"
-
-    :goto_4
-    invoke-virtual {v7, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v5
-
-    .line 89
-    invoke-static {v6, v5}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-virtual {v1, v2}, Landroid/app/NotificationManager;->setInterruptionFilter(I)V
 
     goto :goto_2
 
-    :cond_4
-    move v6, v5
+    .line 85
+    :cond_2
+    sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v2, 0x15
+
+    if-ne v1, v2, :cond_3
 
     .line 86
-    goto :goto_3
+    iget-object v1, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
+
+    invoke-virtual {v1, v7}, Landroid/media/AudioManager;->setRingerMode(I)V
+
+    .line 87
+    sget-object v1, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
+
+    const-string v2, "set ringer mode to RINGER_MODE_VIBRATE"
+
+    invoke-static {v1, v2}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    goto :goto_2
+
+    .line 89
+    :cond_3
+    iget-object v1, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
 
     .line 90
-    :cond_5
-    const-string v5, "RINGER_MODE_VIBRATE"
-
-    goto :goto_4
-
-    .line 101
-    :cond_6
-    if-eqz v3, :cond_0
-
-    .line 103
-    iget-object v7, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
-
-    invoke-virtual {v7}, Landroid/media/AudioManager;->getRingerMode()I
+    invoke-direct {p0}, Lba/vaktija/android/service/SilentModeManager;->isVibrationOff()Z
 
     move-result v2
 
-    .line 105
-    .local v2, "ringerMode":I
-    iget-object v7, p0, Lba/vaktija/android/service/SilentModeManager;->mPrefs:Landroid/content/SharedPreferences;
+    xor-int/2addr v2, v7
 
-    invoke-interface {v7}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+    .line 89
+    invoke-virtual {v1, v2}, Landroid/media/AudioManager;->setRingerMode(I)V
 
-    move-result-object v7
+    .line 93
+    sget-object v1, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
 
-    const-string v8, "silentByApp"
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    .line 106
-    invoke-interface {v7, v8, v6}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    move-result-object v7
+    const-string v3, "set ringer mode to "
 
-    const-string v8, "goingSilent"
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 107
-    invoke-interface {v7, v8, v6}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+    .line 94
+    invoke-direct {p0}, Lba/vaktija/android/service/SilentModeManager;->isVibrationOff()Z
 
-    move-result-object v7
+    move-result v3
 
-    const-string v8, "COMMING_FROM_SILENT"
+    if-eqz v3, :cond_4
 
-    if-eq v2, v10, :cond_7
+    const-string v3, "RINGER_MODE_SILENT"
 
-    .line 108
-    :goto_5
-    invoke-interface {v7, v8, v5}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+    goto :goto_1
 
-    move-result-object v5
+    :cond_4
+    const-string v3, "RINGER_MODE_VIBRATE"
 
-    .line 109
-    invoke-interface {v5}, Landroid/content/SharedPreferences$Editor;->commit()Z
+    :goto_1
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 111
-    iget-object v5, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-virtual {v5, v10}, Landroid/media/AudioManager;->setRingerMode(I)V
+    move-result-object v2
 
-    .line 112
-    sget-object v5, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
+    .line 93
+    invoke-static {v1, v2}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
 
-    const-string v6, "set ringer mode to RINGER_MODE_NORMAL"
+    .line 99
+    :cond_5
+    :goto_2
+    invoke-virtual {p0}, Lba/vaktija/android/service/SilentModeManager;->isSunriseSilentModeOn()Z
 
-    invoke-static {v5, v6}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+    move-result v1
 
-    goto/16 :goto_1
+    if-eqz v1, :cond_6
+
+    goto :goto_4
+
+    .line 102
+    :cond_6
+    iget-object v1, p0, Lba/vaktija/android/service/SilentModeManager;->mAlarmManager:Landroid/app/AlarmManager;
+
+    invoke-virtual {v0, p1, v1}, Lba/vaktija/android/models/Prayer;->scheduleSilentOffAlarm(Landroid/content/Context;Landroid/app/AlarmManager;)V
+
+    goto :goto_4
 
     :cond_7
-    move v5, v6
+    if-eqz v1, :cond_b
 
     .line 107
-    goto :goto_5
+    iget-object p1, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
+
+    invoke-virtual {p1}, Landroid/media/AudioManager;->getRingerMode()I
+
+    move-result p1
+
+    .line 109
+    iget-object v0, p0, Lba/vaktija/android/service/SilentModeManager;->mPrefs:Landroid/content/SharedPreferences;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    .line 110
+    invoke-interface {v0, v2, v3}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    .line 111
+    invoke-interface {v0, v9, v3}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    if-eq p1, v6, :cond_8
+
+    const/4 v3, 0x1
+
+    .line 112
+    :cond_8
+    invoke-interface {v0, v8, v3}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object p1
+
+    .line 113
+    invoke-interface {p1}, Landroid/content/SharedPreferences$Editor;->commit()Z
+
+    .line 115
+    sget p1, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    if-lt p1, v5, :cond_a
+
+    .line 116
+    sget-object p1, Lba/vaktija/android/App;->app:Lba/vaktija/android/App;
+
+    iget-object p1, p1, Lba/vaktija/android/App;->notificationManager:Landroid/app/NotificationManager;
+
+    invoke-virtual {p1}, Landroid/app/NotificationManager;->isNotificationPolicyAccessGranted()Z
+
+    move-result p1
+
+    if-eqz p1, :cond_9
+
+    .line 117
+    iget-object p1, p0, Lba/vaktija/android/service/SilentModeManager;->notificationManager:Landroid/app/NotificationManager;
+
+    invoke-virtual {p1, v7}, Landroid/app/NotificationManager;->setInterruptionFilter(I)V
+
+    .line 118
+    sget-object p1, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
+
+    const-string v0, "set interruption filter to INTERRUPTION_FILTER_ALL"
+
+    invoke-static {p1, v0}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    goto :goto_3
+
+    .line 120
+    :cond_9
+    sget-object p1, Lba/vaktija/android/App;->prefs:Landroid/content/SharedPreferences;
+
+    invoke-interface {p1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object p1
+
+    const-string v0, "SILENT_BLOCKED_BY_DND_REVOKE"
+
+    invoke-interface {p1, v0, v7}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object p1
+
+    invoke-interface {p1}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    goto :goto_3
+
+    .line 123
+    :cond_a
+    iget-object p1, p0, Lba/vaktija/android/service/SilentModeManager;->mAudioManager:Landroid/media/AudioManager;
+
+    invoke-virtual {p1, v6}, Landroid/media/AudioManager;->setRingerMode(I)V
+
+    .line 126
+    :goto_3
+    sget-object p1, Lba/vaktija/android/service/SilentModeManager;->TAG:Ljava/lang/String;
+
+    const-string v0, "set ringer mode to RINGER_MODE_NORMAL"
+
+    invoke-static {p1, v0}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    :cond_b
+    :goto_4
+    return-void
 .end method

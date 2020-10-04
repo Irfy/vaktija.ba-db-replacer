@@ -1,5 +1,5 @@
 .class public Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;
-.super Landroid/support/v4/app/Fragment;
+.super Landroidx/fragment/app/Fragment;
 .source "ErrorDialogManager.java"
 
 
@@ -30,65 +30,51 @@
 .method public constructor <init>()V
     .locals 0
 
-    .prologue
     .line 31
-    invoke-direct {p0}, Landroid/support/v4/app/Fragment;-><init>()V
+    invoke-direct {p0}, Landroidx/fragment/app/Fragment;-><init>()V
 
     return-void
 .end method
 
 .method public static attachTo(Landroid/app/Activity;Ljava/lang/Object;ZLandroid/os/Bundle;)V
-    .locals 4
-    .param p0, "activity"    # Landroid/app/Activity;
-    .param p1, "executionScope"    # Ljava/lang/Object;
-    .param p2, "finishAfterDialog"    # Z
-    .param p3, "argumentsForErrorDialog"    # Landroid/os/Bundle;
+    .locals 3
 
-    .prologue
     .line 88
-    check-cast p0, Landroid/support/v4/app/FragmentActivity;
+    check-cast p0, Landroidx/fragment/app/FragmentActivity;
 
-    .end local p0    # "activity":Landroid/app/Activity;
-    invoke-virtual {p0}, Landroid/support/v4/app/FragmentActivity;->getSupportFragmentManager()Landroid/support/v4/app/FragmentManager;
+    invoke-virtual {p0}, Landroidx/fragment/app/FragmentActivity;->getSupportFragmentManager()Landroidx/fragment/app/FragmentManager;
 
-    move-result-object v0
+    move-result-object p0
+
+    const-string v0, "de.greenrobot.eventbus.error_dialog_manager"
 
     .line 89
-    .local v0, "fm":Landroid/support/v4/app/FragmentManager;
-    const-string v2, "de.greenrobot.eventbus.error_dialog_manager"
-
-    invoke-virtual {v0, v2}, Landroid/support/v4/app/FragmentManager;->findFragmentByTag(Ljava/lang/String;)Landroid/support/v4/app/Fragment;
+    invoke-virtual {p0, v0}, Landroidx/fragment/app/FragmentManager;->findFragmentByTag(Ljava/lang/String;)Landroidx/fragment/app/Fragment;
 
     move-result-object v1
 
     check-cast v1, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;
 
-    .line 90
-    .local v1, "fragment":Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;
     if-nez v1, :cond_0
 
     .line 91
     new-instance v1, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;
 
-    .end local v1    # "fragment":Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;
     invoke-direct {v1}, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;-><init>()V
 
     .line 92
-    .restart local v1    # "fragment":Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;
-    invoke-virtual {v0}, Landroid/support/v4/app/FragmentManager;->beginTransaction()Landroid/support/v4/app/FragmentTransaction;
+    invoke-virtual {p0}, Landroidx/fragment/app/FragmentManager;->beginTransaction()Landroidx/fragment/app/FragmentTransaction;
 
     move-result-object v2
 
-    const-string v3, "de.greenrobot.eventbus.error_dialog_manager"
+    invoke-virtual {v2, v1, v0}, Landroidx/fragment/app/FragmentTransaction;->add(Landroidx/fragment/app/Fragment;Ljava/lang/String;)Landroidx/fragment/app/FragmentTransaction;
 
-    invoke-virtual {v2, v1, v3}, Landroid/support/v4/app/FragmentTransaction;->add(Landroid/support/v4/app/Fragment;Ljava/lang/String;)Landroid/support/v4/app/FragmentTransaction;
+    move-result-object v0
 
-    move-result-object v2
-
-    invoke-virtual {v2}, Landroid/support/v4/app/FragmentTransaction;->commit()I
+    invoke-virtual {v0}, Landroidx/fragment/app/FragmentTransaction;->commit()I
 
     .line 93
-    invoke-virtual {v0}, Landroid/support/v4/app/FragmentManager;->executePendingTransactions()Z
+    invoke-virtual {p0}, Landroidx/fragment/app/FragmentManager;->executePendingTransactions()Z
 
     .line 95
     :cond_0
@@ -100,156 +86,133 @@
     .line 97
     iput-object p1, v1, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->executionScope:Ljava/lang/Object;
 
-    .line 98
     return-void
 .end method
 
 
 # virtual methods
 .method public onCreate(Landroid/os/Bundle;)V
-    .locals 1
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
+    .locals 0
 
-    .prologue
     .line 40
-    invoke-super {p0, p1}, Landroid/support/v4/app/Fragment;->onCreate(Landroid/os/Bundle;)V
+    invoke-super {p0, p1}, Landroidx/fragment/app/Fragment;->onCreate(Landroid/os/Bundle;)V
 
     .line 41
-    sget-object v0, Lde/greenrobot/event/util/ErrorDialogManager;->factory:Lde/greenrobot/event/util/ErrorDialogFragmentFactory;
+    sget-object p1, Lde/greenrobot/event/util/ErrorDialogManager;->factory:Lde/greenrobot/event/util/ErrorDialogFragmentFactory;
 
-    iget-object v0, v0, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
+    iget-object p1, p1, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->config:Lde/greenrobot/event/util/ErrorDialogConfig;
 
-    invoke-virtual {v0}, Lde/greenrobot/event/util/ErrorDialogConfig;->getEventBus()Lde/greenrobot/event/EventBus;
+    invoke-virtual {p1}, Lde/greenrobot/event/util/ErrorDialogConfig;->getEventBus()Lde/greenrobot/event/EventBus;
 
-    move-result-object v0
+    move-result-object p1
 
-    iput-object v0, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->eventBus:Lde/greenrobot/event/EventBus;
+    iput-object p1, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->eventBus:Lde/greenrobot/event/EventBus;
 
     .line 42
-    iget-object v0, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->eventBus:Lde/greenrobot/event/EventBus;
+    invoke-virtual {p1, p0}, Lde/greenrobot/event/EventBus;->register(Ljava/lang/Object;)V
 
-    invoke-virtual {v0, p0}, Lde/greenrobot/event/EventBus;->register(Ljava/lang/Object;)V
+    const/4 p1, 0x1
 
     .line 43
-    const/4 v0, 0x1
+    iput-boolean p1, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->skipRegisterOnNextResume:Z
 
-    iput-boolean v0, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->skipRegisterOnNextResume:Z
-
-    .line 44
     return-void
 .end method
 
 .method public onEventMainThread(Lde/greenrobot/event/util/ThrowableFailureEvent;)V
-    .locals 6
-    .param p1, "event"    # Lde/greenrobot/event/util/ThrowableFailureEvent;
+    .locals 5
 
-    .prologue
     .line 65
-    iget-object v3, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->executionScope:Ljava/lang/Object;
+    iget-object v0, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->executionScope:Ljava/lang/Object;
 
-    # invokes: Lde/greenrobot/event/util/ErrorDialogManager;->isInExecutionScope(Ljava/lang/Object;Lde/greenrobot/event/util/ThrowableFailureEvent;)Z
-    invoke-static {v3, p1}, Lde/greenrobot/event/util/ErrorDialogManager;->access$000(Ljava/lang/Object;Lde/greenrobot/event/util/ThrowableFailureEvent;)Z
+    invoke-static {v0, p1}, Lde/greenrobot/event/util/ErrorDialogManager;->access$000(Ljava/lang/Object;Lde/greenrobot/event/util/ThrowableFailureEvent;)Z
 
-    move-result v3
+    move-result v0
 
-    if-nez v3, :cond_1
+    if-nez v0, :cond_0
 
-    .line 84
-    :cond_0
-    :goto_0
     return-void
 
     .line 68
-    :cond_1
+    :cond_0
     invoke-static {p1}, Lde/greenrobot/event/util/ErrorDialogManager;->checkLogException(Lde/greenrobot/event/util/ThrowableFailureEvent;)V
 
     .line 70
-    invoke-virtual {p0}, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->getFragmentManager()Landroid/support/v4/app/FragmentManager;
-
-    move-result-object v2
-
-    .line 71
-    .local v2, "fm":Landroid/support/v4/app/FragmentManager;
-    invoke-virtual {v2}, Landroid/support/v4/app/FragmentManager;->executePendingTransactions()Z
-
-    .line 73
-    const-string v3, "de.greenrobot.eventbus.error_dialog"
-
-    invoke-virtual {v2, v3}, Landroid/support/v4/app/FragmentManager;->findFragmentByTag(Ljava/lang/String;)Landroid/support/v4/app/Fragment;
-
-    move-result-object v1
-
-    check-cast v1, Landroid/support/v4/app/DialogFragment;
-
-    .line 74
-    .local v1, "existingFragment":Landroid/support/v4/app/DialogFragment;
-    if-eqz v1, :cond_2
-
-    .line 76
-    invoke-virtual {v1}, Landroid/support/v4/app/DialogFragment;->dismiss()V
-
-    .line 79
-    :cond_2
-    sget-object v3, Lde/greenrobot/event/util/ErrorDialogManager;->factory:Lde/greenrobot/event/util/ErrorDialogFragmentFactory;
-
-    iget-boolean v4, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->finishAfterDialog:Z
-
-    iget-object v5, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->argumentsForErrorDialog:Landroid/os/Bundle;
-
-    invoke-virtual {v3, p1, v4, v5}, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->prepareErrorFragment(Lde/greenrobot/event/util/ThrowableFailureEvent;ZLandroid/os/Bundle;)Ljava/lang/Object;
+    invoke-virtual {p0}, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->getFragmentManager()Landroidx/fragment/app/FragmentManager;
 
     move-result-object v0
 
-    check-cast v0, Landroid/support/v4/app/DialogFragment;
+    .line 71
+    invoke-virtual {v0}, Landroidx/fragment/app/FragmentManager;->executePendingTransactions()Z
 
-    .line 81
-    .local v0, "errorFragment":Landroid/support/v4/app/DialogFragment;
-    if-eqz v0, :cond_0
+    const-string v1, "de.greenrobot.eventbus.error_dialog"
+
+    .line 73
+    invoke-virtual {v0, v1}, Landroidx/fragment/app/FragmentManager;->findFragmentByTag(Ljava/lang/String;)Landroidx/fragment/app/Fragment;
+
+    move-result-object v2
+
+    check-cast v2, Landroidx/fragment/app/DialogFragment;
+
+    if-eqz v2, :cond_1
+
+    .line 76
+    invoke-virtual {v2}, Landroidx/fragment/app/DialogFragment;->dismiss()V
+
+    .line 79
+    :cond_1
+    sget-object v2, Lde/greenrobot/event/util/ErrorDialogManager;->factory:Lde/greenrobot/event/util/ErrorDialogFragmentFactory;
+
+    iget-boolean v3, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->finishAfterDialog:Z
+
+    iget-object v4, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->argumentsForErrorDialog:Landroid/os/Bundle;
+
+    invoke-virtual {v2, p1, v3, v4}, Lde/greenrobot/event/util/ErrorDialogFragmentFactory;->prepareErrorFragment(Lde/greenrobot/event/util/ThrowableFailureEvent;ZLandroid/os/Bundle;)Ljava/lang/Object;
+
+    move-result-object p1
+
+    check-cast p1, Landroidx/fragment/app/DialogFragment;
+
+    if-eqz p1, :cond_2
 
     .line 82
-    const-string v3, "de.greenrobot.eventbus.error_dialog"
+    invoke-virtual {p1, v0, v1}, Landroidx/fragment/app/DialogFragment;->show(Landroidx/fragment/app/FragmentManager;Ljava/lang/String;)V
 
-    invoke-virtual {v0, v2, v3}, Landroid/support/v4/app/DialogFragment;->show(Landroid/support/v4/app/FragmentManager;Ljava/lang/String;)V
-
-    goto :goto_0
+    :cond_2
+    return-void
 .end method
 
 .method public onPause()V
     .locals 1
 
-    .prologue
     .line 60
     iget-object v0, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->eventBus:Lde/greenrobot/event/EventBus;
 
     invoke-virtual {v0, p0}, Lde/greenrobot/event/EventBus;->unregister(Ljava/lang/Object;)V
 
     .line 61
-    invoke-super {p0}, Landroid/support/v4/app/Fragment;->onPause()V
+    invoke-super {p0}, Landroidx/fragment/app/Fragment;->onPause()V
 
-    .line 62
     return-void
 .end method
 
 .method public onResume()V
     .locals 1
 
-    .prologue
     .line 48
-    invoke-super {p0}, Landroid/support/v4/app/Fragment;->onResume()V
+    invoke-super {p0}, Landroidx/fragment/app/Fragment;->onResume()V
 
     .line 49
     iget-boolean v0, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->skipRegisterOnNextResume:Z
 
     if-eqz v0, :cond_0
 
-    .line 51
     const/4 v0, 0x0
 
+    .line 51
     iput-boolean v0, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->skipRegisterOnNextResume:Z
 
-    .line 56
-    :goto_0
-    return-void
+    goto :goto_0
 
     .line 53
     :cond_0
@@ -264,9 +227,8 @@
     iput-object v0, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->eventBus:Lde/greenrobot/event/EventBus;
 
     .line 54
-    iget-object v0, p0, Lde/greenrobot/event/util/ErrorDialogManager$SupportManagerFragment;->eventBus:Lde/greenrobot/event/EventBus;
-
     invoke-virtual {v0, p0}, Lde/greenrobot/event/EventBus;->register(Ljava/lang/Object;)V
 
-    goto :goto_0
+    :goto_0
+    return-void
 .end method

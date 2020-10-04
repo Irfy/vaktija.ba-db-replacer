@@ -1,5 +1,5 @@
 .class public Lba/vaktija/android/wizard/LocationFragment;
-.super Landroid/support/v4/app/Fragment;
+.super Landroidx/fragment/app/Fragment;
 .source "LocationFragment.java"
 
 # interfaces
@@ -19,7 +19,7 @@
 
 .field private locationName:Ljava/lang/String;
 
-.field mActivity:Landroid/support/v7/app/AppCompatActivity;
+.field mActivity:Landroidx/appcompat/app/AppCompatActivity;
 
 .field mListView:Landroid/widget/ListView;
 
@@ -36,8 +36,7 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
-    .line 37
+    .line 38
     const-class v0, Lba/vaktija/android/wizard/LocationFragment;
 
     invoke-virtual {v0}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
@@ -52,18 +51,17 @@
 .method public constructor <init>()V
     .locals 1
 
-    .prologue
-    .line 36
-    invoke-direct {p0}, Landroid/support/v4/app/Fragment;-><init>()V
+    .line 37
+    invoke-direct {p0}, Landroidx/fragment/app/Fragment;-><init>()V
 
-    .line 49
     const/16 v0, 0x6b
 
+    .line 50
     iput v0, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
 
-    .line 50
-    const-string v0, "Beč (Džemat Bosna)"
+    const-string v0, "Sarajevo"
 
+    .line 51
     iput-object v0, p0, Lba/vaktija/android/wizard/LocationFragment;->locationName:Ljava/lang/String;
 
     return-void
@@ -71,11 +69,8 @@
 
 .method static synthetic access$002(Lba/vaktija/android/wizard/LocationFragment;I)I
     .locals 0
-    .param p0, "x0"    # Lba/vaktija/android/wizard/LocationFragment;
-    .param p1, "x1"    # I
 
-    .prologue
-    .line 36
+    .line 37
     iput p1, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
 
     return p1
@@ -83,11 +78,8 @@
 
 .method static synthetic access$102(Lba/vaktija/android/wizard/LocationFragment;Ljava/lang/String;)Ljava/lang/String;
     .locals 0
-    .param p0, "x0"    # Lba/vaktija/android/wizard/LocationFragment;
-    .param p1, "x1"    # Ljava/lang/String;
 
-    .prologue
-    .line 36
+    .line 37
     iput-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->locationName:Ljava/lang/String;
 
     return-object p1
@@ -95,10 +87,8 @@
 
 .method static synthetic access$200(Lba/vaktija/android/wizard/LocationFragment;)V
     .locals 0
-    .param p0, "x0"    # Lba/vaktija/android/wizard/LocationFragment;
 
-    .prologue
-    .line 36
+    .line 37
     invoke-direct {p0}, Lba/vaktija/android/wizard/LocationFragment;->saveSelectedLocation()V
 
     return-void
@@ -106,127 +96,114 @@
 
 .method static synthetic access$300(Lba/vaktija/android/wizard/LocationFragment;)V
     .locals 0
-    .param p0, "x0"    # Lba/vaktija/android/wizard/LocationFragment;
 
-    .prologue
-    .line 36
+    .line 37
     invoke-direct {p0}, Lba/vaktija/android/wizard/LocationFragment;->replaceFragments()V
 
     return-void
 .end method
 
 .method private getHalfScreenHeight()I
-    .locals 2
+    .locals 1
 
-    .prologue
-    .line 163
-    invoke-virtual {p0}, Lba/vaktija/android/wizard/LocationFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Landroid/support/v4/app/FragmentActivity;->getWindowManager()Landroid/view/WindowManager;
-
-    move-result-object v1
-
-    invoke-interface {v1}, Landroid/view/WindowManager;->getDefaultDisplay()Landroid/view/Display;
+    .line 164
+    invoke-virtual {p0}, Lba/vaktija/android/wizard/LocationFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
     move-result-object v0
 
-    .line 164
-    .local v0, "display":Landroid/view/Display;
+    invoke-virtual {v0}, Landroidx/fragment/app/FragmentActivity;->getWindowManager()Landroid/view/WindowManager;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/view/WindowManager;->getDefaultDisplay()Landroid/view/Display;
+
+    move-result-object v0
+
+    .line 165
     invoke-virtual {v0}, Landroid/view/Display;->getHeight()I
 
-    move-result v1
+    move-result v0
 
-    add-int/lit16 v1, v1, -0x1f4
+    add-int/lit16 v0, v0, -0x1f4
 
-    div-int/lit8 v1, v1, 0x2
+    div-int/lit8 v0, v0, 0x2
 
-    return v1
+    return v0
 .end method
 
-.method public static newInstance(Z)Landroid/support/v4/app/Fragment;
-    .locals 3
-    .param p0, "noWizard"    # Z
+.method public static newInstance(Z)Landroidx/fragment/app/Fragment;
+    .locals 2
 
-    .prologue
-    .line 55
+    .line 56
     new-instance v0, Landroid/os/Bundle;
 
     invoke-direct {v0}, Landroid/os/Bundle;-><init>()V
 
-    .line 56
-    .local v0, "args":Landroid/os/Bundle;
-    const-string v2, "EXTRA_NO_WIZARD"
-
-    invoke-virtual {v0, v2, p0}, Landroid/os/Bundle;->putBoolean(Ljava/lang/String;Z)V
+    const-string v1, "EXTRA_NO_WIZARD"
 
     .line 57
-    new-instance v1, Lba/vaktija/android/wizard/LocationFragment;
-
-    invoke-direct {v1}, Lba/vaktija/android/wizard/LocationFragment;-><init>()V
+    invoke-virtual {v0, v1, p0}, Landroid/os/Bundle;->putBoolean(Ljava/lang/String;Z)V
 
     .line 58
-    .local v1, "f":Landroid/support/v4/app/Fragment;
-    invoke-virtual {v1, v0}, Landroid/support/v4/app/Fragment;->setArguments(Landroid/os/Bundle;)V
+    new-instance p0, Lba/vaktija/android/wizard/LocationFragment;
+
+    invoke-direct {p0}, Lba/vaktija/android/wizard/LocationFragment;-><init>()V
 
     .line 59
-    return-object v1
+    invoke-virtual {p0, v0}, Landroidx/fragment/app/Fragment;->setArguments(Landroid/os/Bundle;)V
+
+    return-object p0
 .end method
 
 .method private replaceFragments()V
     .locals 3
 
-    .prologue
-    .line 202
-    iget-object v1, p0, Lba/vaktija/android/wizard/LocationFragment;->mActivity:Landroid/support/v7/app/AppCompatActivity;
-
-    invoke-virtual {v1}, Landroid/support/v7/app/AppCompatActivity;->getSupportFragmentManager()Landroid/support/v4/app/FragmentManager;
-
-    move-result-object v1
-
     .line 203
-    invoke-virtual {v1}, Landroid/support/v4/app/FragmentManager;->beginTransaction()Landroid/support/v4/app/FragmentTransaction;
+    iget-object v0, p0, Lba/vaktija/android/wizard/LocationFragment;->mActivity:Landroidx/appcompat/app/AppCompatActivity;
+
+    invoke-virtual {v0}, Landroidx/appcompat/app/AppCompatActivity;->getSupportFragmentManager()Landroidx/fragment/app/FragmentManager;
 
     move-result-object v0
 
-    .line 205
-    .local v0, "ft":Landroid/support/v4/app/FragmentTransaction;
+    .line 204
+    invoke-virtual {v0}, Landroidx/fragment/app/FragmentManager;->beginTransaction()Landroidx/fragment/app/FragmentTransaction;
+
+    move-result-object v0
+
+    .line 206
     sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
 
     const/16 v2, 0xf
 
     if-le v1, v2, :cond_0
 
-    .line 206
-    const v1, 0x7f04000c
+    const v1, 0x7f010021
 
-    const v2, 0x7f04000d
+    const v2, 0x7f010022
 
-    invoke-virtual {v0, v1, v2}, Landroid/support/v4/app/FragmentTransaction;->setCustomAnimations(II)Landroid/support/v4/app/FragmentTransaction;
+    .line 207
+    invoke-virtual {v0, v1, v2}, Landroidx/fragment/app/FragmentTransaction;->setCustomAnimations(II)Landroidx/fragment/app/FragmentTransaction;
 
-    .line 209
     :cond_0
-    const v1, 0x7f0e006b
+    const v1, 0x7f080056
 
+    .line 210
     new-instance v2, Lba/vaktija/android/wizard/VakatTweaksFragment;
 
     invoke-direct {v2}, Lba/vaktija/android/wizard/VakatTweaksFragment;-><init>()V
 
-    invoke-virtual {v0, v1, v2}, Landroid/support/v4/app/FragmentTransaction;->replace(ILandroid/support/v4/app/Fragment;)Landroid/support/v4/app/FragmentTransaction;
-
-    .line 210
-    invoke-virtual {v0}, Landroid/support/v4/app/FragmentTransaction;->commit()I
+    invoke-virtual {v0, v1, v2}, Landroidx/fragment/app/FragmentTransaction;->replace(ILandroidx/fragment/app/Fragment;)Landroidx/fragment/app/FragmentTransaction;
 
     .line 211
+    invoke-virtual {v0}, Landroidx/fragment/app/FragmentTransaction;->commit()I
+
     return-void
 .end method
 
 .method private saveSelectedLocation()V
     .locals 3
 
-    .prologue
-    .line 175
+    .line 176
     sget-object v0, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -237,13 +214,9 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     iget v2, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -251,44 +224,44 @@
 
     invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 177
+    .line 178
     iget-object v0, p0, Lba/vaktija/android/wizard/LocationFragment;->prefs:Landroid/content/SharedPreferences;
 
     invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
 
     move-result-object v0
 
-    const-string v1, "selectedLocation"
+    iget v1, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
 
-    iget v2, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
-
-    .line 178
-    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v0
-
-    const-string v1, "locationName"
-
-    iget-object v2, p0, Lba/vaktija/android/wizard/LocationFragment;->locationName:Ljava/lang/String;
+    const-string v2, "selectedLocation"
 
     .line 179
-    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+    invoke-interface {v0, v2, v1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
 
     move-result-object v0
 
+    iget-object v1, p0, Lba/vaktija/android/wizard/LocationFragment;->locationName:Ljava/lang/String;
+
+    const-string v2, "locationName"
+
     .line 180
+    invoke-interface {v0, v2, v1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    .line 181
     invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->commit()Z
 
-    .line 182
+    .line 183
     iget-object v0, p0, Lba/vaktija/android/wizard/LocationFragment;->app:Lba/vaktija/android/App;
 
-    const-string v1, "Odabrana lokacija"
+    iget-object v1, p0, Lba/vaktija/android/wizard/LocationFragment;->locationName:Ljava/lang/String;
 
-    iget-object v2, p0, Lba/vaktija/android/wizard/LocationFragment;->locationName:Ljava/lang/String;
+    const-string v2, "Odabrana lokacija"
 
-    invoke-virtual {v0, v1, v2}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-virtual {v0, v2, v1}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 184
+    .line 185
     iget-object v0, p0, Lba/vaktija/android/wizard/LocationFragment;->app:Lba/vaktija/android/App;
 
     invoke-static {v0}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
@@ -297,28 +270,26 @@
 
     invoke-virtual {v0}, Lba/vaktija/android/models/PrayersSchedule;->reset()V
 
-    .line 186
-    invoke-virtual {p0}, Lba/vaktija/android/wizard/LocationFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    .line 187
+    invoke-virtual {p0}, Lba/vaktija/android/wizard/LocationFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
     move-result-object v0
 
     invoke-static {v0}, Lba/vaktija/android/util/Utils;->updateWidget(Landroid/content/Context;)V
 
-    .line 188
+    .line 189
     iget-boolean v0, p0, Lba/vaktija/android/wizard/LocationFragment;->noWizard:Z
 
     if-eqz v0, :cond_0
 
-    .line 189
-    iget-object v0, p0, Lba/vaktija/android/wizard/LocationFragment;->mActivity:Landroid/support/v7/app/AppCompatActivity;
+    .line 190
+    iget-object v0, p0, Lba/vaktija/android/wizard/LocationFragment;->mActivity:Landroidx/appcompat/app/AppCompatActivity;
 
-    invoke-virtual {v0}, Landroid/support/v7/app/AppCompatActivity;->finish()V
+    invoke-virtual {v0}, Landroidx/appcompat/app/AppCompatActivity;->finish()V
 
-    .line 198
-    :goto_0
-    return-void
+    goto :goto_0
 
-    .line 191
+    .line 192
     :cond_0
     iget-object v0, p0, Lba/vaktija/android/wizard/LocationFragment;->next:Landroid/widget/Button;
 
@@ -328,366 +299,330 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->post(Ljava/lang/Runnable;)Z
 
-    goto :goto_0
+    :goto_0
+    return-void
 .end method
 
 
 # virtual methods
 .method public onActivityCreated(Landroid/os/Bundle;)V
-    .locals 11
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
-
-    .prologue
-    const/16 v10, 0x6b
-
-    const/4 v9, -0x1
-
-    .line 91
-    invoke-super {p0, p1}, Landroid/support/v4/app/Fragment;->onActivityCreated(Landroid/os/Bundle;)V
+    .locals 8
 
     .line 92
-    sget-object v6, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
+    invoke-super {p0, p1}, Landroidx/fragment/app/Fragment;->onActivityCreated(Landroid/os/Bundle;)V
 
-    const-string v7, "onActivityCreated"
+    .line 93
+    sget-object p1, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
 
-    invoke-static {v6, v7}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    const-string v0, "onActivityCreated"
 
-    .line 94
-    iget-object v6, p0, Lba/vaktija/android/wizard/LocationFragment;->mActivity:Landroid/support/v7/app/AppCompatActivity;
+    invoke-static {p1, v0}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    invoke-static {v6}, Landroid/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
+    .line 95
+    iget-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->mActivity:Landroidx/appcompat/app/AppCompatActivity;
 
-    move-result-object v6
+    invoke-static {p1}, Landroid/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
-    iput-object v6, p0, Lba/vaktija/android/wizard/LocationFragment;->prefs:Landroid/content/SharedPreferences;
+    move-result-object p1
 
-    .line 96
-    iget-object v6, p0, Lba/vaktija/android/wizard/LocationFragment;->mActivity:Landroid/support/v7/app/AppCompatActivity;
+    iput-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->prefs:Landroid/content/SharedPreferences;
 
-    invoke-virtual {v6}, Landroid/support/v7/app/AppCompatActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;
+    .line 97
+    iget-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->mActivity:Landroidx/appcompat/app/AppCompatActivity;
 
-    move-result-object v6
+    invoke-virtual {p1}, Landroidx/appcompat/app/AppCompatActivity;->getSupportActionBar()Landroidx/appcompat/app/ActionBar;
 
-    const-string v7, "Lokacija"
+    move-result-object p1
 
-    invoke-virtual {v6, v7}, Landroid/support/v7/app/ActionBar;->setTitle(Ljava/lang/CharSequence;)V
+    const-string v0, "Lokacija"
 
-    .line 98
-    iget-object v6, p0, Lba/vaktija/android/wizard/LocationFragment;->prev:Landroid/widget/Button;
-
-    const/4 v7, 0x4
-
-    invoke-virtual {v6, v7}, Landroid/widget/Button;->setVisibility(I)V
+    invoke-virtual {p1, v0}, Landroidx/appcompat/app/ActionBar;->setTitle(Ljava/lang/CharSequence;)V
 
     .line 99
-    iget-object v6, p0, Lba/vaktija/android/wizard/LocationFragment;->next:Landroid/widget/Button;
+    iget-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->prev:Landroid/widget/Button;
 
-    invoke-virtual {v6, p0}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+    const/4 v0, 0x4
 
-    .line 101
+    invoke-virtual {p1, v0}, Landroid/widget/Button;->setVisibility(I)V
+
+    .line 100
+    iget-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->next:Landroid/widget/Button;
+
+    invoke-virtual {p1, p0}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    .line 102
     invoke-virtual {p0}, Lba/vaktija/android/wizard/LocationFragment;->getArguments()Landroid/os/Bundle;
 
-    move-result-object v6
+    move-result-object p1
 
-    const-string v7, "EXTRA_NO_WIZARD"
+    const-string v0, "EXTRA_NO_WIZARD"
 
-    invoke-virtual {v6, v7}, Landroid/os/Bundle;->getBoolean(Ljava/lang/String;)Z
+    invoke-virtual {p1, v0}, Landroid/os/Bundle;->getBoolean(Ljava/lang/String;)Z
 
-    move-result v6
+    move-result p1
 
-    iput-boolean v6, p0, Lba/vaktija/android/wizard/LocationFragment;->noWizard:Z
+    iput-boolean p1, p0, Lba/vaktija/android/wizard/LocationFragment;->noWizard:Z
 
-    .line 103
-    iget-boolean v6, p0, Lba/vaktija/android/wizard/LocationFragment;->noWizard:Z
+    if-eqz p1, :cond_0
 
-    if-eqz v6, :cond_0
-
-    .line 104
+    .line 105
     invoke-virtual {p0}, Lba/vaktija/android/wizard/LocationFragment;->getView()Landroid/view/View;
 
-    move-result-object v6
+    move-result-object p1
 
-    const v7, 0x7f0e00e2
+    const v0, 0x7f080158
 
-    invoke-virtual {v6, v7}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    invoke-virtual {p1, v0}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    move-result-object v6
+    move-result-object p1
 
-    const/16 v7, 0x8
+    const/16 v0, 0x8
 
-    invoke-virtual {v6, v7}, Landroid/view/View;->setVisibility(I)V
-
-    .line 107
-    :cond_0
-    iget-object v6, p0, Lba/vaktija/android/wizard/LocationFragment;->app:Lba/vaktija/android/App;
-
-    iget-object v6, v6, Lba/vaktija/android/App;->db:Lba/vaktija/android/db/Database;
-
-    invoke-virtual {v6}, Lba/vaktija/android/db/Database;->getLocations()Ljava/util/List;
-
-    move-result-object v2
+    invoke-virtual {p1, v0}, Landroid/view/View;->setVisibility(I)V
 
     .line 108
-    .local v2, "locations":Ljava/util/List;, "Ljava/util/List<Lba/vaktija/android/models/Location;>;"
-    new-instance v3, Ljava/util/ArrayList;
+    :cond_0
+    iget-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->app:Lba/vaktija/android/App;
 
-    invoke-direct {v3}, Ljava/util/ArrayList;-><init>()V
+    iget-object p1, p1, Lba/vaktija/android/App;->db:Lba/vaktija/android/db/Database;
 
-    .line 110
-    .local v3, "locationsList":Ljava/util/List;, "Ljava/util/List<Lba/vaktija/android/models/Location;>;"
+    invoke-virtual {p1}, Lba/vaktija/android/db/Database;->getLocations()Ljava/util/List;
+
+    move-result-object p1
+
+    .line 109
+    new-instance v0, Ljava/util/ArrayList;
+
+    invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
+
     const/4 v1, 0x0
 
-    .local v1, "i":I
-    :goto_0
-    invoke-interface {v2}, Ljava/util/List;->size()I
-
-    move-result v6
-
-    if-ge v1, v6, :cond_3
+    const/4 v2, 0x0
 
     .line 111
-    if-nez v1, :cond_1
+    :goto_0
+    invoke-interface {p1}, Ljava/util/List;->size()I
 
-    .line 112
-    new-instance v6, Lba/vaktija/android/models/Location;
+    move-result v3
 
-    const-string v7, "Bosna i Hercegovina"
+    const/16 v4, 0x6b
 
-    invoke-direct {v6, v7, v9}, Lba/vaktija/android/models/Location;-><init>(Ljava/lang/String;I)V
+    const-string v5, "Sand\u017eak"
 
-    invoke-interface {v3, v6}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+    const-string v6, "Bosna i Hercegovina"
 
-    .line 115
+    const/4 v7, -0x1
+
+    if-ge v2, v3, :cond_3
+
+    if-nez v2, :cond_1
+
+    .line 113
+    new-instance v3, Lba/vaktija/android/models/Location;
+
+    invoke-direct {v3, v6, v7}, Lba/vaktija/android/models/Location;-><init>(Ljava/lang/String;I)V
+
+    invoke-interface {v0, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
     :cond_1
-    if-ne v1, v10, :cond_2
+    if-ne v2, v4, :cond_2
 
-    .line 116
-    new-instance v6, Lba/vaktija/android/models/Location;
+    .line 117
+    new-instance v3, Lba/vaktija/android/models/Location;
 
-    const-string v7, "Sand\u017eak"
+    invoke-direct {v3, v5, v7}, Lba/vaktija/android/models/Location;-><init>(Ljava/lang/String;I)V
 
-    invoke-direct {v6, v7, v9}, Lba/vaktija/android/models/Location;-><init>(Ljava/lang/String;I)V
+    invoke-interface {v0, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    invoke-interface {v3, v6}, Ljava/util/List;->add(Ljava/lang/Object;)Z
-
-    .line 119
+    .line 120
     :cond_2
-    invoke-interface {v2, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+    invoke-interface {p1, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
-    move-result-object v6
+    move-result-object v3
 
-    invoke-interface {v3, v6}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+    invoke-interface {v0, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    .line 110
-    add-int/lit8 v1, v1, 0x1
+    add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
-    .line 122
+    .line 123
     :cond_3
-    new-instance v4, Ljava/util/HashMap;
+    new-instance p1, Ljava/util/HashMap;
 
-    invoke-direct {v4}, Ljava/util/HashMap;-><init>()V
-
-    .line 124
-    .local v4, "sections":Ljava/util/HashMap;, "Ljava/util/HashMap<Ljava/lang/Integer;Lba/vaktija/android/models/Location;>;"
-    const/4 v6, 0x0
-
-    invoke-static {v6}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v6
-
-    new-instance v7, Lba/vaktija/android/models/Location;
-
-    const-string v8, "Bosna i Hercegovina"
-
-    invoke-direct {v7, v8, v9}, Lba/vaktija/android/models/Location;-><init>(Ljava/lang/String;I)V
-
-    invoke-virtual {v4, v6, v7}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-direct {p1}, Ljava/util/HashMap;-><init>()V
 
     .line 125
-    const/16 v6, 0x6c
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    invoke-static {v6}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result-object v1
 
-    move-result-object v6
+    new-instance v2, Lba/vaktija/android/models/Location;
 
-    new-instance v7, Lba/vaktija/android/models/Location;
+    invoke-direct {v2, v6, v7}, Lba/vaktija/android/models/Location;-><init>(Ljava/lang/String;I)V
 
-    const-string v8, "Sand\u017eak"
+    invoke-virtual {p1, v1, v2}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    invoke-direct {v7, v8, v9}, Lba/vaktija/android/models/Location;-><init>(Ljava/lang/String;I)V
+    const/16 v1, 0x6c
 
-    invoke-virtual {v4, v6, v7}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    .line 126
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    .line 127
-    new-instance v0, Lba/vaktija/android/LocationsAdapter;
+    move-result-object v1
 
-    iget-object v6, p0, Lba/vaktija/android/wizard/LocationFragment;->mActivity:Landroid/support/v7/app/AppCompatActivity;
+    new-instance v2, Lba/vaktija/android/models/Location;
 
-    invoke-direct {v0, v6, v3}, Lba/vaktija/android/LocationsAdapter;-><init>(Landroid/content/Context;Ljava/util/List;)V
+    invoke-direct {v2, v5, v7}, Lba/vaktija/android/models/Location;-><init>(Ljava/lang/String;I)V
 
-    .line 131
-    .local v0, "adapter":Lba/vaktija/android/LocationsAdapter;
-    invoke-virtual {v0, v4}, Lba/vaktija/android/LocationsAdapter;->setSections(Ljava/util/HashMap;)V
+    invoke-virtual {p1, v1, v2}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 133
-    iget-object v6, p0, Lba/vaktija/android/wizard/LocationFragment;->mListView:Landroid/widget/ListView;
+    .line 128
+    new-instance v1, Lba/vaktija/android/LocationsAdapter;
 
-    invoke-virtual {v6, v0}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
+    iget-object v2, p0, Lba/vaktija/android/wizard/LocationFragment;->mActivity:Landroidx/appcompat/app/AppCompatActivity;
 
-    .line 135
-    iget-object v6, p0, Lba/vaktija/android/wizard/LocationFragment;->prefs:Landroid/content/SharedPreferences;
+    invoke-direct {v1, v2, v0}, Lba/vaktija/android/LocationsAdapter;-><init>(Landroid/content/Context;Ljava/util/List;)V
 
-    const-string v7, "selectedLocation"
+    .line 132
+    invoke-virtual {v1, p1}, Lba/vaktija/android/LocationsAdapter;->setSections(Ljava/util/HashMap;)V
 
-    invoke-interface {v6, v7, v10}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+    .line 134
+    iget-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->mListView:Landroid/widget/ListView;
 
-    move-result v6
-
-    iput v6, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
+    invoke-virtual {p1, v1}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
 
     .line 136
-    new-instance v6, Ljava/lang/StringBuilder;
+    iget-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->prefs:Landroid/content/SharedPreferences;
 
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
+    const-string v0, "selectedLocation"
 
-    iget v7, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
+    invoke-interface {p1, v0, v4}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
 
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    move-result p1
 
-    move-result-object v6
+    iput p1, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
 
-    const-string v7, ""
+    .line 137
+    new-instance p1, Ljava/lang/StringBuilder;
 
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V
 
-    move-result-object v6
+    iget v0, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
 
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    move-result-object v5
+    const-string v0, ""
 
-    .line 138
-    .local v5, "selectedName":Ljava/lang/String;
-    sget-object v6, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
+    invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    new-instance v7, Ljava/lang/StringBuilder;
+    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v8, "locationId: "
-
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    iget v8, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
-
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    const-string v8, " adapter.count: "
-
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    invoke-virtual {v0}, Lba/vaktija/android/LocationsAdapter;->getCount()I
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-static {v6, v7}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+    move-result-object p1
 
     .line 139
-    sget-object v6, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
+    sget-object v0, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
 
-    new-instance v7, Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v8, "selectedName: "
+    const-string v3, "locationId: "
 
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v7
+    iget v3, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
 
-    invoke-virtual {v7, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    move-result-object v7
+    const-string v3, " adapter.count: "
 
-    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v7
+    invoke-virtual {v1}, Lba/vaktija/android/LocationsAdapter;->getCount()I
 
-    invoke-static {v6, v7}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+    move-result v3
 
-    .line 142
-    iget-object v6, p0, Lba/vaktija/android/wizard/LocationFragment;->mListView:Landroid/widget/ListView;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    iget v7, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-virtual {v0, v7}, Lba/vaktija/android/LocationsAdapter;->getPositionForLocationId(I)I
+    move-result-object v2
 
-    move-result v7
+    invoke-static {v0, v2}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
 
-    const/4 v8, 0x1
+    .line 140
+    sget-object v0, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
 
-    invoke-virtual {v6, v7, v8}, Landroid/widget/ListView;->setItemChecked(IZ)V
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    .line 144
-    iget-object v6, p0, Lba/vaktija/android/wizard/LocationFragment;->mListView:Landroid/widget/ListView;
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    new-instance v7, Lba/vaktija/android/wizard/LocationFragment$1;
+    const-string v3, "selectedName: "
 
-    invoke-direct {v7, p0}, Lba/vaktija/android/wizard/LocationFragment$1;-><init>(Lba/vaktija/android/wizard/LocationFragment;)V
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v6, v7}, Landroid/widget/ListView;->setOnItemClickListener(Landroid/widget/AdapterView$OnItemClickListener;)V
+    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 159
-    iget-object v6, p0, Lba/vaktija/android/wizard/LocationFragment;->mListView:Landroid/widget/ListView;
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    iget v7, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
+    move-result-object p1
 
-    invoke-virtual {v0, v7}, Lba/vaktija/android/LocationsAdapter;->getPositionForLocationId(I)I
+    invoke-static {v0, p1}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
 
-    move-result v7
+    .line 143
+    iget-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->mListView:Landroid/widget/ListView;
+
+    iget v0, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
+
+    invoke-virtual {v1, v0}, Lba/vaktija/android/LocationsAdapter;->getPositionForLocationId(I)I
+
+    move-result v0
+
+    const/4 v2, 0x1
+
+    invoke-virtual {p1, v0, v2}, Landroid/widget/ListView;->setItemChecked(IZ)V
+
+    .line 145
+    iget-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->mListView:Landroid/widget/ListView;
+
+    new-instance v0, Lba/vaktija/android/wizard/LocationFragment$1;
+
+    invoke-direct {v0, p0}, Lba/vaktija/android/wizard/LocationFragment$1;-><init>(Lba/vaktija/android/wizard/LocationFragment;)V
+
+    invoke-virtual {p1, v0}, Landroid/widget/ListView;->setOnItemClickListener(Landroid/widget/AdapterView$OnItemClickListener;)V
+
+    .line 160
+    iget-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->mListView:Landroid/widget/ListView;
+
+    iget v0, p0, Lba/vaktija/android/wizard/LocationFragment;->locationId:I
+
+    invoke-virtual {v1, v0}, Lba/vaktija/android/LocationsAdapter;->getPositionForLocationId(I)I
+
+    move-result v0
 
     invoke-direct {p0}, Lba/vaktija/android/wizard/LocationFragment;->getHalfScreenHeight()I
 
-    move-result v8
+    move-result v1
 
-    invoke-virtual {v6, v7, v8}, Landroid/widget/ListView;->setSelectionFromTop(II)V
+    invoke-virtual {p1, v0, v1}, Landroid/widget/ListView;->setSelectionFromTop(II)V
 
-    .line 160
     return-void
 .end method
 
 .method public onAttach(Landroid/app/Activity;)V
     .locals 2
-    .param p1, "activity"    # Landroid/app/Activity;
-
-    .prologue
-    .line 64
-    invoke-super {p0, p1}, Landroid/support/v4/app/Fragment;->onAttach(Landroid/app/Activity;)V
 
     .line 65
+    invoke-super {p0, p1}, Landroidx/fragment/app/Fragment;->onAttach(Landroid/app/Activity;)V
+
+    .line 66
     sget-object v0, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
 
     const-string v1, "onAttach"
 
     invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 67
+    .line 68
     invoke-virtual {p1}, Landroid/app/Activity;->getApplicationContext()Landroid/content/Context;
 
     move-result-object v0
@@ -696,119 +631,105 @@
 
     iput-object v0, p0, Lba/vaktija/android/wizard/LocationFragment;->app:Lba/vaktija/android/App;
 
-    .line 68
-    check-cast p1, Landroid/support/v7/app/AppCompatActivity;
-
-    .end local p1    # "activity":Landroid/app/Activity;
-    iput-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->mActivity:Landroid/support/v7/app/AppCompatActivity;
-
     .line 69
+    check-cast p1, Landroidx/appcompat/app/AppCompatActivity;
+
+    iput-object p1, p0, Lba/vaktija/android/wizard/LocationFragment;->mActivity:Landroidx/appcompat/app/AppCompatActivity;
+
     return-void
 .end method
 
 .method public onClick(Landroid/view/View;)V
-    .locals 2
-    .param p1, "v"    # Landroid/view/View;
-
-    .prologue
-    .line 169
-    invoke-virtual {p1}, Landroid/view/View;->getId()I
-
-    move-result v0
-
-    const v1, 0x7f0e00e4
-
-    if-ne v0, v1, :cond_0
+    .locals 1
 
     .line 170
+    invoke-virtual {p1}, Landroid/view/View;->getId()I
+
+    move-result p1
+
+    const v0, 0x7f080159
+
+    if-ne p1, v0, :cond_0
+
+    .line 171
     invoke-direct {p0}, Lba/vaktija/android/wizard/LocationFragment;->saveSelectedLocation()V
 
-    .line 172
     :cond_0
     return-void
 .end method
 
 .method public onCreate(Landroid/os/Bundle;)V
-    .locals 2
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
-
-    .prologue
-    .line 73
-    invoke-super {p0, p1}, Landroid/support/v4/app/Fragment;->onCreate(Landroid/os/Bundle;)V
+    .locals 1
 
     .line 74
-    sget-object v0, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
-
-    const-string v1, "onCreate"
-
-    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-super {p0, p1}, Landroidx/fragment/app/Fragment;->onCreate(Landroid/os/Bundle;)V
 
     .line 75
-    const/4 v0, 0x1
+    sget-object p1, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
 
-    invoke-virtual {p0, v0}, Lba/vaktija/android/wizard/LocationFragment;->setHasOptionsMenu(Z)V
+    const-string v0, "onCreate"
+
+    invoke-static {p1, v0}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    const/4 p1, 0x1
 
     .line 76
+    invoke-virtual {p0, p1}, Lba/vaktija/android/wizard/LocationFragment;->setHasOptionsMenu(Z)V
+
     return-void
 .end method
 
 .method public onCreateView(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;
-    .locals 3
-    .param p1, "inflater"    # Landroid/view/LayoutInflater;
-    .param p2, "container"    # Landroid/view/ViewGroup;
-    .param p3, "savedInstanceState"    # Landroid/os/Bundle;
-
-    .prologue
-    .line 81
-    sget-object v1, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
-
-    const-string v2, "onCreateView"
-
-    invoke-static {v1, v2}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    .locals 1
 
     .line 82
-    const v1, 0x7f030029
+    sget-object p3, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
 
-    const/4 v2, 0x0
+    const-string v0, "onCreateView"
 
-    invoke-virtual {p1, v1, p2, v2}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
+    invoke-static {p3, v0}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    move-result-object v0
+    const p3, 0x7f0b0030
+
+    const/4 v0, 0x0
 
     .line 83
-    .local v0, "view":Landroid/view/View;
-    const v1, 0x7f0e008e
+    invoke-virtual {p1, p3, p2, v0}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p1
 
-    move-result-object v1
-
-    check-cast v1, Landroid/widget/ListView;
-
-    iput-object v1, p0, Lba/vaktija/android/wizard/LocationFragment;->mListView:Landroid/widget/ListView;
+    const p2, 0x7f0800af
 
     .line 84
-    const v1, 0x7f0e00e4
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    check-cast p2, Landroid/widget/ListView;
 
-    check-cast v1, Landroid/widget/Button;
+    iput-object p2, p0, Lba/vaktija/android/wizard/LocationFragment;->mListView:Landroid/widget/ListView;
 
-    iput-object v1, p0, Lba/vaktija/android/wizard/LocationFragment;->next:Landroid/widget/Button;
+    const p2, 0x7f080159
 
     .line 85
-    const v1, 0x7f0e00e3
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    check-cast p2, Landroid/widget/Button;
 
-    check-cast v1, Landroid/widget/Button;
+    iput-object p2, p0, Lba/vaktija/android/wizard/LocationFragment;->next:Landroid/widget/Button;
 
-    iput-object v1, p0, Lba/vaktija/android/wizard/LocationFragment;->prev:Landroid/widget/Button;
+    const p2, 0x7f08015a
 
-    .line 87
-    return-object v0
+    .line 86
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object p2
+
+    check-cast p2, Landroid/widget/Button;
+
+    iput-object p2, p0, Lba/vaktija/android/wizard/LocationFragment;->prev:Landroid/widget/Button;
+
+    return-object p1
 .end method

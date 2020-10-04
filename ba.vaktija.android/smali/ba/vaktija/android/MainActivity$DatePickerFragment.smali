@@ -1,5 +1,5 @@
 .class public Lba/vaktija/android/MainActivity$DatePickerFragment;
-.super Landroid/support/v4/app/DialogFragment;
+.super Landroidx/fragment/app/DialogFragment;
 .source "MainActivity.java"
 
 # interfaces
@@ -25,13 +25,12 @@
 .method public constructor <init>()V
     .locals 1
 
-    .prologue
-    .line 330
-    invoke-direct {p0}, Landroid/support/v4/app/DialogFragment;-><init>()V
+    .line 533
+    invoke-direct {p0}, Landroidx/fragment/app/DialogFragment;-><init>()V
 
-    .line 333
     const/4 v0, 0x0
 
+    .line 536
     iput-boolean v0, p0, Lba/vaktija/android/MainActivity$DatePickerFragment;->calledOnce:Z
 
     return-void
@@ -41,148 +40,134 @@
 # virtual methods
 .method public onCreateDialog(Landroid/os/Bundle;)Landroid/app/Dialog;
     .locals 7
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
 
-    .prologue
-    .line 338
+    .line 541
     invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
 
-    move-result-object v0
+    move-result-object p1
 
-    invoke-static {v0}, Ljava/util/Calendar;->getInstance(Ljava/util/Locale;)Ljava/util/Calendar;
+    invoke-static {p1}, Ljava/util/Calendar;->getInstance(Ljava/util/Locale;)Ljava/util/Calendar;
 
-    move-result-object v6
+    move-result-object p1
 
-    .line 339
-    .local v6, "c":Ljava/util/Calendar;
     const/4 v0, 0x1
 
-    invoke-virtual {v6, v0}, Ljava/util/Calendar;->get(I)I
-
-    move-result v3
-
-    .line 340
-    .local v3, "year":I
-    const/4 v0, 0x2
-
-    invoke-virtual {v6, v0}, Ljava/util/Calendar;->get(I)I
+    .line 542
+    invoke-virtual {p1, v0}, Ljava/util/Calendar;->get(I)I
 
     move-result v4
 
-    .line 341
-    .local v4, "month":I
-    const/4 v0, 0x5
+    const/4 v0, 0x2
 
-    invoke-virtual {v6, v0}, Ljava/util/Calendar;->get(I)I
+    .line 543
+    invoke-virtual {p1, v0}, Ljava/util/Calendar;->get(I)I
 
     move-result v5
 
-    .line 344
-    .local v5, "day":I
-    new-instance v0, Landroid/app/DatePickerDialog;
+    const/4 v0, 0x5
 
-    invoke-virtual {p0}, Lba/vaktija/android/MainActivity$DatePickerFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    .line 544
+    invoke-virtual {p1, v0}, Ljava/util/Calendar;->get(I)I
 
-    move-result-object v1
+    move-result v6
 
-    move-object v2, p0
+    .line 547
+    new-instance p1, Landroid/app/DatePickerDialog;
 
-    invoke-direct/range {v0 .. v5}, Landroid/app/DatePickerDialog;-><init>(Landroid/content/Context;Landroid/app/DatePickerDialog$OnDateSetListener;III)V
+    invoke-virtual {p0}, Lba/vaktija/android/MainActivity$DatePickerFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
-    return-object v0
+    move-result-object v2
+
+    move-object v1, p1
+
+    move-object v3, p0
+
+    invoke-direct/range {v1 .. v6}, Landroid/app/DatePickerDialog;-><init>(Landroid/content/Context;Landroid/app/DatePickerDialog$OnDateSetListener;III)V
+
+    return-object p1
 .end method
 
 .method public onDateSet(Landroid/widget/DatePicker;III)V
-    .locals 5
-    .param p1, "view"    # Landroid/widget/DatePicker;
-    .param p2, "year"    # I
-    .param p3, "month"    # I
-    .param p4, "day"    # I
+    .locals 1
 
-    .prologue
-    .line 349
-    iget-boolean v3, p0, Lba/vaktija/android/MainActivity$DatePickerFragment;->calledOnce:Z
+    .line 552
+    iget-boolean p1, p0, Lba/vaktija/android/MainActivity$DatePickerFragment;->calledOnce:Z
 
-    if-eqz v3, :cond_0
+    if-eqz p1, :cond_0
 
-    .line 367
-    :goto_0
     return-void
 
-    .line 351
     :cond_0
-    const-string v3, "DatePickerFragment"
+    const-string p1, "DatePickerFragment"
 
-    const-string v4, "[onDateSet]"
+    const-string v0, "[onDateSet]"
 
-    invoke-static {v3, v4}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    .line 554
+    invoke-static {p1, v0}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 353
-    new-instance v2, Ljava/util/ArrayList;
+    .line 556
+    new-instance p1, Ljava/util/ArrayList;
 
-    invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
+    invoke-direct {p1}, Ljava/util/ArrayList;-><init>()V
 
-    .line 354
-    .local v2, "values":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Ljava/lang/String;>;"
+    .line 557
     invoke-static {p4}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object p4
 
-    invoke-virtual {v2, v3}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+    invoke-virtual {p1, p4}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 355
-    add-int/lit8 v3, p3, 0x1
+    const/4 p4, 0x1
 
-    invoke-static {v3}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+    add-int/2addr p3, p4
 
-    move-result-object v3
+    .line 558
+    invoke-static {p3}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
 
-    invoke-virtual {v2, v3}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+    move-result-object p3
 
-    .line 356
+    invoke-virtual {p1, p3}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+
+    .line 559
     invoke-static {p2}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object p2
 
-    invoke-virtual {v2, v3}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+    invoke-virtual {p1, p2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 358
-    new-instance v0, Landroid/os/Bundle;
+    .line 561
+    new-instance p2, Landroid/os/Bundle;
 
-    invoke-direct {v0}, Landroid/os/Bundle;-><init>()V
+    invoke-direct {p2}, Landroid/os/Bundle;-><init>()V
 
-    .line 359
-    .local v0, "args":Landroid/os/Bundle;
-    const-string v3, "EXTRA_VALUES"
+    const-string p3, "EXTRA_VALUES"
 
-    invoke-virtual {v0, v3, v2}, Landroid/os/Bundle;->putStringArrayList(Ljava/lang/String;Ljava/util/ArrayList;)V
+    .line 562
+    invoke-virtual {p2, p3, p1}, Landroid/os/Bundle;->putStringArrayList(Ljava/lang/String;Ljava/util/ArrayList;)V
 
-    .line 361
-    new-instance v1, Lba/vaktija/android/DateFragment;
+    .line 564
+    new-instance p1, Lba/vaktija/android/DateFragment;
 
-    invoke-direct {v1}, Lba/vaktija/android/DateFragment;-><init>()V
+    invoke-direct {p1}, Lba/vaktija/android/DateFragment;-><init>()V
 
-    .line 362
-    .local v1, "dateFragment":Lba/vaktija/android/DateFragment;
-    invoke-virtual {v1, v0}, Lba/vaktija/android/DateFragment;->setArguments(Landroid/os/Bundle;)V
+    .line 565
+    invoke-virtual {p1, p2}, Lba/vaktija/android/DateFragment;->setArguments(Landroid/os/Bundle;)V
 
-    .line 364
-    invoke-virtual {p0}, Lba/vaktija/android/MainActivity$DatePickerFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    .line 567
+    invoke-virtual {p0}, Lba/vaktija/android/MainActivity$DatePickerFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
-    move-result-object v3
+    move-result-object p2
 
-    invoke-virtual {v3}, Landroid/support/v4/app/FragmentActivity;->getSupportFragmentManager()Landroid/support/v4/app/FragmentManager;
+    invoke-virtual {p2}, Landroidx/fragment/app/FragmentActivity;->getSupportFragmentManager()Landroidx/fragment/app/FragmentManager;
 
-    move-result-object v3
+    move-result-object p2
 
-    sget-object v4, Lba/vaktija/android/DateFragment;->TAG:Ljava/lang/String;
+    sget-object p3, Lba/vaktija/android/DateFragment;->TAG:Ljava/lang/String;
 
-    invoke-virtual {v1, v3, v4}, Lba/vaktija/android/DateFragment;->show(Landroid/support/v4/app/FragmentManager;Ljava/lang/String;)V
+    invoke-virtual {p1, p2, p3}, Lba/vaktija/android/DateFragment;->show(Landroidx/fragment/app/FragmentManager;Ljava/lang/String;)V
 
-    .line 366
-    const/4 v3, 0x1
+    .line 569
+    iput-boolean p4, p0, Lba/vaktija/android/MainActivity$DatePickerFragment;->calledOnce:Z
 
-    iput-boolean v3, p0, Lba/vaktija/android/MainActivity$DatePickerFragment;->calledOnce:Z
-
-    goto :goto_0
+    return-void
 .end method

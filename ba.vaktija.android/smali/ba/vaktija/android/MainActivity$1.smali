@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lba/vaktija/android/MainActivity;->showActualEvent()V
+    value = Lba/vaktija/android/MainActivity;->showSilentActive()V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -24,10 +24,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/MainActivity;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/MainActivity;
 
-    .prologue
-    .line 457
+    .line 342
     iput-object p1, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -38,52 +36,145 @@
 
 # virtual methods
 .method public onClick(Landroid/view/View;)V
-    .locals 4
-    .param p1, "v"    # Landroid/view/View;
+    .locals 3
 
-    .prologue
-    .line 461
-    iget-object v1, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
+    .line 346
+    iget-object p1, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
 
-    # getter for: Lba/vaktija/android/MainActivity;->mPrefs:Landroid/content/SharedPreferences;
-    invoke-static {v1}, Lba/vaktija/android/MainActivity;->access$000(Lba/vaktija/android/MainActivity;)Landroid/content/SharedPreferences;
+    invoke-static {p1}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
 
-    move-result-object v1
+    move-result-object p1
 
-    invoke-interface {v1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+    invoke-virtual {p1}, Lba/vaktija/android/models/PrayersSchedule;->getCurrentPrayer()Lba/vaktija/android/models/Prayer;
 
-    move-result-object v1
+    move-result-object p1
 
-    const-string v2, "silentByApp"
+    .line 348
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->getId()I
 
-    const/4 v3, 0x1
+    move-result v0
 
-    invoke-interface {v1, v2, v3}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+    const/4 v1, 0x1
 
-    move-result-object v1
+    if-nez v0, :cond_0
 
-    invoke-interface {v1}, Landroid/content/SharedPreferences$Editor;->commit()Z
+    iget-object v0, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
 
-    .line 463
-    iget-object v1, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
-
-    const-string v2, "Actual event action"
-
-    invoke-static {v1, v2}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+    .line 349
+    invoke-static {v0}, Lba/vaktija/android/service/SilentModeManager;->getInstance(Landroid/content/Context;)Lba/vaktija/android/service/SilentModeManager;
 
     move-result-object v0
 
-    .line 464
-    .local v0, "silentOffIntent":Landroid/content/Intent;
-    const-string v1, "ACTION_SKIP_SILENT"
+    invoke-virtual {v0}, Lba/vaktija/android/service/SilentModeManager;->isSunriseSilentModeOn()Z
 
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+    move-result v0
 
-    .line 465
+    if-eqz v0, :cond_0
+
+    .line 350
+    iget-object p1, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
+
+    invoke-static {p1}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
+
+    move-result-object p1
+
+    invoke-virtual {p1, v1}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
+
+    move-result-object p1
+
+    .line 353
+    :cond_0
+    invoke-virtual {p1, v1}, Lba/vaktija/android/models/Prayer;->setSkipNextSilent(Z)V
+
+    .line 354
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->save()V
+
+    .line 356
+    iget-object v0, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
+
+    invoke-static {v0}, Lba/vaktija/android/MainActivity;->access$000(Lba/vaktija/android/MainActivity;)Lba/vaktija/android/App;
+
+    move-result-object v0
+
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object p1
+
+    const-string v1, "Turning sounds on"
+
+    invoke-virtual {v0, p1, v1}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 361
+    sget p1, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v0, 0x18
+
+    const-string v1, "ACTION_SILENT_CHANGED"
+
+    const-string v2, "Actual event action"
+
+    if-lt p1, v0, :cond_2
+
+    .line 363
+    sget-object p1, Lba/vaktija/android/App;->app:Lba/vaktija/android/App;
+
+    iget-object p1, p1, Lba/vaktija/android/App;->notificationManager:Landroid/app/NotificationManager;
+
+    invoke-virtual {p1}, Landroid/app/NotificationManager;->isNotificationPolicyAccessGranted()Z
+
+    move-result p1
+
+    if-eqz p1, :cond_1
+
+    .line 364
+    iget-object p1, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
+
+    invoke-static {p1, v2}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+
+    move-result-object p1
+
+    .line 365
+    invoke-virtual {p1, v1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+
+    .line 366
+    iget-object v0, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
+
+    invoke-static {v0, p1}, Lba/vaktija/android/service/VaktijaServiceHelper;->startService(Landroid/content/Context;Landroid/content/Intent;)V
+
+    goto :goto_0
+
+    .line 368
+    :cond_1
+    iget-object p1, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
+
+    new-instance v0, Landroid/content/Intent;
+
     iget-object v1, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
 
-    invoke-virtual {v1, v0}, Lba/vaktija/android/MainActivity;->startService(Landroid/content/Intent;)Landroid/content/ComponentName;
+    const-class v2, Lba/vaktija/android/SystemSettingsHelperActivity;
 
-    .line 477
+    invoke-direct {v0, v1, v2}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
+
+    invoke-virtual {p1, v0}, Lba/vaktija/android/MainActivity;->startActivity(Landroid/content/Intent;)V
+
+    goto :goto_0
+
+    .line 372
+    :cond_2
+    iget-object p1, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
+
+    invoke-static {p1, v2}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+
+    move-result-object p1
+
+    .line 373
+    invoke-virtual {p1, v1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+
+    .line 374
+    iget-object v0, p0, Lba/vaktija/android/MainActivity$1;->this$0:Lba/vaktija/android/MainActivity;
+
+    invoke-static {v0, p1}, Lba/vaktija/android/service/VaktijaServiceHelper;->startService(Landroid/content/Context;Landroid/content/Intent;)V
+
+    :goto_0
     return-void
 .end method

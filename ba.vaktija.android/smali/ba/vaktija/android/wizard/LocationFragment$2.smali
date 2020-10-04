@@ -24,10 +24,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/wizard/LocationFragment;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/wizard/LocationFragment;
 
-    .prologue
-    .line 191
+    .line 192
     iput-object p1, p0, Lba/vaktija/android/wizard/LocationFragment$2;->this$0:Lba/vaktija/android/wizard/LocationFragment;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -40,13 +38,10 @@
 .method public run()V
     .locals 1
 
-    .prologue
-    .line 194
+    .line 195
     iget-object v0, p0, Lba/vaktija/android/wizard/LocationFragment$2;->this$0:Lba/vaktija/android/wizard/LocationFragment;
 
-    # invokes: Lba/vaktija/android/wizard/LocationFragment;->replaceFragments()V
     invoke-static {v0}, Lba/vaktija/android/wizard/LocationFragment;->access$300(Lba/vaktija/android/wizard/LocationFragment;)V
 
-    .line 195
     return-void
 .end method

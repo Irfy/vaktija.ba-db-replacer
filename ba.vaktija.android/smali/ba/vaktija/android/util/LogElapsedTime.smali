@@ -11,7 +11,6 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
     .line 10
     new-instance v0, Ljava/lang/StringBuilder;
 
@@ -25,7 +24,6 @@
 .method public constructor <init>()V
     .locals 0
 
-    .prologue
     .line 8
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -33,12 +31,8 @@
 .end method
 
 .method public static d(Ljava/lang/String;Ljava/lang/String;J)V
-    .locals 6
-    .param p0, "tag"    # Ljava/lang/String;
-    .param p1, "message"    # Ljava/lang/String;
-    .param p2, "executionStartTime"    # J
+    .locals 3
 
-    .prologue
     .line 25
     sget-object v0, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
 
@@ -53,83 +47,70 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     .line 27
     invoke-static {}, Ljava/lang/System;->nanoTime()J
 
-    move-result-wide v2
+    move-result-wide v1
 
-    sub-long/2addr v2, p2
+    sub-long/2addr v1, p2
 
-    long-to-double v2, v2
+    long-to-double p2, v1
 
-    const-wide v4, 0x408f400000000000L    # 1000.0
+    const-wide v1, 0x408f400000000000L    # 1000.0
 
-    div-double/2addr v2, v4
+    invoke-static {p2, p3}, Ljava/lang/Double;->isNaN(D)Z
 
-    invoke-virtual {v0, v2, v3}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
+    div-double/2addr p2, v1
 
-    move-result-object v0
+    invoke-virtual {v0, p2, p3}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
 
-    const-string v1, " us] ["
+    const-string p2, " us] ["
 
     .line 28
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 29
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
-    move-result-object v1
+    move-result-object p2
 
-    invoke-virtual {v1}, Ljava/lang/Thread;->getStackTrace()[Ljava/lang/StackTraceElement;
+    invoke-virtual {p2}, Ljava/lang/Thread;->getStackTrace()[Ljava/lang/StackTraceElement;
 
-    move-result-object v1
+    move-result-object p2
 
-    const/4 v2, 0x3
+    const/4 p3, 0x3
 
-    aget-object v1, v1, v2
+    aget-object p2, p2, p3
 
-    invoke-virtual {v1}, Ljava/lang/StackTraceElement;->getMethodName()Ljava/lang/String;
+    invoke-virtual {p2}, Ljava/lang/StackTraceElement;->getMethodName()Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object p2
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
-    const-string v1, "] "
+    const-string p2, "] "
 
     .line 30
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 31
     invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 33
-    sget-object v0, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
+    sget-object p1, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object p1
 
-    invoke-static {p0, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {p0, p1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 34
     return-void
 .end method
 
 .method public static e(Ljava/lang/String;Ljava/lang/String;J)V
-    .locals 6
-    .param p0, "tag"    # Ljava/lang/String;
-    .param p1, "message"    # Ljava/lang/String;
-    .param p2, "executionStartTime"    # J
+    .locals 3
 
-    .prologue
     .line 61
     sget-object v0, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
 
@@ -144,83 +125,70 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     .line 63
     invoke-static {}, Ljava/lang/System;->nanoTime()J
 
-    move-result-wide v2
+    move-result-wide v1
 
-    sub-long/2addr v2, p2
+    sub-long/2addr v1, p2
 
-    long-to-double v2, v2
+    long-to-double p2, v1
 
-    const-wide v4, 0x408f400000000000L    # 1000.0
+    const-wide v1, 0x408f400000000000L    # 1000.0
 
-    div-double/2addr v2, v4
+    invoke-static {p2, p3}, Ljava/lang/Double;->isNaN(D)Z
 
-    invoke-virtual {v0, v2, v3}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
+    div-double/2addr p2, v1
 
-    move-result-object v0
+    invoke-virtual {v0, p2, p3}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
 
-    const-string v1, " us] ["
+    const-string p2, " us] ["
 
     .line 64
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 65
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
-    move-result-object v1
+    move-result-object p2
 
-    invoke-virtual {v1}, Ljava/lang/Thread;->getStackTrace()[Ljava/lang/StackTraceElement;
+    invoke-virtual {p2}, Ljava/lang/Thread;->getStackTrace()[Ljava/lang/StackTraceElement;
 
-    move-result-object v1
+    move-result-object p2
 
-    const/4 v2, 0x3
+    const/4 p3, 0x3
 
-    aget-object v1, v1, v2
+    aget-object p2, p2, p3
 
-    invoke-virtual {v1}, Ljava/lang/StackTraceElement;->getMethodName()Ljava/lang/String;
+    invoke-virtual {p2}, Ljava/lang/StackTraceElement;->getMethodName()Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object p2
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
-    const-string v1, "] "
+    const-string p2, "] "
 
     .line 66
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 67
     invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 69
-    sget-object v0, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
+    sget-object p1, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object p1
 
-    invoke-static {p0, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {p0, p1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 70
     return-void
 .end method
 
 .method public static i(Ljava/lang/String;Ljava/lang/String;J)V
-    .locals 6
-    .param p0, "tag"    # Ljava/lang/String;
-    .param p1, "message"    # Ljava/lang/String;
-    .param p2, "executionStartTime"    # J
+    .locals 3
 
-    .prologue
     .line 13
     sget-object v0, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
 
@@ -235,83 +203,70 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     .line 15
     invoke-static {}, Ljava/lang/System;->nanoTime()J
 
-    move-result-wide v2
+    move-result-wide v1
 
-    sub-long/2addr v2, p2
+    sub-long/2addr v1, p2
 
-    long-to-double v2, v2
+    long-to-double p2, v1
 
-    const-wide v4, 0x408f400000000000L    # 1000.0
+    const-wide v1, 0x408f400000000000L    # 1000.0
 
-    div-double/2addr v2, v4
+    invoke-static {p2, p3}, Ljava/lang/Double;->isNaN(D)Z
 
-    invoke-virtual {v0, v2, v3}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
+    div-double/2addr p2, v1
 
-    move-result-object v0
+    invoke-virtual {v0, p2, p3}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
 
-    const-string v1, " us] ["
+    const-string p2, " us] ["
 
     .line 16
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 17
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
-    move-result-object v1
+    move-result-object p2
 
-    invoke-virtual {v1}, Ljava/lang/Thread;->getStackTrace()[Ljava/lang/StackTraceElement;
+    invoke-virtual {p2}, Ljava/lang/Thread;->getStackTrace()[Ljava/lang/StackTraceElement;
 
-    move-result-object v1
+    move-result-object p2
 
-    const/4 v2, 0x3
+    const/4 p3, 0x3
 
-    aget-object v1, v1, v2
+    aget-object p2, p2, p3
 
-    invoke-virtual {v1}, Ljava/lang/StackTraceElement;->getMethodName()Ljava/lang/String;
+    invoke-virtual {p2}, Ljava/lang/StackTraceElement;->getMethodName()Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object p2
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
-    const-string v1, "] "
+    const-string p2, "] "
 
     .line 18
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 19
     invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 21
-    sget-object v0, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
+    sget-object p1, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object p1
 
-    invoke-static {p0, v0}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {p0, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 22
     return-void
 .end method
 
 .method public static v(Ljava/lang/String;Ljava/lang/String;J)V
-    .locals 6
-    .param p0, "tag"    # Ljava/lang/String;
-    .param p1, "message"    # Ljava/lang/String;
-    .param p2, "executionStartTime"    # J
+    .locals 3
 
-    .prologue
     .line 49
     sget-object v0, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
 
@@ -326,83 +281,70 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     .line 51
     invoke-static {}, Ljava/lang/System;->nanoTime()J
 
-    move-result-wide v2
+    move-result-wide v1
 
-    sub-long/2addr v2, p2
+    sub-long/2addr v1, p2
 
-    long-to-double v2, v2
+    long-to-double p2, v1
 
-    const-wide v4, 0x408f400000000000L    # 1000.0
+    const-wide v1, 0x408f400000000000L    # 1000.0
 
-    div-double/2addr v2, v4
+    invoke-static {p2, p3}, Ljava/lang/Double;->isNaN(D)Z
 
-    invoke-virtual {v0, v2, v3}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
+    div-double/2addr p2, v1
 
-    move-result-object v0
+    invoke-virtual {v0, p2, p3}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
 
-    const-string v1, " us] ["
+    const-string p2, " us] ["
 
     .line 52
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 53
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
-    move-result-object v1
+    move-result-object p2
 
-    invoke-virtual {v1}, Ljava/lang/Thread;->getStackTrace()[Ljava/lang/StackTraceElement;
+    invoke-virtual {p2}, Ljava/lang/Thread;->getStackTrace()[Ljava/lang/StackTraceElement;
 
-    move-result-object v1
+    move-result-object p2
 
-    const/4 v2, 0x3
+    const/4 p3, 0x3
 
-    aget-object v1, v1, v2
+    aget-object p2, p2, p3
 
-    invoke-virtual {v1}, Ljava/lang/StackTraceElement;->getMethodName()Ljava/lang/String;
+    invoke-virtual {p2}, Ljava/lang/StackTraceElement;->getMethodName()Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object p2
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
-    const-string v1, "] "
+    const-string p2, "] "
 
     .line 54
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 55
     invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 57
-    sget-object v0, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
+    sget-object p1, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object p1
 
-    invoke-static {p0, v0}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {p0, p1}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 58
     return-void
 .end method
 
 .method public static w(Ljava/lang/String;Ljava/lang/String;J)V
-    .locals 6
-    .param p0, "tag"    # Ljava/lang/String;
-    .param p1, "message"    # Ljava/lang/String;
-    .param p2, "executionStartTime"    # J
+    .locals 3
 
-    .prologue
     .line 37
     sget-object v0, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
 
@@ -417,72 +359,63 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     .line 39
     invoke-static {}, Ljava/lang/System;->nanoTime()J
 
-    move-result-wide v2
+    move-result-wide v1
 
-    sub-long/2addr v2, p2
+    sub-long/2addr v1, p2
 
-    long-to-double v2, v2
+    long-to-double p2, v1
 
-    const-wide v4, 0x408f400000000000L    # 1000.0
+    const-wide v1, 0x408f400000000000L    # 1000.0
 
-    div-double/2addr v2, v4
+    invoke-static {p2, p3}, Ljava/lang/Double;->isNaN(D)Z
 
-    invoke-virtual {v0, v2, v3}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
+    div-double/2addr p2, v1
 
-    move-result-object v0
+    invoke-virtual {v0, p2, p3}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
 
-    const-string v1, " us] ["
+    const-string p2, " us] ["
 
     .line 40
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 41
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
-    move-result-object v1
+    move-result-object p2
 
-    invoke-virtual {v1}, Ljava/lang/Thread;->getStackTrace()[Ljava/lang/StackTraceElement;
+    invoke-virtual {p2}, Ljava/lang/Thread;->getStackTrace()[Ljava/lang/StackTraceElement;
 
-    move-result-object v1
+    move-result-object p2
 
-    const/4 v2, 0x3
+    const/4 p3, 0x3
 
-    aget-object v1, v1, v2
+    aget-object p2, p2, p3
 
-    invoke-virtual {v1}, Ljava/lang/StackTraceElement;->getMethodName()Ljava/lang/String;
+    invoke-virtual {p2}, Ljava/lang/StackTraceElement;->getMethodName()Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object p2
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
-    const-string v1, "] "
+    const-string p2, "] "
 
     .line 42
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 43
     invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 45
-    sget-object v0, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
+    sget-object p1, Lba/vaktija/android/util/LogElapsedTime;->sb:Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object p1
 
-    invoke-static {p0, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {p0, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 46
     return-void
 .end method

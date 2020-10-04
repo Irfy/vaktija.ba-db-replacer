@@ -1,10 +1,10 @@
 .class public Lba/vaktija/android/prefs/SettingsFragment;
-.super Landroid/support/v4/preference/PreferenceFragment;
+.super Landroidx/preference/PreferenceFragmentCompat;
 .source "SettingsFragment.java"
 
 # interfaces
-.implements Landroid/preference/Preference$OnPreferenceChangeListener;
-.implements Landroid/preference/Preference$OnPreferenceClickListener;
+.implements Landroidx/preference/Preference$OnPreferenceClickListener;
+.implements Landroidx/preference/Preference$OnPreferenceChangeListener;
 
 
 # annotations
@@ -17,91 +17,66 @@
 
 
 # static fields
-.field public static final EXTRA_FIRST_VISIBLE_ITEM:Ljava/lang/String; = "EXTRA_FIRST_VISIBLE_ITEM"
+.field static final synthetic $assertionsDisabled:Z = false
 
-.field public static final EXTRA_ITEM_TOP:Ljava/lang/String; = "EXTRA_ITEM_TOP"
+.field private static final EXTRA_FIRST_VISIBLE_ITEM:Ljava/lang/String; = "EXTRA_FIRST_VISIBLE_ITEM"
+
+.field private static final EXTRA_ITEM_TOP:Ljava/lang/String; = "EXTRA_ITEM_TOP"
 
 .field private static final REQUEST_ALARM_TONE:I = 0x2
 
 .field private static final REQUEST_NOTIF_TONE:I = 0x1
 
-.field public static final TAG:Ljava/lang/String;
+.field private static final REQUEST_SYSTEM_SETTINGS:I = 0x3
+
+.field public static final TAG:Ljava/lang/String; = "SettingsFragment"
 
 
 # instance fields
-.field aboutText:Ljava/lang/StringBuilder;
+.field private alarmTonePreference:Landroidx/preference/Preference;
 
 .field private alertDialog:Landroid/app/AlertDialog;
 
-.field dhuhrCounting:Landroid/preference/ListPreference;
+.field private dhuhrCounting:Landroidx/preference/ListPreference;
 
-.field private location:Landroid/preference/Preference;
+.field private location:Landroidx/preference/Preference;
 
-.field mAlarmTonePreference:Landroid/preference/Preference;
+.field private notificationTonePreference:Landroidx/preference/Preference;
 
-.field mApp:Lba/vaktija/android/App;
+.field private prefs:Landroid/content/SharedPreferences;
 
-.field mNotificationTonePreference:Landroid/preference/Preference;
-
-.field private mSelectedColor:Ljava/lang/String;
-
-.field prefs:Landroid/content/SharedPreferences;
-
-.field private scrolled:Z
-
-.field selectedTheme:Ljava/lang/String;
+.field private systemSettingsPreference:Landroidx/preference/Preference;
 
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 1
-
-    .prologue
-    .line 52
-    const-class v0, Lba/vaktija/android/prefs/SettingsFragment;
-
-    invoke-virtual {v0}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
-
-    move-result-object v0
-
-    sput-object v0, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
+    .locals 0
 
     return-void
 .end method
 
 .method public constructor <init>()V
-    .locals 1
+    .locals 0
 
-    .prologue
-    .line 51
-    invoke-direct {p0}, Landroid/support/v4/preference/PreferenceFragment;-><init>()V
-
-    .line 72
-    const-string v0, ""
-
-    iput-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->mSelectedColor:Ljava/lang/String;
+    .line 57
+    invoke-direct {p0}, Landroidx/preference/PreferenceFragmentCompat;-><init>()V
 
     return-void
 .end method
 
 .method static synthetic access$000(Lba/vaktija/android/prefs/SettingsFragment;)Landroid/app/AlertDialog;
-    .locals 1
-    .param p0, "x0"    # Lba/vaktija/android/prefs/SettingsFragment;
+    .locals 0
 
-    .prologue
-    .line 51
-    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->alertDialog:Landroid/app/AlertDialog;
+    .line 57
+    iget-object p0, p0, Lba/vaktija/android/prefs/SettingsFragment;->alertDialog:Landroid/app/AlertDialog;
 
-    return-object v0
+    return-object p0
 .end method
 
 .method static synthetic access$100(Lba/vaktija/android/prefs/SettingsFragment;Z)V
     .locals 0
-    .param p0, "x0"    # Lba/vaktija/android/prefs/SettingsFragment;
-    .param p1, "x1"    # Z
 
-    .prologue
-    .line 51
+    .line 57
     invoke-direct {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->setDefaultTone(Z)V
 
     return-void
@@ -109,11 +84,8 @@
 
 .method static synthetic access$200(Lba/vaktija/android/prefs/SettingsFragment;Z)V
     .locals 0
-    .param p0, "x0"    # Lba/vaktija/android/prefs/SettingsFragment;
-    .param p1, "x1"    # Z
 
-    .prologue
-    .line 51
+    .line 57
     invoke-direct {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->launchToneChooser(Z)V
 
     return-void
@@ -121,10 +93,8 @@
 
 .method static synthetic access$300(Lba/vaktija/android/prefs/SettingsFragment;)V
     .locals 0
-    .param p0, "x0"    # Lba/vaktija/android/prefs/SettingsFragment;
 
-    .prologue
-    .line 51
+    .line 57
     invoke-direct {p0}, Lba/vaktija/android/prefs/SettingsFragment;->showSettingsExportedDialog()V
 
     return-void
@@ -132,10 +102,8 @@
 
 .method static synthetic access$400(Lba/vaktija/android/prefs/SettingsFragment;)V
     .locals 0
-    .param p0, "x0"    # Lba/vaktija/android/prefs/SettingsFragment;
 
-    .prologue
-    .line 51
+    .line 57
     invoke-direct {p0}, Lba/vaktija/android/prefs/SettingsFragment;->showFileExistsDialog()V
 
     return-void
@@ -143,11 +111,8 @@
 
 .method static synthetic access$500(Lba/vaktija/android/prefs/SettingsFragment;Ljava/lang/String;)V
     .locals 0
-    .param p0, "x0"    # Lba/vaktija/android/prefs/SettingsFragment;
-    .param p1, "x1"    # Ljava/lang/String;
 
-    .prologue
-    .line 51
+    .line 57
     invoke-direct {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->showErrorProcessingSettingsDialog(Ljava/lang/String;)V
 
     return-void
@@ -155,604 +120,449 @@
 
 .method static synthetic access$600(Lba/vaktija/android/prefs/SettingsFragment;)V
     .locals 0
-    .param p0, "x0"    # Lba/vaktija/android/prefs/SettingsFragment;
 
-    .prologue
-    .line 51
+    .line 57
     invoke-direct {p0}, Lba/vaktija/android/prefs/SettingsFragment;->showFileMissingDialog()V
 
     return-void
 .end method
 
 .method private colorPreferenceTitles()V
-    .locals 9
+    .locals 3
 
-    .prologue
-    .line 175
+    .line 225
     invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getResources()Landroid/content/res/Resources;
-
-    move-result-object v7
-
-    const v8, 0x7f0d0007
-
-    invoke-virtual {v7, v8}, Landroid/content/res/Resources;->getColor(I)I
-
-    move-result v2
-
-    .line 177
-    .local v2, "almostBlack":I
-    iget-object v7, p0, Lba/vaktija/android/prefs/SettingsFragment;->location:Landroid/preference/Preference;
-
-    const v8, 0x7f070035
-
-    .line 178
-    invoke-virtual {p0, v8}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v8
-
-    .line 177
-    invoke-static {v8, v2}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
-
-    move-result-object v8
-
-    invoke-virtual {v7, v8}, Landroid/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
-
-    .line 181
-    const-string v7, "statusbarNotification"
-
-    invoke-virtual {p0, v7}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v6
-
-    .line 182
-    .local v6, "statusBarNotif":Landroid/preference/Preference;
-    const v7, 0x7f070062
-
-    .line 183
-    invoke-virtual {p0, v7}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v7
-
-    .line 182
-    invoke-static {v7, v2}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
-
-    move-result-object v7
-
-    invoke-virtual {v6, v7}, Landroid/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
-
-    .line 186
-    const-string v7, "ALL_PRAYERS_IN_NOTIF"
-
-    invoke-virtual {p0, v7}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v1
-
-    .line 189
-    .local v1, "allPrayersNotif":Landroid/preference/Preference;
-    if-eqz v1, :cond_0
-
-    .line 190
-    const v7, 0x7f07001a
-
-    .line 191
-    invoke-virtual {p0, v7}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v7
-
-    .line 190
-    invoke-static {v7, v2}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
-
-    move-result-object v7
-
-    invoke-virtual {v1, v7}, Landroid/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
-
-    .line 195
-    :cond_0
-    iget-object v7, p0, Lba/vaktija/android/prefs/SettingsFragment;->mNotificationTonePreference:Landroid/preference/Preference;
-
-    const v8, 0x7f070039
-
-    .line 196
-    invoke-virtual {p0, v8}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v8
-
-    .line 195
-    invoke-static {v8, v2}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
-
-    move-result-object v8
-
-    invoke-virtual {v7, v8}, Landroid/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
-
-    .line 199
-    iget-object v7, p0, Lba/vaktija/android/prefs/SettingsFragment;->mAlarmTonePreference:Landroid/preference/Preference;
-
-    const v8, 0x7f070019
-
-    .line 200
-    invoke-virtual {p0, v8}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v8
-
-    .line 199
-    invoke-static {v8, v2}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
-
-    move-result-object v8
-
-    invoke-virtual {v7, v8}, Landroid/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
-
-    .line 203
-    iget-object v7, p0, Lba/vaktija/android/prefs/SettingsFragment;->dhuhrCounting:Landroid/preference/ListPreference;
-
-    const v8, 0x7f070029
-
-    .line 204
-    invoke-virtual {p0, v8}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v8
-
-    .line 203
-    invoke-static {v8, v2}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
-
-    move-result-object v8
-
-    invoke-virtual {v7, v8}, Landroid/preference/ListPreference;->setTitle(Ljava/lang/CharSequence;)V
-
-    .line 207
-    const-string v7, "separateJumaSettings"
-
-    invoke-virtual {p0, v7}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v4
-
-    .line 208
-    .local v4, "separateJumaSettings":Landroid/preference/Preference;
-    const v7, 0x7f070056
-
-    .line 209
-    invoke-virtual {p0, v7}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v7
-
-    .line 208
-    invoke-static {v7, v2}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
-
-    move-result-object v7
-
-    invoke-virtual {v4, v7}, Landroid/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
-
-    .line 212
-    const-string v7, "showDate"
-
-    invoke-virtual {p0, v7}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v5
-
-    .line 213
-    .local v5, "showDate":Landroid/preference/Preference;
-    const v7, 0x7f070025
-
-    .line 214
-    invoke-virtual {p0, v7}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v7
-
-    .line 213
-    invoke-static {v7, v2}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
-
-    move-result-object v7
-
-    invoke-virtual {v5, v7}, Landroid/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
-
-    .line 224
-    const-string v7, "feedback"
-
-    invoke-virtual {p0, v7}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v3
-
-    .line 225
-    .local v3, "feedback":Landroid/preference/Preference;
-    const v7, 0x7f070032
-
-    .line 226
-    invoke-virtual {p0, v7}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v7
-
-    .line 225
-    invoke-static {v7, v2}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
-
-    move-result-object v7
-
-    invoke-virtual {v3, v7}, Landroid/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
-
-    .line 229
-    const-string v7, "about"
-
-    invoke-virtual {p0, v7}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
 
     move-result-object v0
 
-    .line 230
-    .local v0, "about":Landroid/preference/Preference;
-    const v7, 0x7f070012
+    const v1, 0x7f05001b
 
-    .line 231
-    invoke-virtual {p0, v7}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+    invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getColor(I)I
 
-    move-result-object v7
+    move-result v0
 
-    .line 230
-    invoke-static {v7, v2}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
+    .line 227
+    iget-object v1, p0, Lba/vaktija/android/prefs/SettingsFragment;->location:Landroidx/preference/Preference;
 
-    move-result-object v7
+    const v2, 0x7f0f004c
 
-    invoke-virtual {v0, v7}, Landroid/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
-
-    .line 233
-    return-void
-.end method
-
-.method private launchToneChooser(Z)V
-    .locals 8
-    .param p1, "alarmTone"    # Z
-
-    .prologue
-    const/4 v4, 0x2
-
-    const/4 v5, 0x1
-
-    .line 425
-    iget-object v6, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
-
-    if-eqz p1, :cond_0
-
-    const-string v3, "alarmToneUri"
-
-    :goto_0
-    const-string v7, ""
-
-    invoke-interface {v6, v3, v7}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v1
-
-    .line 427
-    .local v1, "path":Ljava/lang/String;
-    invoke-static {v1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
-
-    move-result v3
-
-    if-nez v3, :cond_1
-
-    invoke-static {v1}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+    .line 228
+    invoke-virtual {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
 
     move-result-object v2
 
-    .line 429
-    .local v2, "uri":Landroid/net/Uri;
+    .line 227
+    invoke-static {v2, v0}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroidx/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
+
+    const-string v1, "statusbarNotification"
+
+    .line 231
+    invoke-direct {p0, v1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object v1
+
+    const v2, 0x7f0f0081
+
+    .line 233
+    invoke-virtual {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 232
+    invoke-static {v2, v0}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroidx/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
+
+    const-string v1, "ALL_PRAYERS_IN_NOTIF"
+
+    .line 236
+    invoke-virtual {p0, v1}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroidx/preference/Preference;
+
+    move-result-object v1
+
+    if-eqz v1, :cond_0
+
+    const v2, 0x7f0f0023
+
+    .line 241
+    invoke-virtual {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 240
+    invoke-static {v2, v0}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroidx/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
+
+    .line 245
+    :cond_0
+    iget-object v1, p0, Lba/vaktija/android/prefs/SettingsFragment;->notificationTonePreference:Landroidx/preference/Preference;
+
+    const v2, 0x7f0f0054
+
+    .line 246
+    invoke-virtual {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 245
+    invoke-static {v2, v0}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroidx/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
+
+    .line 249
+    iget-object v1, p0, Lba/vaktija/android/prefs/SettingsFragment;->alarmTonePreference:Landroidx/preference/Preference;
+
+    const v2, 0x7f0f0022
+
+    .line 250
+    invoke-virtual {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 249
+    invoke-static {v2, v0}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroidx/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
+
+    .line 253
+    iget-object v1, p0, Lba/vaktija/android/prefs/SettingsFragment;->dhuhrCounting:Landroidx/preference/ListPreference;
+
+    const v2, 0x7f0f0033
+
+    .line 254
+    invoke-virtual {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 253
+    invoke-static {v2, v0}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroidx/preference/ListPreference;->setTitle(Ljava/lang/CharSequence;)V
+
+    const-string v1, "separateJumaSettings"
+
+    .line 257
+    invoke-direct {p0, v1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object v1
+
+    const v2, 0x7f0f0073
+
+    .line 259
+    invoke-virtual {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 258
+    invoke-static {v2, v0}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroidx/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
+
+    const-string v1, "showDate"
+
+    .line 262
+    invoke-direct {p0, v1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object v1
+
+    const v2, 0x7f0f002f
+
+    .line 264
+    invoke-virtual {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 263
+    invoke-static {v2, v0}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroidx/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
+
+    const-string v1, "feedback"
+
+    .line 267
+    invoke-direct {p0, v1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object v1
+
+    const v2, 0x7f0f0041
+
+    .line 269
+    invoke-virtual {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 268
+    invoke-static {v2, v0}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroidx/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
+
+    const-string v1, "about"
+
+    .line 272
+    invoke-direct {p0, v1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object v1
+
+    const v2, 0x7f0f001b
+
+    .line 274
+    invoke-virtual {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 273
+    invoke-static {v2, v0}, Lba/vaktija/android/util/FormattingUtils;->colorText(Ljava/lang/String;I)Ljava/lang/CharSequence;
+
+    move-result-object v0
+
+    invoke-virtual {v1, v0}, Landroidx/preference/Preference;->setTitle(Ljava/lang/CharSequence;)V
+
+    return-void
+.end method
+
+.method private getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "<T:",
+            "Landroidx/preference/Preference;",
+            ">(",
+            "Ljava/lang/String;",
+            ")TT;"
+        }
+    .end annotation
+
+    .line 530
+    invoke-virtual {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroidx/preference/Preference;
+
+    move-result-object p1
+
+    return-object p1
+.end method
+
+.method private launchToneChooser(Z)V
+    .locals 5
+
+    .line 441
+    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
+
+    if-eqz p1, :cond_0
+
+    const-string v1, "alarmToneUri"
+
+    goto :goto_0
+
+    :cond_0
+    const-string v1, "notificationToneUri"
+
+    :goto_0
+    const-string v2, ""
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 443
+    invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_1
+
+    invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v0
+
+    goto :goto_1
+
+    :cond_1
+    const/4 v0, 0x0
+
+    .line 445
     :goto_1
-    new-instance v0, Landroid/content/Intent;
+    new-instance v1, Landroid/content/Intent;
 
-    const-string v3, "android.intent.action.RINGTONE_PICKER"
+    const-string v2, "android.intent.action.RINGTONE_PICKER"
 
-    invoke-direct {v0, v3}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+    invoke-direct {v1, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
 
-    .line 430
-    .local v0, "intent":Landroid/content/Intent;
-    const-string v6, "android.intent.extra.ringtone.TYPE"
+    const/4 v2, 0x2
 
     if-eqz p1, :cond_2
 
     const/4 v3, 0x4
 
-    :goto_2
-    invoke-virtual {v0, v6, v3}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
-
-    .line 432
-    const-string v3, "android.intent.extra.ringtone.EXISTING_URI"
-
-    invoke-virtual {v0, v3, v2}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;
-
-    .line 433
-    const-string v3, "android.intent.extra.ringtone.SHOW_SILENT"
-
-    invoke-virtual {v0, v3, v5}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Z)Landroid/content/Intent;
-
-    .line 434
-    const-string v3, "android.intent.extra.ringtone.SHOW_DEFAULT"
-
-    invoke-virtual {v0, v3, v5}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Z)Landroid/content/Intent;
-
-    .line 436
-    if-eqz p1, :cond_3
-
-    :goto_3
-    invoke-virtual {p0, v0, v4}, Lba/vaktija/android/prefs/SettingsFragment;->startActivityForResult(Landroid/content/Intent;I)V
-
-    .line 437
-    return-void
-
-    .line 425
-    .end local v0    # "intent":Landroid/content/Intent;
-    .end local v1    # "path":Ljava/lang/String;
-    .end local v2    # "uri":Landroid/net/Uri;
-    :cond_0
-    const-string v3, "notificationToneUri"
-
-    goto :goto_0
-
-    .line 427
-    .restart local v1    # "path":Ljava/lang/String;
-    :cond_1
-    const/4 v2, 0x0
-
-    goto :goto_1
-
-    .restart local v0    # "intent":Landroid/content/Intent;
-    .restart local v2    # "uri":Landroid/net/Uri;
-    :cond_2
-    move v3, v4
-
-    .line 430
     goto :goto_2
 
-    :cond_3
-    move v4, v5
+    :cond_2
+    const/4 v3, 0x2
 
-    .line 436
+    :goto_2
+    const-string v4, "android.intent.extra.ringtone.TYPE"
+
+    .line 446
+    invoke-virtual {v1, v4, v3}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
+
+    const-string v3, "android.intent.extra.ringtone.EXISTING_URI"
+
+    .line 448
+    invoke-virtual {v1, v3, v0}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;
+
+    const-string v0, "android.intent.extra.ringtone.SHOW_SILENT"
+
+    const/4 v3, 0x1
+
+    .line 449
+    invoke-virtual {v1, v0, v3}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Z)Landroid/content/Intent;
+
+    const-string v0, "android.intent.extra.ringtone.SHOW_DEFAULT"
+
+    .line 450
+    invoke-virtual {v1, v0, v3}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Z)Landroid/content/Intent;
+
+    if-eqz p1, :cond_3
+
     goto :goto_3
+
+    :cond_3
+    const/4 v2, 0x1
+
+    .line 452
+    :goto_3
+    invoke-virtual {p0, v1, v2}, Lba/vaktija/android/prefs/SettingsFragment;->startActivityForResult(Landroid/content/Intent;I)V
+
+    return-void
 .end method
 
-.method public static newInstance(II)Lba/vaktija/android/prefs/SettingsFragment;
-    .locals 3
-    .param p0, "scrollPosition"    # I
-    .param p1, "itemTop"    # I
+.method static newInstance(II)Lba/vaktija/android/prefs/SettingsFragment;
+    .locals 2
 
-    .prologue
-    .line 78
+    .line 81
     new-instance v0, Landroid/os/Bundle;
 
     invoke-direct {v0}, Landroid/os/Bundle;-><init>()V
 
-    .line 79
-    .local v0, "args":Landroid/os/Bundle;
-    const-string v2, "EXTRA_FIRST_VISIBLE_ITEM"
-
-    invoke-virtual {v0, v2, p0}, Landroid/os/Bundle;->putInt(Ljava/lang/String;I)V
-
-    .line 80
-    const-string v2, "EXTRA_ITEM_TOP"
-
-    invoke-virtual {v0, v2, p1}, Landroid/os/Bundle;->putInt(Ljava/lang/String;I)V
+    const-string v1, "EXTRA_FIRST_VISIBLE_ITEM"
 
     .line 82
-    new-instance v1, Lba/vaktija/android/prefs/SettingsFragment;
+    invoke-virtual {v0, v1, p0}, Landroid/os/Bundle;->putInt(Ljava/lang/String;I)V
 
-    invoke-direct {v1}, Lba/vaktija/android/prefs/SettingsFragment;-><init>()V
+    const-string p0, "EXTRA_ITEM_TOP"
 
     .line 83
-    .local v1, "sf":Lba/vaktija/android/prefs/SettingsFragment;
-    invoke-virtual {v1, v0}, Lba/vaktija/android/prefs/SettingsFragment;->setArguments(Landroid/os/Bundle;)V
+    invoke-virtual {v0, p0, p1}, Landroid/os/Bundle;->putInt(Ljava/lang/String;I)V
 
     .line 85
-    return-object v1
-.end method
+    new-instance p0, Lba/vaktija/android/prefs/SettingsFragment;
 
-.method private restart()V
-    .locals 7
+    invoke-direct {p0}, Lba/vaktija/android/prefs/SettingsFragment;-><init>()V
 
-    .prologue
-    const/4 v6, 0x0
+    .line 86
+    invoke-virtual {p0, v0}, Lba/vaktija/android/prefs/SettingsFragment;->setArguments(Landroid/os/Bundle;)V
 
-    .line 309
-    iput-boolean v6, p0, Lba/vaktija/android/prefs/SettingsFragment;->scrolled:Z
-
-    .line 310
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getListView()Landroid/widget/ListView;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Landroid/widget/ListView;->getFirstVisiblePosition()I
-
-    move-result v0
-
-    .line 311
-    .local v0, "firstVisibleItem":I
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getListView()Landroid/widget/ListView;
-
-    move-result-object v3
-
-    invoke-virtual {v3, v6}, Landroid/widget/ListView;->getChildAt(I)Landroid/view/View;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Landroid/view/View;->getTop()I
-
-    move-result v1
-
-    .line 313
-    .local v1, "firstVisibleItemTop":I
-    sget-object v3, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
-
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v5, "firstVisibleItem="
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-static {v3, v4}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 314
-    sget-object v3, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
-
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v5, "firstVisibleItemTop="
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-static {v3, v4}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 316
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Landroid/support/v4/app/FragmentActivity;->finish()V
-
-    .line 317
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Landroid/support/v4/app/FragmentActivity;->getIntent()Landroid/content/Intent;
-
-    move-result-object v2
-
-    .line 318
-    .local v2, "i":Landroid/content/Intent;
-    const-string v3, "EXTRA_FIRST_VISIBLE_ITEM"
-
-    invoke-virtual {v2, v3, v0}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
-
-    .line 319
-    const-string v3, "EXTRA_ITEM_TOP"
-
-    invoke-virtual {v2, v3, v1}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
-
-    .line 320
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v3
-
-    invoke-virtual {v3, v2}, Landroid/support/v4/app/FragmentActivity;->startActivity(Landroid/content/Intent;)V
-
-    .line 321
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v3
-
-    invoke-virtual {v3, v6, v6}, Landroid/support/v4/app/FragmentActivity;->overridePendingTransition(II)V
-
-    .line 322
-    return-void
+    return-object p0
 .end method
 
 .method private setDefaultTone(Z)V
     .locals 3
-    .param p1, "alarmTone"    # Z
 
-    .prologue
-    .line 411
-    sget-object v0, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
+    .line 428
+    new-instance v0, Ljava/lang/StringBuilder;
 
-    new-instance v1, Ljava/lang/StringBuilder;
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    const-string v1, "setDefaultTone alarmTone="
 
-    const-string v2, "setDefaultTone alarmTone="
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
 
-    move-result-object v1
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+    move-result-object v0
 
-    move-result-object v1
+    const-string v1, "SettingsFragment"
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-static {v1, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    move-result-object v1
-
-    invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 413
+    .line 430
     iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
 
     invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
 
-    move-result-object v1
+    move-result-object v0
 
     if-eqz p1, :cond_0
 
-    const-string v0, "useVaktijaAlarmTone"
+    const-string v1, "useVaktijaAlarmTone"
+
+    goto :goto_0
+
+    :cond_0
+    const-string v1, "useVaktijaNotifTone"
 
     :goto_0
     const/4 v2, 0x1
 
-    .line 415
-    invoke-interface {v1, v0, v2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+    .line 431
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
 
     move-result-object v0
 
-    .line 416
-    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->commit()Z
+    .line 432
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
 
-    .line 418
     if-eqz p1, :cond_1
 
-    .line 419
-    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->mAlarmTonePreference:Landroid/preference/Preference;
+    .line 435
+    iget-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment;->alarmTonePreference:Landroidx/preference/Preference;
 
-    sget-object v1, Lba/vaktija/android/prefs/Defaults;->ALARM_TONE_TITLE:Ljava/lang/String;
+    sget-object v0, Lba/vaktija/android/prefs/Defaults;->ALARM_TONE_TITLE:Ljava/lang/String;
 
-    invoke-virtual {v0, v1}, Landroid/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
-
-    .line 422
-    :goto_1
-    return-void
-
-    .line 413
-    :cond_0
-    const-string v0, "useVaktijaNotifTone"
-
-    goto :goto_0
-
-    .line 421
-    :cond_1
-    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->mNotificationTonePreference:Landroid/preference/Preference;
-
-    sget-object v1, Lba/vaktija/android/prefs/Defaults;->NOTIF_TONE_TITLE:Ljava/lang/String;
-
-    invoke-virtual {v0, v1}, Landroid/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
+    invoke-virtual {p1, v0}, Landroidx/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
 
     goto :goto_1
+
+    .line 437
+    :cond_1
+    iget-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment;->notificationTonePreference:Landroidx/preference/Preference;
+
+    sget-object v0, Lba/vaktija/android/prefs/Defaults;->NOTIF_TONE_TITLE:Ljava/lang/String;
+
+    invoke-virtual {p1, v0}, Landroidx/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
+
+    :goto_1
+    return-void
 .end method
 
 .method private showErrorProcessingSettingsDialog(Ljava/lang/String;)V
     .locals 3
-    .param p1, "errorMessage"    # Ljava/lang/String;
 
-    .prologue
-    .line 498
+    .line 514
     new-instance v0, Landroid/app/AlertDialog$Builder;
 
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
     move-result-object v1
 
@@ -760,7 +570,7 @@
 
     const-string v1, "Gre\u0161ka"
 
-    .line 499
+    .line 515
     invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
@@ -773,45 +583,39 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object p1
 
-    .line 500
-    invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setMessage(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
+    .line 516
+    invoke-virtual {v0, p1}, Landroid/app/AlertDialog$Builder;->setMessage(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
 
-    move-result-object v0
+    move-result-object p1
 
-    const-string v1, "Uredu"
+    const-string v0, "Uredu"
 
-    const/4 v2, 0x0
+    const/4 v1, 0x0
 
-    .line 501
-    invoke-virtual {v0, v1, v2}, Landroid/app/AlertDialog$Builder;->setPositiveButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
+    .line 517
+    invoke-virtual {p1, v0, v1}, Landroid/app/AlertDialog$Builder;->setPositiveButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
 
-    move-result-object v0
+    move-result-object p1
 
-    .line 502
-    invoke-virtual {v0}, Landroid/app/AlertDialog$Builder;->show()Landroid/app/AlertDialog;
+    .line 518
+    invoke-virtual {p1}, Landroid/app/AlertDialog$Builder;->show()Landroid/app/AlertDialog;
 
-    .line 503
     return-void
 .end method
 
 .method private showFileExistsDialog()V
     .locals 3
 
-    .prologue
-    .line 484
+    .line 500
     new-instance v0, Landroid/app/AlertDialog$Builder;
 
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
     move-result-object v1
 
@@ -819,26 +623,26 @@
 
     const-string v1, "Prepisati postavke?"
 
-    .line 485
+    .line 501
     invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
 
     const-string v1, "Postavke su ve\u0107 prije eksportovane u vaktija_settings.dat datoteku. Da li ih \u017eelite zamijeniti sa novim postavkama?"
 
-    .line 486
+    .line 502
     invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setMessage(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
 
-    const-string v1, "Zamijeni"
+    new-instance v1, Lba/vaktija/android/prefs/SettingsFragment$6;
 
-    new-instance v2, Lba/vaktija/android/prefs/SettingsFragment$4;
+    invoke-direct {v1, p0}, Lba/vaktija/android/prefs/SettingsFragment$6;-><init>(Lba/vaktija/android/prefs/SettingsFragment;)V
 
-    invoke-direct {v2, p0}, Lba/vaktija/android/prefs/SettingsFragment$4;-><init>(Lba/vaktija/android/prefs/SettingsFragment;)V
+    const-string v2, "Zamijeni"
 
-    .line 487
-    invoke-virtual {v0, v1, v2}, Landroid/app/AlertDialog$Builder;->setPositiveButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
+    .line 503
+    invoke-virtual {v0, v2, v1}, Landroid/app/AlertDialog$Builder;->setPositiveButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
 
@@ -846,26 +650,24 @@
 
     const/4 v2, 0x0
 
-    .line 493
+    .line 509
     invoke-virtual {v0, v1, v2}, Landroid/app/AlertDialog$Builder;->setNegativeButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
 
-    .line 494
+    .line 510
     invoke-virtual {v0}, Landroid/app/AlertDialog$Builder;->show()Landroid/app/AlertDialog;
 
-    .line 495
     return-void
 .end method
 
 .method private showFileMissingDialog()V
     .locals 3
 
-    .prologue
-    .line 506
+    .line 522
     new-instance v0, Landroid/app/AlertDialog$Builder;
 
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
     move-result-object v1
 
@@ -873,14 +675,14 @@
 
     const-string v1, "Datoteka ne postoji"
 
-    .line 507
+    .line 523
     invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
 
     const-string v1, "Datoteka vaktija_settings.dat nije prona\u0111ena"
 
-    .line 508
+    .line 524
     invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setMessage(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
@@ -889,26 +691,53 @@
 
     const/4 v2, 0x0
 
-    .line 509
+    .line 525
     invoke-virtual {v0, v1, v2}, Landroid/app/AlertDialog$Builder;->setPositiveButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
 
-    .line 510
+    .line 526
     invoke-virtual {v0}, Landroid/app/AlertDialog$Builder;->show()Landroid/app/AlertDialog;
 
-    .line 511
+    return-void
+.end method
+
+.method private showLocationDialog()V
+    .locals 3
+
+    .line 485
+    sget-object v0, Lba/vaktija/android/App;->app:Lba/vaktija/android/App;
+
+    const-string v1, "SettingsFragment"
+
+    const-string v2, "Location"
+
+    invoke-virtual {v0, v1, v2}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 487
+    new-instance v0, Landroid/content/Intent;
+
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
+
+    move-result-object v1
+
+    const-class v2, Lba/vaktija/android/LocationActivity;
+
+    invoke-direct {v0, v1, v2}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
+
+    .line 488
+    invoke-virtual {p0, v0}, Lba/vaktija/android/prefs/SettingsFragment;->startActivity(Landroid/content/Intent;)V
+
     return-void
 .end method
 
 .method private showSettingsExportedDialog()V
     .locals 3
 
-    .prologue
-    .line 476
+    .line 492
     new-instance v0, Landroid/app/AlertDialog$Builder;
 
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
     move-result-object v1
 
@@ -916,14 +745,14 @@
 
     const-string v1, "Postavke eksportovane"
 
-    .line 477
+    .line 493
     invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
 
     const-string v1, "Postavke eksportovane u vaktija_settings.dat fajl"
 
-    .line 478
+    .line 494
     invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setMessage(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
@@ -932,1210 +761,1138 @@
 
     const/4 v2, 0x0
 
-    .line 479
+    .line 495
     invoke-virtual {v0, v1, v2}, Landroid/app/AlertDialog$Builder;->setPositiveButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
 
-    .line 480
+    .line 496
     invoke-virtual {v0}, Landroid/app/AlertDialog$Builder;->show()Landroid/app/AlertDialog;
 
-    .line 481
     return-void
 .end method
 
 .method private showToneSelectionDialog(Z)V
-    .locals 8
-    .param p1, "alarmTone"    # Z
+    .locals 7
 
-    .prologue
-    .line 381
+    .line 397
     new-instance v0, Landroid/app/AlertDialog$Builder;
 
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
-    move-result-object v3
+    move-result-object v1
 
-    invoke-direct {v0, v3}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
+    invoke-direct {v0, v1}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
 
-    .line 382
-    .local v0, "dialog":Landroid/app/AlertDialog$Builder;
-    iget-object v3, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
+    .line 399
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
 
-    invoke-static {v3}, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;
+    move-result-object v1
 
-    move-result-object v3
+    invoke-static {v1}, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;
 
-    const v4, 0x7f030025
+    move-result-object v1
 
-    const/4 v5, 0x0
+    const v2, 0x7f0b002b
 
-    invoke-virtual {v3, v4, v5}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;)Landroid/view/View;
+    const/4 v3, 0x0
+
+    invoke-virtual {v1, v2, v3}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;)Landroid/view/View;
 
     move-result-object v1
 
     check-cast v1, Landroid/widget/ListView;
 
-    .line 383
-    .local v1, "listView":Landroid/widget/ListView;
+    .line 400
     new-instance v2, Landroid/widget/ArrayAdapter;
 
-    .line 384
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v4
-
-    const v5, 0x1090003
-
-    const/4 v3, 0x2
-
-    new-array v6, v3, [Ljava/lang/String;
-
-    const/4 v7, 0x0
-
-    if-eqz p1, :cond_0
-
-    sget-object v3, Lba/vaktija/android/prefs/Defaults;->ALARM_TONE_TITLE:Ljava/lang/String;
-
-    :goto_0
-    aput-object v3, v6, v7
-
-    const/4 v3, 0x1
-
-    const-string v7, "Odaberi drugi..."
-
-    aput-object v7, v6, v3
-
-    invoke-direct {v2, v4, v5, v6}, Landroid/widget/ArrayAdapter;-><init>(Landroid/content/Context;I[Ljava/lang/Object;)V
-
-    .line 389
-    .local v2, "optionsAdapter":Landroid/widget/ArrayAdapter;, "Landroid/widget/ArrayAdapter<Ljava/lang/String;>;"
-    invoke-virtual {v1, v2}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
-
-    .line 391
-    new-instance v3, Lba/vaktija/android/prefs/SettingsFragment$3;
-
-    invoke-direct {v3, p0, p1}, Lba/vaktija/android/prefs/SettingsFragment$3;-><init>(Lba/vaktija/android/prefs/SettingsFragment;Z)V
-
-    invoke-virtual {v1, v3}, Landroid/widget/ListView;->setOnItemClickListener(Landroid/widget/AdapterView$OnItemClickListener;)V
-
-    .line 405
-    invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setView(Landroid/view/View;)Landroid/app/AlertDialog$Builder;
-
-    .line 406
-    invoke-virtual {v0}, Landroid/app/AlertDialog$Builder;->create()Landroid/app/AlertDialog;
+    .line 401
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireActivity()Landroidx/fragment/app/FragmentActivity;
 
     move-result-object v3
 
-    iput-object v3, p0, Lba/vaktija/android/prefs/SettingsFragment;->alertDialog:Landroid/app/AlertDialog;
+    const/4 v4, 0x2
 
-    .line 407
-    iget-object v3, p0, Lba/vaktija/android/prefs/SettingsFragment;->alertDialog:Landroid/app/AlertDialog;
+    new-array v4, v4, [Ljava/lang/String;
 
-    invoke-virtual {v3}, Landroid/app/AlertDialog;->show()V
+    if-eqz p1, :cond_0
 
-    .line 408
-    return-void
-
-    .line 384
-    .end local v2    # "optionsAdapter":Landroid/widget/ArrayAdapter;, "Landroid/widget/ArrayAdapter<Ljava/lang/String;>;"
-    :cond_0
-    sget-object v3, Lba/vaktija/android/prefs/Defaults;->NOTIF_TONE_TITLE:Ljava/lang/String;
+    sget-object v5, Lba/vaktija/android/prefs/Defaults;->ALARM_TONE_TITLE:Ljava/lang/String;
 
     goto :goto_0
+
+    :cond_0
+    sget-object v5, Lba/vaktija/android/prefs/Defaults;->NOTIF_TONE_TITLE:Ljava/lang/String;
+
+    :goto_0
+    const/4 v6, 0x0
+
+    aput-object v5, v4, v6
+
+    const/4 v5, 0x1
+
+    const-string v6, "Odaberi drugi..."
+
+    aput-object v6, v4, v5
+
+    const v5, 0x1090003
+
+    invoke-direct {v2, v3, v5, v4}, Landroid/widget/ArrayAdapter;-><init>(Landroid/content/Context;I[Ljava/lang/Object;)V
+
+    .line 406
+    invoke-virtual {v1, v2}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
+
+    .line 408
+    new-instance v2, Lba/vaktija/android/prefs/SettingsFragment$5;
+
+    invoke-direct {v2, p0, p1}, Lba/vaktija/android/prefs/SettingsFragment$5;-><init>(Lba/vaktija/android/prefs/SettingsFragment;Z)V
+
+    invoke-virtual {v1, v2}, Landroid/widget/ListView;->setOnItemClickListener(Landroid/widget/AdapterView$OnItemClickListener;)V
+
+    .line 422
+    invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setView(Landroid/view/View;)Landroid/app/AlertDialog$Builder;
+
+    .line 423
+    invoke-virtual {v0}, Landroid/app/AlertDialog$Builder;->create()Landroid/app/AlertDialog;
+
+    move-result-object p1
+
+    iput-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment;->alertDialog:Landroid/app/AlertDialog;
+
+    .line 424
+    invoke-virtual {p1}, Landroid/app/AlertDialog;->show()V
+
+    return-void
+.end method
+
+.method private updateSystemSettingsPreferenceSummary()V
+    .locals 3
+
+    .line 212
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
+
+    move-result-object v0
+
+    const-string v1, "power"
+
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/os/PowerManager;
+
+    .line 213
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Landroid/os/PowerManager;->isIgnoringBatteryOptimizations(Ljava/lang/String;)Z
+
+    move-result v0
+
+    .line 214
+    sget-object v1, Lba/vaktija/android/App;->app:Lba/vaktija/android/App;
+
+    iget-object v1, v1, Lba/vaktija/android/App;->notificationManager:Landroid/app/NotificationManager;
+
+    invoke-virtual {v1}, Landroid/app/NotificationManager;->isNotificationPolicyAccessGranted()Z
+
+    move-result v1
+
+    .line 216
+    new-instance v2, Ljava/util/ArrayList;
+
+    invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
+
+    if-eqz v0, :cond_0
+
+    const v0, 0x7f0f003d
+
+    goto :goto_0
+
+    :cond_0
+    const v0, 0x7f0f003f
+
+    .line 217
+    :goto_0
+    invoke-virtual {p0, v0}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-interface {v2, v0}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    if-eqz v1, :cond_1
+
+    const v0, 0x7f0f0039
+
+    goto :goto_1
+
+    :cond_1
+    const v0, 0x7f0f003a
+
+    .line 218
+    :goto_1
+    invoke-virtual {p0, v0}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-interface {v2, v0}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    .line 220
+    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->systemSettingsPreference:Landroidx/preference/Preference;
+
+    const-string v1, ", "
+
+    invoke-static {v1, v2}, Landroid/text/TextUtils;->join(Ljava/lang/CharSequence;Ljava/lang/Iterable;)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Landroidx/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
+
+    return-void
 .end method
 
 
 # virtual methods
 .method public onActivityResult(IILandroid/content/Intent;)V
     .locals 8
-    .param p1, "requestCode"    # I
-    .param p2, "resultCode"    # I
-    .param p3, "data"    # Landroid/content/Intent;
 
-    .prologue
-    const v7, 0x7f070022
+    .line 336
+    invoke-super {p0, p1, p2, p3}, Landroidx/preference/PreferenceFragmentCompat;->onActivityResult(IILandroid/content/Intent;)V
 
-    const/4 v6, 0x0
+    const-string v0, "SettingsFragment"
 
-    const/4 v5, 0x1
-
-    .line 326
-    invoke-super {p0, p1, p2, p3}, Landroid/support/v4/preference/PreferenceFragment;->onActivityResult(IILandroid/content/Intent;)V
-
-    .line 327
-    sget-object v2, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
-
-    const-string v3, "onActivityResult"
-
-    invoke-static {v2, v3}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 329
-    const/4 v2, -0x1
-
-    if-eq p2, v2, :cond_1
-
-    .line 377
-    :cond_0
-    :goto_0
-    return-void
-
-    .line 332
-    :cond_1
-    if-ne p1, v5, :cond_3
-
-    .line 333
-    const-string v2, "android.intent.extra.ringtone.PICKED_URI"
-
-    invoke-virtual {p3, v2}, Landroid/content/Intent;->getParcelableExtra(Ljava/lang/String;)Landroid/os/Parcelable;
-
-    move-result-object v1
-
-    check-cast v1, Landroid/net/Uri;
-
-    .line 335
-    .local v1, "uri":Landroid/net/Uri;
-    sget-object v2, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
-
-    new-instance v3, Ljava/lang/StringBuilder;
-
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v4, "REQUEST_NOTIF_TONE: "
-
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-static {v2, v3}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    const-string v1, "onActivityResult"
 
     .line 337
-    if-nez v1, :cond_2
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 338
-    sget-object v1, Landroid/provider/Settings$System;->DEFAULT_NOTIFICATION_URI:Landroid/net/Uri;
+    const/4 v1, -0x1
 
-    .line 341
-    :cond_2
-    iget-object v2, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
+    if-eq p2, v1, :cond_0
 
-    invoke-static {v2, v1}, Landroid/media/RingtoneManager;->getRingtone(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/Ringtone;
+    return-void
 
-    move-result-object v0
+    :cond_0
+    const/4 p2, 0x0
 
-    .line 343
-    .local v0, "ringtone":Landroid/media/Ringtone;
-    if-eqz v0, :cond_5
+    const v1, 0x7f0f002c
 
-    .line 345
-    iget-object v2, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
-
-    invoke-interface {v2}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v2
-
-    const-string v3, "notificationToneUri"
-
-    .line 346
-    invoke-virtual {v1}, Landroid/net/Uri;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-interface {v2, v3, v4}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v2
-
-    const-string v3, "useVaktijaNotifTone"
-
-    .line 347
-    invoke-interface {v2, v3, v6}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v2
-
-    .line 348
-    invoke-interface {v2}, Landroid/content/SharedPreferences$Editor;->commit()Z
-
-    .line 350
-    iget-object v2, p0, Lba/vaktija/android/prefs/SettingsFragment;->mNotificationTonePreference:Landroid/preference/Preference;
-
-    iget-object v3, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
-
-    invoke-virtual {v0, v3}, Landroid/media/Ringtone;->getTitle(Landroid/content/Context;)Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-virtual {v2, v3}, Landroid/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
-
-    .line 356
-    .end local v0    # "ringtone":Landroid/media/Ringtone;
-    .end local v1    # "uri":Landroid/net/Uri;
-    :cond_3
-    :goto_1
-    const/4 v2, 0x2
-
-    if-ne p1, v2, :cond_0
-
-    .line 357
     const-string v2, "android.intent.extra.ringtone.PICKED_URI"
 
+    const/4 v3, 0x1
+
+    if-ne p1, v3, :cond_3
+
+    .line 343
     invoke-virtual {p3, v2}, Landroid/content/Intent;->getParcelableExtra(Ljava/lang/String;)Landroid/os/Parcelable;
 
-    move-result-object v1
-
-    check-cast v1, Landroid/net/Uri;
-
-    .line 359
-    .restart local v1    # "uri":Landroid/net/Uri;
-    if-nez v1, :cond_4
-
-    .line 360
-    sget-object v1, Landroid/provider/Settings$System;->DEFAULT_ALARM_ALERT_URI:Landroid/net/Uri;
-
-    .line 362
-    :cond_4
-    sget-object v2, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
-
-    new-instance v3, Ljava/lang/StringBuilder;
-
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v4, "REQUEST_ALARM_TONE: "
-
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-static {v2, v3}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 364
-    iget-object v2, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
-
-    invoke-static {v2, v1}, Landroid/media/RingtoneManager;->getRingtone(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/Ringtone;
-
-    move-result-object v0
-
-    .line 366
-    .restart local v0    # "ringtone":Landroid/media/Ringtone;
-    if-eqz v0, :cond_6
-
-    .line 367
-    iget-object v2, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
-
-    invoke-interface {v2}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v2
-
-    const-string v3, "alarmToneUri"
-
-    .line 368
-    invoke-virtual {v1}, Landroid/net/Uri;->toString()Ljava/lang/String;
-
     move-result-object v4
 
-    invoke-interface {v2, v3, v4}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+    check-cast v4, Landroid/net/Uri;
 
-    move-result-object v2
+    .line 345
+    new-instance v5, Ljava/lang/StringBuilder;
 
-    const-string v3, "useVaktijaAlarmTone"
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
 
-    .line 369
-    invoke-interface {v2, v3, v6}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+    const-string v6, "REQUEST_NOTIF_TONE: "
 
-    move-result-object v2
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 370
-    invoke-interface {v2}, Landroid/content/SharedPreferences$Editor;->commit()Z
+    invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    .line 372
-    iget-object v2, p0, Lba/vaktija/android/prefs/SettingsFragment;->mAlarmTonePreference:Landroid/preference/Preference;
-
-    iget-object v3, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
-
-    invoke-virtual {v0, v3}, Landroid/media/Ringtone;->getTitle(Landroid/content/Context;)Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-virtual {v2, v3}, Landroid/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
-
-    goto/16 :goto_0
-
-    .line 352
-    :cond_5
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v2
-
-    invoke-static {v2, v7, v5}, Landroid/widget/Toast;->makeText(Landroid/content/Context;II)Landroid/widget/Toast;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Landroid/widget/Toast;->show()V
-
-    goto :goto_1
-
-    .line 374
-    :cond_6
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v2
-
-    invoke-static {v2, v7, v5}, Landroid/widget/Toast;->makeText(Landroid/content/Context;II)Landroid/widget/Toast;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Landroid/widget/Toast;->show()V
-
-    goto/16 :goto_0
-.end method
-
-.method public onAttach(Landroid/app/Activity;)V
-    .locals 2
-    .param p1, "activity"    # Landroid/app/Activity;
-
-    .prologue
-    .line 90
-    invoke-super {p0, p1}, Landroid/support/v4/preference/PreferenceFragment;->onAttach(Landroid/app/Activity;)V
-
-    .line 91
-    sget-object v0, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
-
-    const-string v1, "onAttach"
-
-    invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 93
-    invoke-virtual {p1}, Landroid/app/Activity;->getApplicationContext()Landroid/content/Context;
-
-    move-result-object v0
-
-    check-cast v0, Lba/vaktija/android/App;
-
-    iput-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
-
-    .line 94
-    return-void
-.end method
-
-.method public onCreate(Landroid/os/Bundle;)V
-    .locals 15
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
-
-    .prologue
-    .line 98
-    invoke-super/range {p0 .. p1}, Landroid/support/v4/preference/PreferenceFragment;->onCreate(Landroid/os/Bundle;)V
-
-    .line 100
-    const v11, 0x7f050001
-
-    invoke-virtual {p0, v11}, Lba/vaktija/android/prefs/SettingsFragment;->addPreferencesFromResource(I)V
-
-    .line 102
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v11
-
-    invoke-virtual {v11}, Landroid/support/v4/app/FragmentActivity;->getApplicationContext()Landroid/content/Context;
-
-    move-result-object v11
-
-    invoke-static {v11}, Landroid/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
-
-    move-result-object v11
-
-    iput-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
-
-    .line 104
-    const-string v11, "locationName"
-
-    invoke-virtual {p0, v11}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v11
-
-    iput-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->location:Landroid/preference/Preference;
-
-    .line 105
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->location:Landroid/preference/Preference;
-
-    invoke-virtual {v11, p0}, Landroid/preference/Preference;->setOnPreferenceClickListener(Landroid/preference/Preference$OnPreferenceClickListener;)V
-
-    .line 106
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->location:Landroid/preference/Preference;
-
-    iget-object v12, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
-
-    const-string v13, "locationName"
-
-    const-string v14, "Beč (Džemat Bosna)"
-
-    invoke-interface {v12, v13, v14}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v12
-
-    invoke-virtual {v11, v12}, Landroid/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
-
-    .line 108
-    const-string v11, "statusbarNotification"
-
-    invoke-virtual {p0, v11}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v9
-
-    .line 109
-    .local v9, "statusBarNotif":Landroid/preference/Preference;
-    invoke-virtual {v9, p0}, Landroid/preference/Preference;->setOnPreferenceChangeListener(Landroid/preference/Preference$OnPreferenceChangeListener;)V
-
-    .line 111
-    const-string v11, "ALL_PRAYERS_IN_NOTIF"
-
-    invoke-virtual {p0, v11}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v1
-
-    .line 112
-    .local v1, "allPrayersNotif":Landroid/preference/Preference;
-    invoke-virtual {v1, p0}, Landroid/preference/Preference;->setOnPreferenceChangeListener(Landroid/preference/Preference$OnPreferenceChangeListener;)V
-
-    .line 114
-    sget v11, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v12, 0x10
-
-    if-ge v11, v12, :cond_0
-
-    .line 115
-    const-string v11, "notifications"
-
-    invoke-virtual {p0, v11}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v2
-
-    check-cast v2, Landroid/preference/PreferenceCategory;
-
-    .line 116
-    .local v2, "category":Landroid/preference/PreferenceCategory;
-    invoke-virtual {v2, v1}, Landroid/preference/PreferenceCategory;->removePreference(Landroid/preference/Preference;)Z
-
-    .line 119
-    .end local v2    # "category":Landroid/preference/PreferenceCategory;
-    :cond_0
-    const-string v11, "notificationToneUri"
-
-    invoke-virtual {p0, v11}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v11
-
-    iput-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->mNotificationTonePreference:Landroid/preference/Preference;
-
-    .line 120
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->mNotificationTonePreference:Landroid/preference/Preference;
-
-    invoke-virtual {v11, p0}, Landroid/preference/Preference;->setOnPreferenceClickListener(Landroid/preference/Preference$OnPreferenceClickListener;)V
-
-    .line 122
-    sget-object v10, Lba/vaktija/android/prefs/Defaults;->NOTIF_TONE_TITLE:Ljava/lang/String;
-
-    .line 124
-    .local v10, "title":Ljava/lang/String;
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
-
-    const-string v12, "useVaktijaNotifTone"
-
-    const/4 v13, 0x1
-
-    invoke-interface {v11, v12, v13}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
-
-    move-result v11
-
-    if-nez v11, :cond_1
-
-    .line 125
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
-
-    const-string v12, "notificationToneUri"
-
-    .line 126
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v13
-
-    const/4 v14, 0x0
-
-    invoke-static {v13, v14}, Lba/vaktija/android/prefs/Defaults;->getDefaultTone(Landroid/content/Context;Z)Ljava/lang/String;
-
-    move-result-object v13
-
-    .line 125
-    invoke-interface {v11, v12, v13}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v7
-
-    .line 128
-    .local v7, "selectedNotifTone":Ljava/lang/String;
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
-
-    .line 129
-    invoke-static {v7}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
-
-    move-result-object v12
-
-    invoke-static {v11, v12}, Landroid/media/RingtoneManager;->getRingtone(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/Ringtone;
-
-    move-result-object v4
-
-    .line 131
-    .local v4, "ringtone":Landroid/media/Ringtone;
-    sget-object v11, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
-
-    new-instance v12, Ljava/lang/StringBuilder;
-
-    invoke-direct {v12}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v13, "selectedNotifTone: "
-
-    invoke-virtual {v12, v13}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v12
-
-    invoke-virtual {v12, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v12
-
-    invoke-virtual {v12}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v12
-
-    invoke-static {v11, v12}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 132
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
-
-    invoke-virtual {v4, v11}, Landroid/media/Ringtone;->getTitle(Landroid/content/Context;)Ljava/lang/String;
-
-    move-result-object v10
-
-    .line 135
-    .end local v4    # "ringtone":Landroid/media/Ringtone;
-    .end local v7    # "selectedNotifTone":Ljava/lang/String;
-    :cond_1
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->mNotificationTonePreference:Landroid/preference/Preference;
-
-    invoke-virtual {v11, v10}, Landroid/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
-
-    .line 137
-    const-string v11, "alarmToneUri"
-
-    invoke-virtual {p0, v11}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v11
-
-    iput-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->mAlarmTonePreference:Landroid/preference/Preference;
-
-    .line 138
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->mAlarmTonePreference:Landroid/preference/Preference;
-
-    invoke-virtual {v11, p0}, Landroid/preference/Preference;->setOnPreferenceClickListener(Landroid/preference/Preference$OnPreferenceClickListener;)V
-
-    .line 140
-    sget-object v6, Lba/vaktija/android/prefs/Defaults;->ALARM_TONE_TITLE:Ljava/lang/String;
-
-    .line 142
-    .local v6, "selectedAlarmToneTitle":Ljava/lang/String;
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
-
-    const-string v12, "useVaktijaAlarmTone"
-
-    const/4 v13, 0x1
-
-    invoke-interface {v11, v12, v13}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
-
-    move-result v11
-
-    if-nez v11, :cond_2
-
-    .line 143
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
-
-    const-string v12, "alarmToneUri"
-
-    .line 145
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v13
-
-    const/4 v14, 0x1
-
-    invoke-static {v13, v14}, Lba/vaktija/android/prefs/Defaults;->getDefaultTone(Landroid/content/Context;Z)Ljava/lang/String;
-
-    move-result-object v13
-
-    .line 143
-    invoke-interface {v11, v12, v13}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v5
 
-    .line 147
-    .local v5, "selectedAlarmTone":Ljava/lang/String;
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
+    invoke-static {v0, v5}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 148
-    invoke-static {v5}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+    if-nez v4, :cond_1
 
-    move-result-object v12
+    .line 348
+    sget-object v4, Landroid/provider/Settings$System;->DEFAULT_NOTIFICATION_URI:Landroid/net/Uri;
 
-    invoke-static {v11, v12}, Landroid/media/RingtoneManager;->getRingtone(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/Ringtone;
+    .line 351
+    :cond_1
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
 
-    move-result-object v0
+    move-result-object v5
 
-    .line 150
-    .local v0, "alarmRingtone":Landroid/media/Ringtone;
-    sget-object v11, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
+    invoke-static {v5, v4}, Landroid/media/RingtoneManager;->getRingtone(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/Ringtone;
 
-    new-instance v12, Ljava/lang/StringBuilder;
+    move-result-object v5
 
-    invoke-direct {v12}, Ljava/lang/StringBuilder;-><init>()V
+    if-eqz v5, :cond_2
 
-    const-string v13, "selectedAlarmTone: "
+    .line 355
+    iget-object v6, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
 
-    invoke-virtual {v12, v13}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v12
-
-    invoke-virtual {v12, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v12
-
-    invoke-virtual {v12}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v12
-
-    invoke-static {v11, v12}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 151
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
-
-    invoke-virtual {v0, v11}, Landroid/media/Ringtone;->getTitle(Landroid/content/Context;)Ljava/lang/String;
+    invoke-interface {v6}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
 
     move-result-object v6
 
-    .line 154
-    .end local v0    # "alarmRingtone":Landroid/media/Ringtone;
-    .end local v5    # "selectedAlarmTone":Ljava/lang/String;
-    :cond_2
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->mAlarmTonePreference:Landroid/preference/Preference;
-
-    invoke-virtual {v11, v6}, Landroid/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
-
-    .line 156
-    const-string v11, "dhuhrTime"
-
-    invoke-virtual {p0, v11}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v11
-
-    check-cast v11, Landroid/preference/ListPreference;
-
-    iput-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->dhuhrCounting:Landroid/preference/ListPreference;
-
-    .line 157
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->dhuhrCounting:Landroid/preference/ListPreference;
-
-    invoke-virtual {v11, p0}, Landroid/preference/ListPreference;->setOnPreferenceChangeListener(Landroid/preference/Preference$OnPreferenceChangeListener;)V
-
-    .line 159
-    const-string v11, "separateJumaSettings"
-
-    invoke-virtual {p0, v11}, Lba/vaktija/android/prefs/SettingsFragment;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
-
-    move-result-object v8
-
-    check-cast v8, Landroid/preference/CheckBoxPreference;
-
-    .line 160
-    .local v8, "separateJumaSettings":Landroid/preference/CheckBoxPreference;
-    invoke-virtual {v8, p0}, Landroid/preference/CheckBoxPreference;->setOnPreferenceChangeListener(Landroid/preference/Preference$OnPreferenceChangeListener;)V
-
-    .line 162
-    iget-object v11, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
-
-    const-string v12, "dhuhrTime"
-
-    const-string v13, "1"
-
-    invoke-interface {v11, v12, v13}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v3
-
-    .line 163
-    .local v3, "dhuhrTime":Ljava/lang/String;
-    iget-object v12, p0, Lba/vaktija/android/prefs/SettingsFragment;->dhuhrCounting:Landroid/preference/ListPreference;
-
-    const-string v11, "1"
-
-    .line 164
-    invoke-virtual {v3, v11}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v11
-
-    if-eqz v11, :cond_3
-
-    const v11, 0x7f070061
-
-    .line 165
-    invoke-virtual {p0, v11}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v11
-
-    .line 163
-    :goto_0
-    invoke-virtual {v12, v11}, Landroid/preference/ListPreference;->setSummary(Ljava/lang/CharSequence;)V
-
-    .line 168
-    iget-object v12, p0, Lba/vaktija/android/prefs/SettingsFragment;->dhuhrCounting:Landroid/preference/ListPreference;
-
-    const-string v11, "1"
-
-    invoke-virtual {v3, v11}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v11
-
-    if-eqz v11, :cond_4
-
-    const/4 v11, 0x0
-
-    :goto_1
-    invoke-virtual {v12, v11}, Landroid/preference/ListPreference;->setValueIndex(I)V
-
-    .line 170
-    invoke-direct {p0}, Lba/vaktija/android/prefs/SettingsFragment;->colorPreferenceTitles()V
-
-    .line 171
-    return-void
-
-    .line 165
-    :cond_3
-    const v11, 0x7f070054
-
-    .line 166
-    invoke-virtual {p0, v11}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v11
-
-    goto :goto_0
-
-    .line 168
-    :cond_4
-    const/4 v11, 0x1
-
-    goto :goto_1
-.end method
-
-.method public onPreferenceChange(Landroid/preference/Preference;Ljava/lang/Object;)Z
-    .locals 6
-    .param p1, "preference"    # Landroid/preference/Preference;
-    .param p2, "newValue"    # Ljava/lang/Object;
-
-    .prologue
-    .line 260
-    sget-object v2, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
-
-    new-instance v3, Ljava/lang/StringBuilder;
-
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v4, "onPreferenceChange key="
-
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {p1}, Landroid/preference/Preference;->getKey()Ljava/lang/String;
+    .line 356
+    invoke-virtual {v4}, Landroid/net/Uri;->toString()Ljava/lang/String;
 
     move-result-object v4
 
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v7, "notificationToneUri"
 
-    move-result-object v3
+    invoke-interface {v6, v7, v4}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
 
-    const-string v4, " newValue="
+    move-result-object v4
 
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v6, "useVaktijaNotifTone"
 
-    move-result-object v3
+    .line 357
+    invoke-interface {v4, v6, p2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
 
-    invoke-virtual {v3, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    move-result-object v4
 
-    move-result-object v3
+    .line 358
+    invoke-interface {v4}, Landroid/content/SharedPreferences$Editor;->apply()V
 
-    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    .line 360
+    iget-object v4, p0, Lba/vaktija/android/prefs/SettingsFragment;->notificationTonePreference:Landroidx/preference/Preference;
 
-    move-result-object v3
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
 
-    invoke-static {v2, v3}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    move-result-object v6
 
-    .line 262
-    invoke-virtual {p1}, Landroid/preference/Preference;->getKey()Ljava/lang/String;
+    invoke-virtual {v5, v6}, Landroid/media/Ringtone;->getTitle(Landroid/content/Context;)Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-virtual {v4, v5}, Landroidx/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
+
+    goto :goto_0
+
+    .line 362
+    :cond_2
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
+
+    move-result-object v4
+
+    invoke-static {v4, v1, v3}, Landroid/widget/Toast;->makeText(Landroid/content/Context;II)Landroid/widget/Toast;
+
+    move-result-object v4
+
+    invoke-virtual {v4}, Landroid/widget/Toast;->show()V
+
+    :cond_3
+    :goto_0
+    const/4 v4, 0x2
+
+    if-ne p1, v4, :cond_6
+
+    .line 367
+    invoke-virtual {p3, v2}, Landroid/content/Intent;->getParcelableExtra(Ljava/lang/String;)Landroid/os/Parcelable;
+
+    move-result-object p3
+
+    check-cast p3, Landroid/net/Uri;
+
+    if-nez p3, :cond_4
+
+    .line 370
+    sget-object p3, Landroid/provider/Settings$System;->DEFAULT_ALARM_ALERT_URI:Landroid/net/Uri;
+
+    .line 372
+    :cond_4
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v4, "REQUEST_ALARM_TONE: "
+
+    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v2
 
-    const-string v3, "ALL_PRAYERS_IN_NOTIF"
+    invoke-static {v0, v2}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    .line 374
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
 
-    move-result v2
+    move-result-object v0
 
-    if-eqz v2, :cond_0
+    invoke-static {v0, p3}, Landroid/media/RingtoneManager;->getRingtone(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/Ringtone;
 
-    .line 264
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getListView()Landroid/widget/ListView;
+    move-result-object v0
 
-    move-result-object v2
+    if-eqz v0, :cond_5
 
-    new-instance v3, Lba/vaktija/android/prefs/SettingsFragment$2;
+    .line 377
+    iget-object v1, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
 
-    invoke-direct {v3, p0}, Lba/vaktija/android/prefs/SettingsFragment$2;-><init>(Lba/vaktija/android/prefs/SettingsFragment;)V
+    invoke-interface {v1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
 
-    const-wide/16 v4, 0x1f4
+    move-result-object v1
 
-    invoke-virtual {v2, v3, v4, v5}, Landroid/widget/ListView;->postDelayed(Ljava/lang/Runnable;J)Z
+    .line 378
+    invoke-virtual {p3}, Landroid/net/Uri;->toString()Ljava/lang/String;
 
-    .line 272
-    :cond_0
-    invoke-virtual {p1}, Landroid/preference/Preference;->getKey()Ljava/lang/String;
+    move-result-object p3
 
-    move-result-object v2
+    const-string v2, "alarmToneUri"
 
-    const-string v3, "statusbarNotification"
+    invoke-interface {v1, v2, p3}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
 
-    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    move-result-object p3
 
-    move-result v2
+    const-string v1, "useVaktijaAlarmTone"
 
-    if-eqz v2, :cond_1
+    .line 379
+    invoke-interface {p3, v1, p2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
 
-    .line 274
-    invoke-virtual {p2}, Ljava/lang/Object;->toString()Ljava/lang/String;
+    move-result-object p2
 
-    move-result-object v2
+    .line 380
+    invoke-interface {p2}, Landroid/content/SharedPreferences$Editor;->apply()V
 
-    invoke-static {v2}, Ljava/lang/Boolean;->parseBoolean(Ljava/lang/String;)Z
+    .line 382
+    iget-object p2, p0, Lba/vaktija/android/prefs/SettingsFragment;->alarmTonePreference:Landroidx/preference/Preference;
+
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
+
+    move-result-object p3
+
+    invoke-virtual {v0, p3}, Landroid/media/Ringtone;->getTitle(Landroid/content/Context;)Ljava/lang/String;
+
+    move-result-object p3
+
+    invoke-virtual {p2, p3}, Landroidx/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
+
+    goto :goto_1
+
+    .line 384
+    :cond_5
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
+
+    move-result-object p2
+
+    invoke-static {p2, v1, v3}, Landroid/widget/Toast;->makeText(Landroid/content/Context;II)Landroid/widget/Toast;
+
+    move-result-object p2
+
+    invoke-virtual {p2}, Landroid/widget/Toast;->show()V
+
+    :cond_6
+    :goto_1
+    const/4 p2, 0x3
+
+    if-ne p1, p2, :cond_7
+
+    .line 389
+    sget p1, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 p2, 0x17
+
+    if-lt p1, p2, :cond_7
+
+    .line 390
+    invoke-direct {p0}, Lba/vaktija/android/prefs/SettingsFragment;->updateSystemSettingsPreferenceSummary()V
+
+    :cond_7
+    return-void
+.end method
+
+.method public onCreatePreferences(Landroid/os/Bundle;Ljava/lang/String;)V
+    .locals 4
+
+    const p1, 0x7f120001
+
+    .line 94
+    invoke-virtual {p0, p1, p2}, Lba/vaktija/android/prefs/SettingsFragment;->setPreferencesFromResource(ILjava/lang/String;)V
+
+    .line 96
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
+
+    move-result-object p1
+
+    invoke-static {p1}, Landroidx/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
+
+    move-result-object p1
+
+    iput-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
+
+    const-string p1, "locationName"
+
+    .line 98
+    invoke-direct {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object p2
+
+    iput-object p2, p0, Lba/vaktija/android/prefs/SettingsFragment;->location:Landroidx/preference/Preference;
+
+    .line 99
+    invoke-virtual {p2, p0}, Landroidx/preference/Preference;->setOnPreferenceClickListener(Landroidx/preference/Preference$OnPreferenceClickListener;)V
+
+    .line 100
+    iget-object p2, p0, Lba/vaktija/android/prefs/SettingsFragment;->location:Landroidx/preference/Preference;
+
+    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
+
+    const-string v1, "Sarajevo"
+
+    invoke-interface {v0, p1, v1}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-virtual {p2, p1}, Landroidx/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
+
+    const-string p1, "statusbarNotification"
+
+    .line 102
+    invoke-direct {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object p1
+
+    .line 103
+    invoke-virtual {p1, p0}, Landroidx/preference/Preference;->setOnPreferenceChangeListener(Landroidx/preference/Preference$OnPreferenceChangeListener;)V
+
+    const-string p1, "ALL_PRAYERS_IN_NOTIF"
+
+    .line 105
+    invoke-direct {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object p1
+
+    .line 106
+    invoke-virtual {p1, p0}, Landroidx/preference/Preference;->setOnPreferenceChangeListener(Landroidx/preference/Preference$OnPreferenceChangeListener;)V
+
+    const-string p1, "notificationToneUri"
+
+    .line 108
+    invoke-direct {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object p2
+
+    iput-object p2, p0, Lba/vaktija/android/prefs/SettingsFragment;->notificationTonePreference:Landroidx/preference/Preference;
+
+    .line 109
+    invoke-virtual {p2, p0}, Landroidx/preference/Preference;->setOnPreferenceClickListener(Landroidx/preference/Preference$OnPreferenceClickListener;)V
+
+    .line 111
+    sget-object p2, Lba/vaktija/android/prefs/Defaults;->NOTIF_TONE_TITLE:Ljava/lang/String;
+
+    .line 113
+    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
+
+    const-string v1, "useVaktijaNotifTone"
+
+    const/4 v2, 0x1
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
 
     move-result v0
 
-    .line 276
-    .local v0, "enabled":Z
-    iget-object v3, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
+    const-string v1, "SettingsFragment"
 
-    const-string v4, "Settings"
+    if-nez v0, :cond_0
 
-    if-eqz v0, :cond_4
+    .line 114
+    iget-object p2, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
 
-    const-string v2, "Enabled status bar notificatoin"
+    .line 115
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
 
-    :goto_0
-    invoke-virtual {v3, v4, v2}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+    move-result-object v0
 
-    .line 278
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    const/4 v3, 0x0
 
-    move-result-object v2
+    invoke-static {v0, v3}, Lba/vaktija/android/prefs/Defaults;->getDefaultTone(Landroid/content/Context;Z)Ljava/lang/String;
 
-    new-instance v3, Ljava/lang/StringBuilder;
+    move-result-object v0
 
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+    .line 114
+    invoke-interface {p2, p1, v0}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
-    sget-object v4, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
+    move-result-object p1
 
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    .line 118
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
 
-    move-result-object v3
+    move-result-object p2
 
-    const-string v4, ":onPreferenceChange"
+    invoke-static {p1}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
 
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v0
 
-    move-result-object v3
+    invoke-static {p2, v0}, Landroid/media/RingtoneManager;->getRingtone(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/Ringtone;
 
-    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object p2
 
-    move-result-object v3
+    .line 120
+    new-instance v0, Ljava/lang/StringBuilder;
 
-    invoke-static {v2, v3}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v3, "selectedNotifTone: "
+
+    invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-static {v1, p1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 121
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
+
+    move-result-object p1
+
+    invoke-virtual {p2, p1}, Landroid/media/Ringtone;->getTitle(Landroid/content/Context;)Ljava/lang/String;
+
+    move-result-object p2
+
+    .line 124
+    :cond_0
+    iget-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment;->notificationTonePreference:Landroidx/preference/Preference;
+
+    invoke-virtual {p1, p2}, Landroidx/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
+
+    const-string p1, "alarmToneUri"
+
+    .line 126
+    invoke-direct {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object p2
+
+    iput-object p2, p0, Lba/vaktija/android/prefs/SettingsFragment;->alarmTonePreference:Landroidx/preference/Preference;
+
+    .line 127
+    invoke-virtual {p2, p0}, Landroidx/preference/Preference;->setOnPreferenceClickListener(Landroidx/preference/Preference$OnPreferenceClickListener;)V
+
+    .line 129
+    sget-object p2, Lba/vaktija/android/prefs/Defaults;->ALARM_TONE_TITLE:Ljava/lang/String;
+
+    .line 131
+    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
+
+    const-string v3, "useVaktijaAlarmTone"
+
+    invoke-interface {v0, v3, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    if-nez v0, :cond_1
+
+    .line 132
+    iget-object p2, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
+
+    .line 134
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
+
+    move-result-object v0
+
+    invoke-static {v0, v2}, Lba/vaktija/android/prefs/Defaults;->getDefaultTone(Landroid/content/Context;Z)Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 132
+    invoke-interface {p2, p1, v0}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object p1
+
+    .line 137
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
+
+    move-result-object p2
+
+    invoke-static {p1}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v0
+
+    invoke-static {p2, v0}, Landroid/media/RingtoneManager;->getRingtone(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/Ringtone;
+
+    move-result-object p2
+
+    .line 139
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v3, "selectedAlarmTone: "
+
+    invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-static {v1, p1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 140
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
+
+    move-result-object p1
+
+    invoke-virtual {p2, p1}, Landroid/media/Ringtone;->getTitle(Landroid/content/Context;)Ljava/lang/String;
+
+    move-result-object p2
+
+    .line 143
+    :cond_1
+    iget-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment;->alarmTonePreference:Landroidx/preference/Preference;
+
+    invoke-virtual {p1, p2}, Landroidx/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
+
+    const-string p1, "dhuhrTime"
+
+    .line 145
+    invoke-direct {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object p2
+
+    check-cast p2, Landroidx/preference/ListPreference;
+
+    iput-object p2, p0, Lba/vaktija/android/prefs/SettingsFragment;->dhuhrCounting:Landroidx/preference/ListPreference;
+
+    .line 146
+    invoke-virtual {p2, p0}, Landroidx/preference/ListPreference;->setOnPreferenceChangeListener(Landroidx/preference/Preference$OnPreferenceChangeListener;)V
+
+    const-string p2, "separateJumaSettings"
+
+    .line 148
+    invoke-direct {p0, p2}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object p2
+
+    check-cast p2, Landroidx/preference/CheckBoxPreference;
+
+    .line 149
+    invoke-virtual {p2, p0}, Landroidx/preference/CheckBoxPreference;->setOnPreferenceChangeListener(Landroidx/preference/Preference$OnPreferenceChangeListener;)V
+
+    .line 151
+    iget-object p2, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
+
+    const-string v0, "1"
+
+    invoke-interface {p2, p1, v0}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object p1
+
+    .line 153
+    iget-object p2, p0, Lba/vaktija/android/prefs/SettingsFragment;->dhuhrCounting:Landroidx/preference/ListPreference;
+
+    .line 154
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_2
+
+    const v1, 0x7f0f007f
+
+    .line 155
+    invoke-virtual {p0, v1}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
 
     move-result-object v1
 
-    .line 279
-    .local v1, "service":Landroid/content/Intent;
-    if-eqz v0, :cond_5
+    goto :goto_0
 
-    const-string v2, "ACTION_ENABLE_NOTIFS"
+    :cond_2
+    const v1, 0x7f0f0070
 
+    .line 156
+    invoke-virtual {p0, v1}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v1
+
+    .line 153
+    :goto_0
+    invoke-virtual {p2, v1}, Landroidx/preference/ListPreference;->setSummary(Ljava/lang/CharSequence;)V
+
+    .line 158
+    iget-object p2, p0, Lba/vaktija/android/prefs/SettingsFragment;->dhuhrCounting:Landroidx/preference/ListPreference;
+
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result p1
+
+    xor-int/2addr p1, v2
+
+    invoke-virtual {p2, p1}, Landroidx/preference/ListPreference;->setValueIndex(I)V
+
+    const-string p1, "about"
+
+    .line 160
+    invoke-direct {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object p1
+
+    .line 161
+    new-instance p2, Lba/vaktija/android/prefs/SettingsFragment$1;
+
+    invoke-direct {p2, p0}, Lba/vaktija/android/prefs/SettingsFragment$1;-><init>(Lba/vaktija/android/prefs/SettingsFragment;)V
+
+    invoke-virtual {p1, p2}, Landroidx/preference/Preference;->setOnPreferenceClickListener(Landroidx/preference/Preference$OnPreferenceClickListener;)V
+
+    const-string p1, "feedback"
+
+    .line 169
+    invoke-direct {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object p1
+
+    new-instance p2, Lba/vaktija/android/prefs/SettingsFragment$2;
+
+    invoke-direct {p2, p0}, Lba/vaktija/android/prefs/SettingsFragment$2;-><init>(Lba/vaktija/android/prefs/SettingsFragment;)V
+
+    invoke-virtual {p1, p2}, Landroidx/preference/Preference;->setOnPreferenceClickListener(Landroidx/preference/Preference$OnPreferenceClickListener;)V
+
+    const-string p1, "systemSettings"
+
+    .line 188
+    invoke-direct {p0, p1}, Lba/vaktija/android/prefs/SettingsFragment;->getPreference(Ljava/lang/String;)Landroidx/preference/Preference;
+
+    move-result-object p1
+
+    iput-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment;->systemSettingsPreference:Landroidx/preference/Preference;
+
+    .line 190
+    sget p1, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 p2, 0x17
+
+    if-lt p1, p2, :cond_3
+
+    .line 191
+    iget-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment;->systemSettingsPreference:Landroidx/preference/Preference;
+
+    new-instance p2, Lba/vaktija/android/prefs/SettingsFragment$3;
+
+    invoke-direct {p2, p0}, Lba/vaktija/android/prefs/SettingsFragment$3;-><init>(Lba/vaktija/android/prefs/SettingsFragment;)V
+
+    invoke-virtual {p1, p2}, Landroidx/preference/Preference;->setOnPreferenceClickListener(Landroidx/preference/Preference$OnPreferenceClickListener;)V
+
+    .line 202
+    invoke-direct {p0}, Lba/vaktija/android/prefs/SettingsFragment;->updateSystemSettingsPreferenceSummary()V
+
+    goto :goto_1
+
+    .line 204
+    :cond_3
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getPreferenceScreen()Landroidx/preference/PreferenceScreen;
+
+    move-result-object p1
+
+    iget-object p2, p0, Lba/vaktija/android/prefs/SettingsFragment;->systemSettingsPreference:Landroidx/preference/Preference;
+
+    invoke-virtual {p1, p2}, Landroidx/preference/PreferenceScreen;->removePreference(Landroidx/preference/Preference;)Z
+
+    .line 207
     :goto_1
-    invoke-virtual {v1, v2}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+    invoke-direct {p0}, Lba/vaktija/android/prefs/SettingsFragment;->colorPreferenceTitles()V
 
-    .line 280
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    return-void
+.end method
 
-    move-result-object v2
+.method public onPreferenceChange(Landroidx/preference/Preference;Ljava/lang/Object;)Z
+    .locals 6
 
-    invoke-virtual {v2, v1}, Landroid/support/v4/app/FragmentActivity;->startService(Landroid/content/Intent;)Landroid/content/ComponentName;
+    .line 286
+    new-instance v0, Ljava/lang/StringBuilder;
 
-    .line 283
-    .end local v0    # "enabled":Z
-    .end local v1    # "service":Landroid/content/Intent;
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "onPreferenceChange key="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p1}, Landroidx/preference/Preference;->getKey()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v1, " newValue="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    const-string v1, "SettingsFragment"
+
+    invoke-static {v1, v0}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 288
+    invoke-virtual {p1}, Landroidx/preference/Preference;->getKey()Ljava/lang/String;
+
+    move-result-object v0
+
+    const-string v1, "ALL_PRAYERS_IN_NOTIF"
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    .line 290
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getListView()Landroidx/recyclerview/widget/RecyclerView;
+
+    move-result-object v0
+
+    new-instance v1, Lba/vaktija/android/prefs/SettingsFragment$4;
+
+    invoke-direct {v1, p0}, Lba/vaktija/android/prefs/SettingsFragment$4;-><init>(Lba/vaktija/android/prefs/SettingsFragment;)V
+
+    const-wide/16 v2, 0x1f4
+
+    invoke-virtual {v0, v1, v2, v3}, Landroidx/recyclerview/widget/RecyclerView;->postDelayed(Ljava/lang/Runnable;J)Z
+
+    .line 298
+    :cond_0
+    invoke-virtual {p1}, Landroidx/preference/Preference;->getKey()Ljava/lang/String;
+
+    move-result-object v0
+
+    const-string v1, "statusbarNotification"
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    const-string v1, "SettingsFragment:onPreferenceChange"
+
+    const-string v2, "Settings"
+
+    if-eqz v0, :cond_3
+
+    .line 300
+    invoke-virtual {p2}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Ljava/lang/Boolean;->parseBoolean(Ljava/lang/String;)Z
+
+    move-result v0
+
+    .line 302
+    sget-object v3, Lba/vaktija/android/App;->app:Lba/vaktija/android/App;
+
+    if-eqz v0, :cond_1
+
+    const-string v4, "Enabled status bar notificatoin"
+
+    goto :goto_0
+
     :cond_1
-    invoke-virtual {p1}, Landroid/preference/Preference;->getKey()Ljava/lang/String;
+    const-string v4, "Disabled status bar notification"
 
-    move-result-object v2
+    :goto_0
+    invoke-virtual {v3, v2, v4}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 304
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
+
+    move-result-object v3
+
+    invoke-static {v3, v1}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+
+    move-result-object v3
+
+    if-eqz v0, :cond_2
+
+    const-string v0, "ACTION_ENABLE_NOTIFS"
+
+    goto :goto_1
+
+    :cond_2
+    const-string v0, "ACTION_DISABLE_NOTIFS"
+
+    .line 305
+    :goto_1
+    invoke-virtual {v3, v0}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+
+    .line 306
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
+
+    move-result-object v0
+
+    invoke-static {v0, v3}, Lba/vaktija/android/service/VaktijaServiceHelper;->startService(Landroid/content/Context;Landroid/content/Intent;)V
+
+    .line 309
+    :cond_3
+    invoke-virtual {p1}, Landroidx/preference/Preference;->getKey()Ljava/lang/String;
+
+    move-result-object v0
 
     const-string v3, "dhuhrTime"
 
-    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v2
+    move-result v0
 
-    if-eqz v2, :cond_2
+    const-string v3, "ACTION_UPDATE"
 
-    .line 285
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    if-eqz v0, :cond_6
 
-    move-result-object v2
+    .line 311
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
-    new-instance v3, Ljava/lang/StringBuilder;
+    move-result-object v0
 
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-static {v0, v1}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
 
-    sget-object v4, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
+    move-result-object v0
 
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    .line 312
+    invoke-virtual {v0, v3}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
 
-    move-result-object v3
+    .line 313
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
 
-    const-string v4, ":onPreferenceChange"
+    move-result-object v4
 
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-static {v4, v0}, Lba/vaktija/android/service/VaktijaServiceHelper;->startService(Landroid/content/Context;Landroid/content/Intent;)V
 
-    move-result-object v3
-
-    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-static {v2, v3}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
-
-    move-result-object v1
-
-    .line 286
-    .restart local v1    # "service":Landroid/content/Intent;
-    const-string v2, "ACTION_UPDATE"
-
-    invoke-virtual {v1, v2}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
-
-    .line 287
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v2
-
-    invoke-virtual {v2, v1}, Landroid/support/v4/app/FragmentActivity;->startService(Landroid/content/Intent;)Landroid/content/ComponentName;
-
-    .line 289
-    iget-object v3, p0, Lba/vaktija/android/prefs/SettingsFragment;->dhuhrCounting:Landroid/preference/ListPreference;
+    .line 315
+    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->dhuhrCounting:Landroidx/preference/ListPreference;
 
     invoke-virtual {p2}, Ljava/lang/Object;->toString()Ljava/lang/String;
 
-    move-result-object v2
-
-    sget-object v4, Lba/vaktija/android/prefs/Prefs;->DHUHR_NORMALIZED:Ljava/lang/String;
-
-    invoke-virtual {v2, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v2
-
-    if-eqz v2, :cond_6
-
-    const v2, 0x7f070061
-
-    .line 290
-    invoke-virtual {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v2
-
-    .line 289
-    :goto_2
-    invoke-virtual {v3, v2}, Landroid/preference/ListPreference;->setSummary(Ljava/lang/CharSequence;)V
-
-    .line 293
-    iget-object v3, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
-
-    const-string v4, "Settings"
-
-    invoke-virtual {p2}, Ljava/lang/Object;->toString()Ljava/lang/String;
-
-    move-result-object v2
+    move-result-object v4
 
     sget-object v5, Lba/vaktija/android/prefs/Prefs;->DHUHR_NORMALIZED:Ljava/lang/String;
 
-    invoke-virtual {v2, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v4, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v2
+    move-result v4
 
-    if-eqz v2, :cond_7
+    if-eqz v4, :cond_4
 
-    const-string v2, "Normalized time enabled"
+    const v4, 0x7f0f007f
 
-    :goto_3
-    invoke-virtual {v3, v4, v2}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+    .line 316
+    invoke-virtual {p0, v4}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
 
-    .line 296
-    .end local v1    # "service":Landroid/content/Intent;
-    :cond_2
-    invoke-virtual {p1}, Landroid/preference/Preference;->getKey()Ljava/lang/String;
-
-    move-result-object v2
-
-    const-string v3, "separateJumaSettings"
-
-    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v2
-
-    if-eqz v2, :cond_3
-
-    .line 298
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v2
-
-    new-instance v3, Ljava/lang/StringBuilder;
-
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
-
-    sget-object v4, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
-
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    const-string v4, ":onPreferenceChange"
-
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-static {v2, v3}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
-
-    move-result-object v1
-
-    .line 299
-    .restart local v1    # "service":Landroid/content/Intent;
-    const-string v2, "ACTION_UPDATE"
-
-    invoke-virtual {v1, v2}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
-
-    .line 300
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v2
-
-    invoke-virtual {v2, v1}, Landroid/support/v4/app/FragmentActivity;->startService(Landroid/content/Intent;)Landroid/content/ComponentName;
-
-    .line 302
-    iget-object v3, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
-
-    const-string v4, "Settings"
-
-    check-cast p2, Ljava/lang/Boolean;
-
-    .end local p2    # "newValue":Ljava/lang/Object;
-    invoke-virtual {p2}, Ljava/lang/Boolean;->booleanValue()Z
-
-    move-result v2
-
-    if-eqz v2, :cond_8
-
-    const-string v2, "Separate settings for juma enabled"
-
-    :goto_4
-    invoke-virtual {v3, v4, v2}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 305
-    .end local v1    # "service":Landroid/content/Intent;
-    :cond_3
-    const/4 v2, 0x1
-
-    return v2
-
-    .line 276
-    .restart local v0    # "enabled":Z
-    .restart local p2    # "newValue":Ljava/lang/Object;
-    :cond_4
-    const-string v2, "Disabled status bar notification"
-
-    goto/16 :goto_0
-
-    .line 279
-    .restart local v1    # "service":Landroid/content/Intent;
-    :cond_5
-    const-string v2, "ACTION_DISABLE_NOTIFS"
-
-    goto/16 :goto_1
-
-    .line 290
-    .end local v0    # "enabled":Z
-    :cond_6
-    const v2, 0x7f070054
-
-    .line 291
-    invoke-virtual {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
-
-    move-result-object v2
+    move-result-object v4
 
     goto :goto_2
 
-    .line 293
-    :cond_7
-    const-string v2, "Actual time enabled"
+    :cond_4
+    const v4, 0x7f0f0070
+
+    .line 317
+    invoke-virtual {p0, v4}, Lba/vaktija/android/prefs/SettingsFragment;->getString(I)Ljava/lang/String;
+
+    move-result-object v4
+
+    .line 315
+    :goto_2
+    invoke-virtual {v0, v4}, Landroidx/preference/ListPreference;->setSummary(Ljava/lang/CharSequence;)V
+
+    .line 319
+    sget-object v0, Lba/vaktija/android/App;->app:Lba/vaktija/android/App;
+
+    invoke-virtual {p2}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v4
+
+    sget-object v5, Lba/vaktija/android/prefs/Prefs;->DHUHR_NORMALIZED:Ljava/lang/String;
+
+    invoke-virtual {v4, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v4
+
+    if-eqz v4, :cond_5
+
+    const-string v4, "Normalized time enabled"
 
     goto :goto_3
 
-    .line 302
-    .end local p2    # "newValue":Ljava/lang/Object;
-    :cond_8
-    const-string v2, "Separate settings for juma disabled"
+    :cond_5
+    const-string v4, "Actual time enabled"
+
+    :goto_3
+    invoke-virtual {v0, v2, v4}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 322
+    :cond_6
+    invoke-virtual {p1}, Landroidx/preference/Preference;->getKey()Ljava/lang/String;
+
+    move-result-object p1
+
+    const-string v0, "separateJumaSettings"
+
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result p1
+
+    if-eqz p1, :cond_8
+
+    .line 324
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
+
+    move-result-object p1
+
+    invoke-static {p1, v1}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+
+    move-result-object p1
+
+    .line 325
+    invoke-virtual {p1, v3}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+
+    .line 326
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
+
+    move-result-object v0
+
+    invoke-static {v0, p1}, Lba/vaktija/android/service/VaktijaServiceHelper;->startService(Landroid/content/Context;Landroid/content/Intent;)V
+
+    .line 328
+    sget-object p1, Lba/vaktija/android/App;->app:Lba/vaktija/android/App;
+
+    check-cast p2, Ljava/lang/Boolean;
+
+    invoke-virtual {p2}, Ljava/lang/Boolean;->booleanValue()Z
+
+    move-result p2
+
+    if-eqz p2, :cond_7
+
+    const-string p2, "Separate settings for juma enabled"
 
     goto :goto_4
+
+    :cond_7
+    const-string p2, "Separate settings for juma disabled"
+
+    :goto_4
+    invoke-virtual {p1, v2, p2}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+
+    :cond_8
+    const/4 p1, 0x1
+
+    return p1
 .end method
 
-.method public onPreferenceClick(Landroid/preference/Preference;)Z
+.method public onPreferenceClick(Landroidx/preference/Preference;)Z
     .locals 4
-    .param p1, "preference"    # Landroid/preference/Preference;
 
-    .prologue
-    const/4 v3, 0x1
-
-    const/4 v2, 0x0
-
-    .line 442
-    invoke-virtual {p1}, Landroid/preference/Preference;->getKey()Ljava/lang/String;
+    .line 458
+    invoke-virtual {p1}, Landroidx/preference/Preference;->getKey()Ljava/lang/String;
 
     move-result-object v0
 
@@ -2147,12 +1904,12 @@
 
     if-eqz v0, :cond_0
 
-    .line 443
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->showLocationDialog()V
+    .line 459
+    invoke-direct {p0}, Lba/vaktija/android/prefs/SettingsFragment;->showLocationDialog()V
 
-    .line 446
+    .line 462
     :cond_0
-    invoke-virtual {p1}, Landroid/preference/Preference;->getKey()Ljava/lang/String;
+    invoke-virtual {p1}, Landroidx/preference/Preference;->getKey()Ljava/lang/String;
 
     move-result-object v0
 
@@ -2162,199 +1919,110 @@
 
     move-result v0
 
+    const/4 v1, 0x0
+
     if-eqz v0, :cond_1
 
-    .line 448
-    invoke-direct {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->showToneSelectionDialog(Z)V
+    .line 464
+    invoke-direct {p0, v1}, Lba/vaktija/android/prefs/SettingsFragment;->showToneSelectionDialog(Z)V
 
-    .line 451
+    .line 467
     :cond_1
-    invoke-virtual {p1}, Landroid/preference/Preference;->getKey()Ljava/lang/String;
+    invoke-virtual {p1}, Landroidx/preference/Preference;->getKey()Ljava/lang/String;
 
     move-result-object v0
 
-    const-string v1, "alarmToneUri"
+    const-string v2, "alarmToneUri"
 
-    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
+    const/4 v2, 0x1
+
     if-eqz v0, :cond_2
 
-    .line 453
-    invoke-direct {p0, v3}, Lba/vaktija/android/prefs/SettingsFragment;->showToneSelectionDialog(Z)V
+    .line 469
+    invoke-direct {p0, v2}, Lba/vaktija/android/prefs/SettingsFragment;->showToneSelectionDialog(Z)V
 
-    .line 456
+    .line 472
     :cond_2
-    invoke-virtual {p1}, Landroid/preference/Preference;->getKey()Ljava/lang/String;
+    invoke-virtual {p1}, Landroidx/preference/Preference;->getKey()Ljava/lang/String;
 
     move-result-object v0
 
-    const-string v1, "export"
+    const-string v3, "export"
 
-    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
     if-eqz v0, :cond_3
 
-    .line 457
+    .line 473
     new-instance v0, Lba/vaktija/android/prefs/SettingsFragment$SettingsExporter;
 
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
-    move-result-object v1
+    move-result-object v3
 
-    invoke-direct {v0, p0, v1, v2}, Lba/vaktija/android/prefs/SettingsFragment$SettingsExporter;-><init>(Lba/vaktija/android/prefs/SettingsFragment;Landroid/content/Context;Z)V
+    invoke-direct {v0, p0, v3, v1}, Lba/vaktija/android/prefs/SettingsFragment$SettingsExporter;-><init>(Lba/vaktija/android/prefs/SettingsFragment;Landroid/content/Context;Z)V
 
-    new-array v1, v2, [Ljava/lang/Void;
+    new-array v3, v1, [Ljava/lang/Void;
 
-    invoke-virtual {v0, v1}, Lba/vaktija/android/prefs/SettingsFragment$SettingsExporter;->execute([Ljava/lang/Object;)Landroid/os/AsyncTask;
+    invoke-virtual {v0, v3}, Lba/vaktija/android/prefs/SettingsFragment$SettingsExporter;->execute([Ljava/lang/Object;)Landroid/os/AsyncTask;
 
-    .line 460
+    .line 476
     :cond_3
-    invoke-virtual {p1}, Landroid/preference/Preference;->getKey()Ljava/lang/String;
+    invoke-virtual {p1}, Landroidx/preference/Preference;->getKey()Ljava/lang/String;
+
+    move-result-object p1
+
+    const-string v0, "import"
+
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result p1
+
+    if-eqz p1, :cond_4
+
+    .line 477
+    new-instance p1, Lba/vaktija/android/prefs/SettingsFragment$SettingsImporter;
+
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
     move-result-object v0
 
-    const-string v1, "import"
+    invoke-direct {p1, p0, v0}, Lba/vaktija/android/prefs/SettingsFragment$SettingsImporter;-><init>(Lba/vaktija/android/prefs/SettingsFragment;Landroid/content/Context;)V
 
-    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    new-array v0, v1, [Ljava/lang/Void;
 
-    move-result v0
+    invoke-virtual {p1, v0}, Lba/vaktija/android/prefs/SettingsFragment$SettingsImporter;->execute([Ljava/lang/Object;)Landroid/os/AsyncTask;
 
-    if-eqz v0, :cond_4
-
-    .line 461
-    new-instance v0, Lba/vaktija/android/prefs/SettingsFragment$SettingsImporter;
-
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v1
-
-    invoke-direct {v0, p0, v1}, Lba/vaktija/android/prefs/SettingsFragment$SettingsImporter;-><init>(Lba/vaktija/android/prefs/SettingsFragment;Landroid/content/Context;)V
-
-    new-array v1, v2, [Ljava/lang/Void;
-
-    invoke-virtual {v0, v1}, Lba/vaktija/android/prefs/SettingsFragment$SettingsImporter;->execute([Ljava/lang/Object;)Landroid/os/AsyncTask;
-
-    .line 464
     :cond_4
-    return v3
+    return v2
 .end method
 
 .method public onResume()V
     .locals 4
 
-    .prologue
-    .line 237
-    invoke-super {p0}, Landroid/support/v4/preference/PreferenceFragment;->onResume()V
+    .line 280
+    invoke-super {p0}, Landroidx/preference/PreferenceFragmentCompat;->onResume()V
 
-    .line 239
-    iget-boolean v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->scrolled:Z
-
-    if-nez v0, :cond_0
-
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getArguments()Landroid/os/Bundle;
-
-    move-result-object v0
-
-    if-eqz v0, :cond_0
-
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getArguments()Landroid/os/Bundle;
-
-    move-result-object v0
-
-    const-string v1, "EXTRA_FIRST_VISIBLE_ITEM"
-
-    invoke-virtual {v0, v1}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_0
-
-    .line 240
-    const/4 v0, 0x1
-
-    iput-boolean v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->scrolled:Z
-
-    .line 241
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getListView()Landroid/widget/ListView;
-
-    move-result-object v0
-
-    new-instance v1, Lba/vaktija/android/prefs/SettingsFragment$1;
-
-    invoke-direct {v1, p0}, Lba/vaktija/android/prefs/SettingsFragment$1;-><init>(Lba/vaktija/android/prefs/SettingsFragment;)V
-
-    invoke-virtual {v0, v1}, Landroid/widget/ListView;->post(Ljava/lang/Runnable;)Z
-
-    .line 252
-    :cond_0
-    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->location:Landroid/preference/Preference;
+    .line 281
+    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment;->location:Landroidx/preference/Preference;
 
     iget-object v1, p0, Lba/vaktija/android/prefs/SettingsFragment;->prefs:Landroid/content/SharedPreferences;
 
     const-string v2, "locationName"
 
-    const-string v3, "Beč (Džemat Bosna)"
+    const-string v3, "Sarajevo"
 
     invoke-interface {v1, v2, v3}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v1
 
-    invoke-virtual {v0, v1}, Landroid/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
+    invoke-virtual {v0, v1}, Landroidx/preference/Preference;->setSummary(Ljava/lang/CharSequence;)V
 
-    .line 254
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getListView()Landroid/widget/ListView;
-
-    move-result-object v0
-
-    const/4 v1, 0x0
-
-    invoke-virtual {v0, v1}, Landroid/widget/ListView;->setDivider(Landroid/graphics/drawable/Drawable;)V
-
-    .line 255
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getListView()Landroid/widget/ListView;
-
-    move-result-object v0
-
-    const/4 v1, 0x0
-
-    invoke-virtual {v0, v1}, Landroid/widget/ListView;->setDividerHeight(I)V
-
-    .line 256
-    return-void
-.end method
-
-.method showLocationDialog()V
-    .locals 4
-
-    .prologue
-    .line 469
-    iget-object v1, p0, Lba/vaktija/android/prefs/SettingsFragment;->mApp:Lba/vaktija/android/App;
-
-    sget-object v2, Lba/vaktija/android/prefs/SettingsFragment;->TAG:Ljava/lang/String;
-
-    const-string v3, "Location"
-
-    invoke-virtual {v1, v2, v3}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 471
-    new-instance v0, Landroid/content/Intent;
-
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v1
-
-    const-class v2, Lba/vaktija/android/LocationActivity;
-
-    invoke-direct {v0, v1, v2}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
-
-    .line 472
-    .local v0, "i":Landroid/content/Intent;
-    invoke-virtual {p0, v0}, Lba/vaktija/android/prefs/SettingsFragment;->startActivity(Landroid/content/Intent;)V
-
-    .line 473
     return-void
 .end method

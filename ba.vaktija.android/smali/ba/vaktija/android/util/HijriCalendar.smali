@@ -13,151 +13,138 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 8
+    .locals 12
 
-    .prologue
-    const/4 v7, 0x4
-
-    const/4 v6, 0x3
-
-    const/4 v5, 0x2
-
-    const/4 v4, 0x1
-
-    const/4 v3, 0x0
-
-    .line 14
     const/16 v0, 0x8
 
-    new-array v0, v0, [Ljava/lang/String;
+    new-array v1, v0, [Ljava/lang/String;
 
-    const-string v1, ""
+    const/4 v2, 0x0
 
-    aput-object v1, v0, v3
+    const-string v3, ""
 
-    const-string v1, "Ahad"
+    aput-object v3, v1, v2
 
-    aput-object v1, v0, v4
+    const-string v4, "Ahad"
 
-    const-string v1, "Ithnin"
+    const/4 v5, 0x1
 
-    aput-object v1, v0, v5
+    aput-object v4, v1, v5
 
-    const-string v1, "Thulatha"
+    const-string v4, "Ithnin"
 
-    aput-object v1, v0, v6
+    const/4 v6, 0x2
 
-    const-string v1, "Arbaa"
+    aput-object v4, v1, v6
 
-    aput-object v1, v0, v7
+    const-string v4, "Thulatha"
 
-    const/4 v1, 0x5
+    const/4 v7, 0x3
 
-    const-string v2, "Khams"
+    aput-object v4, v1, v7
 
-    aput-object v2, v0, v1
+    const-string v4, "Arbaa"
 
-    const/4 v1, 0x6
+    const/4 v8, 0x4
 
-    const-string v2, "Jumuah"
+    aput-object v4, v1, v8
 
-    aput-object v2, v0, v1
+    const-string v4, "Khams"
 
-    const/4 v1, 0x7
+    const/4 v9, 0x5
 
-    const-string v2, "Sabt"
+    aput-object v4, v1, v9
 
-    aput-object v2, v0, v1
+    const-string v4, "Jumuah"
 
-    sput-object v0, Lba/vaktija/android/util/HijriCalendar;->WEEKDAYS:[Ljava/lang/String;
+    const/4 v10, 0x6
+
+    aput-object v4, v1, v10
+
+    const-string v4, "Sabt"
+
+    const/4 v11, 0x7
+
+    aput-object v4, v1, v11
 
     .line 15
-    const/16 v0, 0xd
+    sput-object v1, Lba/vaktija/android/util/HijriCalendar;->WEEKDAYS:[Ljava/lang/String;
 
-    new-array v0, v0, [Ljava/lang/String;
+    const/16 v1, 0xd
 
-    const-string v1, ""
+    new-array v1, v1, [Ljava/lang/String;
 
-    aput-object v1, v0, v3
+    aput-object v3, v1, v2
 
-    const-string v1, "Muharrem"
+    const-string v2, "muharrem"
 
-    aput-object v1, v0, v4
+    aput-object v2, v1, v5
 
-    const-string v1, "Safer"
+    const-string v2, "safer"
 
-    aput-object v1, v0, v5
+    aput-object v2, v1, v6
 
-    const-string v1, "Rebiu-l-evvel"
+    const-string v2, "rebiu-l-evvel"
 
-    aput-object v1, v0, v6
+    aput-object v2, v1, v7
 
-    const-string v1, "Rabiu-l-ahir"
+    const-string v2, "rebiu-l-ahir"
 
-    aput-object v1, v0, v7
+    aput-object v2, v1, v8
 
-    const/4 v1, 0x5
+    const-string v2, "d\u017eumade-l-ula"
 
-    const-string v2, "D\u017eumade-l-ula"
+    aput-object v2, v1, v9
 
-    aput-object v2, v0, v1
+    const-string v2, "d\u017eumade-l-uhra"
 
-    const/4 v1, 0x6
+    aput-object v2, v1, v10
 
-    const-string v2, "D\u017eumade-l-uhra"
+    const-string v2, "red\u017eeb"
 
-    aput-object v2, v0, v1
+    aput-object v2, v1, v11
 
-    const/4 v1, 0x7
+    const-string v2, "\u0161a\'ban"
 
-    const-string v2, "Red\u017eeb"
+    aput-object v2, v1, v0
 
-    aput-object v2, v0, v1
+    const/16 v0, 0x9
 
-    const/16 v1, 0x8
+    const-string v2, "ramazan"
 
-    const-string v2, "\u0160a\'ban"
+    aput-object v2, v1, v0
 
-    aput-object v2, v0, v1
+    const/16 v0, 0xa
 
-    const/16 v1, 0x9
+    const-string v2, "\u0161evval"
 
-    const-string v2, "Ramazan"
+    aput-object v2, v1, v0
 
-    aput-object v2, v0, v1
+    const/16 v0, 0xb
 
-    const/16 v1, 0xa
+    const-string v2, "zu-l-ka\'de"
 
-    const-string v2, "\u0160evval"
+    aput-object v2, v1, v0
 
-    aput-object v2, v0, v1
+    const/16 v0, 0xc
 
-    const/16 v1, 0xb
+    const-string v2, "zu-l-hid\u017ed\u017ee"
 
-    const-string v2, "Zu-l-ka\'de"
+    aput-object v2, v1, v0
 
-    aput-object v2, v0, v1
+    .line 16
+    sput-object v1, Lba/vaktija/android/util/HijriCalendar;->MONTHS:[Ljava/lang/String;
 
-    const/16 v1, 0xc
-
-    const-string v2, "Zu-l-hid\u017ed\u017ee"
-
-    aput-object v2, v0, v1
-
-    sput-object v0, Lba/vaktija/android/util/HijriCalendar;->MONTHS:[Ljava/lang/String;
-
-    .line 31
     const/16 v0, 0x6cd
 
     new-array v0, v0, [D
 
+    .line 32
     fill-array-data v0, :array_0
 
     sput-object v0, Lba/vaktija/android/util/HijriCalendar;->UMMALQURA_DAT:[D
 
     return-void
-
-    nop
 
     :array_0
     .array-data 8
@@ -1908,465 +1895,350 @@
 .method public constructor <init>()V
     .locals 0
 
-    .prologue
-    .line 12
+    .line 13
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
 .end method
 
 .method public static getSimpleDate(Ljava/util/Calendar;)Ljava/lang/String;
-    .locals 4
-    .param p0, "cal"    # Ljava/util/Calendar;
+    .locals 3
 
-    .prologue
-    .line 175
+    .line 182
     invoke-static {p0}, Lba/vaktija/android/util/HijriCalendar;->ummalQuraCalendar(Ljava/util/Calendar;)[I
-
-    move-result-object v0
-
-    .line 176
-    .local v0, "dt":[I
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const/4 v2, 0x1
-
-    aget v2, v0, v2
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    const-string v2, ". "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    sget-object v2, Lba/vaktija/android/util/HijriCalendar;->MONTHS:[Ljava/lang/String;
-
-    const/4 v3, 0x2
-
-    aget v3, v0, v3
-
-    aget-object v2, v2, v3
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    const-string v2, " "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    const/4 v2, 0x3
-
-    aget v2, v0, v2
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    const-string v2, "H"
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    return-object v1
-.end method
-
-.method public static ummalQuraCalendar(Ljava/util/Calendar;)[I
-    .locals 36
-    .param p0, "cal"    # Ljava/util/Calendar;
-
-    .prologue
-    .line 122
-    if-nez p0, :cond_0
-
-    invoke-static {}, Ljava/util/Calendar;->getInstance()Ljava/util/Calendar;
 
     move-result-object p0
 
-    .line 124
-    :cond_0
-    const/4 v15, 0x5
+    .line 183
+    new-instance v0, Ljava/lang/StringBuilder;
 
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const/4 v1, 0x1
+
+    aget v1, p0, v1
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    const-string v1, ". "
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    sget-object v1, Lba/vaktija/android/util/HijriCalendar;->MONTHS:[Ljava/lang/String;
+
+    const/4 v2, 0x2
+
+    aget v2, p0, v2
+
+    aget-object v1, v1, v2
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v1, " "
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const/4 v1, 0x3
+
+    aget p0, p0, v1
+
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public static ummalQuraCalendar(Ljava/util/Calendar;)[I
+    .locals 23
+
+    if-nez p0, :cond_0
+
+    .line 123
+    invoke-static {}, Ljava/util/Calendar;->getInstance()Ljava/util/Calendar;
+
+    move-result-object v0
+
+    goto :goto_0
+
+    :cond_0
     move-object/from16 v0, p0
 
-    invoke-virtual {v0, v15}, Ljava/util/Calendar;->get(I)I
-
-    move-result v15
-
-    int-to-double v12, v15
+    :goto_0
+    const/4 v1, 0x5
 
     .line 125
-    .local v12, "day":D
-    const/4 v15, 0x2
+    invoke-virtual {v0, v1}, Ljava/util/Calendar;->get(I)I
 
-    move-object/from16 v0, p0
+    move-result v1
 
-    invoke-virtual {v0, v15}, Ljava/util/Calendar;->get(I)I
+    int-to-double v1, v1
 
-    move-result v15
-
-    int-to-double v0, v15
-
-    move-wide/from16 v22, v0
+    const/4 v3, 0x2
 
     .line 126
-    .local v22, "month":D
-    const/4 v15, 0x1
+    invoke-virtual {v0, v3}, Ljava/util/Calendar;->get(I)I
 
-    move-object/from16 v0, p0
+    move-result v4
 
-    invoke-virtual {v0, v15}, Ljava/util/Calendar;->get(I)I
+    int-to-double v4, v4
 
-    move-result v15
-
-    int-to-double v0, v15
-
-    move-wide/from16 v28, v0
+    const/4 v6, 0x1
 
     .line 127
-    .local v28, "year":D
-    const/4 v15, 0x7
+    invoke-virtual {v0, v6}, Ljava/util/Calendar;->get(I)I
 
-    move-object/from16 v0, p0
+    move-result v7
 
-    invoke-virtual {v0, v15}, Ljava/util/Calendar;->get(I)I
+    int-to-double v7, v7
 
-    move-result v15
+    const/4 v9, 0x7
 
-    int-to-double v0, v15
+    .line 128
+    invoke-virtual {v0, v9}, Ljava/util/Calendar;->get(I)I
 
-    move-wide/from16 v24, v0
+    move-result v0
 
-    .line 131
-    .local v24, "weekday":D
-    const-wide/high16 v30, 0x3ff0000000000000L    # 1.0
+    int-to-double v9, v0
 
-    add-double v18, v22, v30
+    const-wide/high16 v11, 0x3ff0000000000000L    # 1.0
 
     .line 132
-    .local v18, "m":D
-    move-wide/from16 v26, v28
+    invoke-static {v4, v5}, Ljava/lang/Double;->isNaN(D)Z
 
-    .line 133
-    .local v26, "y":D
-    const-wide/high16 v30, 0x4008000000000000L    # 3.0
+    add-double/2addr v4, v11
 
-    cmpg-double v15, v18, v30
+    const-wide/high16 v13, 0x4008000000000000L    # 3.0
 
-    if-gez v15, :cond_1
+    const-wide/high16 v15, 0x4028000000000000L    # 12.0
 
-    const-wide/high16 v30, 0x3ff0000000000000L    # 1.0
+    cmpg-double v0, v4, v13
 
-    sub-double v26, v26, v30
+    if-gez v0, :cond_1
 
-    const-wide/high16 v30, 0x4028000000000000L    # 12.0
+    .line 135
+    invoke-static {v7, v8}, Ljava/lang/Double;->isNaN(D)Z
 
-    add-double v18, v18, v30
+    sub-double/2addr v7, v11
 
-    .line 136
+    add-double/2addr v4, v15
+
     :cond_1
-    const-wide/high16 v30, 0x4059000000000000L    # 100.0
+    const-wide/high16 v13, 0x4059000000000000L    # 100.0
 
-    div-double v30, v26, v30
-
-    invoke-static/range {v30 .. v31}, Ljava/lang/Math;->floor(D)D
-
-    move-result-wide v2
-
-    .line 137
-    .local v2, "a":D
-    const-wide/high16 v30, 0x4010000000000000L    # 4.0
-
-    div-double v30, v2, v30
-
-    invoke-static/range {v30 .. v31}, Ljava/lang/Math;->floor(D)D
-
-    move-result-wide v30
-
-    sub-double v30, v2, v30
-
-    const-wide/high16 v32, 0x4000000000000000L    # 2.0
-
-    sub-double v16, v30, v32
+    div-double v13, v7, v13
 
     .line 140
-    .local v16, "jgc":D
-    const-wide v30, 0x4076d40000000000L    # 365.25
+    invoke-static {v13, v14}, Ljava/lang/Math;->floor(D)D
 
-    const-wide v32, 0x40b26c0000000000L    # 4716.0
+    move-result-wide v13
 
-    add-double v32, v32, v26
+    const-wide/high16 v17, 0x4010000000000000L    # 4.0
 
-    mul-double v30, v30, v32
+    div-double v19, v13, v17
 
-    invoke-static/range {v30 .. v31}, Ljava/lang/Math;->floor(D)D
+    .line 141
+    invoke-static/range {v19 .. v20}, Ljava/lang/Math;->floor(D)D
 
-    move-result-wide v30
+    move-result-wide v19
 
-    const-wide v32, 0x403e99a027525461L    # 30.6001
+    sub-double v13, v13, v19
 
-    const-wide/high16 v34, 0x3ff0000000000000L    # 1.0
+    const-wide/high16 v19, 0x4000000000000000L    # 2.0
 
-    add-double v34, v34, v18
+    sub-double v13, v13, v19
 
-    mul-double v32, v32, v34
+    const-wide v19, 0x40b26c0000000000L    # 4716.0
 
-    invoke-static/range {v32 .. v33}, Ljava/lang/Math;->floor(D)D
+    add-double v7, v7, v19
 
-    move-result-wide v32
+    const-wide v19, 0x4076d40000000000L    # 365.25
 
-    add-double v30, v30, v32
-
-    add-double v30, v30, v12
-
-    sub-double v30, v30, v16
-
-    const-wide v32, 0x4097d00000000000L    # 1524.0
-
-    sub-double v8, v30, v32
-
-    .line 142
-    .local v8, "cjdn":D
-    const-wide v30, 0x413c7dd040000000L    # 1867216.25
-
-    sub-double v30, v8, v30
-
-    const-wide v32, 0x40e1d58800000000L    # 36524.25
-
-    div-double v30, v30, v32
-
-    invoke-static/range {v30 .. v31}, Ljava/lang/Math;->floor(D)D
-
-    move-result-wide v2
-
-    .line 143
-    const-wide/high16 v30, 0x4010000000000000L    # 4.0
-
-    div-double v30, v2, v30
-
-    invoke-static/range {v30 .. v31}, Ljava/lang/Math;->floor(D)D
-
-    move-result-wide v30
-
-    sub-double v30, v2, v30
-
-    const-wide/high16 v32, 0x3ff0000000000000L    # 1.0
-
-    add-double v16, v30, v32
+    mul-double v7, v7, v19
 
     .line 144
-    add-double v30, v8, v16
+    invoke-static {v7, v8}, Ljava/lang/Math;->floor(D)D
 
-    const-wide v32, 0x4097d00000000000L    # 1524.0
+    move-result-wide v7
 
-    add-double v4, v30, v32
+    add-double/2addr v4, v11
 
-    .line 145
-    .local v4, "b":D
-    const-wide v30, 0x405e866666666666L    # 122.1
+    const-wide v21, 0x403e99a027525461L    # 30.6001
 
-    sub-double v30, v4, v30
+    mul-double v4, v4, v21
 
-    const-wide v32, 0x4076d40000000000L    # 365.25
-
-    div-double v30, v30, v32
-
-    invoke-static/range {v30 .. v31}, Ljava/lang/Math;->floor(D)D
-
-    move-result-wide v6
-
-    .line 146
-    .local v6, "c":D
-    const-wide v30, 0x4076d40000000000L    # 365.25
-
-    mul-double v30, v30, v6
-
-    invoke-static/range {v30 .. v31}, Ljava/lang/Math;->floor(D)D
-
-    move-result-wide v10
-
-    .line 147
-    .local v10, "d":D
-    sub-double v30, v4, v10
-
-    const-wide v32, 0x403e99a027525461L    # 30.6001
-
-    div-double v30, v30, v32
-
-    invoke-static/range {v30 .. v31}, Ljava/lang/Math;->floor(D)D
-
-    move-result-wide v22
-
-    .line 148
-    sub-double v30, v4, v10
-
-    const-wide v32, 0x403e99a027525461L    # 30.6001
-
-    mul-double v32, v32, v22
-
-    invoke-static/range {v32 .. v33}, Ljava/lang/Math;->floor(D)D
-
-    move-result-wide v32
-
-    sub-double v12, v30, v32
-
-    .line 150
-    const-wide/high16 v30, 0x402a000000000000L    # 13.0
-
-    cmpl-double v15, v22, v30
-
-    if-lez v15, :cond_2
-
-    const-wide/high16 v30, 0x3ff0000000000000L    # 1.0
-
-    add-double v6, v6, v30
-
-    const-wide/high16 v30, 0x4028000000000000L    # 12.0
-
-    sub-double v22, v22, v30
-
-    .line 151
-    :cond_2
-    const-wide/high16 v30, 0x3ff0000000000000L    # 1.0
-
-    sub-double v22, v22, v30
-
-    .line 152
-    const-wide v30, 0x40b26c0000000000L    # 4716.0
-
-    sub-double v28, v6, v30
-
-    .line 155
-    const-wide v30, 0x41424f8000000000L    # 2400000.0
-
-    sub-double v20, v8, v30
-
-    .line 159
-    .local v20, "mcjdn":D
-    const/4 v14, 0x0
-
-    .local v14, "i":I
-    :goto_0
-    sget-object v15, Lba/vaktija/android/util/HijriCalendar;->UMMALQURA_DAT:[D
-
-    array-length v15, v15
-
-    if-ge v14, v15, :cond_3
-
-    .line 160
-    sget-object v15, Lba/vaktija/android/util/HijriCalendar;->UMMALQURA_DAT:[D
-
-    aget-wide v30, v15, v14
-
-    cmpl-double v15, v30, v20
-
-    if-lez v15, :cond_4
-
-    .line 164
-    :cond_3
-    add-int/lit16 v15, v14, 0x3f84
-
-    int-to-double v2, v15
-
-    .line 165
-    const-wide/high16 v30, 0x3ff0000000000000L    # 1.0
-
-    sub-double v30, v2, v30
-
-    const-wide/high16 v32, 0x4028000000000000L    # 12.0
-
-    div-double v30, v30, v32
-
-    invoke-static/range {v30 .. v31}, Ljava/lang/Math;->floor(D)D
+    invoke-static {v4, v5}, Ljava/lang/Math;->floor(D)D
 
     move-result-wide v4
 
-    .line 166
-    const-wide/high16 v30, 0x3ff0000000000000L    # 1.0
+    add-double/2addr v7, v4
 
-    add-double v28, v4, v30
+    invoke-static {v1, v2}, Ljava/lang/Double;->isNaN(D)Z
+
+    add-double/2addr v7, v1
+
+    sub-double/2addr v7, v13
+
+    const-wide v0, 0x4097d00000000000L    # 1524.0
+
+    sub-double/2addr v7, v0
+
+    const-wide v4, 0x413c7dd040000000L    # 1867216.25
+
+    sub-double v4, v7, v4
+
+    const-wide v13, 0x40e1d58800000000L    # 36524.25
+
+    div-double/2addr v4, v13
+
+    .line 146
+    invoke-static {v4, v5}, Ljava/lang/Math;->floor(D)D
+
+    move-result-wide v4
+
+    div-double v13, v4, v17
+
+    .line 147
+    invoke-static {v13, v14}, Ljava/lang/Math;->floor(D)D
+
+    move-result-wide v13
+
+    sub-double/2addr v4, v13
+
+    add-double/2addr v4, v11
+
+    add-double/2addr v4, v7
+
+    add-double/2addr v4, v0
+
+    const-wide v0, 0x405e866666666666L    # 122.1
+
+    sub-double v0, v4, v0
+
+    div-double v0, v0, v19
+
+    .line 149
+    invoke-static {v0, v1}, Ljava/lang/Math;->floor(D)D
+
+    move-result-wide v0
+
+    mul-double v0, v0, v19
+
+    .line 150
+    invoke-static {v0, v1}, Ljava/lang/Math;->floor(D)D
+
+    move-result-wide v0
+
+    sub-double/2addr v4, v0
+
+    div-double v4, v4, v21
+
+    .line 151
+    invoke-static {v4, v5}, Ljava/lang/Math;->floor(D)D
+
+    move-result-wide v0
+
+    mul-double v21, v21, v0
+
+    .line 152
+    invoke-static/range {v21 .. v22}, Ljava/lang/Math;->floor(D)D
+
+    const-wide/high16 v4, 0x402a000000000000L    # 13.0
+
+    cmpl-double v2, v0, v4
+
+    const-wide v0, 0x41424f8000000000L    # 2400000.0
+
+    sub-double/2addr v7, v0
+
+    const/4 v1, 0x0
+
+    .line 166
+    :goto_1
+    sget-object v2, Lba/vaktija/android/util/HijriCalendar;->UMMALQURA_DAT:[D
+
+    array-length v4, v2
+
+    if-ge v1, v4, :cond_3
 
     .line 167
-    const-wide/high16 v30, 0x4028000000000000L    # 12.0
+    aget-wide v4, v2, v1
 
-    mul-double v30, v30, v4
+    cmpl-double v2, v4, v7
 
-    sub-double v22, v2, v30
+    if-lez v2, :cond_2
 
-    .line 168
-    sget-object v15, Lba/vaktija/android/util/HijriCalendar;->UMMALQURA_DAT:[D
+    goto :goto_2
 
-    add-int/lit8 v30, v14, -0x1
+    :cond_2
+    add-int/lit8 v1, v1, 0x1
 
-    aget-wide v30, v15, v30
+    goto :goto_1
 
-    sub-double v30, v20, v30
+    :cond_3
+    :goto_2
+    add-int/lit16 v2, v1, 0x3f84
 
-    const-wide/high16 v32, 0x3ff0000000000000L    # 1.0
+    int-to-double v4, v2
 
-    add-double v12, v30, v32
+    .line 172
+    invoke-static {v4, v5}, Ljava/lang/Double;->isNaN(D)Z
 
-    .line 171
-    const/4 v15, 0x4
+    sub-double v13, v4, v11
 
-    new-array v15, v15, [I
+    div-double/2addr v13, v15
 
-    const/16 v30, 0x0
+    invoke-static {v13, v14}, Ljava/lang/Math;->floor(D)D
 
-    move-wide/from16 v0, v24
+    move-result-wide v13
+
+    move v2, v1
+
+    add-double v0, v13, v11
+
+    mul-double v13, v13, v15
+
+    .line 174
+    invoke-static {v4, v5}, Ljava/lang/Double;->isNaN(D)Z
+
+    sub-double/2addr v4, v13
+
+    .line 175
+    sget-object v13, Lba/vaktija/android/util/HijriCalendar;->UMMALQURA_DAT:[D
+
+    sub-int/2addr v2, v6
+
+    aget-wide v14, v13, v2
+
+    sub-double/2addr v7, v14
+
+    add-double/2addr v7, v11
+
+    const/4 v2, 0x4
+
+    new-array v2, v2, [I
+
+    double-to-int v9, v9
+
+    const/4 v10, 0x0
+
+    aput v9, v2, v10
+
+    double-to-int v7, v7
+
+    aput v7, v2, v6
+
+    double-to-int v4, v4
+
+    aput v4, v2, v3
+
+    const/4 v3, 0x3
 
     double-to-int v0, v0
 
-    move/from16 v31, v0
+    aput v0, v2, v3
 
-    aput v31, v15, v30
-
-    const/16 v30, 0x1
-
-    double-to-int v0, v12
-
-    move/from16 v31, v0
-
-    aput v31, v15, v30
-
-    const/16 v30, 0x2
-
-    move-wide/from16 v0, v22
-
-    double-to-int v0, v0
-
-    move/from16 v31, v0
-
-    aput v31, v15, v30
-
-    const/16 v30, 0x3
-
-    move-wide/from16 v0, v28
-
-    double-to-int v0, v0
-
-    move/from16 v31, v0
-
-    aput v31, v15, v30
-
-    return-object v15
-
-    .line 159
-    :cond_4
-    add-int/lit8 v14, v14, 0x1
-
-    goto :goto_0
+    return-object v2
 .end method

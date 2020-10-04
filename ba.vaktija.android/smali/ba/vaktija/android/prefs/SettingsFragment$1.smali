@@ -3,12 +3,12 @@
 .source "SettingsFragment.java"
 
 # interfaces
-.implements Ljava/lang/Runnable;
+.implements Landroidx/preference/Preference$OnPreferenceClickListener;
 
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lba/vaktija/android/prefs/SettingsFragment;->onResume()V
+    value = Lba/vaktija/android/prefs/SettingsFragment;->onCreatePreferences(Landroid/os/Bundle;Ljava/lang/String;)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -24,10 +24,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/prefs/SettingsFragment;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/prefs/SettingsFragment;
 
-    .prologue
-    .line 241
+    .line 161
     iput-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment$1;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -37,60 +35,27 @@
 
 
 # virtual methods
-.method public run()V
-    .locals 5
+.method public onPreferenceClick(Landroidx/preference/Preference;)Z
+    .locals 3
 
-    .prologue
-    .line 244
-    iget-object v2, p0, Lba/vaktija/android/prefs/SettingsFragment$1;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
+    .line 164
+    iget-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment$1;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
 
-    invoke-virtual {v2}, Lba/vaktija/android/prefs/SettingsFragment;->getArguments()Landroid/os/Bundle;
+    new-instance v0, Landroid/content/Intent;
 
-    move-result-object v2
+    iget-object v1, p0, Lba/vaktija/android/prefs/SettingsFragment$1;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
 
-    const-string v3, "EXTRA_FIRST_VISIBLE_ITEM"
+    invoke-virtual {v1}, Lba/vaktija/android/prefs/SettingsFragment;->requireActivity()Landroidx/fragment/app/FragmentActivity;
 
-    invoke-virtual {v2, v3}, Landroid/os/Bundle;->getInt(Ljava/lang/String;)I
+    move-result-object v1
 
-    move-result v1
+    const-class v2, Lba/vaktija/android/prefs/AboutActivity;
 
-    .line 245
-    .local v1, "scrollPosition":I
-    iget-object v2, p0, Lba/vaktija/android/prefs/SettingsFragment$1;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
+    invoke-direct {v0, v1, v2}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
 
-    invoke-virtual {v2}, Lba/vaktija/android/prefs/SettingsFragment;->getArguments()Landroid/os/Bundle;
+    invoke-virtual {p1, v0}, Lba/vaktija/android/prefs/SettingsFragment;->startActivity(Landroid/content/Intent;)V
 
-    move-result-object v2
+    const/4 p1, 0x1
 
-    const-string v3, "EXTRA_ITEM_TOP"
-
-    invoke-virtual {v2, v3}, Landroid/os/Bundle;->getInt(Ljava/lang/String;)I
-
-    move-result v0
-
-    .line 246
-    .local v0, "itemTop":I
-    iget-object v2, p0, Lba/vaktija/android/prefs/SettingsFragment$1;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
-
-    invoke-virtual {v2}, Lba/vaktija/android/prefs/SettingsFragment;->getListView()Landroid/widget/ListView;
-
-    move-result-object v2
-
-    invoke-virtual {v2, v1}, Landroid/widget/ListView;->setSelection(I)V
-
-    .line 247
-    iget-object v2, p0, Lba/vaktija/android/prefs/SettingsFragment$1;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
-
-    invoke-virtual {v2}, Lba/vaktija/android/prefs/SettingsFragment;->getListView()Landroid/widget/ListView;
-
-    move-result-object v2
-
-    neg-int v3, v0
-
-    const/4 v4, 0x0
-
-    invoke-virtual {v2, v3, v4}, Landroid/widget/ListView;->smoothScrollBy(II)V
-
-    .line 248
-    return-void
+    return p1
 .end method

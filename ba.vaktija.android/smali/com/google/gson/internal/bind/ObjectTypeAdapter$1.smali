@@ -1,4 +1,4 @@
-.class final Lcom/google/gson/internal/bind/ObjectTypeAdapter$1;
+.class Lcom/google/gson/internal/bind/ObjectTypeAdapter$1;
 .super Ljava/lang/Object;
 .source "ObjectTypeAdapter.java"
 
@@ -12,7 +12,7 @@
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
-    accessFlags = 0x8
+    accessFlags = 0x0
     name = null
 .end annotation
 
@@ -21,7 +21,6 @@
 .method constructor <init>()V
     .locals 0
 
-    .prologue
     .line 38
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -31,45 +30,38 @@
 
 # virtual methods
 .method public create(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
-    .locals 3
-    .param p1, "gson"    # Lcom/google/gson/Gson;
+    .locals 1
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<T:",
             "Ljava/lang/Object;",
             ">(",
             "Lcom/google/gson/Gson;",
-            "Lcom/google/gson/reflect/TypeToken",
-            "<TT;>;)",
-            "Lcom/google/gson/TypeAdapter",
-            "<TT;>;"
+            "Lcom/google/gson/reflect/TypeToken<",
+            "TT;>;)",
+            "Lcom/google/gson/TypeAdapter<",
+            "TT;>;"
         }
     .end annotation
-
-    .prologue
-    .local p2, "type":Lcom/google/gson/reflect/TypeToken;, "Lcom/google/gson/reflect/TypeToken<TT;>;"
-    const/4 v1, 0x0
 
     .line 41
     invoke-virtual {p2}, Lcom/google/gson/reflect/TypeToken;->getRawType()Ljava/lang/Class;
 
-    move-result-object v0
+    move-result-object p2
 
-    const-class v2, Ljava/lang/Object;
+    const-class v0, Ljava/lang/Object;
 
-    if-ne v0, v2, :cond_0
+    if-ne p2, v0, :cond_0
 
     .line 42
-    new-instance v0, Lcom/google/gson/internal/bind/ObjectTypeAdapter;
+    new-instance p2, Lcom/google/gson/internal/bind/ObjectTypeAdapter;
 
-    invoke-direct {v0, p1, v1}, Lcom/google/gson/internal/bind/ObjectTypeAdapter;-><init>(Lcom/google/gson/Gson;Lcom/google/gson/internal/bind/ObjectTypeAdapter$1;)V
+    invoke-direct {p2, p1}, Lcom/google/gson/internal/bind/ObjectTypeAdapter;-><init>(Lcom/google/gson/Gson;)V
 
-    .line 44
-    :goto_0
-    return-object v0
+    return-object p2
 
     :cond_0
-    move-object v0, v1
+    const/4 p1, 0x0
 
-    goto :goto_0
+    return-object p1
 .end method

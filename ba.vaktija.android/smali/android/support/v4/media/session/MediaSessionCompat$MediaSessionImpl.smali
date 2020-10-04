@@ -15,7 +15,16 @@
 
 
 # virtual methods
+.method public abstract getCallingPackage()Ljava/lang/String;
+.end method
+
+.method public abstract getCurrentControllerInfo()Landroidx/media/MediaSessionManager$RemoteUserInfo;
+.end method
+
 .method public abstract getMediaSession()Ljava/lang/Object;
+.end method
+
+.method public abstract getPlaybackState()Landroid/support/v4/media/session/PlaybackStateCompat;
 .end method
 
 .method public abstract getRemoteControlClient()Ljava/lang/Object;
@@ -39,6 +48,12 @@
 .method public abstract setCallback(Landroid/support/v4/media/session/MediaSessionCompat$Callback;Landroid/os/Handler;)V
 .end method
 
+.method public abstract setCaptioningEnabled(Z)V
+.end method
+
+.method public abstract setCurrentControllerInfo(Landroidx/media/MediaSessionManager$RemoteUserInfo;)V
+.end method
+
 .method public abstract setExtras(Landroid/os/Bundle;)V
 .end method
 
@@ -57,15 +72,14 @@
 .method public abstract setPlaybackToLocal(I)V
 .end method
 
-.method public abstract setPlaybackToRemote(Landroid/support/v4/media/VolumeProviderCompat;)V
+.method public abstract setPlaybackToRemote(Landroidx/media/VolumeProviderCompat;)V
 .end method
 
 .method public abstract setQueue(Ljava/util/List;)V
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
-            "Ljava/util/List",
-            "<",
+            "Ljava/util/List<",
             "Landroid/support/v4/media/session/MediaSessionCompat$QueueItem;",
             ">;)V"
         }
@@ -78,5 +92,11 @@
 .method public abstract setRatingType(I)V
 .end method
 
+.method public abstract setRepeatMode(I)V
+.end method
+
 .method public abstract setSessionActivity(Landroid/app/PendingIntent;)V
+.end method
+
+.method public abstract setShuffleMode(I)V
 .end method

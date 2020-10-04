@@ -30,7 +30,7 @@
 
 .field private static final DATABASE_NAME:Ljava/lang/String; = "vaktija.db"
 
-.field private static final DATABASE_VERSION:I = 0x2
+.field private static final DATABASE_VERSION:I = 0x3
 
 .field public static final TABLE_LOCATIONS:Ljava/lang/String; = "locations"
 
@@ -45,8 +45,7 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
-    .line 19
+    .line 20
     const-class v0, Lba/vaktija/android/db/Database;
 
     invoke-virtual {v0}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
@@ -60,1148 +59,846 @@
 
 .method public constructor <init>(Landroid/content/Context;)V
     .locals 3
-    .param p1, "context"    # Landroid/content/Context;
 
-    .prologue
-    .line 43
     const-string v0, "vaktija.db"
 
     const/4 v1, 0x0
 
-    const/4 v2, 0x2
-
-    invoke-direct {p0, p1, v0, v1, v2}, Lcom/readystatesoftware/sqliteasset/SQLiteAssetHelper;-><init>(Landroid/content/Context;Ljava/lang/String;Landroid/database/sqlite/SQLiteDatabase$CursorFactory;I)V
+    const/4 v2, 0x3
 
     .line 44
-    invoke-virtual {p0}, Lba/vaktija/android/db/Database;->setForcedUpgrade()V
+    invoke-direct {p0, p1, v0, v1, v2}, Lcom/readystatesoftware/sqliteasset/SQLiteAssetHelper;-><init>(Landroid/content/Context;Ljava/lang/String;Landroid/database/sqlite/SQLiteDatabase$CursorFactory;I)V
 
     .line 45
+    invoke-virtual {p0}, Lba/vaktija/android/db/Database;->setForcedUpgrade()V
+
     return-void
 .end method
 
 
 # virtual methods
 .method public getLocationName(I)Ljava/lang/String;
-    .locals 9
-    .param p1, "locationId"    # I
+    .locals 8
 
-    .prologue
-    const/4 v2, 0x0
-
-    .line 142
+    .line 143
     invoke-virtual {p0}, Lba/vaktija/android/db/Database;->getReadableDatabase()Landroid/database/sqlite/SQLiteDatabase;
 
     move-result-object v0
 
+    const/4 v1, 0x1
+
+    new-array v4, v1, [Ljava/lang/String;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    const-string p1, ""
+
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p1
+
+    const/4 v1, 0x0
+
+    aput-object p1, v4, v1
+
     const-string v1, "locations"
+
+    const/4 v2, 0x0
 
     const-string v3, "_id=?"
 
-    const/4 v4, 0x1
-
-    new-array v4, v4, [Ljava/lang/String;
-
     const/4 v5, 0x0
 
-    new-instance v6, Ljava/lang/StringBuilder;
+    const/4 v6, 0x0
 
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    invoke-virtual {v6, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    const-string v7, ""
-
-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    aput-object v6, v4, v5
-
-    move-object v5, v2
-
-    move-object v6, v2
-
-    move-object v7, v2
+    const/4 v7, 0x0
 
     invoke-virtual/range {v0 .. v7}, Landroid/database/sqlite/SQLiteDatabase;->query(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
 
-    move-result-object v8
+    move-result-object p1
 
-    .line 144
-    .local v8, "c":Landroid/database/Cursor;
-    invoke-interface {v8}, Landroid/database/Cursor;->moveToFirst()Z
+    .line 145
+    invoke-interface {p1}, Landroid/database/Cursor;->moveToFirst()Z
 
-    .line 146
     const-string v0, "location"
 
-    invoke-interface {v8, v0}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+    .line 147
+    invoke-interface {p1, v0}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
 
     move-result v0
 
-    invoke-interface {v8, v0}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+    invoke-interface {p1, v0}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object p1
 
-    return-object v0
+    return-object p1
 .end method
 
 .method public getLocations()Ljava/util/List;
-    .locals 10
+    .locals 9
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()",
-            "Ljava/util/List",
-            "<",
+            "Ljava/util/List<",
             "Lba/vaktija/android/models/Location;",
             ">;"
         }
     .end annotation
 
-    .prologue
-    const/4 v2, 0x0
+    .line 49
+    new-instance v0, Ljava/util/ArrayList;
 
-    .line 48
-    new-instance v9, Ljava/util/ArrayList;
+    invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
-    invoke-direct {v9}, Ljava/util/ArrayList;-><init>()V
-
-    .line 50
-    .local v9, "locations":Ljava/util/List;, "Ljava/util/List<Lba/vaktija/android/models/Location;>;"
+    .line 51
     invoke-virtual {p0}, Lba/vaktija/android/db/Database;->getReadableDatabase()Landroid/database/sqlite/SQLiteDatabase;
-
-    move-result-object v0
-
-    const-string v1, "locations"
-
-    const-string v7, "weight"
-
-    move-object v3, v2
-
-    move-object v4, v2
-
-    move-object v5, v2
-
-    move-object v6, v2
-
-    invoke-virtual/range {v0 .. v7}, Landroid/database/sqlite/SQLiteDatabase;->query(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
-
-    move-result-object v8
-
-    .line 52
-    .local v8, "c":Landroid/database/Cursor;
-    :goto_0
-    invoke-interface {v8}, Landroid/database/Cursor;->moveToNext()Z
-
-    move-result v0
-
-    if-eqz v0, :cond_0
-
-    .line 53
-    new-instance v0, Lba/vaktija/android/models/Location;
-
-    const-string v1, "location"
-
-    .line 54
-    invoke-interface {v8, v1}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
-
-    move-result v1
-
-    invoke-interface {v8, v1}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
 
     move-result-object v1
 
-    const-string v2, "_id"
+    const-string v2, "locations"
 
-    .line 55
-    invoke-interface {v8, v2}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+    const/4 v3, 0x0
 
-    move-result v2
+    const/4 v4, 0x0
 
-    invoke-interface {v8, v2}, Landroid/database/Cursor;->getInt(I)I
+    const/4 v5, 0x0
 
-    move-result v2
+    const/4 v6, 0x0
 
-    invoke-direct {v0, v1, v2}, Lba/vaktija/android/models/Location;-><init>(Ljava/lang/String;I)V
+    const/4 v7, 0x0
+
+    const-string v8, "weight"
+
+    invoke-virtual/range {v1 .. v8}, Landroid/database/sqlite/SQLiteDatabase;->query(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+
+    move-result-object v1
 
     .line 53
-    invoke-interface {v9, v0}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+    :goto_0
+    invoke-interface {v1}, Landroid/database/Cursor;->moveToNext()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_0
+
+    .line 54
+    new-instance v2, Lba/vaktija/android/models/Location;
+
+    const-string v3, "location"
+
+    .line 55
+    invoke-interface {v1, v3}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v3
+
+    invoke-interface {v1, v3}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+
+    move-result-object v3
+
+    const-string v4, "_id"
+
+    .line 56
+    invoke-interface {v1, v4}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v4
+
+    invoke-interface {v1, v4}, Landroid/database/Cursor;->getInt(I)I
+
+    move-result v4
+
+    invoke-direct {v2, v3, v4}, Lba/vaktija/android/models/Location;-><init>(Ljava/lang/String;I)V
+
+    .line 54
+    invoke-interface {v0, v2}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
     goto :goto_0
 
-    .line 58
-    :cond_0
-    invoke-interface {v8}, Landroid/database/Cursor;->close()V
-
     .line 59
-    return-object v9
+    :cond_0
+    invoke-interface {v1}, Landroid/database/Cursor;->close()V
+
+    return-object v0
 .end method
 
 .method public getPrayerTimesSec(III)[I
-    .locals 30
-    .param p1, "month"    # I
-    .param p2, "day"    # I
-    .param p3, "locationId"    # I
-
-    .prologue
-    .line 63
-    sget-object v1, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
-
-    new-instance v2, Ljava/lang/StringBuilder;
-
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v3, "getPrayerTimeMins month="
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
+    .locals 16
 
     move/from16 v0, p1
 
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    move/from16 v1, p2
 
-    move-result-object v2
+    move/from16 v2, p3
 
-    const-string v3, " day="
+    .line 64
+    sget-object v3, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
 
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    new-instance v4, Ljava/lang/StringBuilder;
 
-    move-result-object v2
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
 
-    move/from16 v0, p2
+    const-string v5, "getPrayerTimeMins month="
 
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
+    invoke-virtual {v4, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    const-string v3, " locationId="
+    const-string v5, " day="
 
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
+    invoke-virtual {v4, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    move/from16 v0, p3
+    const-string v5, " locationId="
 
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
+    invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v4
 
-    invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 65
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    move/from16 v0, p1
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    const-string v2, ""
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v21
+    invoke-static {v3, v4}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 66
-    .local v21, "monthStr":Ljava/lang/String;
-    new-instance v1, Ljava/lang/StringBuilder;
+    new-instance v3, Ljava/lang/StringBuilder;
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
 
-    move/from16 v0, p2
+    invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    const-string v4, ""
 
-    move-result-object v1
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const-string v2, ""
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v3
 
-    move-result-object v1
+    .line 67
+    new-instance v5, Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
 
-    move-result-object v12
+    invoke-virtual {v5, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    .line 68
-    .local v12, "dayStr":Ljava/lang/String;
-    const/16 v1, 0xa
+    invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move/from16 v0, p1
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    if-ge v0, v1, :cond_0
+    move-result-object v5
 
-    .line 69
-    new-instance v1, Ljava/lang/StringBuilder;
+    const-string v6, "0"
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    const/16 v7, 0xa
 
-    const-string v2, "0"
+    if-ge v0, v7, :cond_0
 
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    .line 70
+    new-instance v3, Ljava/lang/StringBuilder;
 
-    move-result-object v1
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
 
-    move/from16 v0, p1
+    invoke-virtual {v3, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    move-result-object v1
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v3
 
-    move-result-object v21
-
-    .line 72
     :cond_0
-    const/16 v1, 0xa
+    if-ge v1, v7, :cond_1
 
-    move/from16 v0, p2
+    .line 74
+    new-instance v5, Ljava/lang/StringBuilder;
 
-    if-ge v0, v1, :cond_1
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
 
-    .line 73
-    new-instance v1, Ljava/lang/StringBuilder;
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-virtual {v5, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    const-string v2, "0"
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v5
 
-    move-result-object v1
-
-    move/from16 v0, p2
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v12
-
-    .line 76
+    .line 77
     :cond_1
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    move-object/from16 v0, v21
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v3, "-"
 
-    move-result-object v1
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const-string v2, "-"
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    invoke-virtual {v1, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v11
-
-    .line 78
-    .local v11, "datum":Ljava/lang/String;
-    sget-object v1, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
-
-    new-instance v2, Ljava/lang/StringBuilder;
-
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v3, "datum="
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-static {v1, v2}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 80
-    invoke-virtual/range {p0 .. p0}, Lba/vaktija/android/db/Database;->getReadableDatabase()Landroid/database/sqlite/SQLiteDatabase;
-
     move-result-object v1
 
-    const-string v2, "schedule"
+    .line 79
+    sget-object v3, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
 
-    const/4 v3, 0x0
+    new-instance v5, Ljava/lang/StringBuilder;
 
-    const-string v4, "datum=?"
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
 
-    const/4 v5, 0x1
+    const-string v6, "datum="
 
-    new-array v5, v5, [Ljava/lang/String;
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const/4 v6, 0x0
+    invoke-virtual {v5, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    aput-object v11, v5, v6
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    const/4 v6, 0x0
+    move-result-object v5
 
-    const/4 v7, 0x0
+    invoke-static {v3, v5}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 81
+    invoke-virtual/range {p0 .. p0}, Lba/vaktija/android/db/Database;->getReadableDatabase()Landroid/database/sqlite/SQLiteDatabase;
+
+    move-result-object v6
 
     const/4 v8, 0x0
 
-    invoke-virtual/range {v1 .. v8}, Landroid/database/sqlite/SQLiteDatabase;->query(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+    const/4 v3, 0x1
 
-    move-result-object v26
+    new-array v10, v3, [Ljava/lang/String;
 
-    .line 82
-    .local v26, "prayerTimes":Landroid/database/Cursor;
-    invoke-virtual/range {p0 .. p0}, Lba/vaktija/android/db/Database;->getReadableDatabase()Landroid/database/sqlite/SQLiteDatabase;
+    const/4 v5, 0x0
+
+    aput-object v1, v10, v5
+
+    const/4 v11, 0x0
+
+    const/4 v12, 0x0
+
+    const/4 v13, 0x0
+
+    const-string v7, "schedule"
+
+    const-string v9, "datum=?"
+
+    invoke-virtual/range {v6 .. v13}, Landroid/database/sqlite/SQLiteDatabase;->query(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
 
     move-result-object v1
 
-    const-string v2, "offset"
+    .line 83
+    invoke-virtual/range {p0 .. p0}, Lba/vaktija/android/db/Database;->getReadableDatabase()Landroid/database/sqlite/SQLiteDatabase;
 
-    const/4 v3, 0x0
+    move-result-object v6
 
-    const-string v4, "month=? AND location_id=?"
+    const/4 v14, 0x2
 
-    const/4 v5, 0x2
-
-    new-array v5, v5, [Ljava/lang/String;
-
-    const/4 v6, 0x0
+    new-array v10, v14, [Ljava/lang/String;
 
     new-instance v7, Ljava/lang/StringBuilder;
 
     invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
 
-    move/from16 v0, p1
-
     invoke-virtual {v7, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    move-result-object v7
-
-    const-string v8, ""
-
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
+    invoke-virtual {v7, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v7
+    move-result-object v0
 
-    aput-object v7, v5, v6
+    aput-object v0, v10, v5
 
-    const/4 v6, 0x1
+    new-instance v0, Ljava/lang/StringBuilder;
 
-    new-instance v7, Ljava/lang/StringBuilder;
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    move/from16 v0, p3
+    invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v7, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v7
+    move-result-object v0
 
-    const-string v8, ""
+    aput-object v0, v10, v3
 
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v7, "offset"
 
-    move-result-object v7
+    const-string v9, "month=? AND location_id=?"
 
-    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual/range {v6 .. v13}, Landroid/database/sqlite/SQLiteDatabase;->query(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
 
-    move-result-object v7
-
-    aput-object v7, v5, v6
-
-    const/4 v6, 0x0
-
-    const/4 v7, 0x0
-
-    const/4 v8, 0x0
-
-    invoke-virtual/range {v1 .. v8}, Landroid/database/sqlite/SQLiteDatabase;->query(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
-
-    move-result-object v22
-
-    .line 84
-    .local v22, "offset":Landroid/database/Cursor;
-    sget-object v1, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
-
-    new-instance v2, Ljava/lang/StringBuilder;
-
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v3, "prayerTimes count="
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-interface/range {v26 .. v26}, Landroid/database/Cursor;->getCount()I
-
-    move-result v3
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-static {v1, v2}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+    move-result-object v0
 
     .line 85
-    sget-object v1, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
+    sget-object v2, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
 
-    new-instance v2, Ljava/lang/StringBuilder;
+    new-instance v4, Ljava/lang/StringBuilder;
 
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v3, "offset count="
+    const-string v6, "prayerTimes count="
 
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v4, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
+    invoke-interface {v1}, Landroid/database/Cursor;->getCount()I
 
-    invoke-interface/range {v22 .. v22}, Landroid/database/Cursor;->getCount()I
+    move-result v6
 
-    move-result v3
+    invoke-virtual {v4, v6}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v4
 
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-static {v2, v4}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    move-result-object v2
+    .line 86
+    sget-object v2, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
 
-    invoke-static {v1, v2}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+    new-instance v4, Ljava/lang/StringBuilder;
 
-    .line 87
-    invoke-interface/range {v26 .. v26}, Landroid/database/Cursor;->moveToFirst()Z
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
 
-    .line 89
-    const-string v1, "fajr"
+    const-string v6, "offset count="
 
-    move-object/from16 v0, v26
+    invoke-virtual {v4, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+    invoke-interface {v0}, Landroid/database/Cursor;->getCount()I
 
-    move-result v1
+    move-result v6
 
-    move-object/from16 v0, v26
+    invoke-virtual {v4, v6}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v15
+    move-result-object v4
+
+    invoke-static {v2, v4}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 88
+    invoke-interface {v1}, Landroid/database/Cursor;->moveToFirst()Z
+
+    const-string v2, "fajr"
 
     .line 90
-    .local v15, "fajr":Ljava/lang/String;
-    const-string v1, "sunrise"
+    invoke-interface {v1, v2}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
 
-    move-object/from16 v0, v26
+    move-result v4
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+    invoke-interface {v1, v4}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
 
-    move-result v1
+    move-result-object v4
 
-    move-object/from16 v0, v26
-
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
-
-    move-result-object v27
+    const-string v6, "sunrise"
 
     .line 91
-    .local v27, "sunrise":Ljava/lang/String;
-    const-string v1, "dhuhr"
+    invoke-interface {v1, v6}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
 
-    move-object/from16 v0, v26
+    move-result v6
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+    invoke-interface {v1, v6}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
 
-    move-result v1
+    move-result-object v6
 
-    move-object/from16 v0, v26
+    const-string v7, "dhuhr"
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+    .line 92
+    invoke-interface {v1, v7}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v8
+
+    invoke-interface {v1, v8}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+
+    move-result-object v8
+
+    const-string v9, "asr"
+
+    .line 93
+    invoke-interface {v1, v9}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v10
+
+    invoke-interface {v1, v10}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+
+    move-result-object v10
+
+    const-string v11, "maghrib"
+
+    .line 94
+    invoke-interface {v1, v11}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v11
+
+    invoke-interface {v1, v11}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+
+    move-result-object v11
+
+    const-string v12, "isha"
+
+    .line 95
+    invoke-interface {v1, v12}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v12
+
+    invoke-interface {v1, v12}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+
+    move-result-object v12
+
+    .line 97
+    sget-object v13, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
+
+    new-instance v15, Ljava/lang/StringBuilder;
+
+    invoke-direct {v15}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v14, "fajr="
+
+    invoke-virtual {v15, v14}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v15, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v14, " sunrise="
+
+    invoke-virtual {v15, v14}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v15, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v14, " dhuhr="
+
+    invoke-virtual {v15, v14}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v15, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v14, " asr="
+
+    invoke-virtual {v15, v14}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v15, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v14, " maghrib="
+
+    invoke-virtual {v15, v14}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v15, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v14, " isha="
+
+    invoke-virtual {v15, v14}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v15, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v15}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v14
+
+    invoke-static {v13, v14}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+
+    const-string v13, ":"
+
+    .line 99
+    invoke-virtual {v4, v13}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v14
+
+    aget-object v14, v14, v5
+
+    invoke-static {v14}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v14
+
+    mul-int/lit8 v14, v14, 0x3c
+
+    .line 100
+    invoke-virtual {v4, v13}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v4
+
+    aget-object v4, v4, v3
+
+    invoke-static {v4}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v4
+
+    add-int/2addr v14, v4
+
+    .line 102
+    invoke-virtual {v6, v13}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v4
+
+    aget-object v4, v4, v5
+
+    invoke-static {v4}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v4
+
+    mul-int/lit8 v4, v4, 0x3c
+
+    .line 103
+    invoke-virtual {v6, v13}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v6
+
+    aget-object v6, v6, v3
+
+    invoke-static {v6}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v6
+
+    add-int/2addr v4, v6
+
+    .line 105
+    invoke-virtual {v8, v13}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v6
+
+    aget-object v6, v6, v5
+
+    invoke-static {v6}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v6
+
+    mul-int/lit8 v6, v6, 0x3c
+
+    .line 106
+    invoke-virtual {v8, v13}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v8
+
+    aget-object v8, v8, v3
+
+    invoke-static {v8}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v8
+
+    add-int/2addr v6, v8
+
+    .line 108
+    invoke-virtual {v10, v13}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v8
+
+    aget-object v8, v8, v5
+
+    invoke-static {v8}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v8
+
+    mul-int/lit8 v8, v8, 0x3c
+
+    .line 109
+    invoke-virtual {v10, v13}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v10
+
+    aget-object v10, v10, v3
+
+    invoke-static {v10}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v10
+
+    add-int/2addr v8, v10
+
+    .line 111
+    invoke-virtual {v11, v13}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v10
+
+    aget-object v10, v10, v5
+
+    invoke-static {v10}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v10
+
+    mul-int/lit8 v10, v10, 0x3c
+
+    .line 112
+    invoke-virtual {v11, v13}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v11
+
+    aget-object v11, v11, v3
+
+    invoke-static {v11}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v11
+
+    add-int/2addr v10, v11
+
+    .line 114
+    invoke-virtual {v12, v13}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v11
+
+    aget-object v11, v11, v5
+
+    invoke-static {v11}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v11
+
+    mul-int/lit8 v11, v11, 0x3c
+
+    .line 115
+    invoke-virtual {v12, v13}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v12
+
+    aget-object v12, v12, v3
+
+    invoke-static {v12}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v12
+
+    add-int/2addr v11, v12
+
+    .line 117
+    invoke-interface {v0}, Landroid/database/Cursor;->moveToFirst()Z
+
+    .line 119
+    invoke-interface {v0, v2}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v2
+
+    invoke-interface {v0, v2}, Landroid/database/Cursor;->getInt(I)I
+
+    move-result v2
+
+    .line 120
+    invoke-interface {v0, v7}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v7
+
+    invoke-interface {v0, v7}, Landroid/database/Cursor;->getInt(I)I
+
+    move-result v7
+
+    .line 121
+    invoke-interface {v0, v9}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v9
+
+    invoke-interface {v0, v9}, Landroid/database/Cursor;->getInt(I)I
+
+    move-result v9
+
+    .line 123
+    sget-object v12, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
+
+    new-instance v13, Ljava/lang/StringBuilder;
+
+    invoke-direct {v13}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v15, "offsetFajr="
+
+    invoke-virtual {v13, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v13, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    const-string v15, " offsetDhuhr="
+
+    invoke-virtual {v13, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v13, v7}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    const-string v15, " offsetAsr="
+
+    invoke-virtual {v13, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v13, v9}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v13}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v13
 
-    .line 92
-    .local v13, "dhuhr":Ljava/lang/String;
-    const-string v1, "asr"
+    invoke-static {v12, v13}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    move-object/from16 v0, v26
+    add-int/2addr v14, v2
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+    mul-int/lit8 v14, v14, 0x3c
 
-    move-result v1
+    add-int/2addr v4, v2
 
-    move-object/from16 v0, v26
+    mul-int/lit8 v4, v4, 0x3c
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+    add-int/2addr v6, v7
 
-    move-result-object v9
+    mul-int/lit8 v6, v6, 0x3c
 
-    .line 93
-    .local v9, "asr":Ljava/lang/String;
-    const-string v1, "maghrib"
+    add-int/2addr v8, v9
 
-    move-object/from16 v0, v26
+    mul-int/lit8 v8, v8, 0x3c
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+    add-int/2addr v10, v9
 
-    move-result v1
+    mul-int/lit8 v10, v10, 0x3c
 
-    move-object/from16 v0, v26
+    add-int/2addr v11, v9
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+    mul-int/lit8 v11, v11, 0x3c
 
-    move-result-object v19
+    const/4 v2, 0x6
 
-    .line 94
-    .local v19, "maghrib":Ljava/lang/String;
-    const-string v1, "isha"
+    new-array v2, v2, [I
 
-    move-object/from16 v0, v26
+    aput v14, v2, v5
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+    aput v4, v2, v3
 
-    move-result v1
+    const/4 v3, 0x2
 
-    move-object/from16 v0, v26
+    aput v6, v2, v3
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+    const/4 v3, 0x3
 
-    move-result-object v17
+    aput v8, v2, v3
 
-    .line 96
-    .local v17, "isha":Ljava/lang/String;
-    sget-object v1, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
+    const/4 v3, 0x4
 
-    new-instance v2, Ljava/lang/StringBuilder;
+    aput v10, v2, v3
 
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+    const/4 v3, 0x5
 
-    const-string v3, "fajr="
+    aput v11, v2, v3
 
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    .line 134
+    sget-object v3, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
 
-    move-result-object v2
+    new-instance v4, Ljava/lang/StringBuilder;
 
-    invoke-virtual {v2, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
 
-    move-result-object v2
+    const-string v5, "times="
 
-    const-string v3, " sunrise="
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-static {v2}, Ljava/util/Arrays;->toString([I)Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v5
 
-    move-object/from16 v0, v27
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v4
 
-    const-string v3, " dhuhr="
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2, v13}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    const-string v3, " asr="
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    const-string v3, " maghrib="
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    move-object/from16 v0, v19
-
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    const-string v3, " isha="
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    move-object/from16 v0, v17
-
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-static {v1, v2}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 98
-    const-string v1, ":"
-
-    invoke-virtual {v15, v1}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v1
-
-    const/4 v2, 0x0
-
-    aget-object v1, v1, v2
-
-    invoke-static {v1}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v1
-
-    mul-int/lit8 v1, v1, 0x3c
-
-    const-string v2, ":"
-
-    .line 99
-    invoke-virtual {v15, v2}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v2
-
-    const/4 v3, 0x1
-
-    aget-object v2, v2, v3
-
-    invoke-static {v2}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v2
-
-    add-int v16, v1, v2
-
-    .line 101
-    .local v16, "fajrTime":I
-    const-string v1, ":"
-
-    move-object/from16 v0, v27
-
-    invoke-virtual {v0, v1}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v1
-
-    const/4 v2, 0x0
-
-    aget-object v1, v1, v2
-
-    invoke-static {v1}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v1
-
-    mul-int/lit8 v1, v1, 0x3c
-
-    const-string v2, ":"
-
-    .line 102
-    move-object/from16 v0, v27
-
-    invoke-virtual {v0, v2}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v2
-
-    const/4 v3, 0x1
-
-    aget-object v2, v2, v3
-
-    invoke-static {v2}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v2
-
-    add-int v28, v1, v2
-
-    .line 104
-    .local v28, "sunriseTime":I
-    const-string v1, ":"
-
-    invoke-virtual {v13, v1}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v1
-
-    const/4 v2, 0x0
-
-    aget-object v1, v1, v2
-
-    invoke-static {v1}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v1
-
-    mul-int/lit8 v1, v1, 0x3c
-
-    const-string v2, ":"
-
-    .line 105
-    invoke-virtual {v13, v2}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v2
-
-    const/4 v3, 0x1
-
-    aget-object v2, v2, v3
-
-    invoke-static {v2}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v2
-
-    add-int v14, v1, v2
-
-    .line 107
-    .local v14, "dhuhrTime":I
-    const-string v1, ":"
-
-    invoke-virtual {v9, v1}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v1
-
-    const/4 v2, 0x0
-
-    aget-object v1, v1, v2
-
-    invoke-static {v1}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v1
-
-    mul-int/lit8 v1, v1, 0x3c
-
-    const-string v2, ":"
-
-    .line 108
-    invoke-virtual {v9, v2}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v2
-
-    const/4 v3, 0x1
-
-    aget-object v2, v2, v3
-
-    invoke-static {v2}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v2
-
-    add-int v10, v1, v2
-
-    .line 110
-    .local v10, "asrTime":I
-    const-string v1, ":"
-
-    move-object/from16 v0, v19
-
-    invoke-virtual {v0, v1}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v1
-
-    const/4 v2, 0x0
-
-    aget-object v1, v1, v2
-
-    invoke-static {v1}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v1
-
-    mul-int/lit8 v1, v1, 0x3c
-
-    const-string v2, ":"
-
-    .line 111
-    move-object/from16 v0, v19
-
-    invoke-virtual {v0, v2}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v2
-
-    const/4 v3, 0x1
-
-    aget-object v2, v2, v3
-
-    invoke-static {v2}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v2
-
-    add-int v20, v1, v2
-
-    .line 113
-    .local v20, "maghribTime":I
-    const-string v1, ":"
-
-    move-object/from16 v0, v17
-
-    invoke-virtual {v0, v1}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v1
-
-    const/4 v2, 0x0
-
-    aget-object v1, v1, v2
-
-    invoke-static {v1}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v1
-
-    mul-int/lit8 v1, v1, 0x3c
-
-    const-string v2, ":"
-
-    .line 114
-    move-object/from16 v0, v17
-
-    invoke-virtual {v0, v2}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v2
-
-    const/4 v3, 0x1
-
-    aget-object v2, v2, v3
-
-    invoke-static {v2}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-
-    move-result v2
-
-    add-int v18, v1, v2
-
-    .line 116
-    .local v18, "ishaTime":I
-    invoke-interface/range {v22 .. v22}, Landroid/database/Cursor;->moveToFirst()Z
-
-    .line 118
-    const-string v1, "fajr"
-
-    move-object/from16 v0, v22
-
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
-
-    move-result v1
-
-    move-object/from16 v0, v22
-
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getInt(I)I
-
-    move-result v25
-
-    .line 119
-    .local v25, "offsetFajr":I
-    const-string v1, "dhuhr"
-
-    move-object/from16 v0, v22
-
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
-
-    move-result v1
-
-    move-object/from16 v0, v22
-
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getInt(I)I
-
-    move-result v24
-
-    .line 120
-    .local v24, "offsetDhuhr":I
-    const-string v1, "asr"
-
-    move-object/from16 v0, v22
-
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
-
-    move-result v1
-
-    move-object/from16 v0, v22
-
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getInt(I)I
-
-    move-result v23
-
-    .line 122
-    .local v23, "offsetAsr":I
-    sget-object v1, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
-
-    new-instance v2, Ljava/lang/StringBuilder;
-
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v3, "offsetFajr="
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    move/from16 v0, v25
-
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    const-string v3, " offsetDhuhr="
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    move/from16 v0, v24
-
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    const-string v3, " offsetAsr="
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    move/from16 v0, v23
-
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-static {v1, v2}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 124
-    add-int v1, v16, v25
-
-    mul-int/lit8 v16, v1, 0x3c
-
-    .line 125
-    add-int v1, v28, v25
-
-    mul-int/lit8 v28, v1, 0x3c
-
-    .line 126
-    add-int v1, v14, v24
-
-    mul-int/lit8 v14, v1, 0x3c
-
-    .line 127
-    add-int v1, v10, v23
-
-    mul-int/lit8 v10, v1, 0x3c
-
-    .line 128
-    add-int v1, v20, v23
-
-    mul-int/lit8 v20, v1, 0x3c
-
-    .line 129
-    add-int v1, v18, v23
-
-    mul-int/lit8 v18, v1, 0x3c
-
-    .line 131
-    const/4 v1, 0x6
-
-    new-array v0, v1, [I
-
-    move-object/from16 v29, v0
-
-    const/4 v1, 0x0
-
-    aput v16, v29, v1
-
-    const/4 v1, 0x1
-
-    aput v28, v29, v1
-
-    const/4 v1, 0x2
-
-    aput v14, v29, v1
-
-    const/4 v1, 0x3
-
-    aput v10, v29, v1
-
-    const/4 v1, 0x4
-
-    aput v20, v29, v1
-
-    const/4 v1, 0x5
-
-    aput v18, v29, v1
-
-    .line 133
-    .local v29, "times":[I
-    sget-object v1, Lba/vaktija/android/db/Database;->TAG:Ljava/lang/String;
-
-    new-instance v2, Ljava/lang/StringBuilder;
-
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v3, "times="
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-static/range {v29 .. v29}, Ljava/util/Arrays;->toString([I)Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-static {v1, v2}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 135
-    invoke-interface/range {v26 .. v26}, Landroid/database/Cursor;->close()V
+    invoke-static {v3, v4}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 136
-    invoke-interface/range {v22 .. v22}, Landroid/database/Cursor;->close()V
+    invoke-interface {v1}, Landroid/database/Cursor;->close()V
 
-    .line 138
-    return-object v29
+    .line 137
+    invoke-interface {v0}, Landroid/database/Cursor;->close()V
+
+    return-object v2
 .end method

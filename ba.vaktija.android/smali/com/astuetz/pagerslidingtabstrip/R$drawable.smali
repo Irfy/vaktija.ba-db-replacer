@@ -1,6 +1,5 @@
 .class public final Lcom/astuetz/pagerslidingtabstrip/R$drawable;
 .super Ljava/lang/Object;
-.source "R.java"
 
 
 # annotations
@@ -15,15 +14,13 @@
 
 
 # static fields
-.field public static final background_tab:I = 0x7f020040
+.field public static final background_tab:I = 0x7f070058
 
 
 # direct methods
-.method public constructor <init>()V
+.method private constructor <init>()V
     .locals 0
 
-    .prologue
-    .line 26
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void

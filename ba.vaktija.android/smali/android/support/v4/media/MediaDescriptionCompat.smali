@@ -15,16 +15,43 @@
 
 
 # static fields
+.field public static final BT_FOLDER_TYPE_ALBUMS:J = 0x2L
+
+.field public static final BT_FOLDER_TYPE_ARTISTS:J = 0x3L
+
+.field public static final BT_FOLDER_TYPE_GENRES:J = 0x4L
+
+.field public static final BT_FOLDER_TYPE_MIXED:J = 0x0L
+
+.field public static final BT_FOLDER_TYPE_PLAYLISTS:J = 0x5L
+
+.field public static final BT_FOLDER_TYPE_TITLES:J = 0x1L
+
+.field public static final BT_FOLDER_TYPE_YEARS:J = 0x6L
+
 .field public static final CREATOR:Landroid/os/Parcelable$Creator;
     .annotation system Ldalvik/annotation/Signature;
         value = {
-            "Landroid/os/Parcelable$Creator",
-            "<",
+            "Landroid/os/Parcelable$Creator<",
             "Landroid/support/v4/media/MediaDescriptionCompat;",
             ">;"
         }
     .end annotation
 .end field
+
+.field public static final DESCRIPTION_KEY_MEDIA_URI:Ljava/lang/String; = "android.support.v4.media.description.MEDIA_URI"
+
+.field public static final DESCRIPTION_KEY_NULL_BUNDLE_FLAG:Ljava/lang/String; = "android.support.v4.media.description.NULL_BUNDLE_FLAG"
+
+.field public static final EXTRA_BT_FOLDER_TYPE:Ljava/lang/String; = "android.media.extra.BT_FOLDER_TYPE"
+
+.field public static final EXTRA_DOWNLOAD_STATUS:Ljava/lang/String; = "android.media.extra.DOWNLOAD_STATUS"
+
+.field public static final STATUS_DOWNLOADED:J = 0x2L
+
+.field public static final STATUS_DOWNLOADING:J = 0x1L
+
+.field public static final STATUS_NOT_DOWNLOADED:J
 
 
 # instance fields
@@ -51,8 +78,7 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
-    .line 263
+    .line 418
     new-instance v0, Landroid/support/v4/media/MediaDescriptionCompat$1;
 
     invoke-direct {v0}, Landroid/support/v4/media/MediaDescriptionCompat$1;-><init>()V
@@ -62,24 +88,20 @@
     return-void
 .end method
 
-.method private constructor <init>(Landroid/os/Parcel;)V
+.method constructor <init>(Landroid/os/Parcel;)V
     .locals 2
-    .param p1, "in"    # Landroid/os/Parcel;
 
-    .prologue
-    const/4 v1, 0x0
-
-    .line 83
+    .line 201
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 84
+    .line 202
     invoke-virtual {p1}, Landroid/os/Parcel;->readString()Ljava/lang/String;
 
     move-result-object v0
 
     iput-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaId:Ljava/lang/String;
 
-    .line 85
+    .line 203
     sget-object v0, Landroid/text/TextUtils;->CHAR_SEQUENCE_CREATOR:Landroid/os/Parcelable$Creator;
 
     invoke-interface {v0, p1}, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
@@ -90,7 +112,7 @@
 
     iput-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mTitle:Ljava/lang/CharSequence;
 
-    .line 86
+    .line 204
     sget-object v0, Landroid/text/TextUtils;->CHAR_SEQUENCE_CREATOR:Landroid/os/Parcelable$Creator;
 
     invoke-interface {v0, p1}, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
@@ -101,7 +123,7 @@
 
     iput-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mSubtitle:Ljava/lang/CharSequence;
 
-    .line 87
+    .line 205
     sget-object v0, Landroid/text/TextUtils;->CHAR_SEQUENCE_CREATOR:Landroid/os/Parcelable$Creator;
 
     invoke-interface {v0, p1}, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
@@ -112,221 +134,240 @@
 
     iput-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescription:Ljava/lang/CharSequence;
 
-    .line 88
-    invoke-virtual {p1, v1}, Landroid/os/Parcel;->readParcelable(Ljava/lang/ClassLoader;)Landroid/os/Parcelable;
+    .line 207
+    invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
 
     move-result-object v0
 
-    check-cast v0, Landroid/graphics/Bitmap;
-
-    iput-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mIcon:Landroid/graphics/Bitmap;
-
-    .line 89
-    invoke-virtual {p1, v1}, Landroid/os/Parcel;->readParcelable(Ljava/lang/ClassLoader;)Landroid/os/Parcelable;
+    invoke-virtual {v0}, Ljava/lang/Class;->getClassLoader()Ljava/lang/ClassLoader;
 
     move-result-object v0
 
-    check-cast v0, Landroid/net/Uri;
+    .line 208
+    invoke-virtual {p1, v0}, Landroid/os/Parcel;->readParcelable(Ljava/lang/ClassLoader;)Landroid/os/Parcelable;
 
-    iput-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mIconUri:Landroid/net/Uri;
+    move-result-object v1
 
-    .line 90
-    invoke-virtual {p1}, Landroid/os/Parcel;->readBundle()Landroid/os/Bundle;
+    check-cast v1, Landroid/graphics/Bitmap;
 
-    move-result-object v0
+    iput-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mIcon:Landroid/graphics/Bitmap;
 
-    iput-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mExtras:Landroid/os/Bundle;
+    .line 209
+    invoke-virtual {p1, v0}, Landroid/os/Parcel;->readParcelable(Ljava/lang/ClassLoader;)Landroid/os/Parcelable;
 
-    .line 91
-    invoke-virtual {p1, v1}, Landroid/os/Parcel;->readParcelable(Ljava/lang/ClassLoader;)Landroid/os/Parcelable;
+    move-result-object v1
 
-    move-result-object v0
+    check-cast v1, Landroid/net/Uri;
 
-    check-cast v0, Landroid/net/Uri;
+    iput-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mIconUri:Landroid/net/Uri;
 
-    iput-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaUri:Landroid/net/Uri;
+    .line 210
+    invoke-virtual {p1, v0}, Landroid/os/Parcel;->readBundle(Ljava/lang/ClassLoader;)Landroid/os/Bundle;
 
-    .line 92
-    return-void
-.end method
+    move-result-object v1
 
-.method synthetic constructor <init>(Landroid/os/Parcel;Landroid/support/v4/media/MediaDescriptionCompat$1;)V
-    .locals 0
-    .param p1, "x0"    # Landroid/os/Parcel;
-    .param p2, "x1"    # Landroid/support/v4/media/MediaDescriptionCompat$1;
+    iput-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mExtras:Landroid/os/Bundle;
 
-    .prologue
-    .line 32
-    invoke-direct {p0, p1}, Landroid/support/v4/media/MediaDescriptionCompat;-><init>(Landroid/os/Parcel;)V
+    .line 211
+    invoke-virtual {p1, v0}, Landroid/os/Parcel;->readParcelable(Ljava/lang/ClassLoader;)Landroid/os/Parcelable;
+
+    move-result-object p1
+
+    check-cast p1, Landroid/net/Uri;
+
+    iput-object p1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaUri:Landroid/net/Uri;
 
     return-void
 .end method
 
-.method private constructor <init>(Ljava/lang/String;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Landroid/graphics/Bitmap;Landroid/net/Uri;Landroid/os/Bundle;Landroid/net/Uri;)V
+.method constructor <init>(Ljava/lang/String;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Landroid/graphics/Bitmap;Landroid/net/Uri;Landroid/os/Bundle;Landroid/net/Uri;)V
     .locals 0
-    .param p1, "mediaId"    # Ljava/lang/String;
-    .param p2, "title"    # Ljava/lang/CharSequence;
-    .param p3, "subtitle"    # Ljava/lang/CharSequence;
-    .param p4, "description"    # Ljava/lang/CharSequence;
-    .param p5, "icon"    # Landroid/graphics/Bitmap;
-    .param p6, "iconUri"    # Landroid/net/Uri;
-    .param p7, "extras"    # Landroid/os/Bundle;
-    .param p8, "mediaUri"    # Landroid/net/Uri;
 
-    .prologue
-    .line 72
+    .line 190
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 73
+    .line 191
     iput-object p1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaId:Ljava/lang/String;
 
-    .line 74
+    .line 192
     iput-object p2, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mTitle:Ljava/lang/CharSequence;
 
-    .line 75
+    .line 193
     iput-object p3, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mSubtitle:Ljava/lang/CharSequence;
 
-    .line 76
+    .line 194
     iput-object p4, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescription:Ljava/lang/CharSequence;
 
-    .line 77
+    .line 195
     iput-object p5, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mIcon:Landroid/graphics/Bitmap;
 
-    .line 78
+    .line 196
     iput-object p6, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mIconUri:Landroid/net/Uri;
 
-    .line 79
+    .line 197
     iput-object p7, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mExtras:Landroid/os/Bundle;
 
-    .line 80
+    .line 198
     iput-object p8, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaUri:Landroid/net/Uri;
-
-    .line 81
-    return-void
-.end method
-
-.method synthetic constructor <init>(Ljava/lang/String;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Landroid/graphics/Bitmap;Landroid/net/Uri;Landroid/os/Bundle;Landroid/net/Uri;Landroid/support/v4/media/MediaDescriptionCompat$1;)V
-    .locals 0
-    .param p1, "x0"    # Ljava/lang/String;
-    .param p2, "x1"    # Ljava/lang/CharSequence;
-    .param p3, "x2"    # Ljava/lang/CharSequence;
-    .param p4, "x3"    # Ljava/lang/CharSequence;
-    .param p5, "x4"    # Landroid/graphics/Bitmap;
-    .param p6, "x5"    # Landroid/net/Uri;
-    .param p7, "x6"    # Landroid/os/Bundle;
-    .param p8, "x7"    # Landroid/net/Uri;
-    .param p9, "x8"    # Landroid/support/v4/media/MediaDescriptionCompat$1;
-
-    .prologue
-    .line 32
-    invoke-direct/range {p0 .. p8}, Landroid/support/v4/media/MediaDescriptionCompat;-><init>(Ljava/lang/String;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Landroid/graphics/Bitmap;Landroid/net/Uri;Landroid/os/Bundle;Landroid/net/Uri;)V
 
     return-void
 .end method
 
 .method public static fromMediaDescription(Ljava/lang/Object;)Landroid/support/v4/media/MediaDescriptionCompat;
-    .locals 4
-    .param p0, "descriptionObj"    # Ljava/lang/Object;
+    .locals 8
 
-    .prologue
-    .line 242
-    if-eqz p0, :cond_0
+    const/4 v0, 0x0
 
-    sget v2, Landroid/os/Build$VERSION;->SDK_INT:I
+    if-eqz p0, :cond_5
 
-    const/16 v3, 0x15
+    .line 375
+    sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
 
-    if-ge v2, v3, :cond_1
+    const/16 v2, 0x15
 
-    .line 243
-    :cond_0
-    const/4 v1, 0x0
+    if-lt v1, v2, :cond_5
 
-    .line 260
-    :goto_0
-    return-object v1
+    .line 376
+    new-instance v1, Landroid/support/v4/media/MediaDescriptionCompat$Builder;
 
-    .line 246
-    :cond_1
-    new-instance v0, Landroid/support/v4/media/MediaDescriptionCompat$Builder;
+    invoke-direct {v1}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;-><init>()V
 
-    invoke-direct {v0}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;-><init>()V
-
-    .line 247
-    .local v0, "bob":Landroid/support/v4/media/MediaDescriptionCompat$Builder;
+    .line 377
     invoke-static {p0}, Landroid/support/v4/media/MediaDescriptionCompatApi21;->getMediaId(Ljava/lang/Object;)Ljava/lang/String;
 
     move-result-object v2
 
-    invoke-virtual {v0, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setMediaId(Ljava/lang/String;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
+    invoke-virtual {v1, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setMediaId(Ljava/lang/String;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
 
-    .line 248
+    .line 378
     invoke-static {p0}, Landroid/support/v4/media/MediaDescriptionCompatApi21;->getTitle(Ljava/lang/Object;)Ljava/lang/CharSequence;
 
     move-result-object v2
 
-    invoke-virtual {v0, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
+    invoke-virtual {v1, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
 
-    .line 249
+    .line 379
     invoke-static {p0}, Landroid/support/v4/media/MediaDescriptionCompatApi21;->getSubtitle(Ljava/lang/Object;)Ljava/lang/CharSequence;
 
     move-result-object v2
 
-    invoke-virtual {v0, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setSubtitle(Ljava/lang/CharSequence;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
+    invoke-virtual {v1, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setSubtitle(Ljava/lang/CharSequence;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
 
-    .line 250
+    .line 380
     invoke-static {p0}, Landroid/support/v4/media/MediaDescriptionCompatApi21;->getDescription(Ljava/lang/Object;)Ljava/lang/CharSequence;
 
     move-result-object v2
 
-    invoke-virtual {v0, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setDescription(Ljava/lang/CharSequence;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
+    invoke-virtual {v1, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setDescription(Ljava/lang/CharSequence;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
 
-    .line 251
+    .line 381
     invoke-static {p0}, Landroid/support/v4/media/MediaDescriptionCompatApi21;->getIconBitmap(Ljava/lang/Object;)Landroid/graphics/Bitmap;
 
     move-result-object v2
 
-    invoke-virtual {v0, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setIconBitmap(Landroid/graphics/Bitmap;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
+    invoke-virtual {v1, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setIconBitmap(Landroid/graphics/Bitmap;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
 
-    .line 252
+    .line 382
     invoke-static {p0}, Landroid/support/v4/media/MediaDescriptionCompatApi21;->getIconUri(Ljava/lang/Object;)Landroid/net/Uri;
 
     move-result-object v2
 
-    invoke-virtual {v0, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setIconUri(Landroid/net/Uri;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
+    invoke-virtual {v1, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setIconUri(Landroid/net/Uri;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
 
-    .line 253
+    .line 383
     invoke-static {p0}, Landroid/support/v4/media/MediaDescriptionCompatApi21;->getExtras(Ljava/lang/Object;)Landroid/os/Bundle;
 
     move-result-object v2
 
-    invoke-virtual {v0, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setExtras(Landroid/os/Bundle;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
+    const-string v3, "android.support.v4.media.description.MEDIA_URI"
 
-    .line 254
-    sget v2, Landroid/os/Build$VERSION;->SDK_INT:I
+    if-eqz v2, :cond_0
 
-    const/16 v3, 0x17
+    .line 386
+    invoke-static {v2}, Landroid/support/v4/media/session/MediaSessionCompat;->ensureClassLoader(Landroid/os/Bundle;)V
 
-    if-lt v2, v3, :cond_2
+    .line 387
+    invoke-virtual {v2, v3}, Landroid/os/Bundle;->getParcelable(Ljava/lang/String;)Landroid/os/Parcelable;
 
-    .line 255
-    invoke-static {p0}, Landroid/support/v4/media/MediaDescriptionCompatApi23;->getMediaUri(Ljava/lang/Object;)Landroid/net/Uri;
+    move-result-object v4
 
-    move-result-object v2
-
-    invoke-virtual {v0, v2}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setMediaUri(Landroid/net/Uri;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
-
-    .line 257
-    :cond_2
-    invoke-virtual {v0}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->build()Landroid/support/v4/media/MediaDescriptionCompat;
-
-    move-result-object v1
-
-    .line 258
-    .local v1, "descriptionCompat":Landroid/support/v4/media/MediaDescriptionCompat;
-    iput-object p0, v1, Landroid/support/v4/media/MediaDescriptionCompat;->mDescriptionObj:Ljava/lang/Object;
+    check-cast v4, Landroid/net/Uri;
 
     goto :goto_0
+
+    :cond_0
+    move-object v4, v0
+
+    :goto_0
+    if-eqz v4, :cond_2
+
+    const-string v5, "android.support.v4.media.description.NULL_BUNDLE_FLAG"
+
+    .line 390
+    invoke-virtual {v2, v5}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
+
+    move-result v6
+
+    if-eqz v6, :cond_1
+
+    invoke-virtual {v2}, Landroid/os/Bundle;->size()I
+
+    move-result v6
+
+    const/4 v7, 0x2
+
+    if-ne v6, v7, :cond_1
+
+    goto :goto_1
+
+    .line 399
+    :cond_1
+    invoke-virtual {v2, v3}, Landroid/os/Bundle;->remove(Ljava/lang/String;)V
+
+    .line 400
+    invoke-virtual {v2, v5}, Landroid/os/Bundle;->remove(Ljava/lang/String;)V
+
+    :cond_2
+    move-object v0, v2
+
+    .line 403
+    :goto_1
+    invoke-virtual {v1, v0}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setExtras(Landroid/os/Bundle;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
+
+    if-eqz v4, :cond_3
+
+    .line 405
+    invoke-virtual {v1, v4}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setMediaUri(Landroid/net/Uri;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
+
+    goto :goto_2
+
+    .line 406
+    :cond_3
+    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v2, 0x17
+
+    if-lt v0, v2, :cond_4
+
+    .line 407
+    invoke-static {p0}, Landroid/support/v4/media/MediaDescriptionCompatApi23;->getMediaUri(Ljava/lang/Object;)Landroid/net/Uri;
+
+    move-result-object v0
+
+    invoke-virtual {v1, v0}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->setMediaUri(Landroid/net/Uri;)Landroid/support/v4/media/MediaDescriptionCompat$Builder;
+
+    .line 409
+    :cond_4
+    :goto_2
+    invoke-virtual {v1}, Landroid/support/v4/media/MediaDescriptionCompat$Builder;->build()Landroid/support/v4/media/MediaDescriptionCompat;
+
+    move-result-object v0
+
+    .line 410
+    iput-object p0, v0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescriptionObj:Ljava/lang/Object;
+
+    :cond_5
+    return-object v0
 .end method
 
 
@@ -334,8 +375,6 @@
 .method public describeContents()I
     .locals 1
 
-    .prologue
-    .line 175
     const/4 v0, 0x0
 
     return v0
@@ -343,11 +382,8 @@
 
 .method public getDescription()Ljava/lang/CharSequence;
     .locals 1
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
 
-    .prologue
-    .line 130
+    .line 250
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescription:Ljava/lang/CharSequence;
 
     return-object v0
@@ -355,11 +391,8 @@
 
 .method public getExtras()Landroid/os/Bundle;
     .locals 1
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
 
-    .prologue
-    .line 160
+    .line 280
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mExtras:Landroid/os/Bundle;
 
     return-object v0
@@ -367,11 +400,8 @@
 
 .method public getIconBitmap()Landroid/graphics/Bitmap;
     .locals 1
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
 
-    .prologue
-    .line 140
+    .line 260
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mIcon:Landroid/graphics/Bitmap;
 
     return-object v0
@@ -379,114 +409,137 @@
 
 .method public getIconUri()Landroid/net/Uri;
     .locals 1
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
 
-    .prologue
-    .line 150
+    .line 270
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mIconUri:Landroid/net/Uri;
 
     return-object v0
 .end method
 
 .method public getMediaDescription()Ljava/lang/Object;
-    .locals 3
+    .locals 5
 
-    .prologue
-    .line 210
-    iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescriptionObj:Ljava/lang/Object;
+    .line 331
+    iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescriptionObj:Ljava/lang/Object;
 
-    if-nez v1, :cond_0
+    if-nez v0, :cond_4
 
-    sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
+    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
 
-    const/16 v2, 0x15
+    const/16 v1, 0x15
 
-    if-ge v1, v2, :cond_1
+    if-ge v0, v1, :cond_0
 
-    .line 211
+    goto :goto_0
+
+    .line 334
     :cond_0
-    iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescriptionObj:Ljava/lang/Object;
-
-    .line 226
-    :goto_0
-    return-object v1
-
-    .line 213
-    :cond_1
     invoke-static {}, Landroid/support/v4/media/MediaDescriptionCompatApi21$Builder;->newInstance()Ljava/lang/Object;
 
     move-result-object v0
 
-    .line 214
-    .local v0, "bob":Ljava/lang/Object;
+    .line 335
     iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaId:Ljava/lang/String;
 
     invoke-static {v0, v1}, Landroid/support/v4/media/MediaDescriptionCompatApi21$Builder;->setMediaId(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 215
+    .line 336
     iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mTitle:Ljava/lang/CharSequence;
 
     invoke-static {v0, v1}, Landroid/support/v4/media/MediaDescriptionCompatApi21$Builder;->setTitle(Ljava/lang/Object;Ljava/lang/CharSequence;)V
 
-    .line 216
+    .line 337
     iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mSubtitle:Ljava/lang/CharSequence;
 
     invoke-static {v0, v1}, Landroid/support/v4/media/MediaDescriptionCompatApi21$Builder;->setSubtitle(Ljava/lang/Object;Ljava/lang/CharSequence;)V
 
-    .line 217
+    .line 338
     iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescription:Ljava/lang/CharSequence;
 
     invoke-static {v0, v1}, Landroid/support/v4/media/MediaDescriptionCompatApi21$Builder;->setDescription(Ljava/lang/Object;Ljava/lang/CharSequence;)V
 
-    .line 218
+    .line 339
     iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mIcon:Landroid/graphics/Bitmap;
 
     invoke-static {v0, v1}, Landroid/support/v4/media/MediaDescriptionCompatApi21$Builder;->setIconBitmap(Ljava/lang/Object;Landroid/graphics/Bitmap;)V
 
-    .line 219
+    .line 340
     iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mIconUri:Landroid/net/Uri;
 
     invoke-static {v0, v1}, Landroid/support/v4/media/MediaDescriptionCompatApi21$Builder;->setIconUri(Ljava/lang/Object;Landroid/net/Uri;)V
 
-    .line 220
+    .line 345
     iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mExtras:Landroid/os/Bundle;
 
+    .line 346
+    sget v2, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v3, 0x17
+
+    if-ge v2, v3, :cond_2
+
+    iget-object v2, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaUri:Landroid/net/Uri;
+
+    if-eqz v2, :cond_2
+
+    if-nez v1, :cond_1
+
+    .line 348
+    new-instance v1, Landroid/os/Bundle;
+
+    invoke-direct {v1}, Landroid/os/Bundle;-><init>()V
+
+    const/4 v2, 0x1
+
+    const-string v4, "android.support.v4.media.description.NULL_BUNDLE_FLAG"
+
+    .line 349
+    invoke-virtual {v1, v4, v2}, Landroid/os/Bundle;->putBoolean(Ljava/lang/String;Z)V
+
+    .line 351
+    :cond_1
+    iget-object v2, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaUri:Landroid/net/Uri;
+
+    const-string v4, "android.support.v4.media.description.MEDIA_URI"
+
+    invoke-virtual {v1, v4, v2}, Landroid/os/Bundle;->putParcelable(Ljava/lang/String;Landroid/os/Parcelable;)V
+
+    .line 353
+    :cond_2
     invoke-static {v0, v1}, Landroid/support/v4/media/MediaDescriptionCompatApi21$Builder;->setExtras(Ljava/lang/Object;Landroid/os/Bundle;)V
 
-    .line 221
+    .line 354
     sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
 
-    const/16 v2, 0x17
+    if-lt v1, v3, :cond_3
 
-    if-lt v1, v2, :cond_2
-
-    .line 222
+    .line 355
     iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaUri:Landroid/net/Uri;
 
     invoke-static {v0, v1}, Landroid/support/v4/media/MediaDescriptionCompatApi23$Builder;->setMediaUri(Ljava/lang/Object;Landroid/net/Uri;)V
 
-    .line 224
-    :cond_2
+    .line 357
+    :cond_3
     invoke-static {v0}, Landroid/support/v4/media/MediaDescriptionCompatApi21$Builder;->build(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object v1
+    move-result-object v0
 
-    iput-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescriptionObj:Ljava/lang/Object;
+    iput-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescriptionObj:Ljava/lang/Object;
 
-    .line 226
-    iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescriptionObj:Ljava/lang/Object;
+    return-object v0
 
-    goto :goto_0
+    .line 332
+    :cond_4
+    :goto_0
+    iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescriptionObj:Ljava/lang/Object;
+
+    return-object v0
 .end method
 
 .method public getMediaId()Ljava/lang/String;
     .locals 1
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
 
-    .prologue
-    .line 100
+    .line 220
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaId:Ljava/lang/String;
 
     return-object v0
@@ -494,11 +547,8 @@
 
 .method public getMediaUri()Landroid/net/Uri;
     .locals 1
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
 
-    .prologue
-    .line 170
+    .line 290
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaUri:Landroid/net/Uri;
 
     return-object v0
@@ -506,11 +556,8 @@
 
 .method public getSubtitle()Ljava/lang/CharSequence;
     .locals 1
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
 
-    .prologue
-    .line 120
+    .line 240
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mSubtitle:Ljava/lang/CharSequence;
 
     return-object v0
@@ -518,21 +565,17 @@
 
 .method public getTitle()Ljava/lang/CharSequence;
     .locals 1
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
 
-    .prologue
-    .line 110
+    .line 230
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mTitle:Ljava/lang/CharSequence;
 
     return-object v0
 .end method
 
 .method public toString()Ljava/lang/String;
-    .locals 2
+    .locals 3
 
-    .prologue
-    .line 195
+    .line 316
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -541,31 +584,19 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     const-string v1, ", "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
+    iget-object v2, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mSubtitle:Ljava/lang/CharSequence;
 
-    iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mSubtitle:Ljava/lang/CharSequence;
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    const-string v1, ", "
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     iget-object v1, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescription:Ljava/lang/CharSequence;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -576,57 +607,57 @@
 
 .method public writeToParcel(Landroid/os/Parcel;I)V
     .locals 2
-    .param p1, "dest"    # Landroid/os/Parcel;
-    .param p2, "flags"    # I
 
-    .prologue
-    .line 180
+    .line 300
     sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
 
     const/16 v1, 0x15
 
     if-ge v0, v1, :cond_0
 
-    .line 181
+    .line 301
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaId:Ljava/lang/String;
 
     invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
 
-    .line 182
+    .line 302
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mTitle:Ljava/lang/CharSequence;
 
     invoke-static {v0, p1, p2}, Landroid/text/TextUtils;->writeToParcel(Ljava/lang/CharSequence;Landroid/os/Parcel;I)V
 
-    .line 183
+    .line 303
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mSubtitle:Ljava/lang/CharSequence;
 
     invoke-static {v0, p1, p2}, Landroid/text/TextUtils;->writeToParcel(Ljava/lang/CharSequence;Landroid/os/Parcel;I)V
 
-    .line 184
+    .line 304
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mDescription:Ljava/lang/CharSequence;
 
     invoke-static {v0, p1, p2}, Landroid/text/TextUtils;->writeToParcel(Ljava/lang/CharSequence;Landroid/os/Parcel;I)V
 
-    .line 185
+    .line 305
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mIcon:Landroid/graphics/Bitmap;
 
     invoke-virtual {p1, v0, p2}, Landroid/os/Parcel;->writeParcelable(Landroid/os/Parcelable;I)V
 
-    .line 186
+    .line 306
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mIconUri:Landroid/net/Uri;
 
     invoke-virtual {p1, v0, p2}, Landroid/os/Parcel;->writeParcelable(Landroid/os/Parcelable;I)V
 
-    .line 187
+    .line 307
     iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mExtras:Landroid/os/Bundle;
 
     invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeBundle(Landroid/os/Bundle;)V
 
-    .line 191
-    :goto_0
-    return-void
+    .line 308
+    iget-object v0, p0, Landroid/support/v4/media/MediaDescriptionCompat;->mMediaUri:Landroid/net/Uri;
 
-    .line 189
+    invoke-virtual {p1, v0, p2}, Landroid/os/Parcel;->writeParcelable(Landroid/os/Parcelable;I)V
+
+    goto :goto_0
+
+    .line 310
     :cond_0
     invoke-virtual {p0}, Landroid/support/v4/media/MediaDescriptionCompat;->getMediaDescription()Ljava/lang/Object;
 
@@ -634,5 +665,6 @@
 
     invoke-static {v0, p1, p2}, Landroid/support/v4/media/MediaDescriptionCompatApi21;->writeToParcel(Ljava/lang/Object;Landroid/os/Parcel;I)V
 
-    goto :goto_0
+    :goto_0
+    return-void
 .end method

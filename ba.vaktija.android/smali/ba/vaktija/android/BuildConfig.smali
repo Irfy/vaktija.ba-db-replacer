@@ -10,18 +10,15 @@
 
 .field public static final DEBUG:Z = false
 
-.field public static final FLAVOR:Ljava/lang/String; = ""
+.field public static final VERSION_CODE:I = 0x27df
 
-.field public static final VERSION_CODE:I = 0x2d
-
-.field public static final VERSION_NAME:Ljava/lang/String; = "@string/version_name"
+.field public static final VERSION_NAME:Ljava/lang/String; = "1.2.7"
 
 
 # direct methods
 .method public constructor <init>()V
     .locals 0
 
-    .prologue
     .line 6
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 

@@ -24,10 +24,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/wizard/LocationFragment;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/wizard/LocationFragment;
 
-    .prologue
-    .line 144
+    .line 145
     iput-object p1, p0, Lba/vaktija/android/wizard/LocationFragment$1;->this$0:Lba/vaktija/android/wizard/LocationFragment;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -38,79 +36,65 @@
 
 # virtual methods
 .method public onItemClick(Landroid/widget/AdapterView;Landroid/view/View;IJ)V
-    .locals 4
-    .param p2, "view"    # Landroid/view/View;
-    .param p3, "position"    # I
-    .param p4, "id"    # J
+    .locals 0
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
-            "Landroid/widget/AdapterView",
-            "<*>;",
+            "Landroid/widget/AdapterView<",
+            "*>;",
             "Landroid/view/View;",
             "IJ)V"
         }
     .end annotation
 
-    .prologue
-    .line 147
-    .local p1, "parent":Landroid/widget/AdapterView;, "Landroid/widget/AdapterView<*>;"
-    sget-object v1, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
+    .line 148
+    sget-object p1, Lba/vaktija/android/wizard/LocationFragment;->TAG:Ljava/lang/String;
 
-    new-instance v2, Ljava/lang/StringBuilder;
+    new-instance p2, Ljava/lang/StringBuilder;
 
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v3, "onItemClick position="
+    const-string p4, "onItemClick position="
 
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {p2, p4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
+    invoke-virtual {p2, p3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v2, p3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object p2
 
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-static {p1, p2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    move-result-object v2
+    .line 150
+    iget-object p1, p0, Lba/vaktija/android/wizard/LocationFragment$1;->this$0:Lba/vaktija/android/wizard/LocationFragment;
 
-    invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    iget-object p1, p1, Lba/vaktija/android/wizard/LocationFragment;->mListView:Landroid/widget/ListView;
 
-    .line 149
-    iget-object v1, p0, Lba/vaktija/android/wizard/LocationFragment$1;->this$0:Lba/vaktija/android/wizard/LocationFragment;
+    invoke-virtual {p1, p3}, Landroid/widget/ListView;->getItemAtPosition(I)Ljava/lang/Object;
 
-    iget-object v1, v1, Lba/vaktija/android/wizard/LocationFragment;->mListView:Landroid/widget/ListView;
+    move-result-object p1
 
-    invoke-virtual {v1, p3}, Landroid/widget/ListView;->getItemAtPosition(I)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Lba/vaktija/android/models/Location;
-
-    .line 151
-    .local v0, "loc":Lba/vaktija/android/models/Location;
-    iget-object v1, p0, Lba/vaktija/android/wizard/LocationFragment$1;->this$0:Lba/vaktija/android/wizard/LocationFragment;
-
-    iget v2, v0, Lba/vaktija/android/models/Location;->id:I
-
-    # setter for: Lba/vaktija/android/wizard/LocationFragment;->locationId:I
-    invoke-static {v1, v2}, Lba/vaktija/android/wizard/LocationFragment;->access$002(Lba/vaktija/android/wizard/LocationFragment;I)I
+    check-cast p1, Lba/vaktija/android/models/Location;
 
     .line 152
-    iget-object v1, p0, Lba/vaktija/android/wizard/LocationFragment$1;->this$0:Lba/vaktija/android/wizard/LocationFragment;
+    iget-object p2, p0, Lba/vaktija/android/wizard/LocationFragment$1;->this$0:Lba/vaktija/android/wizard/LocationFragment;
 
-    iget-object v2, v0, Lba/vaktija/android/models/Location;->name:Ljava/lang/String;
+    iget p3, p1, Lba/vaktija/android/models/Location;->id:I
 
-    # setter for: Lba/vaktija/android/wizard/LocationFragment;->locationName:Ljava/lang/String;
-    invoke-static {v1, v2}, Lba/vaktija/android/wizard/LocationFragment;->access$102(Lba/vaktija/android/wizard/LocationFragment;Ljava/lang/String;)Ljava/lang/String;
+    invoke-static {p2, p3}, Lba/vaktija/android/wizard/LocationFragment;->access$002(Lba/vaktija/android/wizard/LocationFragment;I)I
 
-    .line 154
-    iget-object v1, p0, Lba/vaktija/android/wizard/LocationFragment$1;->this$0:Lba/vaktija/android/wizard/LocationFragment;
+    .line 153
+    iget-object p2, p0, Lba/vaktija/android/wizard/LocationFragment$1;->this$0:Lba/vaktija/android/wizard/LocationFragment;
 
-    # invokes: Lba/vaktija/android/wizard/LocationFragment;->saveSelectedLocation()V
-    invoke-static {v1}, Lba/vaktija/android/wizard/LocationFragment;->access$200(Lba/vaktija/android/wizard/LocationFragment;)V
+    iget-object p1, p1, Lba/vaktija/android/models/Location;->name:Ljava/lang/String;
+
+    invoke-static {p2, p1}, Lba/vaktija/android/wizard/LocationFragment;->access$102(Lba/vaktija/android/wizard/LocationFragment;Ljava/lang/String;)Ljava/lang/String;
 
     .line 155
+    iget-object p1, p0, Lba/vaktija/android/wizard/LocationFragment$1;->this$0:Lba/vaktija/android/wizard/LocationFragment;
+
+    invoke-static {p1}, Lba/vaktija/android/wizard/LocationFragment;->access$200(Lba/vaktija/android/wizard/LocationFragment;)V
+
     return-void
 .end method

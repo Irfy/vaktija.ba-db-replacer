@@ -11,8 +11,7 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
-    .line 13
+    .line 14
     const-class v0, Lba/vaktija/android/LocationActivity;
 
     invoke-virtual {v0}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
@@ -27,8 +26,7 @@
 .method public constructor <init>()V
     .locals 0
 
-    .prologue
-    .line 12
+    .line 13
     invoke-direct {p0}, Lba/vaktija/android/BaseActivity;-><init>()V
 
     return-void
@@ -37,168 +35,151 @@
 
 # virtual methods
 .method public onCreate(Landroid/os/Bundle;)V
-    .locals 8
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
+    .locals 5
 
-    .prologue
-    const/4 v7, 0x1
+    .line 18
+    sget-object v0, Lba/vaktija/android/LocationActivity;->TAG:Ljava/lang/String;
 
-    const/4 v6, 0x0
-
-    .line 17
-    sget-object v3, Lba/vaktija/android/LocationActivity;->TAG:Ljava/lang/String;
-
-    invoke-virtual {p0, v3}, Lba/vaktija/android/LocationActivity;->setTheme(Ljava/lang/String;)V
-
-    .line 19
-    invoke-super {p0, p1}, Lba/vaktija/android/BaseActivity;->onCreate(Landroid/os/Bundle;)V
+    invoke-virtual {p0, v0}, Lba/vaktija/android/LocationActivity;->setTheme(Ljava/lang/String;)V
 
     .line 20
-    const v3, 0x7f03001e
+    invoke-super {p0, p1}, Lba/vaktija/android/BaseActivity;->onCreate(Landroid/os/Bundle;)V
 
-    invoke-virtual {p0, v3}, Lba/vaktija/android/LocationActivity;->setContentView(I)V
+    const v0, 0x7f0b0022
 
-    .line 22
-    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;
-
-    move-result-object v3
-
-    invoke-virtual {v3, v6}, Landroid/support/v7/app/ActionBar;->setDisplayShowHomeEnabled(Z)V
+    .line 21
+    invoke-virtual {p0, v0}, Lba/vaktija/android/LocationActivity;->setContentView(I)V
 
     .line 23
-    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;
-
-    move-result-object v3
-
-    invoke-virtual {v3, v7}, Landroid/support/v7/app/ActionBar;->setDisplayHomeAsUpEnabled(Z)V
-
-    .line 25
-    invoke-static {p0}, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;
-
-    move-result-object v3
-
-    const v4, 0x7f03001b
-
-    const/4 v5, 0x0
-
-    invoke-virtual {v3, v4, v5}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;)Landroid/view/View;
-
-    move-result-object v1
-
-    .line 26
-    .local v1, "customAb":Landroid/view/View;
-    const v3, 0x7f0e0022
-
-    invoke-virtual {v1, v3}, Landroid/view/View;->findViewById(I)Landroid/view/View;
-
-    move-result-object v2
-
-    check-cast v2, Landroid/widget/TextView;
-
-    .line 28
-    .local v2, "title":Landroid/widget/TextView;
-    const v3, 0x7f070035
-
-    invoke-virtual {v2, v3}, Landroid/widget/TextView;->setText(I)V
-
-    .line 30
-    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;
+    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->getSupportActionBar()Landroidx/appcompat/app/ActionBar;
 
     move-result-object v0
 
+    const/4 v1, 0x0
+
+    invoke-virtual {v0, v1}, Landroidx/appcompat/app/ActionBar;->setDisplayShowHomeEnabled(Z)V
+
+    .line 24
+    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->getSupportActionBar()Landroidx/appcompat/app/ActionBar;
+
+    move-result-object v0
+
+    const/4 v2, 0x1
+
+    invoke-virtual {v0, v2}, Landroidx/appcompat/app/ActionBar;->setDisplayHomeAsUpEnabled(Z)V
+
+    .line 26
+    invoke-static {p0}, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;
+
+    move-result-object v0
+
+    const v3, 0x7f0b001f
+
+    const/4 v4, 0x0
+
+    invoke-virtual {v0, v3, v4}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;)Landroid/view/View;
+
+    move-result-object v0
+
+    const v3, 0x7f08002f
+
+    .line 27
+    invoke-virtual {v0, v3}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object v3
+
+    check-cast v3, Landroid/widget/TextView;
+
+    const v4, 0x7f0f004c
+
+    .line 29
+    invoke-virtual {v3, v4}, Landroid/widget/TextView;->setText(I)V
+
     .line 31
-    .local v0, "ab":Landroid/support/v7/app/ActionBar;
-    invoke-virtual {v0, v6}, Landroid/support/v7/app/ActionBar;->setDisplayShowHomeEnabled(Z)V
+    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->getSupportActionBar()Landroidx/appcompat/app/ActionBar;
+
+    move-result-object v3
 
     .line 32
-    invoke-virtual {v0, v6}, Landroid/support/v7/app/ActionBar;->setDisplayShowTitleEnabled(Z)V
+    invoke-virtual {v3, v1}, Landroidx/appcompat/app/ActionBar;->setDisplayShowHomeEnabled(Z)V
 
     .line 33
-    invoke-virtual {v0, v7}, Landroid/support/v7/app/ActionBar;->setDisplayShowCustomEnabled(Z)V
+    invoke-virtual {v3, v1}, Landroidx/appcompat/app/ActionBar;->setDisplayShowTitleEnabled(Z)V
 
     .line 34
-    invoke-virtual {v0, v1}, Landroid/support/v7/app/ActionBar;->setCustomView(Landroid/view/View;)V
+    invoke-virtual {v3, v2}, Landroidx/appcompat/app/ActionBar;->setDisplayShowCustomEnabled(Z)V
 
-    .line 36
-    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;
-
-    move-result-object v3
-
-    invoke-virtual {v3, v6}, Landroid/support/v7/app/ActionBar;->setDisplayShowHomeEnabled(Z)V
+    .line 35
+    invoke-virtual {v3, v0}, Landroidx/appcompat/app/ActionBar;->setCustomView(Landroid/view/View;)V
 
     .line 37
-    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;
+    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->getSupportActionBar()Landroidx/appcompat/app/ActionBar;
 
-    move-result-object v3
+    move-result-object v0
 
-    invoke-virtual {v3, v7}, Landroid/support/v7/app/ActionBar;->setDisplayHomeAsUpEnabled(Z)V
+    invoke-virtual {v0, v1}, Landroidx/appcompat/app/ActionBar;->setDisplayShowHomeEnabled(Z)V
 
-    .line 39
+    .line 38
+    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->getSupportActionBar()Landroidx/appcompat/app/ActionBar;
+
+    move-result-object v0
+
+    invoke-virtual {v0, v2}, Landroidx/appcompat/app/ActionBar;->setDisplayHomeAsUpEnabled(Z)V
+
     if-nez p1, :cond_0
 
-    .line 40
-    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->getSupportFragmentManager()Landroid/support/v4/app/FragmentManager;
-
-    move-result-object v3
-
     .line 41
-    invoke-virtual {v3}, Landroid/support/v4/app/FragmentManager;->beginTransaction()Landroid/support/v4/app/FragmentTransaction;
+    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->getSupportFragmentManager()Landroidx/fragment/app/FragmentManager;
 
-    move-result-object v3
-
-    const v4, 0x7f0e005c
+    move-result-object p1
 
     .line 42
-    invoke-static {v7}, Lba/vaktija/android/wizard/LocationFragment;->newInstance(Z)Landroid/support/v4/app/Fragment;
+    invoke-virtual {p1}, Landroidx/fragment/app/FragmentManager;->beginTransaction()Landroidx/fragment/app/FragmentTransaction;
 
-    move-result-object v5
+    move-result-object p1
 
-    invoke-virtual {v3, v4, v5}, Landroid/support/v4/app/FragmentTransaction;->add(ILandroid/support/v4/app/Fragment;)Landroid/support/v4/app/FragmentTransaction;
-
-    move-result-object v3
+    const v0, 0x7f080044
 
     .line 43
-    invoke-virtual {v3}, Landroid/support/v4/app/FragmentTransaction;->commit()I
+    invoke-static {v2}, Lba/vaktija/android/wizard/LocationFragment;->newInstance(Z)Landroidx/fragment/app/Fragment;
 
-    .line 45
+    move-result-object v1
+
+    invoke-virtual {p1, v0, v1}, Landroidx/fragment/app/FragmentTransaction;->add(ILandroidx/fragment/app/Fragment;)Landroidx/fragment/app/FragmentTransaction;
+
+    move-result-object p1
+
+    .line 44
+    invoke-virtual {p1}, Landroidx/fragment/app/FragmentTransaction;->commit()I
+
     :cond_0
     return-void
 .end method
 
 .method public onOptionsItemSelected(Landroid/view/MenuItem;)Z
-    .locals 1
-    .param p1, "item"    # Landroid/view/MenuItem;
+    .locals 2
 
-    .prologue
-    .line 49
+    .line 50
     invoke-interface {p1}, Landroid/view/MenuItem;->getItemId()I
 
     move-result v0
 
-    packed-switch v0, :pswitch_data_0
+    const v1, 0x102002c
 
-    .line 55
+    if-eq v0, v1, :cond_0
+
+    .line 56
     invoke-super {p0, p1}, Lba/vaktija/android/BaseActivity;->onOptionsItemSelected(Landroid/view/MenuItem;)Z
 
-    move-result v0
+    move-result p1
 
-    :goto_0
-    return v0
-
-    .line 51
-    :pswitch_0
-    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->finish()V
+    return p1
 
     .line 52
-    const/4 v0, 0x1
+    :cond_0
+    invoke-virtual {p0}, Lba/vaktija/android/LocationActivity;->finish()V
 
-    goto :goto_0
+    const/4 p1, 0x1
 
-    .line 49
-    nop
-
-    :pswitch_data_0
-    .packed-switch 0x102002c
-        :pswitch_0
-    .end packed-switch
+    return p1
 .end method

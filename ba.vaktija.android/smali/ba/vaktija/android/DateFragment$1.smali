@@ -24,10 +24,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/DateFragment;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/DateFragment;
 
-    .prologue
-    .line 63
+    .line 64
     iput-object p1, p0, Lba/vaktija/android/DateFragment$1;->this$0:Lba/vaktija/android/DateFragment;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -39,13 +37,9 @@
 # virtual methods
 .method public onClick(Landroid/content/DialogInterface;I)V
     .locals 0
-    .param p1, "dialog"    # Landroid/content/DialogInterface;
-    .param p2, "whichButton"    # I
-
-    .prologue
-    .line 65
-    invoke-interface {p1}, Landroid/content/DialogInterface;->dismiss()V
 
     .line 66
+    invoke-interface {p1}, Landroid/content/DialogInterface;->dismiss()V
+
     return-void
 .end method

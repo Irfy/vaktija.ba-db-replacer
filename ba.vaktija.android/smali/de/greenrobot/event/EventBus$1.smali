@@ -15,8 +15,7 @@
 
 .annotation system Ldalvik/annotation/Signature;
     value = {
-        "Ljava/lang/ThreadLocal",
-        "<",
+        "Ljava/lang/ThreadLocal<",
         "Lde/greenrobot/event/EventBus$PostingThreadState;",
         ">;"
     }
@@ -31,7 +30,6 @@
 .method constructor <init>(Lde/greenrobot/event/EventBus;)V
     .locals 0
 
-    .prologue
     .line 53
     iput-object p1, p0, Lde/greenrobot/event/EventBus$1;->this$0:Lde/greenrobot/event/EventBus;
 
@@ -45,7 +43,6 @@
 .method protected initialValue()Lde/greenrobot/event/EventBus$PostingThreadState;
     .locals 1
 
-    .prologue
     .line 56
     new-instance v0, Lde/greenrobot/event/EventBus$PostingThreadState;
 
@@ -57,7 +54,6 @@
 .method protected bridge synthetic initialValue()Ljava/lang/Object;
     .locals 1
 
-    .prologue
     .line 53
     invoke-virtual {p0}, Lde/greenrobot/event/EventBus$1;->initialValue()Lde/greenrobot/event/EventBus$PostingThreadState;
 

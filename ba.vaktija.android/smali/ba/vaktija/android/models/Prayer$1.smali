@@ -19,8 +19,7 @@
 .annotation system Ldalvik/annotation/Signature;
     value = {
         "Ljava/lang/Object;",
-        "Landroid/os/Parcelable$Creator",
-        "<",
+        "Landroid/os/Parcelable$Creator<",
         "Lba/vaktija/android/models/Prayer;",
         ">;"
     }
@@ -31,8 +30,7 @@
 .method constructor <init>()V
     .locals 0
 
-    .prologue
-    .line 91
+    .line 46
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -42,10 +40,8 @@
 # virtual methods
 .method public createFromParcel(Landroid/os/Parcel;)Lba/vaktija/android/models/Prayer;
     .locals 1
-    .param p1, "in"    # Landroid/os/Parcel;
 
-    .prologue
-    .line 93
+    .line 48
     new-instance v0, Lba/vaktija/android/models/Prayer;
 
     invoke-direct {v0, p1}, Lba/vaktija/android/models/Prayer;-><init>(Landroid/os/Parcel;)V
@@ -54,36 +50,32 @@
 .end method
 
 .method public bridge synthetic createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
-    .locals 1
+    .locals 0
 
-    .prologue
-    .line 91
+    .line 46
     invoke-virtual {p0, p1}, Lba/vaktija/android/models/Prayer$1;->createFromParcel(Landroid/os/Parcel;)Lba/vaktija/android/models/Prayer;
 
-    move-result-object v0
+    move-result-object p1
 
-    return-object v0
+    return-object p1
 .end method
 
 .method public newArray(I)[Lba/vaktija/android/models/Prayer;
-    .locals 1
-    .param p1, "size"    # I
+    .locals 0
 
-    .prologue
-    .line 97
-    new-array v0, p1, [Lba/vaktija/android/models/Prayer;
+    .line 52
+    new-array p1, p1, [Lba/vaktija/android/models/Prayer;
 
-    return-object v0
+    return-object p1
 .end method
 
 .method public bridge synthetic newArray(I)[Ljava/lang/Object;
-    .locals 1
+    .locals 0
 
-    .prologue
-    .line 91
+    .line 46
     invoke-virtual {p0, p1}, Lba/vaktija/android/models/Prayer$1;->newArray(I)[Lba/vaktija/android/models/Prayer;
 
-    move-result-object v0
+    move-result-object p1
 
-    return-object v0
+    return-object p1
 .end method

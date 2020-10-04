@@ -21,16 +21,13 @@
 # direct methods
 .method public constructor <init>(I)V
     .locals 0
-    .param p1, "prayerId"    # I
 
-    .prologue
-    .line 11
+    .line 14
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 12
+    .line 15
     iput p1, p0, Lba/vaktija/android/models/Events$SkipSilentEvent;->prayerId:I
 
-    .line 13
     return-void
 .end method
 
@@ -39,8 +36,7 @@
 .method public getPrayerId()I
     .locals 1
 
-    .prologue
-    .line 15
+    .line 19
     iget v0, p0, Lba/vaktija/android/models/Events$SkipSilentEvent;->prayerId:I
 
     return v0
@@ -48,12 +44,9 @@
 
 .method public setPrayerId(I)V
     .locals 0
-    .param p1, "prayerId"    # I
 
-    .prologue
-    .line 18
+    .line 23
     iput p1, p0, Lba/vaktija/android/models/Events$SkipSilentEvent;->prayerId:I
 
-    .line 19
     return-void
 .end method

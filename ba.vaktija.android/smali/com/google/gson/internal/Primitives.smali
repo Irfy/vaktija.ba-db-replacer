@@ -3,307 +3,304 @@
 .source "Primitives.java"
 
 
-# static fields
-.field private static final PRIMITIVE_TO_WRAPPER_TYPE:Ljava/util/Map;
-    .annotation system Ldalvik/annotation/Signature;
-        value = {
-            "Ljava/util/Map",
-            "<",
-            "Ljava/lang/Class",
-            "<*>;",
-            "Ljava/lang/Class",
-            "<*>;>;"
-        }
-    .end annotation
-.end field
-
-.field private static final WRAPPER_TO_PRIMITIVE_TYPE:Ljava/util/Map;
-    .annotation system Ldalvik/annotation/Signature;
-        value = {
-            "Ljava/util/Map",
-            "<",
-            "Ljava/lang/Class",
-            "<*>;",
-            "Ljava/lang/Class",
-            "<*>;>;"
-        }
-    .end annotation
-.end field
-
-
 # direct methods
-.method static constructor <clinit>()V
-    .locals 4
-
-    .prologue
-    const/16 v2, 0x10
-
-    .line 43
-    new-instance v0, Ljava/util/HashMap;
-
-    invoke-direct {v0, v2}, Ljava/util/HashMap;-><init>(I)V
-
-    .line 44
-    .local v0, "primToWrap":Ljava/util/Map;, "Ljava/util/Map<Ljava/lang/Class<*>;Ljava/lang/Class<*>;>;"
-    new-instance v1, Ljava/util/HashMap;
-
-    invoke-direct {v1, v2}, Ljava/util/HashMap;-><init>(I)V
-
-    .line 46
-    .local v1, "wrapToPrim":Ljava/util/Map;, "Ljava/util/Map<Ljava/lang/Class<*>;Ljava/lang/Class<*>;>;"
-    sget-object v2, Ljava/lang/Boolean;->TYPE:Ljava/lang/Class;
-
-    const-class v3, Ljava/lang/Boolean;
-
-    invoke-static {v0, v1, v2, v3}, Lcom/google/gson/internal/Primitives;->add(Ljava/util/Map;Ljava/util/Map;Ljava/lang/Class;Ljava/lang/Class;)V
-
-    .line 47
-    sget-object v2, Ljava/lang/Byte;->TYPE:Ljava/lang/Class;
-
-    const-class v3, Ljava/lang/Byte;
-
-    invoke-static {v0, v1, v2, v3}, Lcom/google/gson/internal/Primitives;->add(Ljava/util/Map;Ljava/util/Map;Ljava/lang/Class;Ljava/lang/Class;)V
-
-    .line 48
-    sget-object v2, Ljava/lang/Character;->TYPE:Ljava/lang/Class;
-
-    const-class v3, Ljava/lang/Character;
-
-    invoke-static {v0, v1, v2, v3}, Lcom/google/gson/internal/Primitives;->add(Ljava/util/Map;Ljava/util/Map;Ljava/lang/Class;Ljava/lang/Class;)V
-
-    .line 49
-    sget-object v2, Ljava/lang/Double;->TYPE:Ljava/lang/Class;
-
-    const-class v3, Ljava/lang/Double;
-
-    invoke-static {v0, v1, v2, v3}, Lcom/google/gson/internal/Primitives;->add(Ljava/util/Map;Ljava/util/Map;Ljava/lang/Class;Ljava/lang/Class;)V
-
-    .line 50
-    sget-object v2, Ljava/lang/Float;->TYPE:Ljava/lang/Class;
-
-    const-class v3, Ljava/lang/Float;
-
-    invoke-static {v0, v1, v2, v3}, Lcom/google/gson/internal/Primitives;->add(Ljava/util/Map;Ljava/util/Map;Ljava/lang/Class;Ljava/lang/Class;)V
-
-    .line 51
-    sget-object v2, Ljava/lang/Integer;->TYPE:Ljava/lang/Class;
-
-    const-class v3, Ljava/lang/Integer;
-
-    invoke-static {v0, v1, v2, v3}, Lcom/google/gson/internal/Primitives;->add(Ljava/util/Map;Ljava/util/Map;Ljava/lang/Class;Ljava/lang/Class;)V
-
-    .line 52
-    sget-object v2, Ljava/lang/Long;->TYPE:Ljava/lang/Class;
-
-    const-class v3, Ljava/lang/Long;
-
-    invoke-static {v0, v1, v2, v3}, Lcom/google/gson/internal/Primitives;->add(Ljava/util/Map;Ljava/util/Map;Ljava/lang/Class;Ljava/lang/Class;)V
-
-    .line 53
-    sget-object v2, Ljava/lang/Short;->TYPE:Ljava/lang/Class;
-
-    const-class v3, Ljava/lang/Short;
-
-    invoke-static {v0, v1, v2, v3}, Lcom/google/gson/internal/Primitives;->add(Ljava/util/Map;Ljava/util/Map;Ljava/lang/Class;Ljava/lang/Class;)V
-
-    .line 54
-    sget-object v2, Ljava/lang/Void;->TYPE:Ljava/lang/Class;
-
-    const-class v3, Ljava/lang/Void;
-
-    invoke-static {v0, v1, v2, v3}, Lcom/google/gson/internal/Primitives;->add(Ljava/util/Map;Ljava/util/Map;Ljava/lang/Class;Ljava/lang/Class;)V
-
-    .line 56
-    invoke-static {v0}, Ljava/util/Collections;->unmodifiableMap(Ljava/util/Map;)Ljava/util/Map;
-
-    move-result-object v2
-
-    sput-object v2, Lcom/google/gson/internal/Primitives;->PRIMITIVE_TO_WRAPPER_TYPE:Ljava/util/Map;
-
-    .line 57
-    invoke-static {v1}, Ljava/util/Collections;->unmodifiableMap(Ljava/util/Map;)Ljava/util/Map;
-
-    move-result-object v2
-
-    sput-object v2, Lcom/google/gson/internal/Primitives;->WRAPPER_TO_PRIMITIVE_TYPE:Ljava/util/Map;
-
-    .line 58
-    return-void
-.end method
-
 .method private constructor <init>()V
     .locals 0
 
-    .prologue
-    .line 32
+    .line 28
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
 .end method
 
-.method private static add(Ljava/util/Map;Ljava/util/Map;Ljava/lang/Class;Ljava/lang/Class;)V
-    .locals 0
-    .annotation system Ldalvik/annotation/Signature;
-        value = {
-            "(",
-            "Ljava/util/Map",
-            "<",
-            "Ljava/lang/Class",
-            "<*>;",
-            "Ljava/lang/Class",
-            "<*>;>;",
-            "Ljava/util/Map",
-            "<",
-            "Ljava/lang/Class",
-            "<*>;",
-            "Ljava/lang/Class",
-            "<*>;>;",
-            "Ljava/lang/Class",
-            "<*>;",
-            "Ljava/lang/Class",
-            "<*>;)V"
-        }
-    .end annotation
-
-    .prologue
-    .line 62
-    .local p0, "forward":Ljava/util/Map;, "Ljava/util/Map<Ljava/lang/Class<*>;Ljava/lang/Class<*>;>;"
-    .local p1, "backward":Ljava/util/Map;, "Ljava/util/Map<Ljava/lang/Class<*>;Ljava/lang/Class<*>;>;"
-    .local p2, "key":Ljava/lang/Class;, "Ljava/lang/Class<*>;"
-    .local p3, "value":Ljava/lang/Class;, "Ljava/lang/Class<*>;"
-    invoke-interface {p0, p2, p3}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
-
-    .line 63
-    invoke-interface {p1, p3, p2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
-
-    .line 64
-    return-void
-.end method
-
 .method public static isPrimitive(Ljava/lang/reflect/Type;)Z
     .locals 1
-    .param p0, "type"    # Ljava/lang/reflect/Type;
 
-    .prologue
-    .line 70
-    sget-object v0, Lcom/google/gson/internal/Primitives;->PRIMITIVE_TO_WRAPPER_TYPE:Ljava/util/Map;
+    .line 34
+    instance-of v0, p0, Ljava/lang/Class;
 
-    invoke-interface {v0, p0}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+    if-eqz v0, :cond_0
 
-    move-result v0
+    check-cast p0, Ljava/lang/Class;
 
-    return v0
+    invoke-virtual {p0}, Ljava/lang/Class;->isPrimitive()Z
+
+    move-result p0
+
+    if-eqz p0, :cond_0
+
+    const/4 p0, 0x1
+
+    goto :goto_0
+
+    :cond_0
+    const/4 p0, 0x0
+
+    :goto_0
+    return p0
 .end method
 
 .method public static isWrapperType(Ljava/lang/reflect/Type;)Z
-    .locals 2
-    .param p0, "type"    # Ljava/lang/reflect/Type;
+    .locals 1
 
-    .prologue
-    .line 80
-    sget-object v0, Lcom/google/gson/internal/Primitives;->WRAPPER_TO_PRIMITIVE_TYPE:Ljava/util/Map;
+    .line 44
+    const-class v0, Ljava/lang/Integer;
 
-    .line 81
-    invoke-static {p0}, Lcom/google/gson/internal/$Gson$Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
+    if-eq p0, v0, :cond_1
 
-    move-result-object v1
+    const-class v0, Ljava/lang/Float;
 
-    .line 80
-    invoke-interface {v0, v1}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+    if-eq p0, v0, :cond_1
 
-    move-result v0
+    const-class v0, Ljava/lang/Byte;
 
-    return v0
+    if-eq p0, v0, :cond_1
+
+    const-class v0, Ljava/lang/Double;
+
+    if-eq p0, v0, :cond_1
+
+    const-class v0, Ljava/lang/Long;
+
+    if-eq p0, v0, :cond_1
+
+    const-class v0, Ljava/lang/Character;
+
+    if-eq p0, v0, :cond_1
+
+    const-class v0, Ljava/lang/Boolean;
+
+    if-eq p0, v0, :cond_1
+
+    const-class v0, Ljava/lang/Short;
+
+    if-eq p0, v0, :cond_1
+
+    const-class v0, Ljava/lang/Void;
+
+    if-ne p0, v0, :cond_0
+
+    goto :goto_0
+
+    :cond_0
+    const/4 p0, 0x0
+
+    goto :goto_1
+
+    :cond_1
+    :goto_0
+    const/4 p0, 0x1
+
+    :goto_1
+    return p0
 .end method
 
 .method public static unwrap(Ljava/lang/Class;)Ljava/lang/Class;
-    .locals 3
+    .locals 1
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<T:",
             "Ljava/lang/Object;",
             ">(",
-            "Ljava/lang/Class",
-            "<TT;>;)",
-            "Ljava/lang/Class",
-            "<TT;>;"
+            "Ljava/lang/Class<",
+            "TT;>;)",
+            "Ljava/lang/Class<",
+            "TT;>;"
         }
     .end annotation
 
-    .prologue
-    .line 113
-    .local p0, "type":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
-    sget-object v1, Lcom/google/gson/internal/Primitives;->WRAPPER_TO_PRIMITIVE_TYPE:Ljava/util/Map;
+    .line 89
+    const-class v0, Ljava/lang/Integer;
 
-    .line 114
-    invoke-static {p0}, Lcom/google/gson/internal/$Gson$Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
+    if-ne p0, v0, :cond_0
 
-    move-result-object v2
+    sget-object p0, Ljava/lang/Integer;->TYPE:Ljava/lang/Class;
 
-    .line 113
-    invoke-interface {v1, v2}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Ljava/lang/Class;
-
-    .line 115
-    .local v0, "unwrapped":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
-    if-nez v0, :cond_0
-
-    .end local p0    # "type":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
-    :goto_0
     return-object p0
 
-    .restart local p0    # "type":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
+    .line 90
     :cond_0
-    move-object p0, v0
+    const-class v0, Ljava/lang/Float;
 
-    goto :goto_0
+    if-ne p0, v0, :cond_1
+
+    sget-object p0, Ljava/lang/Float;->TYPE:Ljava/lang/Class;
+
+    return-object p0
+
+    .line 91
+    :cond_1
+    const-class v0, Ljava/lang/Byte;
+
+    if-ne p0, v0, :cond_2
+
+    sget-object p0, Ljava/lang/Byte;->TYPE:Ljava/lang/Class;
+
+    return-object p0
+
+    .line 92
+    :cond_2
+    const-class v0, Ljava/lang/Double;
+
+    if-ne p0, v0, :cond_3
+
+    sget-object p0, Ljava/lang/Double;->TYPE:Ljava/lang/Class;
+
+    return-object p0
+
+    .line 93
+    :cond_3
+    const-class v0, Ljava/lang/Long;
+
+    if-ne p0, v0, :cond_4
+
+    sget-object p0, Ljava/lang/Long;->TYPE:Ljava/lang/Class;
+
+    return-object p0
+
+    .line 94
+    :cond_4
+    const-class v0, Ljava/lang/Character;
+
+    if-ne p0, v0, :cond_5
+
+    sget-object p0, Ljava/lang/Character;->TYPE:Ljava/lang/Class;
+
+    return-object p0
+
+    .line 95
+    :cond_5
+    const-class v0, Ljava/lang/Boolean;
+
+    if-ne p0, v0, :cond_6
+
+    sget-object p0, Ljava/lang/Boolean;->TYPE:Ljava/lang/Class;
+
+    return-object p0
+
+    .line 96
+    :cond_6
+    const-class v0, Ljava/lang/Short;
+
+    if-ne p0, v0, :cond_7
+
+    sget-object p0, Ljava/lang/Short;->TYPE:Ljava/lang/Class;
+
+    return-object p0
+
+    .line 97
+    :cond_7
+    const-class v0, Ljava/lang/Void;
+
+    if-ne p0, v0, :cond_8
+
+    sget-object p0, Ljava/lang/Void;->TYPE:Ljava/lang/Class;
+
+    :cond_8
+    return-object p0
 .end method
 
 .method public static wrap(Ljava/lang/Class;)Ljava/lang/Class;
-    .locals 3
+    .locals 1
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<T:",
             "Ljava/lang/Object;",
             ">(",
-            "Ljava/lang/Class",
-            "<TT;>;)",
-            "Ljava/lang/Class",
-            "<TT;>;"
+            "Ljava/lang/Class<",
+            "TT;>;)",
+            "Ljava/lang/Class<",
+            "TT;>;"
         }
     .end annotation
 
-    .prologue
-    .line 96
-    .local p0, "type":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
-    sget-object v1, Lcom/google/gson/internal/Primitives;->PRIMITIVE_TO_WRAPPER_TYPE:Ljava/util/Map;
+    .line 66
+    sget-object v0, Ljava/lang/Integer;->TYPE:Ljava/lang/Class;
 
-    .line 97
-    invoke-static {p0}, Lcom/google/gson/internal/$Gson$Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
+    if-ne p0, v0, :cond_0
 
-    move-result-object v2
+    const-class p0, Ljava/lang/Integer;
 
-    .line 96
-    invoke-interface {v1, v2}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Ljava/lang/Class;
-
-    .line 98
-    .local v0, "wrapped":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
-    if-nez v0, :cond_0
-
-    .end local p0    # "type":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
-    :goto_0
     return-object p0
 
-    .restart local p0    # "type":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
+    .line 67
     :cond_0
-    move-object p0, v0
+    sget-object v0, Ljava/lang/Float;->TYPE:Ljava/lang/Class;
 
-    goto :goto_0
+    if-ne p0, v0, :cond_1
+
+    const-class p0, Ljava/lang/Float;
+
+    return-object p0
+
+    .line 68
+    :cond_1
+    sget-object v0, Ljava/lang/Byte;->TYPE:Ljava/lang/Class;
+
+    if-ne p0, v0, :cond_2
+
+    const-class p0, Ljava/lang/Byte;
+
+    return-object p0
+
+    .line 69
+    :cond_2
+    sget-object v0, Ljava/lang/Double;->TYPE:Ljava/lang/Class;
+
+    if-ne p0, v0, :cond_3
+
+    const-class p0, Ljava/lang/Double;
+
+    return-object p0
+
+    .line 70
+    :cond_3
+    sget-object v0, Ljava/lang/Long;->TYPE:Ljava/lang/Class;
+
+    if-ne p0, v0, :cond_4
+
+    const-class p0, Ljava/lang/Long;
+
+    return-object p0
+
+    .line 71
+    :cond_4
+    sget-object v0, Ljava/lang/Character;->TYPE:Ljava/lang/Class;
+
+    if-ne p0, v0, :cond_5
+
+    const-class p0, Ljava/lang/Character;
+
+    return-object p0
+
+    .line 72
+    :cond_5
+    sget-object v0, Ljava/lang/Boolean;->TYPE:Ljava/lang/Class;
+
+    if-ne p0, v0, :cond_6
+
+    const-class p0, Ljava/lang/Boolean;
+
+    return-object p0
+
+    .line 73
+    :cond_6
+    sget-object v0, Ljava/lang/Short;->TYPE:Ljava/lang/Class;
+
+    if-ne p0, v0, :cond_7
+
+    const-class p0, Ljava/lang/Short;
+
+    return-object p0
+
+    .line 74
+    :cond_7
+    sget-object v0, Ljava/lang/Void;->TYPE:Ljava/lang/Class;
+
+    if-ne p0, v0, :cond_8
+
+    const-class p0, Ljava/lang/Void;
+
+    :cond_8
+    return-object p0
 .end method

@@ -6,8 +6,7 @@
 # annotations
 .annotation system Ldalvik/annotation/Signature;
     value = {
-        "Lcom/google/gson/TypeAdapter",
-        "<",
+        "Lcom/google/gson/TypeAdapter<",
         "Ljava/sql/Date;",
         ">;"
     }
@@ -26,7 +25,6 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
     .line 39
     new-instance v0, Lcom/google/gson/internal/bind/SqlDateTypeAdapter$1;
 
@@ -40,7 +38,6 @@
 .method public constructor <init>()V
     .locals 2
 
-    .prologue
     .line 38
     invoke-direct {p0}, Lcom/google/gson/TypeAdapter;-><init>()V
 
@@ -59,110 +56,101 @@
 
 # virtual methods
 .method public bridge synthetic read(Lcom/google/gson/stream/JsonReader;)Ljava/lang/Object;
-    .locals 1
+    .locals 0
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
-    .prologue
     .line 38
     invoke-virtual {p0, p1}, Lcom/google/gson/internal/bind/SqlDateTypeAdapter;->read(Lcom/google/gson/stream/JsonReader;)Ljava/sql/Date;
 
-    move-result-object v0
+    move-result-object p1
 
-    return-object v0
+    return-object p1
 .end method
 
 .method public declared-synchronized read(Lcom/google/gson/stream/JsonReader;)Ljava/sql/Date;
-    .locals 5
-    .param p1, "in"    # Lcom/google/gson/stream/JsonReader;
+    .locals 2
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
-    .prologue
-    .line 51
     monitor-enter p0
 
+    .line 51
     :try_start_0
     invoke-virtual {p1}, Lcom/google/gson/stream/JsonReader;->peek()Lcom/google/gson/stream/JsonToken;
 
-    move-result-object v1
+    move-result-object v0
 
-    sget-object v4, Lcom/google/gson/stream/JsonToken;->NULL:Lcom/google/gson/stream/JsonToken;
+    sget-object v1, Lcom/google/gson/stream/JsonToken;->NULL:Lcom/google/gson/stream/JsonToken;
 
-    if-ne v1, v4, :cond_0
+    if-ne v0, v1, :cond_0
 
     .line 52
     invoke-virtual {p1}, Lcom/google/gson/stream/JsonReader;->nextNull()V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 53
-    const/4 v1, 0x0
+    const/4 p1, 0x0
 
-    .line 57
-    :goto_0
+    .line 53
     monitor-exit p0
 
-    return-object v1
+    return-object p1
 
     .line 56
     :cond_0
     :try_start_1
-    iget-object v1, p0, Lcom/google/gson/internal/bind/SqlDateTypeAdapter;->format:Ljava/text/DateFormat;
+    iget-object v0, p0, Lcom/google/gson/internal/bind/SqlDateTypeAdapter;->format:Ljava/text/DateFormat;
 
     invoke-virtual {p1}, Lcom/google/gson/stream/JsonReader;->nextString()Ljava/lang/String;
 
-    move-result-object v4
+    move-result-object p1
 
-    invoke-virtual {v1, v4}, Ljava/text/DateFormat;->parse(Ljava/lang/String;)Ljava/util/Date;
+    invoke-virtual {v0, p1}, Ljava/text/DateFormat;->parse(Ljava/lang/String;)Ljava/util/Date;
 
-    move-result-object v1
+    move-result-object p1
 
-    invoke-virtual {v1}, Ljava/util/Date;->getTime()J
+    invoke-virtual {p1}, Ljava/util/Date;->getTime()J
 
-    move-result-wide v2
+    move-result-wide v0
 
     .line 57
-    .local v2, "utilDate":J
-    new-instance v1, Ljava/sql/Date;
+    new-instance p1, Ljava/sql/Date;
 
-    invoke-direct {v1, v2, v3}, Ljava/sql/Date;-><init>(J)V
+    invoke-direct {p1, v0, v1}, Ljava/sql/Date;-><init>(J)V
     :try_end_1
     .catch Ljava/text/ParseException; {:try_start_1 .. :try_end_1} :catch_0
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    goto :goto_0
+    monitor-exit p0
 
-    .line 58
-    .end local v2    # "utilDate":J
+    return-object p1
+
     :catch_0
-    move-exception v0
+    move-exception p1
 
     .line 59
-    .local v0, "e":Ljava/text/ParseException;
     :try_start_2
-    new-instance v1, Lcom/google/gson/JsonSyntaxException;
+    new-instance v0, Lcom/google/gson/JsonSyntaxException;
 
-    invoke-direct {v1, v0}, Lcom/google/gson/JsonSyntaxException;-><init>(Ljava/lang/Throwable;)V
+    invoke-direct {v0, p1}, Lcom/google/gson/JsonSyntaxException;-><init>(Ljava/lang/Throwable;)V
 
-    throw v1
+    throw v0
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_0
 
-    .line 51
-    .end local v0    # "e":Ljava/text/ParseException;
     :catchall_0
-    move-exception v1
+    move-exception p1
 
     monitor-exit p0
 
-    throw v1
+    throw p1
 .end method
 
 .method public bridge synthetic write(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V
@@ -173,7 +161,6 @@
         }
     .end annotation
 
-    .prologue
     .line 38
     check-cast p2, Ljava/sql/Date;
 
@@ -184,25 +171,31 @@
 
 .method public declared-synchronized write(Lcom/google/gson/stream/JsonWriter;Ljava/sql/Date;)V
     .locals 1
-    .param p1, "out"    # Lcom/google/gson/stream/JsonWriter;
-    .param p2, "value"    # Ljava/sql/Date;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
-    .prologue
-    .line 65
     monitor-enter p0
 
     if-nez p2, :cond_0
 
-    const/4 v0, 0x0
+    const/4 p2, 0x0
+
+    goto :goto_0
+
+    .line 65
+    :cond_0
+    :try_start_0
+    iget-object v0, p0, Lcom/google/gson/internal/bind/SqlDateTypeAdapter;->format:Ljava/text/DateFormat;
+
+    invoke-virtual {v0, p2}, Ljava/text/DateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
+
+    move-result-object p2
 
     :goto_0
-    :try_start_0
-    invoke-virtual {p1, v0}, Lcom/google/gson/stream/JsonWriter;->value(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;
+    invoke-virtual {p1, p2}, Lcom/google/gson/stream/JsonWriter;->value(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -211,23 +204,10 @@
 
     return-void
 
-    .line 65
-    :cond_0
-    :try_start_1
-    iget-object v0, p0, Lcom/google/gson/internal/bind/SqlDateTypeAdapter;->format:Ljava/text/DateFormat;
-
-    invoke-virtual {v0, p2}, Ljava/text/DateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
-
-    move-result-object v0
-
-    goto :goto_0
-
     :catchall_0
-    move-exception v0
+    move-exception p1
 
     monitor-exit p0
 
-    throw v0
+    throw p1
 .end method

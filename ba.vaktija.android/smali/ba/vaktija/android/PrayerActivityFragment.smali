@@ -1,5 +1,5 @@
 .class public Lba/vaktija/android/PrayerActivityFragment;
-.super Landroid/support/v4/app/Fragment;
+.super Landroidx/fragment/app/Fragment;
 .source "PrayerActivityFragment.java"
 
 # interfaces
@@ -12,13 +12,15 @@
 
 .field private static final EXTRA_RESPECT_JUMA:Ljava/lang/String; = "EXTRA_RESPECT_JUMA"
 
+.field private static final REQUEST_SYSTEM_SETTINGS:I = 0x64
+
 .field public static final TAG:Ljava/lang/String;
 
 
 # instance fields
-.field alarm:Landroid/support/v7/widget/CardView;
+.field alarm:Landroidx/cardview/widget/CardView;
 
-.field alarmButton:Landroid/support/v7/widget/SwitchCompat;
+.field alarmButton:Landroidx/appcompat/widget/SwitchCompat;
 
 .field alarmCheckBox:Landroid/widget/CheckBox;
 
@@ -38,15 +40,17 @@
 
 .field colorEnabled:I
 
+.field private doAfterGrantingDnd:Ljava/lang/Runnable;
+
 .field invertValues:Z
 
 .field mPrayer:Lba/vaktija/android/models/Prayer;
 
 .field private mUseCheckBoxes:Z
 
-.field notif:Landroid/support/v7/widget/CardView;
+.field notif:Landroidx/cardview/widget/CardView;
 
-.field notifButton:Landroid/support/v7/widget/SwitchCompat;
+.field notifButton:Landroidx/appcompat/widget/SwitchCompat;
 
 .field notifCheckBox:Landroid/widget/CheckBox;
 
@@ -62,9 +66,9 @@
 
 .field private respectJuma:Z
 
-.field silent:Landroid/support/v7/widget/CardView;
+.field silent:Landroidx/cardview/widget/CardView;
 
-.field silentButton:Landroid/support/v7/widget/SwitchCompat;
+.field silentButton:Landroidx/appcompat/widget/SwitchCompat;
 
 .field silentCheckBox:Landroid/widget/CheckBox;
 
@@ -83,8 +87,7 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
-    .line 36
+    .line 39
     const-class v0, Lba/vaktija/android/PrayerActivityFragment;
 
     invoke-virtual {v0}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
@@ -99,13 +102,12 @@
 .method public constructor <init>()V
     .locals 1
 
-    .prologue
-    .line 34
-    invoke-direct {p0}, Landroid/support/v4/app/Fragment;-><init>()V
+    .line 37
+    invoke-direct {p0}, Landroidx/fragment/app/Fragment;-><init>()V
 
-    .line 72
     const/4 v0, 0x0
 
+    .line 77
     iput-boolean v0, p0, Lba/vaktija/android/PrayerActivityFragment;->invertValues:Z
 
     return-void
@@ -113,92 +115,642 @@
 
 .method public static newInstance(IZ)Lba/vaktija/android/PrayerActivityFragment;
     .locals 3
-    .param p0, "prayerId"    # I
-    .param p1, "respectJuma"    # Z
 
-    .prologue
-    .line 87
-    new-instance v1, Lba/vaktija/android/PrayerActivityFragment;
+    .line 93
+    new-instance v0, Lba/vaktija/android/PrayerActivityFragment;
 
-    invoke-direct {v1}, Lba/vaktija/android/PrayerActivityFragment;-><init>()V
+    invoke-direct {v0}, Lba/vaktija/android/PrayerActivityFragment;-><init>()V
 
-    .line 88
-    .local v1, "fragment":Lba/vaktija/android/PrayerActivityFragment;
-    new-instance v0, Landroid/os/Bundle;
+    .line 94
+    new-instance v1, Landroid/os/Bundle;
 
-    invoke-direct {v0}, Landroid/os/Bundle;-><init>()V
+    invoke-direct {v1}, Landroid/os/Bundle;-><init>()V
 
-    .line 89
-    .local v0, "args":Landroid/os/Bundle;
     const-string v2, "EXTRA_PRAYER_ID"
 
-    invoke-virtual {v0, v2, p0}, Landroid/os/Bundle;->putInt(Ljava/lang/String;I)V
+    .line 95
+    invoke-virtual {v1, v2, p0}, Landroid/os/Bundle;->putInt(Ljava/lang/String;I)V
 
-    .line 90
-    const-string v2, "EXTRA_RESPECT_JUMA"
+    const-string p0, "EXTRA_RESPECT_JUMA"
 
-    invoke-virtual {v0, v2, p1}, Landroid/os/Bundle;->putBoolean(Ljava/lang/String;Z)V
+    .line 96
+    invoke-virtual {v1, p0, p1}, Landroid/os/Bundle;->putBoolean(Ljava/lang/String;Z)V
 
-    .line 91
-    invoke-virtual {v1, v0}, Lba/vaktija/android/PrayerActivityFragment;->setArguments(Landroid/os/Bundle;)V
+    .line 97
+    invoke-virtual {v0, v1}, Lba/vaktija/android/PrayerActivityFragment;->setArguments(Landroid/os/Bundle;)V
 
-    .line 92
-    return-object v1
+    return-object v0
 .end method
 
 .method private updateCheckBoxColor()V
     .locals 2
 
-    .prologue
-    .line 256
-    iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseSound:Landroid/widget/CheckBox;
+    .line 262
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseSound:Landroid/widget/CheckBox;
 
-    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+    iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
 
-    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
+    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_1
+    if-eqz v1, :cond_0
 
-    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->colorEnabled:I
+    iget v1, p0, Lba/vaktija/android/PrayerActivityFragment;->colorEnabled:I
+
+    goto :goto_0
+
+    :cond_0
+    iget v1, p0, Lba/vaktija/android/PrayerActivityFragment;->colorDisabled:I
 
     :goto_0
-    invoke-virtual {v1, v0}, Landroid/widget/CheckBox;->setTextColor(I)V
+    invoke-virtual {v0, v1}, Landroid/widget/CheckBox;->setTextColor(I)V
 
-    .line 257
-    iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseVibro:Landroid/widget/CheckBox;
+    .line 263
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseVibro:Landroid/widget/CheckBox;
 
-    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+    iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
 
-    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
+    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_2
+    if-eqz v1, :cond_1
 
-    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->colorEnabled:I
+    iget v1, p0, Lba/vaktija/android/PrayerActivityFragment;->colorEnabled:I
+
+    goto :goto_1
+
+    :cond_1
+    iget v1, p0, Lba/vaktija/android/PrayerActivityFragment;->colorDisabled:I
 
     :goto_1
-    invoke-virtual {v1, v0}, Landroid/widget/CheckBox;->setTextColor(I)V
+    invoke-virtual {v0, v1}, Landroid/widget/CheckBox;->setTextColor(I)V
 
-    .line 259
+    .line 265
     iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
 
     invoke-virtual {v0}, Landroid/widget/CheckBox;->isEnabled()Z
 
     move-result v0
 
-    if-eqz v0, :cond_0
+    if-eqz v0, :cond_3
 
     sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
 
     const/16 v1, 0x15
 
-    if-ge v0, v1, :cond_0
+    if-ge v0, v1, :cond_3
 
-    .line 260
-    iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
+    .line 266
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
+
+    iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_2
+
+    iget v1, p0, Lba/vaktija/android/PrayerActivityFragment;->colorEnabled:I
+
+    goto :goto_2
+
+    :cond_2
+    iget v1, p0, Lba/vaktija/android/PrayerActivityFragment;->colorDisabled:I
+
+    :goto_2
+    invoke-virtual {v0, v1}, Landroid/widget/CheckBox;->setTextColor(I)V
+
+    :cond_3
+    return-void
+.end method
+
+
+# virtual methods
+.method public onActivityCreated(Landroid/os/Bundle;)V
+    .locals 10
+
+    .line 142
+    invoke-super {p0, p1}, Landroidx/fragment/app/Fragment;->onActivityCreated(Landroid/os/Bundle;)V
+
+    .line 143
+    sget-object p1, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
+
+    const-string v0, "onActivityCreated"
+
+    invoke-static {p1, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 145
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Landroidx/fragment/app/FragmentActivity;->getApplicationContext()Landroid/content/Context;
+
+    move-result-object p1
+
+    check-cast p1, Lba/vaktija/android/App;
+
+    iput-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
+
+    .line 147
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getArguments()Landroid/os/Bundle;
+
+    move-result-object p1
+
+    const-string v0, "EXTRA_RESPECT_JUMA"
+
+    const/4 v1, 0x0
+
+    invoke-virtual {p1, v0, v1}, Landroid/os/Bundle;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result p1
+
+    iput-boolean p1, p0, Lba/vaktija/android/PrayerActivityFragment;->respectJuma:Z
+
+    .line 149
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getArguments()Landroid/os/Bundle;
+
+    move-result-object p1
+
+    const-string v0, "EXTRA_PRAYER_ID"
+
+    invoke-virtual {p1, v0}, Landroid/os/Bundle;->getInt(Ljava/lang/String;)I
+
+    move-result p1
+
+    .line 151
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
+
+    invoke-static {v0}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
+
+    move-result-object v0
+
+    invoke-virtual {v0, p1}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
+
+    move-result-object p1
+
+    iput-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    .line 153
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getResources()Landroid/content/res/Resources;
+
+    move-result-object p1
+
+    const v0, 0x7f05006f
+
+    invoke-virtual {p1, v0}, Landroid/content/res/Resources;->getColor(I)I
+
+    move-result p1
+
+    iput p1, p0, Lba/vaktija/android/PrayerActivityFragment;->colorEnabled:I
+
+    .line 154
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getResources()Landroid/content/res/Resources;
+
+    move-result-object p1
+
+    const v0, 0x7f05006d
+
+    invoke-virtual {p1, v0}, Landroid/content/res/Resources;->getColor(I)I
+
+    move-result p1
+
+    iput p1, p0, Lba/vaktija/android/PrayerActivityFragment;->colorDisabled:I
+
+    .line 156
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result p1
+
+    const/4 v0, 0x2
+
+    const/4 v2, 0x6
+
+    if-ne p1, v2, :cond_0
+
+    iget-boolean p1, p0, Lba/vaktija/android/PrayerActivityFragment;->respectJuma:Z
+
+    if-nez p1, :cond_0
+
+    .line 157
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
+
+    invoke-static {p1}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
+
+    move-result-object p1
+
+    invoke-virtual {p1, v0}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
+
+    move-result-object p1
+
+    iput-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    .line 160
+    :cond_0
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result p1
+
+    if-ne p1, v0, :cond_1
+
+    iget-boolean p1, p0, Lba/vaktija/android/PrayerActivityFragment;->respectJuma:Z
+
+    if-eqz p1, :cond_1
+
+    .line 161
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
+
+    invoke-static {p1}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
+
+    move-result-object p1
+
+    invoke-virtual {p1, v2}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
+
+    move-result-object p1
+
+    iput-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    .line 164
+    :cond_1
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmSeekBar:Landroid/widget/SeekBar;
+
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v0
+
+    const-string v2, "alarm"
+
+    invoke-static {v0, v2}, Lba/vaktija/android/prefs/Defaults;->getMaxValue(ILjava/lang/String;)I
+
+    move-result v0
+
+    invoke-virtual {p1, v0}, Landroid/widget/SeekBar;->setMax(I)V
+
+    .line 165
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifTime:Landroid/widget/SeekBar;
+
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v0
+
+    const-string v2, "notif"
+
+    invoke-static {v0, v2}, Lba/vaktija/android/prefs/Defaults;->getMaxValue(ILjava/lang/String;)I
+
+    move-result v0
+
+    invoke-virtual {p1, v0}, Landroid/widget/SeekBar;->setMax(I)V
+
+    .line 166
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->silentOffSeekBar:Landroid/widget/SeekBar;
+
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v0
+
+    const-string v2, "silent"
+
+    invoke-static {v0, v2}, Lba/vaktija/android/prefs/Defaults;->getMaxValue(ILjava/lang/String;)I
+
+    move-result v0
+
+    invoke-virtual {p1, v0}, Landroid/widget/SeekBar;->setMax(I)V
+
+    .line 168
+    sget p1, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v0, 0x10
+
+    const/4 v2, 0x1
+
+    if-ge p1, v0, :cond_2
+
+    const/4 p1, 0x1
+
+    goto :goto_0
+
+    :cond_2
+    const/4 p1, 0x0
+
+    :goto_0
+    iput-boolean p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mUseCheckBoxes:Z
+
+    .line 170
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result p1
+
+    if-ne p1, v2, :cond_3
+
+    const/4 p1, 0x1
+
+    goto :goto_1
+
+    :cond_3
+    const/4 p1, 0x0
+
+    :goto_1
+    iput-boolean p1, p0, Lba/vaktija/android/PrayerActivityFragment;->invertValues:Z
+
+    .line 172
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->soundLabel:Landroid/widget/TextView;
+
+    if-eqz p1, :cond_4
+
+    const-string p1, "ISKLJU\u010cIVANJE ZVUKOVA"
+
+    goto :goto_2
+
+    :cond_4
+    const-string p1, "UKLJU\u010cIVANJE ZVUKOVA"
+
+    :goto_2
+    invoke-virtual {v0, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    .line 174
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getView()Landroid/view/View;
+
+    move-result-object p1
+
+    const v0, 0x7f08008d
+
+    invoke-virtual {p1, v0}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object p1
+
+    check-cast p1, Landroid/widget/TextView;
+
+    .line 175
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v0
+
+    if-ne v0, v2, :cond_5
+
+    const v0, 0x7f0f0077
+
+    goto :goto_3
+
+    :cond_5
+    const v0, 0x7f0f0076
+
+    :goto_3
+    invoke-virtual {p1, v0}, Landroid/widget/TextView;->setText(I)V
+
+    .line 177
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
+
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-virtual {p1, v0}, Lba/vaktija/android/App;->sendScreenView(Ljava/lang/String;)V
+
+    .line 179
+    sget-object p1, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
+
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "mPrayer="
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p1, v0}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 180
+    sget-object p1, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
+
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "respectJuma="
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-boolean v2, p0, Lba/vaktija/android/PrayerActivityFragment;->respectJuma:Z
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p1, v0}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 182
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->showActionBarTitle()V
+
+    .line 184
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->getSoundOnMins()I
+
+    move-result p1
+
+    invoke-static {p1}, Ljava/lang/Math;->abs(I)I
+
+    move-result p1
+
+    .line 185
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getNotifMins()I
+
+    move-result v0
+
+    .line 186
+    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getAlarmMins()I
+
+    move-result v2
+
+    mul-int/lit8 v3, p1, 0x3c
+
+    mul-int/lit16 v3, v3, 0x3e8
+
+    int-to-long v3, v3
+
+    .line 190
+    iget-object v5, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmTime:Landroid/widget/TextView;
+
+    new-instance v6, Ljava/lang/StringBuilder;
+
+    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
+
+    const v7, 0xea60
+
+    mul-int v8, v2, v7
+
+    int-to-long v8, v8
+
+    invoke-static {v8, v9, v1}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
+
+    move-result-object v8
+
+    invoke-virtual {v6, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v8, " prije nastupa"
+
+    invoke-virtual {v6, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-virtual {v5, v6}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    .line 192
+    iget-object v5, p0, Lba/vaktija/android/PrayerActivityFragment;->soundOffTime:Landroid/widget/TextView;
+
+    new-instance v6, Ljava/lang/StringBuilder;
+
+    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-static {v3, v4, v1}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-virtual {v6, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-boolean v3, p0, Lba/vaktija/android/PrayerActivityFragment;->invertValues:Z
+
+    if-eqz v3, :cond_6
+
+    move-object v3, v8
+
+    goto :goto_4
+
+    :cond_6
+    const-string v3, " nakon nastupa"
+
+    :goto_4
+    invoke-virtual {v6, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-virtual {v5, v3}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    .line 195
+    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->notifOnTime:Landroid/widget/TextView;
+
+    new-instance v4, Ljava/lang/StringBuilder;
+
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
+
+    mul-int v7, v7, v0
+
+    int-to-long v5, v7
+
+    .line 196
+    invoke-static {v5, v6, v1}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v4, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v4
+
+    .line 195
+    invoke-virtual {v3, v4}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    .line 198
+    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseSound:Landroid/widget/CheckBox;
+
+    iget-object v4, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->isNotifSoundOn()Z
+
+    move-result v4
+
+    invoke-virtual {v3, v4}, Landroid/widget/CheckBox;->setChecked(Z)V
+
+    .line 199
+    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseVibro:Landroid/widget/CheckBox;
+
+    iget-object v4, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->isNotifVibroOn()Z
+
+    move-result v4
+
+    invoke-virtual {v3, v4}, Landroid/widget/CheckBox;->setChecked(Z)V
+
+    .line 200
+    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
+
+    iget-object v4, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->isSilentVibrationOff()Z
+
+    move-result v4
+
+    invoke-virtual {v3, v4}, Landroid/widget/CheckBox;->setChecked(Z)V
+
+    .line 202
+    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmSeekBar:Landroid/widget/SeekBar;
+
+    invoke-virtual {v3, v2}, Landroid/widget/SeekBar;->setProgress(I)V
+
+    .line 203
+    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment;->notifTime:Landroid/widget/SeekBar;
+
+    invoke-virtual {v2, v0}, Landroid/widget/SeekBar;->setProgress(I)V
+
+    .line 204
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->silentOffSeekBar:Landroid/widget/SeekBar;
+
+    invoke-virtual {v0, p1}, Landroid/widget/SeekBar;->setProgress(I)V
+
+    .line 206
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmOptionsWrapper:Landroid/view/View;
+
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
+
+    move-result v0
+
+    invoke-virtual {p1, v0}, Landroid/view/View;->setEnabled(Z)V
+
+    .line 207
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->soundOptionsWrapper:Landroid/view/View;
 
     iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
 
@@ -206,956 +758,391 @@
 
     move-result v0
 
-    if-eqz v0, :cond_3
+    invoke-virtual {p1, v0}, Landroid/view/View;->setEnabled(Z)V
 
-    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->colorEnabled:I
+    .line 208
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifOptionsWrapper:Landroid/view/View;
 
-    :goto_2
-    invoke-virtual {v1, v0}, Landroid/widget/CheckBox;->setTextColor(I)V
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
 
-    .line 262
-    :cond_0
-    return-void
-
-    .line 256
-    :cond_1
-    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->colorDisabled:I
-
-    goto :goto_0
-
-    .line 257
-    :cond_2
-    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->colorDisabled:I
-
-    goto :goto_1
-
-    .line 260
-    :cond_3
-    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->colorDisabled:I
-
-    goto :goto_2
-.end method
-
-
-# virtual methods
-.method public onActivityCreated(Landroid/os/Bundle;)V
-    .locals 14
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
-
-    .prologue
-    const/4 v13, 0x6
-
-    const/4 v11, 0x2
-
-    const/4 v8, 0x1
-
-    const/16 v12, 0x8
-
-    const/4 v9, 0x0
-
-    .line 136
-    invoke-super {p0, p1}, Landroid/support/v4/app/Fragment;->onActivityCreated(Landroid/os/Bundle;)V
-
-    .line 137
-    sget-object v7, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
-
-    const-string v10, "onActivityCreated"
-
-    invoke-static {v7, v10}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 139
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v7
-
-    invoke-virtual {v7}, Landroid/support/v4/app/FragmentActivity;->getApplicationContext()Landroid/content/Context;
-
-    move-result-object v7
-
-    check-cast v7, Lba/vaktija/android/App;
-
-    iput-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
-
-    .line 141
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getArguments()Landroid/os/Bundle;
-
-    move-result-object v7
-
-    const-string v10, "EXTRA_RESPECT_JUMA"
-
-    invoke-virtual {v7, v10, v9}, Landroid/os/Bundle;->getBoolean(Ljava/lang/String;Z)Z
-
-    move-result v7
-
-    iput-boolean v7, p0, Lba/vaktija/android/PrayerActivityFragment;->respectJuma:Z
-
-    .line 143
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getArguments()Landroid/os/Bundle;
-
-    move-result-object v7
-
-    const-string v10, "EXTRA_PRAYER_ID"
-
-    invoke-virtual {v7, v10}, Landroid/os/Bundle;->getInt(Ljava/lang/String;)I
-
-    move-result v2
-
-    .line 145
-    .local v2, "prayerId":I
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
-
-    invoke-static {v7}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
-
-    move-result-object v7
-
-    invoke-virtual {v7, v2}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v7
-
-    iput-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    .line 147
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getResources()Landroid/content/res/Resources;
-
-    move-result-object v7
-
-    const v10, 0x7f0d0051
-
-    invoke-virtual {v7, v10}, Landroid/content/res/Resources;->getColor(I)I
-
-    move-result v7
-
-    iput v7, p0, Lba/vaktija/android/PrayerActivityFragment;->colorEnabled:I
-
-    .line 148
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getResources()Landroid/content/res/Resources;
-
-    move-result-object v7
-
-    const v10, 0x7f0d004f
-
-    invoke-virtual {v7, v10}, Landroid/content/res/Resources;->getColor(I)I
-
-    move-result v7
-
-    iput v7, p0, Lba/vaktija/android/PrayerActivityFragment;->colorDisabled:I
-
-    .line 150
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v7
-
-    if-ne v7, v13, :cond_0
-
-    iget-boolean v7, p0, Lba/vaktija/android/PrayerActivityFragment;->respectJuma:Z
-
-    if-nez v7, :cond_0
-
-    .line 151
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
-
-    invoke-static {v7}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
-
-    move-result-object v7
-
-    invoke-virtual {v7, v11}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v7
-
-    iput-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    .line 154
-    :cond_0
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v7
-
-    if-ne v7, v11, :cond_1
-
-    iget-boolean v7, p0, Lba/vaktija/android/PrayerActivityFragment;->respectJuma:Z
-
-    if-eqz v7, :cond_1
-
-    .line 155
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
-
-    invoke-static {v7}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
-
-    move-result-object v7
-
-    invoke-virtual {v7, v13}, Lba/vaktija/android/models/PrayersSchedule;->getPrayer(I)Lba/vaktija/android/models/Prayer;
-
-    move-result-object v7
-
-    iput-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    .line 158
-    :cond_1
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmSeekBar:Landroid/widget/SeekBar;
-
-    iget-object v10, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v10}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v10
-
-    const-string v11, "alarm"
-
-    invoke-static {v10, v11}, Lba/vaktija/android/prefs/Defaults;->getMaxValue(ILjava/lang/String;)I
-
-    move-result v10
-
-    invoke-virtual {v7, v10}, Landroid/widget/SeekBar;->setMax(I)V
-
-    .line 159
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifTime:Landroid/widget/SeekBar;
-
-    iget-object v10, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v10}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v10
-
-    const-string v11, "notif"
-
-    invoke-static {v10, v11}, Lba/vaktija/android/prefs/Defaults;->getMaxValue(ILjava/lang/String;)I
-
-    move-result v10
-
-    invoke-virtual {v7, v10}, Landroid/widget/SeekBar;->setMax(I)V
-
-    .line 160
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->silentOffSeekBar:Landroid/widget/SeekBar;
-
-    iget-object v10, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v10}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v10
-
-    const-string v11, "silent"
-
-    invoke-static {v10, v11}, Lba/vaktija/android/prefs/Defaults;->getMaxValue(ILjava/lang/String;)I
-
-    move-result v10
-
-    invoke-virtual {v7, v10}, Landroid/widget/SeekBar;->setMax(I)V
-
-    .line 162
-    sget v7, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v10, 0x10
-
-    if-ge v7, v10, :cond_3
-
-    move v7, v8
-
-    :goto_0
-    iput-boolean v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mUseCheckBoxes:Z
-
-    .line 164
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v7
-
-    if-ne v7, v8, :cond_4
-
-    move v7, v8
-
-    :goto_1
-    iput-boolean v7, p0, Lba/vaktija/android/PrayerActivityFragment;->invertValues:Z
-
-    .line 166
-    iget-object v10, p0, Lba/vaktija/android/PrayerActivityFragment;->soundLabel:Landroid/widget/TextView;
-
-    iget-boolean v7, p0, Lba/vaktija/android/PrayerActivityFragment;->invertValues:Z
-
-    if-eqz v7, :cond_5
-
-    const-string v7, "ISKLJU\u010cIVANJE ZVUKOVA"
-
-    :goto_2
-    invoke-virtual {v10, v7}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
-
-    .line 168
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getView()Landroid/view/View;
-
-    move-result-object v7
-
-    const v10, 0x7f0e0085
-
-    invoke-virtual {v7, v10}, Landroid/view/View;->findViewById(I)Landroid/view/View;
-
-    move-result-object v3
-
-    check-cast v3, Landroid/widget/TextView;
-
-    .line 169
-    .local v3, "silentDesc":Landroid/widget/TextView;
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v7
-
-    if-ne v7, v8, :cond_6
-
-    const v7, 0x7f070059
-
-    :goto_3
-    invoke-virtual {v3, v7}, Landroid/widget/TextView;->setText(I)V
-
-    .line 171
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-virtual {v7, v8}, Lba/vaktija/android/App;->sendScreenView(Ljava/lang/String;)V
-
-    .line 173
-    sget-object v7, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
-
-    new-instance v8, Ljava/lang/StringBuilder;
-
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v10, "mPrayer="
-
-    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    iget-object v10, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-static {v7, v8}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 174
-    sget-object v7, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
-
-    new-instance v8, Ljava/lang/StringBuilder;
-
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v10, "respectJuma="
-
-    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    iget-boolean v10, p0, Lba/vaktija/android/PrayerActivityFragment;->respectJuma:Z
-
-    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-static {v7, v8}, Lba/vaktija/android/util/FileLog;->i(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 176
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->showActionBarTitle()V
-
-    .line 178
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getSoundOnMins()I
-
-    move-result v7
-
-    invoke-static {v7}, Ljava/lang/Math;->abs(I)I
-
-    move-result v6
-
-    .line 179
-    .local v6, "soundOnMins":I
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getNotifMins()I
-
-    move-result v1
-
-    .line 180
-    .local v1, "notifMins":I
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->getAlarmMins()I
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
 
     move-result v0
 
-    .line 182
-    .local v0, "alarmMins":I
-    mul-int/lit8 v7, v6, 0x3c
+    invoke-virtual {p1, v0}, Landroid/view/View;->setEnabled(Z)V
 
-    mul-int/lit16 v7, v7, 0x3e8
+    .line 210
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getResources()Landroid/content/res/Resources;
 
-    int-to-long v4, v7
+    move-result-object p1
 
-    .line 184
-    .local v4, "soundOnMillis":J
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmTime:Landroid/widget/TextView;
+    const v0, 0x7f060052
 
+    invoke-virtual {p1, v0}, Landroid/content/res/Resources;->getDimension(I)F
+
+    move-result p1
+
+    iput p1, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
+
+    .line 211
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getResources()Landroid/content/res/Resources;
+
+    move-result-object p1
+
+    const v0, 0x7f060051
+
+    invoke-virtual {p1, v0}, Landroid/content/res/Resources;->getDimension(I)F
+
+    move-result p1
+
+    iput p1, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
+
+    .line 213
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarm:Landroidx/cardview/widget/CardView;
+
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_7
+
+    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
+
+    goto :goto_5
+
+    :cond_7
+    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
+
+    :goto_5
+    invoke-virtual {p1, v0}, Landroidx/cardview/widget/CardView;->setCardElevation(F)V
+
+    .line 214
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notif:Landroidx/cardview/widget/CardView;
+
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_8
+
+    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
+
+    goto :goto_6
+
+    :cond_8
+    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
+
+    :goto_6
+    invoke-virtual {p1, v0}, Landroidx/cardview/widget/CardView;->setCardElevation(F)V
+
+    .line 215
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->silent:Landroidx/cardview/widget/CardView;
+
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_9
+
+    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
+
+    goto :goto_7
+
+    :cond_9
+    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
+
+    :goto_7
+    invoke-virtual {p1, v0}, Landroidx/cardview/widget/CardView;->setCardElevation(F)V
+
+    .line 217
+    iget-boolean p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mUseCheckBoxes:Z
+
+    const/16 v0, 0x8
+
+    if-eqz p1, :cond_a
+
+    .line 218
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmCheckBox:Landroid/widget/CheckBox;
+
+    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
+
+    move-result v2
+
+    invoke-virtual {p1, v2}, Landroid/widget/CheckBox;->setChecked(Z)V
+
+    .line 219
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->silentCheckBox:Landroid/widget/CheckBox;
+
+    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
+
+    move-result v2
+
+    invoke-virtual {p1, v2}, Landroid/widget/CheckBox;->setChecked(Z)V
+
+    .line 220
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifCheckBox:Landroid/widget/CheckBox;
+
+    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
+
+    move-result v2
+
+    invoke-virtual {p1, v2}, Landroid/widget/CheckBox;->setChecked(Z)V
+
+    .line 222
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmCheckBox:Landroid/widget/CheckBox;
+
+    invoke-virtual {p1, p0}, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
+
+    .line 223
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->silentCheckBox:Landroid/widget/CheckBox;
+
+    invoke-virtual {p1, p0}, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
+
+    .line 224
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifCheckBox:Landroid/widget/CheckBox;
+
+    invoke-virtual {p1, p0}, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
+
+    .line 226
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmButton:Landroidx/appcompat/widget/SwitchCompat;
+
+    invoke-virtual {p1, v0}, Landroidx/appcompat/widget/SwitchCompat;->setVisibility(I)V
+
+    .line 227
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->silentButton:Landroidx/appcompat/widget/SwitchCompat;
+
+    invoke-virtual {p1, v0}, Landroidx/appcompat/widget/SwitchCompat;->setVisibility(I)V
+
+    .line 228
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifButton:Landroidx/appcompat/widget/SwitchCompat;
+
+    invoke-virtual {p1, v0}, Landroidx/appcompat/widget/SwitchCompat;->setVisibility(I)V
+
+    goto :goto_8
+
+    .line 230
+    :cond_a
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmButton:Landroidx/appcompat/widget/SwitchCompat;
+
+    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
+
+    move-result v2
+
+    invoke-virtual {p1, v2}, Landroidx/appcompat/widget/SwitchCompat;->setChecked(Z)V
+
+    .line 231
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->silentButton:Landroidx/appcompat/widget/SwitchCompat;
+
+    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
+
+    move-result v2
+
+    invoke-virtual {p1, v2}, Landroidx/appcompat/widget/SwitchCompat;->setChecked(Z)V
+
+    .line 232
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifButton:Landroidx/appcompat/widget/SwitchCompat;
+
+    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
+
+    move-result v2
+
+    invoke-virtual {p1, v2}, Landroidx/appcompat/widget/SwitchCompat;->setChecked(Z)V
+
+    .line 234
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmButton:Landroidx/appcompat/widget/SwitchCompat;
+
+    invoke-virtual {p1, p0}, Landroidx/appcompat/widget/SwitchCompat;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
+
+    .line 235
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->silentButton:Landroidx/appcompat/widget/SwitchCompat;
+
+    invoke-virtual {p1, p0}, Landroidx/appcompat/widget/SwitchCompat;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
+
+    .line 236
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifButton:Landroidx/appcompat/widget/SwitchCompat;
+
+    invoke-virtual {p1, p0}, Landroidx/appcompat/widget/SwitchCompat;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
+
+    .line 238
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmCheckBox:Landroid/widget/CheckBox;
+
+    invoke-virtual {p1, v0}, Landroid/widget/CheckBox;->setVisibility(I)V
+
+    .line 239
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->silentCheckBox:Landroid/widget/CheckBox;
+
+    invoke-virtual {p1, v0}, Landroid/widget/CheckBox;->setVisibility(I)V
+
+    .line 240
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifCheckBox:Landroid/widget/CheckBox;
+
+    invoke-virtual {p1, v0}, Landroid/widget/CheckBox;->setVisibility(I)V
+
+    .line 243
+    :goto_8
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseSound:Landroid/widget/CheckBox;
+
+    invoke-virtual {p1, p0}, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
+
+    .line 244
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseVibro:Landroid/widget/CheckBox;
+
+    invoke-virtual {p1, p0}, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
+
+    .line 245
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
+
+    invoke-virtual {p1, p0}, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
+
+    .line 247
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->silentOffSeekBar:Landroid/widget/SeekBar;
+
+    invoke-virtual {p1, p0}, Landroid/widget/SeekBar;->setOnSeekBarChangeListener(Landroid/widget/SeekBar$OnSeekBarChangeListener;)V
+
+    .line 248
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifTime:Landroid/widget/SeekBar;
+
+    invoke-virtual {p1, p0}, Landroid/widget/SeekBar;->setOnSeekBarChangeListener(Landroid/widget/SeekBar$OnSeekBarChangeListener;)V
+
+    .line 249
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmSeekBar:Landroid/widget/SeekBar;
+
+    invoke-virtual {p1, p0}, Landroid/widget/SeekBar;->setOnSeekBarChangeListener(Landroid/widget/SeekBar$OnSeekBarChangeListener;)V
+
+    .line 251
+    sget p1, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v0, 0x15
+
+    if-lt p1, v0, :cond_b
+
+    .line 252
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
+
+    iget v0, p0, Lba/vaktija/android/PrayerActivityFragment;->colorDisabled:I
+
+    invoke-virtual {p1, v0}, Landroid/widget/CheckBox;->setTextColor(I)V
+
+    .line 253
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
+
+    invoke-virtual {p1, v1}, Landroid/widget/CheckBox;->setDuplicateParentStateEnabled(Z)V
+
+    .line 254
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
+
+    invoke-virtual {p1, v1}, Landroid/widget/CheckBox;->setEnabled(Z)V
+
+    .line 257
+    :cond_b
+    invoke-direct {p0}, Lba/vaktija/android/PrayerActivityFragment;->updateCheckBoxColor()V
+
+    return-void
+.end method
+
+.method public onActivityResult(IILandroid/content/Intent;)V
+    .locals 0
+
+    .line 506
+    invoke-super {p0, p1, p2, p3}, Landroidx/fragment/app/Fragment;->onActivityResult(IILandroid/content/Intent;)V
+
+    const/16 p2, 0x64
+
+    if-ne p1, p2, :cond_1
+
+    .line 510
+    sget-object p1, Lba/vaktija/android/App;->app:Lba/vaktija/android/App;
+
+    iget-object p1, p1, Lba/vaktija/android/App;->notificationManager:Landroid/app/NotificationManager;
+
+    invoke-virtual {p1}, Landroid/app/NotificationManager;->isNotificationPolicyAccessGranted()Z
+
+    move-result p1
+
+    if-eqz p1, :cond_0
+
+    .line 512
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->doAfterGrantingDnd:Ljava/lang/Runnable;
+
+    if-eqz p1, :cond_1
+
+    .line 513
+    invoke-interface {p1}, Ljava/lang/Runnable;->run()V
+
+    const/4 p1, 0x0
+
+    .line 514
+    iput-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->doAfterGrantingDnd:Ljava/lang/Runnable;
+
+    goto :goto_0
+
+    .line 518
+    :cond_0
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->silentButton:Landroidx/appcompat/widget/SwitchCompat;
+
+    const/4 p2, 0x0
+
+    invoke-virtual {p1, p2}, Landroidx/appcompat/widget/SwitchCompat;->setChecked(Z)V
+
+    :cond_1
+    :goto_0
+    return-void
+.end method
+
+.method public onCheckedChanged(Landroid/widget/CompoundButton;Z)V
+    .locals 11
+
+    .line 374
+    sget-object v0, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
+
+    const-string v1, "onCheckedChanged"
+
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 376
+    invoke-static {}, Ljava/lang/System;->nanoTime()J
+
+    move-result-wide v0
+
+    .line 378
     new-instance v8, Ljava/lang/StringBuilder;
 
     invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
 
-    const v10, 0xea60
+    .line 379
+    new-instance v9, Ljava/lang/StringBuilder;
 
-    mul-int/2addr v10, v0
+    invoke-direct {v9}, Ljava/lang/StringBuilder;-><init>()V
 
-    int-to-long v10, v10
-
-    invoke-static {v10, v11, v9}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    const-string v10, " prije nastupa"
-
-    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-virtual {v7, v8}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
-
-    .line 186
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->soundOffTime:Landroid/widget/TextView;
-
+    .line 380
     new-instance v7, Ljava/lang/StringBuilder;
 
     invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-static {v4, v5, v9}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-virtual {v7, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v10
-
-    iget-boolean v7, p0, Lba/vaktija/android/PrayerActivityFragment;->invertValues:Z
-
-    if-eqz v7, :cond_7
-
-    const-string v7, " prije nastupa"
-
-    :goto_4
-    invoke-virtual {v10, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-virtual {v8, v7}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
-
-    .line 189
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifOnTime:Landroid/widget/TextView;
-
-    new-instance v8, Ljava/lang/StringBuilder;
-
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
-
-    const v10, 0xea60
-
-    mul-int/2addr v10, v1
-
-    int-to-long v10, v10
-
-    .line 190
-    invoke-static {v10, v11, v9}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
-
-    move-result-object v10
-
-    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    const-string v10, " prije nastupa"
-
-    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    .line 189
-    invoke-virtual {v7, v8}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
-
-    .line 192
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseSound:Landroid/widget/CheckBox;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->isNotifSoundOn()Z
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Landroid/widget/CheckBox;->setChecked(Z)V
-
-    .line 193
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseVibro:Landroid/widget/CheckBox;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->isNotifVibroOn()Z
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Landroid/widget/CheckBox;->setChecked(Z)V
-
-    .line 194
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->isSilentVibrationOff()Z
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Landroid/widget/CheckBox;->setChecked(Z)V
-
-    .line 196
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmSeekBar:Landroid/widget/SeekBar;
-
-    invoke-virtual {v7, v0}, Landroid/widget/SeekBar;->setProgress(I)V
-
-    .line 197
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifTime:Landroid/widget/SeekBar;
-
-    invoke-virtual {v7, v1}, Landroid/widget/SeekBar;->setProgress(I)V
-
-    .line 198
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->silentOffSeekBar:Landroid/widget/SeekBar;
-
-    invoke-virtual {v7, v6}, Landroid/widget/SeekBar;->setProgress(I)V
-
-    .line 200
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmOptionsWrapper:Landroid/view/View;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Landroid/view/View;->setEnabled(Z)V
-
-    .line 201
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->soundOptionsWrapper:Landroid/view/View;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Landroid/view/View;->setEnabled(Z)V
-
-    .line 202
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifOptionsWrapper:Landroid/view/View;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Landroid/view/View;->setEnabled(Z)V
-
-    .line 204
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getResources()Landroid/content/res/Resources;
-
-    move-result-object v7
-
-    const v8, 0x7f080052
-
-    invoke-virtual {v7, v8}, Landroid/content/res/Resources;->getDimension(I)F
-
-    move-result v7
-
-    iput v7, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
-
-    .line 205
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getResources()Landroid/content/res/Resources;
-
-    move-result-object v7
-
-    const v8, 0x7f080051
-
-    invoke-virtual {v7, v8}, Landroid/content/res/Resources;->getDimension(I)F
-
-    move-result v7
-
-    iput v7, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
-
-    .line 207
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->alarm:Landroid/support/v7/widget/CardView;
-
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
-
-    move-result v7
-
-    if-eqz v7, :cond_8
-
-    iget v7, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
-
-    :goto_5
-    invoke-virtual {v8, v7}, Landroid/support/v7/widget/CardView;->setCardElevation(F)V
-
-    .line 208
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->notif:Landroid/support/v7/widget/CardView;
-
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
-
-    move-result v7
-
-    if-eqz v7, :cond_9
-
-    iget v7, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
-
-    :goto_6
-    invoke-virtual {v8, v7}, Landroid/support/v7/widget/CardView;->setCardElevation(F)V
-
-    .line 209
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->silent:Landroid/support/v7/widget/CardView;
-
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v7}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
-
-    move-result v7
-
-    if-eqz v7, :cond_a
-
-    iget v7, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
-
-    :goto_7
-    invoke-virtual {v8, v7}, Landroid/support/v7/widget/CardView;->setCardElevation(F)V
-
-    .line 211
-    iget-boolean v7, p0, Lba/vaktija/android/PrayerActivityFragment;->mUseCheckBoxes:Z
-
-    if-eqz v7, :cond_b
-
-    .line 212
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmCheckBox:Landroid/widget/CheckBox;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Landroid/widget/CheckBox;->setChecked(Z)V
-
-    .line 213
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->silentCheckBox:Landroid/widget/CheckBox;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Landroid/widget/CheckBox;->setChecked(Z)V
-
-    .line 214
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifCheckBox:Landroid/widget/CheckBox;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Landroid/widget/CheckBox;->setChecked(Z)V
-
-    .line 216
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmCheckBox:Landroid/widget/CheckBox;
-
-    invoke-virtual {v7, p0}, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
-
-    .line 217
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->silentCheckBox:Landroid/widget/CheckBox;
-
-    invoke-virtual {v7, p0}, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
-
-    .line 218
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifCheckBox:Landroid/widget/CheckBox;
-
-    invoke-virtual {v7, p0}, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
-
-    .line 220
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmButton:Landroid/support/v7/widget/SwitchCompat;
-
-    invoke-virtual {v7, v12}, Landroid/support/v7/widget/SwitchCompat;->setVisibility(I)V
-
-    .line 221
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->silentButton:Landroid/support/v7/widget/SwitchCompat;
-
-    invoke-virtual {v7, v12}, Landroid/support/v7/widget/SwitchCompat;->setVisibility(I)V
-
-    .line 222
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifButton:Landroid/support/v7/widget/SwitchCompat;
-
-    invoke-virtual {v7, v12}, Landroid/support/v7/widget/SwitchCompat;->setVisibility(I)V
-
-    .line 237
-    :goto_8
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseSound:Landroid/widget/CheckBox;
-
-    invoke-virtual {v7, p0}, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
-
-    .line 238
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseVibro:Landroid/widget/CheckBox;
-
-    invoke-virtual {v7, p0}, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
-
-    .line 239
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
-
-    invoke-virtual {v7, p0}, Landroid/widget/CheckBox;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
-
-    .line 241
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->silentOffSeekBar:Landroid/widget/SeekBar;
-
-    invoke-virtual {v7, p0}, Landroid/widget/SeekBar;->setOnSeekBarChangeListener(Landroid/widget/SeekBar$OnSeekBarChangeListener;)V
-
-    .line 242
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifTime:Landroid/widget/SeekBar;
-
-    invoke-virtual {v7, p0}, Landroid/widget/SeekBar;->setOnSeekBarChangeListener(Landroid/widget/SeekBar$OnSeekBarChangeListener;)V
-
-    .line 243
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmSeekBar:Landroid/widget/SeekBar;
-
-    invoke-virtual {v7, p0}, Landroid/widget/SeekBar;->setOnSeekBarChangeListener(Landroid/widget/SeekBar$OnSeekBarChangeListener;)V
-
-    .line 245
-    sget v7, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v8, 0x15
-
-    if-lt v7, v8, :cond_2
-
-    .line 246
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
-
-    iget v8, p0, Lba/vaktija/android/PrayerActivityFragment;->colorDisabled:I
-
-    invoke-virtual {v7, v8}, Landroid/widget/CheckBox;->setTextColor(I)V
-
-    .line 247
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
-
-    invoke-virtual {v7, v9}, Landroid/widget/CheckBox;->setDuplicateParentStateEnabled(Z)V
-
-    .line 248
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
-
-    invoke-virtual {v7, v9}, Landroid/widget/CheckBox;->setEnabled(Z)V
-
-    .line 251
-    :cond_2
-    invoke-direct {p0}, Lba/vaktija/android/PrayerActivityFragment;->updateCheckBoxColor()V
-
-    .line 252
-    return-void
-
-    .end local v0    # "alarmMins":I
-    .end local v1    # "notifMins":I
-    .end local v3    # "silentDesc":Landroid/widget/TextView;
-    .end local v4    # "soundOnMillis":J
-    .end local v6    # "soundOnMins":I
-    :cond_3
-    move v7, v9
-
-    .line 162
-    goto/16 :goto_0
-
-    :cond_4
-    move v7, v9
-
-    .line 164
-    goto/16 :goto_1
-
-    .line 166
-    :cond_5
-    const-string v7, "UKLJU\u010cIVANJE ZVUKOVA"
-
-    goto/16 :goto_2
-
-    .line 169
-    .restart local v3    # "silentDesc":Landroid/widget/TextView;
-    :cond_6
-    const v7, 0x7f070058
-
-    goto/16 :goto_3
-
-    .line 186
-    .restart local v0    # "alarmMins":I
-    .restart local v1    # "notifMins":I
-    .restart local v4    # "soundOnMillis":J
-    .restart local v6    # "soundOnMins":I
-    :cond_7
-    const-string v7, " nakon nastupa"
-
-    goto/16 :goto_4
-
-    .line 207
-    :cond_8
-    iget v7, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
-
-    goto/16 :goto_5
-
-    .line 208
-    :cond_9
-    iget v7, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
-
-    goto/16 :goto_6
-
-    .line 209
-    :cond_a
-    iget v7, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
-
-    goto/16 :goto_7
-
-    .line 224
-    :cond_b
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmButton:Landroid/support/v7/widget/SwitchCompat;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->isAlarmOn()Z
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Landroid/support/v7/widget/SwitchCompat;->setChecked(Z)V
-
-    .line 225
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->silentButton:Landroid/support/v7/widget/SwitchCompat;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->isSilentOn()Z
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Landroid/support/v7/widget/SwitchCompat;->setChecked(Z)V
-
-    .line 226
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifButton:Landroid/support/v7/widget/SwitchCompat;
-
-    iget-object v8, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v8}, Lba/vaktija/android/models/Prayer;->isNotifOn()Z
-
-    move-result v8
-
-    invoke-virtual {v7, v8}, Landroid/support/v7/widget/SwitchCompat;->setChecked(Z)V
-
-    .line 228
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmButton:Landroid/support/v7/widget/SwitchCompat;
-
-    invoke-virtual {v7, p0}, Landroid/support/v7/widget/SwitchCompat;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
-
-    .line 229
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->silentButton:Landroid/support/v7/widget/SwitchCompat;
-
-    invoke-virtual {v7, p0}, Landroid/support/v7/widget/SwitchCompat;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
-
-    .line 230
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifButton:Landroid/support/v7/widget/SwitchCompat;
-
-    invoke-virtual {v7, p0}, Landroid/support/v7/widget/SwitchCompat;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
-
-    .line 232
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmCheckBox:Landroid/widget/CheckBox;
-
-    invoke-virtual {v7, v12}, Landroid/widget/CheckBox;->setVisibility(I)V
-
-    .line 233
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->silentCheckBox:Landroid/widget/CheckBox;
-
-    invoke-virtual {v7, v12}, Landroid/widget/CheckBox;->setVisibility(I)V
-
-    .line 234
-    iget-object v7, p0, Lba/vaktija/android/PrayerActivityFragment;->notifCheckBox:Landroid/widget/CheckBox;
-
-    invoke-virtual {v7, v12}, Landroid/widget/CheckBox;->setVisibility(I)V
-
-    goto/16 :goto_8
-.end method
-
-.method public onCheckedChanged(Landroid/widget/CompoundButton;Z)V
-    .locals 20
-    .param p1, "buttonView"    # Landroid/widget/CompoundButton;
-    .param p2, "isChecked"    # Z
-
-    .prologue
-    .line 367
-    sget-object v2, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
-
-    const-string v3, "onCheckedChanged"
-
-    invoke-static {v2, v3}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 369
-    invoke-static {}, Ljava/lang/System;->nanoTime()J
-
-    move-result-wide v12
-
-    .line 371
-    .local v12, "start":J
-    const-string v14, ""
-
-    .line 372
-    .local v14, "startedFrom":Ljava/lang/String;
-    const-string v8, ""
-
-    .line 373
-    .local v8, "action":Ljava/lang/String;
+    .line 381
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
 
     invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
@@ -1163,892 +1150,917 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
-
     const-string v3, " settings"
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
-
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v6
+    move-result-object v10
 
-    .line 374
-    .local v6, "gaEventCategory":Ljava/lang/String;
-    const-string v9, ""
+    .line 383
+    invoke-virtual {p1}, Landroid/widget/CompoundButton;->getId()I
 
-    .line 376
-    .local v9, "gaEventAction":Ljava/lang/String;
-    invoke-virtual/range {p1 .. p1}, Landroid/widget/CompoundButton;->getId()I
+    move-result p1
 
-    move-result v2
+    const/4 v2, 0x0
 
-    packed-switch v2, :pswitch_data_0
+    const-string v3, "ACTION_NOTIF_CHANGED"
 
-    .line 461
+    sparse-switch p1, :sswitch_data_0
+
+    goto/16 :goto_7
+
+    .line 406
+    :sswitch_0
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1, p2}, Lba/vaktija/android/models/Prayer;->setSilentVibrationOff(Z)V
+
+    const-string p1, "onCheckedChanged-activity_vakat_vibroOff"
+
+    .line 408
+    invoke-virtual {v8, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string p1, "ACTION_SILENT_CHANGED"
+
+    .line 409
+    invoke-virtual {v9, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    if-eqz p2, :cond_0
+
+    const-string p1, "Disabled vibration in silent mode"
+
+    goto :goto_0
+
+    :cond_0
+    const-string p1, "Enabled vibration in silent mode"
+
+    .line 411
     :goto_0
-    :pswitch_0
+    invoke-virtual {v7, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    goto/16 :goto_7
+
+    .line 395
+    :sswitch_1
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1, p2}, Lba/vaktija/android/models/Prayer;->setNotifVibroOn(Z)V
+
+    const-string p1, "onCheckedChanged-activity_vakat_notifUseVibro"
+
+    .line 397
+    invoke-virtual {v8, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 398
+    invoke-virtual {v9, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    if-eqz p2, :cond_1
+
+    const-string p1, "Enabled vibration for notifications"
+
+    goto :goto_1
+
+    :cond_1
+    const-string p1, "Disabled vibration for notifications"
+
+    .line 400
+    :goto_1
+    invoke-virtual {v7, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    goto/16 :goto_7
+
+    .line 385
+    :sswitch_2
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1, p2}, Lba/vaktija/android/models/Prayer;->setNotifSoundOn(Z)V
+
+    const-string p1, "onCheckedChanged-activity_vakat_notifUseSound"
+
+    .line 387
+    invoke-virtual {v8, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 388
+    invoke-virtual {v9, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    if-eqz p2, :cond_2
+
+    const-string p1, "Enabled sound for notifications"
+
+    goto :goto_2
+
+    :cond_2
+    const-string p1, "Disabled sound for notifications"
+
+    .line 389
+    :goto_2
+    invoke-virtual {v7, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    goto/16 :goto_7
+
+    .line 452
+    :sswitch_3
+    new-instance p1, Lba/vaktija/android/PrayerActivityFragment$1;
+
+    move-object v2, p1
+
+    move-object v3, p0
+
+    move v4, p2
+
     move-object v5, v8
 
-    .line 462
-    .local v5, "serviceAction":Ljava/lang/String;
-    move-object v4, v14
+    move-object v6, v9
 
-    .line 463
-    .local v4, "serviceStartedFrom":Ljava/lang/String;
-    move-object v7, v9
+    invoke-direct/range {v2 .. v7}, Lba/vaktija/android/PrayerActivityFragment$1;-><init>(Lba/vaktija/android/PrayerActivityFragment;ZLjava/lang/StringBuilder;Ljava/lang/StringBuilder;Ljava/lang/StringBuilder;)V
 
-    .line 465
-    .local v7, "eventAction":Ljava/lang/String;
-    move-object/from16 v0, p0
+    iput-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->doAfterGrantingDnd:Ljava/lang/Runnable;
 
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+    if-eqz p2, :cond_3
 
-    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->save()V
+    .line 470
+    sget p1, Landroid/os/Build$VERSION;->SDK_INT:I
 
-    .line 467
-    invoke-virtual/range {p0 .. p0}, Lba/vaktija/android/PrayerActivityFragment;->getView()Landroid/view/View;
+    const/16 p2, 0x18
 
-    move-result-object v15
+    if-lt p1, p2, :cond_3
 
-    new-instance v2, Lba/vaktija/android/PrayerActivityFragment$1;
+    sget-object p1, Lba/vaktija/android/App;->app:Lba/vaktija/android/App;
 
-    move-object/from16 v3, p0
+    iget-object p1, p1, Lba/vaktija/android/App;->notificationManager:Landroid/app/NotificationManager;
 
-    invoke-direct/range {v2 .. v7}, Lba/vaktija/android/PrayerActivityFragment$1;-><init>(Lba/vaktija/android/PrayerActivityFragment;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+    .line 471
+    invoke-virtual {p1}, Landroid/app/NotificationManager;->isNotificationPolicyAccessGranted()Z
 
-    const-wide/16 v16, 0x1f4
+    move-result p1
 
-    move-wide/from16 v0, v16
+    if-nez p1, :cond_3
 
-    invoke-virtual {v15, v2, v0, v1}, Landroid/view/View;->postDelayed(Ljava/lang/Runnable;J)Z
+    .line 473
+    new-instance p1, Landroid/content/Intent;
 
-    .line 480
+    .line 474
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->requireActivity()Landroidx/fragment/app/FragmentActivity;
+
+    move-result-object p2
+
+    const-class v2, Lba/vaktija/android/SystemSettingsHelperActivity;
+
+    invoke-direct {p1, p2, v2}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
+
+    const/16 p2, 0x64
+
+    .line 473
+    invoke-virtual {p0, p1, p2}, Lba/vaktija/android/PrayerActivityFragment;->startActivityForResult(Landroid/content/Intent;I)V
+
+    goto :goto_7
+
+    .line 477
+    :cond_3
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->doAfterGrantingDnd:Ljava/lang/Runnable;
+
+    invoke-interface {p1}, Ljava/lang/Runnable;->run()V
+
+    goto :goto_7
+
+    .line 433
+    :sswitch_4
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notif:Landroidx/cardview/widget/CardView;
+
+    if-eqz p2, :cond_4
+
+    iget v4, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
+
+    goto :goto_3
+
+    :cond_4
+    iget v4, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
+
+    :goto_3
+    invoke-virtual {p1, v4}, Landroidx/cardview/widget/CardView;->setCardElevation(F)V
+
+    .line 438
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1, v2}, Lba/vaktija/android/models/Prayer;->setSkipNextNotif(Z)V
+
+    .line 439
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1, p2}, Lba/vaktija/android/models/Prayer;->setNotifOn(Z)V
+
+    .line 440
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifOptionsWrapper:Landroid/view/View;
+
+    invoke-virtual {p1, p2}, Landroid/view/View;->setEnabled(Z)V
+
+    const-string p1, "onCheckedChanged-activity_vakat_notifSwitch"
+
+    .line 442
+    invoke-virtual {v8, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 443
+    invoke-virtual {v9, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    if-eqz p2, :cond_5
+
+    const-string p1, "Enabled notification"
+
+    goto :goto_4
+
+    :cond_5
+    const-string p1, "Disabled notification"
+
+    .line 445
+    :goto_4
+    invoke-virtual {v7, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    goto :goto_7
+
+    .line 418
+    :sswitch_5
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarm:Landroidx/cardview/widget/CardView;
+
+    if-eqz p2, :cond_6
+
+    iget v3, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
+
+    goto :goto_5
+
+    :cond_6
+    iget v3, p0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
+
+    :goto_5
+    invoke-virtual {p1, v3}, Landroidx/cardview/widget/CardView;->setCardElevation(F)V
+
+    .line 419
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1, v2}, Lba/vaktija/android/models/Prayer;->setSkipNextAlarm(Z)V
+
+    .line 420
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1, p2}, Lba/vaktija/android/models/Prayer;->setAlarmOn(Z)V
+
+    .line 421
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmOptionsWrapper:Landroid/view/View;
+
+    invoke-virtual {p1, p2}, Landroid/view/View;->setEnabled(Z)V
+
+    const-string p1, "onCheckedChanged-activity_vakat_alarmSwitch"
+
+    .line 423
+    invoke-virtual {v8, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string p1, "ACTION_ALARM_CHANGED"
+
+    .line 424
+    invoke-virtual {v9, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    if-eqz p2, :cond_7
+
+    const-string p1, "Enabled alarm"
+
+    goto :goto_6
+
+    :cond_7
+    const-string p1, "Disabled alarm"
+
+    .line 426
+    :goto_6
+    invoke-virtual {v7, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 483
+    :goto_7
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1}, Lba/vaktija/android/models/Prayer;->save()V
+
+    .line 485
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getView()Landroid/view/View;
+
+    move-result-object p1
+
+    new-instance p2, Lba/vaktija/android/PrayerActivityFragment$2;
+
+    invoke-direct {p2, p0, v8, v9, v10}, Lba/vaktija/android/PrayerActivityFragment$2;-><init>(Lba/vaktija/android/PrayerActivityFragment;Ljava/lang/StringBuilder;Ljava/lang/StringBuilder;Ljava/lang/String;)V
+
+    const-wide/16 v2, 0x1f4
+
+    invoke-virtual {p1, p2, v2, v3}, Landroid/view/View;->postDelayed(Ljava/lang/Runnable;J)Z
+
+    .line 498
     invoke-static {}, Ljava/lang/System;->nanoTime()J
 
-    move-result-wide v10
+    move-result-wide p1
 
-    .line 482
-    .local v10, "endTime":J
+    .line 500
     sget-object v2, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
 
     new-instance v3, Ljava/lang/StringBuilder;
 
     invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v15, "onChecked changed done in "
+    const-string v4, "onChecked changed done in "
 
-    invoke-virtual {v3, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v3
+    sub-long/2addr p1, v0
 
-    sub-long v16, v10, v12
+    long-to-double p1, p1
 
-    move-wide/from16 v0, v16
+    const-wide v0, 0x408f400000000000L    # 1000.0
 
-    long-to-double v0, v0
+    invoke-static {p1, p2}, Ljava/lang/Double;->isNaN(D)Z
 
-    move-wide/from16 v16, v0
+    div-double/2addr p1, v0
 
-    const-wide v18, 0x408f400000000000L    # 1000.0
+    invoke-virtual {v3, p1, p2}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
 
-    div-double v16, v16, v18
+    const-string p1, " us"
 
-    move-wide/from16 v0, v16
-
-    invoke-virtual {v3, v0, v1}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    const-string v15, " us"
-
-    invoke-virtual {v3, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
+    invoke-virtual {v3, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object p1
 
-    invoke-static {v2, v3}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v2, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 483
     return-void
 
-    .line 378
-    .end local v4    # "serviceStartedFrom":Ljava/lang/String;
-    .end local v5    # "serviceAction":Ljava/lang/String;
-    .end local v7    # "eventAction":Ljava/lang/String;
-    .end local v10    # "endTime":J
-    :pswitch_1
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    move/from16 v0, p2
-
-    invoke-virtual {v2, v0}, Lba/vaktija/android/models/Prayer;->setNotifSoundOn(Z)V
-
-    .line 380
-    const-string v14, "onCheckedChanged-activity_vakat_notifUseSound"
-
-    .line 381
-    const-string v8, "ACTION_NOTIF_CHANGED"
-
-    .line 382
-    if-eqz p2, :cond_0
-
-    const-string v9, "Enabled sound for notifications"
-
-    .line 385
-    :goto_1
-    goto :goto_0
-
-    .line 382
-    :cond_0
-    const-string v9, "Disabled sound for notifications"
-
-    goto :goto_1
-
-    .line 388
-    :pswitch_2
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    move/from16 v0, p2
-
-    invoke-virtual {v2, v0}, Lba/vaktija/android/models/Prayer;->setNotifVibroOn(Z)V
-
-    .line 390
-    const-string v14, "onCheckedChanged-activity_vakat_notifUseVibro"
-
-    .line 391
-    const-string v8, "ACTION_NOTIF_CHANGED"
-
-    .line 393
-    if-eqz p2, :cond_1
-
-    const-string v9, "Enabled vibration for notifications"
-
-    .line 396
-    :goto_2
-    goto :goto_0
-
-    .line 393
-    :cond_1
-    const-string v9, "Disabled vibration for notifications"
-
-    goto :goto_2
-
-    .line 399
-    :pswitch_3
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    move/from16 v0, p2
-
-    invoke-virtual {v2, v0}, Lba/vaktija/android/models/Prayer;->setSilentVibrationOff(Z)V
-
-    .line 401
-    const-string v14, "onCheckedChanged-activity_vakat_vibroOff"
-
-    .line 402
-    const-string v8, "ACTION_SILENT_CHANGED"
-
-    .line 404
-    if-eqz p2, :cond_2
-
-    const-string v9, "Disabled vibration in silent mode"
-
-    .line 406
-    :goto_3
-    goto/16 :goto_0
-
-    .line 404
-    :cond_2
-    const-string v9, "Enabled vibration in silent mode"
-
-    goto :goto_3
-
-    .line 411
-    :pswitch_4
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lba/vaktija/android/PrayerActivityFragment;->alarm:Landroid/support/v7/widget/CardView;
-
-    if-eqz p2, :cond_3
-
-    move-object/from16 v0, p0
-
-    iget v2, v0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
-
-    :goto_4
-    invoke-virtual {v3, v2}, Landroid/support/v7/widget/CardView;->setCardElevation(F)V
-
-    .line 412
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    const/4 v3, 0x0
-
-    invoke-virtual {v2, v3}, Lba/vaktija/android/models/Prayer;->setSkipNextAlarm(Z)V
-
-    .line 413
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    move/from16 v0, p2
-
-    invoke-virtual {v2, v0}, Lba/vaktija/android/models/Prayer;->setAlarmOn(Z)V
-
-    .line 414
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->alarmOptionsWrapper:Landroid/view/View;
-
-    move/from16 v0, p2
-
-    invoke-virtual {v2, v0}, Landroid/view/View;->setEnabled(Z)V
-
-    .line 416
-    const-string v14, "onCheckedChanged-activity_vakat_alarmSwitch"
-
-    .line 417
-    const-string v8, "ACTION_ALARM_CHANGED"
-
-    .line 419
-    if-eqz p2, :cond_4
-
-    const-string v9, "Enabled alarm"
-
-    .line 421
-    :goto_5
-    goto/16 :goto_0
-
-    .line 411
-    :cond_3
-    move-object/from16 v0, p0
-
-    iget v2, v0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
-
-    goto :goto_4
-
-    .line 419
-    :cond_4
-    const-string v9, "Disabled alarm"
-
-    goto :goto_5
-
-    .line 426
-    :pswitch_5
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lba/vaktija/android/PrayerActivityFragment;->notif:Landroid/support/v7/widget/CardView;
-
-    if-eqz p2, :cond_5
-
-    move-object/from16 v0, p0
-
-    iget v2, v0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
-
-    :goto_6
-    invoke-virtual {v3, v2}, Landroid/support/v7/widget/CardView;->setCardElevation(F)V
-
-    .line 431
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    const/4 v3, 0x0
-
-    invoke-virtual {v2, v3}, Lba/vaktija/android/models/Prayer;->setSkipNextNotif(Z)V
-
-    .line 432
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    move/from16 v0, p2
-
-    invoke-virtual {v2, v0}, Lba/vaktija/android/models/Prayer;->setNotifOn(Z)V
-
-    .line 433
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->notifOptionsWrapper:Landroid/view/View;
-
-    move/from16 v0, p2
-
-    invoke-virtual {v2, v0}, Landroid/view/View;->setEnabled(Z)V
-
-    .line 435
-    const-string v14, "onCheckedChanged-activity_vakat_notifSwitch"
-
-    .line 436
-    const-string v8, "ACTION_NOTIF_CHANGED"
-
-    .line 438
-    if-eqz p2, :cond_6
-
-    const-string v9, "Enabled notification"
-
-    .line 440
-    :goto_7
-    goto/16 :goto_0
-
-    .line 426
-    :cond_5
-    move-object/from16 v0, p0
-
-    iget v2, v0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
-
-    goto :goto_6
-
-    .line 438
-    :cond_6
-    const-string v9, "Disabled notification"
-
-    goto :goto_7
-
-    .line 445
-    :pswitch_6
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
-
-    if-eqz p2, :cond_7
-
-    move-object/from16 v0, p0
-
-    iget v2, v0, Lba/vaktija/android/PrayerActivityFragment;->colorEnabled:I
-
-    :goto_8
-    invoke-virtual {v3, v2}, Landroid/widget/CheckBox;->setTextColor(I)V
-
-    .line 446
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lba/vaktija/android/PrayerActivityFragment;->silent:Landroid/support/v7/widget/CardView;
-
-    if-eqz p2, :cond_8
-
-    move-object/from16 v0, p0
-
-    iget v2, v0, Lba/vaktija/android/PrayerActivityFragment;->cardElevEnabled:F
-
-    :goto_9
-    invoke-virtual {v3, v2}, Landroid/support/v7/widget/CardView;->setCardElevation(F)V
-
-    .line 448
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->soundOptionsWrapper:Landroid/view/View;
-
-    move/from16 v0, p2
-
-    invoke-virtual {v2, v0}, Landroid/view/View;->setEnabled(Z)V
-
-    .line 450
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    const/4 v3, 0x0
-
-    invoke-virtual {v2, v3}, Lba/vaktija/android/models/Prayer;->setSkipNextSilent(Z)V
-
-    .line 451
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    move/from16 v0, p2
-
-    invoke-virtual {v2, v0}, Lba/vaktija/android/models/Prayer;->setSilentOn(Z)V
-
-    .line 453
-    const-string v14, "onCheckedChanged-activity_vakat_silentSwitch"
-
-    .line 454
-    const-string v8, "ACTION_SILENT_CHANGED"
-
-    .line 456
-    if-eqz p2, :cond_9
-
-    const-string v9, "Enabled silent mode"
-
-    :goto_a
-    goto/16 :goto_0
-
-    .line 445
-    :cond_7
-    move-object/from16 v0, p0
-
-    iget v2, v0, Lba/vaktija/android/PrayerActivityFragment;->colorDisabled:I
-
-    goto :goto_8
-
-    .line 446
-    :cond_8
-    move-object/from16 v0, p0
-
-    iget v2, v0, Lba/vaktija/android/PrayerActivityFragment;->cardElev:F
-
-    goto :goto_9
-
-    .line 456
-    :cond_9
-    const-string v9, "Disabled silent mode"
-
-    goto :goto_a
-
-    .line 376
-    nop
-
-    :pswitch_data_0
-    .packed-switch 0x7f0e0072
-        :pswitch_4
-        :pswitch_4
-        :pswitch_0
-        :pswitch_0
-        :pswitch_0
-        :pswitch_0
-        :pswitch_0
-        :pswitch_5
-        :pswitch_5
-        :pswitch_0
-        :pswitch_1
-        :pswitch_2
-        :pswitch_0
-        :pswitch_0
-        :pswitch_0
-        :pswitch_0
-        :pswitch_6
-        :pswitch_6
-        :pswitch_0
-        :pswitch_0
-        :pswitch_3
-    .end packed-switch
+    :sswitch_data_0
+    .sparse-switch
+        0x7f080048 -> :sswitch_5
+        0x7f08004b -> :sswitch_5
+        0x7f08004d -> :sswitch_4
+        0x7f08004f -> :sswitch_4
+        0x7f080052 -> :sswitch_3
+        0x7f080054 -> :sswitch_3
+        0x7f08008b -> :sswitch_2
+        0x7f08008c -> :sswitch_1
+        0x7f080091 -> :sswitch_0
+    .end sparse-switch
 .end method
 
 .method public onCreateView(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;
-    .locals 3
-    .param p1, "inflater"    # Landroid/view/LayoutInflater;
-    .param p2, "container"    # Landroid/view/ViewGroup;
-    .param p3, "savedInstanceState"    # Landroid/os/Bundle;
-
-    .prologue
-    .line 97
-    invoke-super {p0, p1, p2, p3}, Landroid/support/v4/app/Fragment;->onCreateView(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;
-
-    .line 98
-    sget-object v1, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
-
-    const-string v2, "onCreateView"
-
-    invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 99
-    const v1, 0x7f030026
-
-    const/4 v2, 0x0
-
-    invoke-virtual {p1, v1, p2, v2}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
-
-    move-result-object v0
-
-    .line 101
-    .local v0, "view":Landroid/view/View;
-    const v1, 0x7f0e0070
-
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
-
-    move-result-object v1
-
-    check-cast v1, Landroid/support/v7/widget/CardView;
-
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarm:Landroid/support/v7/widget/CardView;
-
-    .line 102
-    const v1, 0x7f0e0077
-
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
-
-    move-result-object v1
-
-    check-cast v1, Landroid/support/v7/widget/CardView;
-
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->notif:Landroid/support/v7/widget/CardView;
+    .locals 1
 
     .line 103
-    const v1, 0x7f0e0080
+    invoke-super {p0, p1, p2, p3}, Landroidx/fragment/app/Fragment;->onCreateView(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    .line 104
+    sget-object p3, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
 
-    move-result-object v1
+    const-string v0, "onCreateView"
 
-    check-cast v1, Landroid/support/v7/widget/CardView;
+    invoke-static {p3, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->silent:Landroid/support/v7/widget/CardView;
+    const p3, 0x7f0b002d
+
+    const/4 v0, 0x0
 
     .line 105
-    const v1, 0x7f0e0072
+    invoke-virtual {p1, p3, p2, v0}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p1
 
-    move-result-object v1
-
-    check-cast v1, Landroid/support/v7/widget/SwitchCompat;
-
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmButton:Landroid/support/v7/widget/SwitchCompat;
-
-    .line 106
-    const v1, 0x7f0e0082
-
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
-
-    move-result-object v1
-
-    check-cast v1, Landroid/support/v7/widget/SwitchCompat;
-
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->silentButton:Landroid/support/v7/widget/SwitchCompat;
+    const p2, 0x7f080047
 
     .line 107
-    const v1, 0x7f0e0079
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    check-cast p2, Landroidx/cardview/widget/CardView;
 
-    check-cast v1, Landroid/support/v7/widget/SwitchCompat;
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->alarm:Landroidx/cardview/widget/CardView;
 
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifButton:Landroid/support/v7/widget/SwitchCompat;
+    const p2, 0x7f08004c
+
+    .line 108
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object p2
+
+    check-cast p2, Landroidx/cardview/widget/CardView;
+
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->notif:Landroidx/cardview/widget/CardView;
+
+    const p2, 0x7f080051
 
     .line 109
-    const v1, 0x7f0e0073
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    check-cast p2, Landroidx/cardview/widget/CardView;
 
-    check-cast v1, Landroid/widget/CheckBox;
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->silent:Landroidx/cardview/widget/CardView;
 
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmCheckBox:Landroid/widget/CheckBox;
-
-    .line 110
-    const v1, 0x7f0e0083
-
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
-
-    move-result-object v1
-
-    check-cast v1, Landroid/widget/CheckBox;
-
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->silentCheckBox:Landroid/widget/CheckBox;
+    const p2, 0x7f08004b
 
     .line 111
-    const v1, 0x7f0e007a
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    check-cast p2, Landroidx/appcompat/widget/SwitchCompat;
 
-    check-cast v1, Landroid/widget/CheckBox;
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmButton:Landroidx/appcompat/widget/SwitchCompat;
 
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifCheckBox:Landroid/widget/CheckBox;
+    const p2, 0x7f080054
+
+    .line 112
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object p2
+
+    check-cast p2, Landroidx/appcompat/widget/SwitchCompat;
+
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->silentButton:Landroidx/appcompat/widget/SwitchCompat;
+
+    const p2, 0x7f08004f
 
     .line 113
-    const v1, 0x7f0e0076
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    check-cast p2, Landroidx/appcompat/widget/SwitchCompat;
 
-    check-cast v1, Landroid/widget/SeekBar;
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->notifButton:Landroidx/appcompat/widget/SwitchCompat;
 
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmSeekBar:Landroid/widget/SeekBar;
-
-    .line 114
-    const v1, 0x7f0e0089
-
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
-
-    move-result-object v1
-
-    check-cast v1, Landroid/widget/SeekBar;
-
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->silentOffSeekBar:Landroid/widget/SeekBar;
+    const p2, 0x7f080048
 
     .line 115
-    const v1, 0x7f0e007f
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    check-cast p2, Landroid/widget/CheckBox;
 
-    check-cast v1, Landroid/widget/SeekBar;
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmCheckBox:Landroid/widget/CheckBox;
 
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifTime:Landroid/widget/SeekBar;
+    const p2, 0x7f080052
+
+    .line 116
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object p2
+
+    check-cast p2, Landroid/widget/CheckBox;
+
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->silentCheckBox:Landroid/widget/CheckBox;
+
+    const p2, 0x7f08004d
 
     .line 117
-    const v1, 0x7f0e0074
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    check-cast p2, Landroid/widget/CheckBox;
 
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmOptionsWrapper:Landroid/view/View;
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->notifCheckBox:Landroid/widget/CheckBox;
 
-    .line 118
-    const v1, 0x7f0e0084
-
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
-
-    move-result-object v1
-
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->soundOptionsWrapper:Landroid/view/View;
+    const p2, 0x7f08004a
 
     .line 119
-    const v1, 0x7f0e007b
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    check-cast p2, Landroid/widget/SeekBar;
 
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifOptionsWrapper:Landroid/view/View;
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmSeekBar:Landroid/widget/SeekBar;
+
+    const p2, 0x7f080053
+
+    .line 120
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object p2
+
+    check-cast p2, Landroid/widget/SeekBar;
+
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->silentOffSeekBar:Landroid/widget/SeekBar;
+
+    const p2, 0x7f080050
 
     .line 121
-    const v1, 0x7f0e0075
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    check-cast p2, Landroid/widget/SeekBar;
 
-    check-cast v1, Landroid/widget/TextView;
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->notifTime:Landroid/widget/SeekBar;
 
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmTime:Landroid/widget/TextView;
+    const p2, 0x7f080049
 
     .line 123
-    const v1, 0x7f0e007c
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmOptionsWrapper:Landroid/view/View;
 
-    check-cast v1, Landroid/widget/CheckBox;
-
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseSound:Landroid/widget/CheckBox;
+    const p2, 0x7f080055
 
     .line 124
-    const v1, 0x7f0e007d
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->soundOptionsWrapper:Landroid/view/View;
 
-    check-cast v1, Landroid/widget/CheckBox;
-
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseVibro:Landroid/widget/CheckBox;
+    const p2, 0x7f08004e
 
     .line 125
-    const v1, 0x7f0e007e
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->notifOptionsWrapper:Landroid/view/View;
 
-    check-cast v1, Landroid/widget/TextView;
-
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifOnTime:Landroid/widget/TextView;
+    const p2, 0x7f080087
 
     .line 127
-    const v1, 0x7f0e0088
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    check-cast p2, Landroid/widget/TextView;
 
-    check-cast v1, Landroid/widget/TextView;
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmTime:Landroid/widget/TextView;
 
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->soundOffTime:Landroid/widget/TextView;
-
-    .line 128
-    const v1, 0x7f0e0087
-
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
-
-    move-result-object v1
-
-    check-cast v1, Landroid/widget/TextView;
-
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->soundLabel:Landroid/widget/TextView;
+    const p2, 0x7f08008b
 
     .line 129
-    const v1, 0x7f0e0086
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
-    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p2
 
-    move-result-object v1
+    check-cast p2, Landroid/widget/CheckBox;
 
-    check-cast v1, Landroid/widget/CheckBox;
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseSound:Landroid/widget/CheckBox;
 
-    iput-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
+    const p2, 0x7f08008c
+
+    .line 130
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object p2
+
+    check-cast p2, Landroid/widget/CheckBox;
+
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->notifUseVibro:Landroid/widget/CheckBox;
+
+    const p2, 0x7f080089
 
     .line 131
-    return-object v0
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object p2
+
+    check-cast p2, Landroid/widget/TextView;
+
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->notifOnTime:Landroid/widget/TextView;
+
+    const p2, 0x7f08008f
+
+    .line 133
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object p2
+
+    check-cast p2, Landroid/widget/TextView;
+
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->soundOffTime:Landroid/widget/TextView;
+
+    const p2, 0x7f08008e
+
+    .line 134
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object p2
+
+    check-cast p2, Landroid/widget/TextView;
+
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->soundLabel:Landroid/widget/TextView;
+
+    const p2, 0x7f080091
+
+    .line 135
+    invoke-virtual {p1, p2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object p2
+
+    check-cast p2, Landroid/widget/CheckBox;
+
+    iput-object p2, p0, Lba/vaktija/android/PrayerActivityFragment;->vibroOff:Landroid/widget/CheckBox;
+
+    return-object p1
 .end method
 
 .method public onProgressChanged(Landroid/widget/SeekBar;IZ)V
     .locals 5
-    .param p1, "seekBar"    # Landroid/widget/SeekBar;
-    .param p2, "progress"    # I
-    .param p3, "fromUser"    # Z
 
-    .prologue
-    const/4 v4, 0x0
+    .line 289
+    invoke-virtual {p1}, Landroid/widget/SeekBar;->getId()I
 
-    .line 283
+    move-result p3
+
+    const-string v0, " prije nastupa"
+
+    const/4 v1, 0x0
+
+    const v2, 0x7f08004a
+
+    if-ne p3, v2, :cond_0
+
+    .line 290
+    iget-object p3, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
+
+    move-result v2
+
+    invoke-virtual {p3, v2}, Lba/vaktija/android/models/Prayer;->setAlarmMins(I)V
+
+    .line 292
+    iget-object p3, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmTime:Landroid/widget/TextView;
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    mul-int/lit8 v3, p2, 0x3c
+
+    mul-int/lit16 v3, v3, 0x3e8
+
+    int-to-long v3, v3
+
+    invoke-static {v3, v4, v1}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {p3, v2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    .line 295
+    :cond_0
+    invoke-virtual {p1}, Landroid/widget/SeekBar;->getId()I
+
+    move-result p3
+
+    const v2, 0x7f080053
+
+    if-ne p3, v2, :cond_3
+
+    .line 296
+    iget-object p3, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
+
+    move-result v2
+
+    iget-boolean v3, p0, Lba/vaktija/android/PrayerActivityFragment;->invertValues:Z
+
+    if-eqz v3, :cond_1
+
+    const/4 v3, -0x1
+
+    goto :goto_0
+
+    :cond_1
+    const/4 v3, 0x1
+
+    :goto_0
+    mul-int v2, v2, v3
+
+    invoke-virtual {p3, v2}, Lba/vaktija/android/models/Prayer;->setSoundOnMins(I)V
+
+    .line 298
+    iget-object p3, p0, Lba/vaktija/android/PrayerActivityFragment;->soundOffTime:Landroid/widget/TextView;
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    mul-int/lit8 v3, p2, 0x3c
+
+    mul-int/lit16 v3, v3, 0x3e8
+
+    int-to-long v3, v3
+
+    .line 299
+    invoke-static {v3, v4, v1}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-boolean v3, p0, Lba/vaktija/android/PrayerActivityFragment;->invertValues:Z
+
+    if-eqz v3, :cond_2
+
+    const-string v3, " prije"
+
+    goto :goto_1
+
+    :cond_2
+    const-string v3, " nakon"
+
+    :goto_1
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v3, " nastupa"
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 298
+    invoke-virtual {p3, v2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    .line 304
+    :cond_3
+    invoke-virtual {p1}, Landroid/widget/SeekBar;->getId()I
+
+    move-result p3
+
+    const v2, 0x7f080050
+
+    if-ne p3, v2, :cond_4
+
+    .line 305
+    iget-object p3, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
+
+    move-result p1
+
+    invoke-virtual {p3, p1}, Lba/vaktija/android/models/Prayer;->setNotifMins(I)V
+
+    .line 307
+    iget-object p1, p0, Lba/vaktija/android/PrayerActivityFragment;->notifOnTime:Landroid/widget/TextView;
+
+    new-instance p3, Ljava/lang/StringBuilder;
+
+    invoke-direct {p3}, Ljava/lang/StringBuilder;-><init>()V
+
+    mul-int/lit8 p2, p2, 0x3c
+
+    mul-int/lit16 p2, p2, 0x3e8
+
+    int-to-long v2, p2
+
+    invoke-static {v2, v3, v1}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
+
+    move-result-object p2
+
+    invoke-virtual {p3, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p2
+
+    invoke-virtual {p1, p2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    :cond_4
+    return-void
+.end method
+
+.method public onStartTrackingTouch(Landroid/widget/SeekBar;)V
+    .locals 0
+
+    return-void
+.end method
+
+.method public onStopTrackingTouch(Landroid/widget/SeekBar;)V
+    .locals 6
+
+    .line 317
+    sget-object v0, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
+
+    const-string v1, "onStopTrackingTouch"
+
+    invoke-static {v0, v1}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 323
     invoke-virtual {p1}, Landroid/widget/SeekBar;->getId()I
 
     move-result v0
 
-    const v1, 0x7f0e0076
+    const v1, 0x7f08004a
 
-    if-ne v0, v1, :cond_0
+    const-string v2, ""
 
-    .line 284
+    const-string v3, " settings"
+
+    if-eq v0, v1, :cond_3
+
+    const v1, 0x7f080050
+
+    if-eq v0, v1, :cond_2
+
+    const v1, 0x7f080053
+
+    if-eq v0, v1, :cond_0
+
+    move-object p1, v2
+
+    goto/16 :goto_2
+
+    .line 336
+    :cond_0
     iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
 
     invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
 
     move-result v1
 
-    invoke-virtual {v0, v1}, Lba/vaktija/android/models/Prayer;->setAlarmMins(I)V
+    iget-boolean v2, p0, Lba/vaktija/android/PrayerActivityFragment;->invertValues:Z
 
-    .line 286
-    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->alarmTime:Landroid/widget/TextView;
+    if-eqz v2, :cond_1
+
+    const/4 v2, -0x1
+
+    goto :goto_0
+
+    :cond_1
+    const/4 v2, 0x1
+
+    :goto_0
+    mul-int v1, v1, v2
+
+    invoke-virtual {v0, v1}, Lba/vaktija/android/models/Prayer;->setSoundOnMins(I)V
+
+    .line 338
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
 
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    mul-int/lit8 v2, p2, 0x3c
+    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
 
-    mul-int/lit16 v2, v2, 0x3e8
-
-    int-to-long v2, v2
-
-    invoke-static {v2, v3, v4}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
     move-result-object v2
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
-    const-string v2, " prije nastupa"
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v1
 
-    invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    .line 289
-    :cond_0
-    invoke-virtual {p1}, Landroid/widget/SeekBar;->getId()I
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    move-result v0
+    const-string v3, "silent off time set to "
 
-    const v1, 0x7f0e0089
-
-    if-ne v0, v1, :cond_1
-
-    .line 290
-    iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
 
-    move-result v2
+    move-result p1
 
-    iget-boolean v0, p0, Lba/vaktija/android/PrayerActivityFragment;->invertValues:Z
+    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    if-eqz v0, :cond_3
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    const/4 v0, -0x1
+    move-result-object p1
 
-    :goto_0
-    mul-int/2addr v0, v2
+    invoke-virtual {v0, v1, p1}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
 
-    invoke-virtual {v1, v0}, Lba/vaktija/android/models/Prayer;->setSoundOnMins(I)V
+    const-string v2, "ACTION_SILENT_CHANGED"
 
-    .line 292
-    iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->soundOffTime:Landroid/widget/TextView;
+    const-string p1, "activity_vakat_silentOffSeekBar"
 
-    new-instance v0, Ljava/lang/StringBuilder;
+    goto :goto_1
 
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    mul-int/lit8 v2, p2, 0x3c
-
-    mul-int/lit16 v2, v2, 0x3e8
-
-    int-to-long v2, v2
-
-    .line 293
-    invoke-static {v2, v3, v4}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    iget-boolean v0, p0, Lba/vaktija/android/PrayerActivityFragment;->invertValues:Z
-
-    if-eqz v0, :cond_4
-
-    const-string v0, " prije"
-
-    :goto_1
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    const-string v2, " nastupa"
-
-    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    .line 292
-    invoke-virtual {v1, v0}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
-
-    .line 298
-    :cond_1
-    invoke-virtual {p1}, Landroid/widget/SeekBar;->getId()I
-
-    move-result v0
-
-    const v1, 0x7f0e007f
-
-    if-ne v0, v1, :cond_2
-
-    .line 299
+    .line 346
+    :cond_2
     iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
 
     invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
@@ -2057,583 +2069,331 @@
 
     invoke-virtual {v0, v1}, Lba/vaktija/android/models/Prayer;->setNotifMins(I)V
 
-    .line 301
-    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->notifOnTime:Landroid/widget/TextView;
+    .line 348
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
 
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    mul-int/lit8 v2, p2, 0x3c
+    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
 
-    mul-int/lit16 v2, v2, 0x3e8
-
-    int-to-long v2, v2
-
-    invoke-static {v2, v3, v4}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
     move-result-object v2
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
-    const-string v2, " prije nastupa"
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v1
 
-    invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    .line 303
-    :cond_2
-    return-void
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    .line 290
-    :cond_3
-    const/4 v0, 0x1
+    const-string v3, "notification time set to "
 
-    goto :goto_0
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 293
-    :cond_4
-    const-string v0, " nakon"
+    invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
+
+    move-result p1
+
+    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-virtual {v0, v1, p1}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string v2, "ACTION_NOTIF_CHANGED"
+
+    const-string p1, "activity_vakat_notifTime"
 
     goto :goto_1
-.end method
-
-.method public onStartTrackingTouch(Landroid/widget/SeekBar;)V
-    .locals 0
-    .param p1, "seekBar"    # Landroid/widget/SeekBar;
-
-    .prologue
-    .line 306
-    return-void
-.end method
-
-.method public onStopTrackingTouch(Landroid/widget/SeekBar;)V
-    .locals 8
-    .param p1, "seekBar"    # Landroid/widget/SeekBar;
-
-    .prologue
-    const/4 v7, 0x0
-
-    .line 310
-    sget-object v3, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
-
-    const-string v4, "onStopTrackingTouch"
-
-    invoke-static {v3, v4}, Lba/vaktija/android/util/FileLog;->d(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 313
-    const-string v2, ""
-
-    .line 314
-    .local v2, "startedFrom":Ljava/lang/String;
-    const-string v0, ""
-
-    .line 316
-    .local v0, "action":Ljava/lang/String;
-    invoke-virtual {p1}, Landroid/widget/SeekBar;->getId()I
-
-    move-result v3
-
-    sparse-switch v3, :sswitch_data_0
-
-    .line 349
-    :goto_0
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->save()V
-
-    .line 351
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
-
-    invoke-static {v3}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Lba/vaktija/android/models/PrayersSchedule;->reset()V
-
-    .line 353
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
-
-    sget-object v3, Lba/vaktija/android/App;->prefs:Landroid/content/SharedPreferences;
-
-    invoke-interface {v3}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v3
-
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v5, "silentNotifDeleted_"
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    iget-object v5, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    .line 354
-    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v5
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-interface {v3, v4, v7}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v3
-
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v5, "approachingNotifDeleted_"
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    iget-object v5, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    .line 355
-    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->getId()I
-
-    move-result v5
-
-    add-int/lit8 v5, v5, -0x1
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-interface {v3, v4, v7}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
-
-    move-result-object v3
-
-    .line 356
-    invoke-interface {v3}, Landroid/content/SharedPreferences$Editor;->commit()Z
-
-    .line 358
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
-
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    sget-object v5, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    const-string v5, ":"
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-static {v3, v4}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
-
-    move-result-object v1
-
-    .line 359
-    .local v1, "service":Landroid/content/Intent;
-    invoke-virtual {v1, v0}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
-
-    .line 360
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v3
-
-    invoke-virtual {v3, v1}, Landroid/support/v4/app/FragmentActivity;->startService(Landroid/content/Intent;)Landroid/content/ComponentName;
-
-    .line 362
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
-    move-result-object v3
-
-    invoke-static {v3}, Lba/vaktija/android/util/Utils;->updateWidget(Landroid/content/Context;)V
-
-    .line 363
-    return-void
-
-    .line 319
-    .end local v1    # "service":Landroid/content/Intent;
-    :sswitch_0
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
-
-    move-result v4
-
-    invoke-virtual {v3, v4}, Lba/vaktija/android/models/Prayer;->setAlarmMins(I)V
-
-    .line 321
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
-
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    iget-object v5, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v5
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    const-string v5, " settings"
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    new-instance v5, Ljava/lang/StringBuilder;
-
-    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v6, "alarm time set to "
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
-
-    move-result v6
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v5
-
-    invoke-virtual {v3, v4, v5}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 323
-    const-string v0, "ACTION_ALARM_CHANGED"
-
-    .line 324
-    const-string v2, "activity_vakat_alarmSeekBar"
 
     .line 326
-    goto/16 :goto_0
-
-    .line 329
-    :sswitch_1
-    iget-object v4, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+    :cond_3
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
 
     invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
-
-    move-result v5
-
-    iget-boolean v3, p0, Lba/vaktija/android/PrayerActivityFragment;->invertValues:Z
-
-    if-eqz v3, :cond_0
-
-    const/4 v3, -0x1
-
-    :goto_1
-    mul-int/2addr v3, v5
-
-    invoke-virtual {v4, v3}, Lba/vaktija/android/models/Prayer;->setSoundOnMins(I)V
-
-    .line 331
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
-
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    iget-object v5, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v5
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    const-string v5, " settings"
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    new-instance v5, Ljava/lang/StringBuilder;
-
-    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v6, "silent off time set to "
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
-
-    move-result v6
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v5
-
-    invoke-virtual {v3, v4, v5}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 333
-    const-string v0, "ACTION_SILENT_CHANGED"
-
-    .line 334
-    const-string v2, "activity_vakat_silentOffSeekBar"
-
-    .line 336
-    goto/16 :goto_0
-
-    .line 329
-    :cond_0
-    const/4 v3, 0x1
-
-    goto :goto_1
-
-    .line 339
-    :sswitch_2
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
-
-    move-result v4
-
-    invoke-virtual {v3, v4}, Lba/vaktija/android/models/Prayer;->setNotifMins(I)V
-
-    .line 341
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
-
-    new-instance v4, Ljava/lang/StringBuilder;
-
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
-
-    iget-object v5, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v5}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v5
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    const-string v5, " settings"
-
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    new-instance v5, Ljava/lang/StringBuilder;
-
-    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v6, "notification time set to "
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
-
-    move-result v6
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v5
-
-    invoke-virtual {v3, v4, v5}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 343
-    const-string v0, "ACTION_NOTIF_CHANGED"
-
-    .line 344
-    const-string v2, "activity_vakat_notifTime"
-
-    goto/16 :goto_0
-
-    .line 316
-    nop
-
-    :sswitch_data_0
-    .sparse-switch
-        0x7f0e0076 -> :sswitch_0
-        0x7f0e007f -> :sswitch_2
-        0x7f0e0089 -> :sswitch_1
-    .end sparse-switch
-.end method
-
-.method showActionBarTitle()V
-    .locals 7
-
-    .prologue
-    const/4 v5, 0x0
-
-    const/4 v4, 0x1
-
-    .line 266
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
-
-    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
-
-    move-result-object v3
-
-    invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
-
-    move-result-object v6
-
-    invoke-virtual {v3, v6}, Ljava/lang/String;->toUpperCase(Ljava/util/Locale;)Ljava/lang/String;
-
-    move-result-object v2
-
-    .line 268
-    .local v2, "title":Ljava/lang/String;
-    sget-object v3, Lba/vaktija/android/App;->prefs:Landroid/content/SharedPreferences;
-
-    const-string v6, "separateJumaSettings"
-
-    invoke-interface {v3, v6, v4}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
 
     move-result v1
 
-    .line 270
-    .local v1, "respect":Z
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+    invoke-virtual {v0, v1}, Lba/vaktija/android/models/Prayer;->setAlarmMins(I)V
 
-    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->getId()I
+    .line 328
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
 
-    move-result v3
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    const/4 v6, 0x2
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    if-ne v3, v6, :cond_1
+    iget-object v2, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
 
-    move v0, v4
+    invoke-virtual {v2}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
 
-    .line 271
-    .local v0, "hideTitle":Z
-    :goto_0
-    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+    move-result-object v2
 
-    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->getId()I
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result v3
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const/4 v6, 0x6
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    if-ne v3, v6, :cond_2
+    move-result-object v1
 
-    move v3, v4
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v3, "alarm time set to "
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p1}, Landroid/widget/SeekBar;->getProgress()I
+
+    move-result p1
+
+    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-virtual {v0, v1, p1}, Lba/vaktija/android/App;->sendEvent(Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string v2, "ACTION_ALARM_CHANGED"
+
+    const-string p1, "activity_vakat_alarmSeekBar"
 
     :goto_1
-    or-int/2addr v0, v3
+    move-object v5, v2
 
-    .line 273
-    if-eqz v1, :cond_0
+    move-object v2, p1
 
-    if-eqz v0, :cond_0
+    move-object p1, v5
+
+    .line 356
+    :goto_2
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->save()V
+
+    .line 358
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
+
+    invoke-static {v0}, Lba/vaktija/android/models/PrayersSchedule;->getInstance(Landroid/content/Context;)Lba/vaktija/android/models/PrayersSchedule;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/PrayersSchedule;->reset()V
+
+    .line 360
+    sget-object v0, Lba/vaktija/android/App;->prefs:Landroid/content/SharedPreferences;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v3, "silentNotifDeleted_"
+
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v3, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    .line 361
+    invoke-virtual {v3}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v3
+
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    const/4 v3, 0x0
+
+    invoke-interface {v0, v1, v3}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v4, "approachingNotifDeleted_"
+
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v4, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    .line 362
+    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v4
+
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-interface {v0, v1, v3}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    .line 363
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->commit()Z
+
+    .line 365
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->app:Lba/vaktija/android/App;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    sget-object v3, Lba/vaktija/android/PrayerActivityFragment;->TAG:Ljava/lang/String;
+
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v3, ":"
+
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Lba/vaktija/android/service/VaktijaService;->getStartIntent(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+
+    move-result-object v0
+
+    .line 366
+    invoke-virtual {v0, p1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+
+    .line 367
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->requireContext()Landroid/content/Context;
+
+    move-result-object p1
+
+    invoke-static {p1, v0}, Lba/vaktija/android/service/VaktijaServiceHelper;->startService(Landroid/content/Context;Landroid/content/Intent;)V
+
+    .line 369
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
+
+    move-result-object p1
+
+    invoke-static {p1}, Lba/vaktija/android/util/Utils;->updateWidget(Landroid/content/Context;)V
+
+    return-void
+.end method
+
+.method showActionBarTitle()V
+    .locals 6
+
+    .line 272
+    iget-object v0, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v0}, Lba/vaktija/android/models/Prayer;->getTitle()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->toUpperCase(Ljava/util/Locale;)Ljava/lang/String;
 
     .line 274
-    const-string v2, ""
+    sget-object v0, Lba/vaktija/android/App;->prefs:Landroid/content/SharedPreferences;
 
-    .line 277
-    :cond_0
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    const-string v1, "separateJumaSettings"
 
-    move-result-object v3
+    const/4 v2, 0x1
 
-    check-cast v3, Landroid/support/v7/app/AppCompatActivity;
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
 
-    invoke-virtual {v3}, Landroid/support/v7/app/AppCompatActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;
+    move-result v0
 
-    move-result-object v3
+    .line 276
+    iget-object v1, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
 
-    invoke-virtual {v3, v5}, Landroid/support/v7/app/ActionBar;->setDisplayShowHomeEnabled(Z)V
+    invoke-virtual {v1}, Lba/vaktija/android/models/Prayer;->getId()I
 
-    .line 278
-    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    move-result v1
 
-    move-result-object v3
+    const/4 v3, 0x0
 
-    check-cast v3, Landroid/support/v7/app/AppCompatActivity;
+    const/4 v4, 0x2
 
-    invoke-virtual {v3}, Landroid/support/v7/app/AppCompatActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;
+    if-ne v1, v4, :cond_0
 
-    move-result-object v3
+    const/4 v1, 0x1
 
-    invoke-virtual {v3, v4}, Landroid/support/v7/app/ActionBar;->setDisplayHomeAsUpEnabled(Z)V
-
-    .line 279
-    return-void
-
-    .end local v0    # "hideTitle":Z
-    :cond_1
-    move v0, v5
-
-    .line 270
     goto :goto_0
 
-    .restart local v0    # "hideTitle":Z
-    :cond_2
-    move v3, v5
+    :cond_0
+    const/4 v1, 0x0
 
-    .line 271
+    .line 277
+    :goto_0
+    iget-object v4, p0, Lba/vaktija/android/PrayerActivityFragment;->mPrayer:Lba/vaktija/android/models/Prayer;
+
+    invoke-virtual {v4}, Lba/vaktija/android/models/Prayer;->getId()I
+
+    move-result v4
+
+    const/4 v5, 0x6
+
+    if-ne v4, v5, :cond_1
+
+    const/4 v4, 0x1
+
     goto :goto_1
+
+    :cond_1
+    const/4 v4, 0x0
+
+    :goto_1
+    or-int/2addr v1, v4
+
+    .line 283
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
+
+    move-result-object v0
+
+    check-cast v0, Landroidx/appcompat/app/AppCompatActivity;
+
+    invoke-virtual {v0}, Landroidx/appcompat/app/AppCompatActivity;->getSupportActionBar()Landroidx/appcompat/app/ActionBar;
+
+    move-result-object v0
+
+    invoke-virtual {v0, v3}, Landroidx/appcompat/app/ActionBar;->setDisplayShowHomeEnabled(Z)V
+
+    .line 284
+    invoke-virtual {p0}, Lba/vaktija/android/PrayerActivityFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
+
+    move-result-object v0
+
+    check-cast v0, Landroidx/appcompat/app/AppCompatActivity;
+
+    invoke-virtual {v0}, Landroidx/appcompat/app/AppCompatActivity;->getSupportActionBar()Landroidx/appcompat/app/ActionBar;
+
+    move-result-object v0
+
+    invoke-virtual {v0, v2}, Landroidx/appcompat/app/ActionBar;->setDisplayHomeAsUpEnabled(Z)V
+
+    return-void
 .end method

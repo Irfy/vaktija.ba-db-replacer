@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lba/vaktija/android/MainActivity;->showAlarmEvent()V
+    value = Lba/vaktija/android/MainActivity;->showSilentBlockedByDndRevoke()V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -24,10 +24,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/MainActivity;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/MainActivity;
 
-    .prologue
-    .line 555
+    .line 452
     iput-object p1, p0, Lba/vaktija/android/MainActivity$4;->this$0:Lba/vaktija/android/MainActivity;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -39,36 +37,42 @@
 # virtual methods
 .method public onClick(Landroid/view/View;)V
     .locals 3
-    .param p1, "v"    # Landroid/view/View;
 
-    .prologue
-    .line 558
-    iget-object v0, p0, Lba/vaktija/android/MainActivity$4;->this$0:Lba/vaktija/android/MainActivity;
+    .line 455
+    iget-object p1, p0, Lba/vaktija/android/MainActivity$4;->this$0:Lba/vaktija/android/MainActivity;
 
-    # getter for: Lba/vaktija/android/MainActivity;->mPrefs:Landroid/content/SharedPreferences;
-    invoke-static {v0}, Lba/vaktija/android/MainActivity;->access$000(Lba/vaktija/android/MainActivity;)Landroid/content/SharedPreferences;
+    invoke-static {p1}, Lba/vaktija/android/MainActivity;->access$100(Lba/vaktija/android/MainActivity;)Landroid/content/SharedPreferences;
 
-    move-result-object v0
+    move-result-object p1
 
-    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+    invoke-interface {p1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
 
-    move-result-object v0
+    move-result-object p1
 
-    const-string v1, "alarmActive"
+    const-string v0, "SILENT_BLOCKED_BY_DND_REVOKE"
 
-    const/4 v2, 0x0
+    const/4 v1, 0x0
 
-    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+    invoke-interface {p1, v0, v1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
 
-    move-result-object v0
+    move-result-object p1
 
-    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->commit()Z
+    invoke-interface {p1}, Landroid/content/SharedPreferences$Editor;->apply()V
 
-    .line 559
-    iget-object v0, p0, Lba/vaktija/android/MainActivity$4;->this$0:Lba/vaktija/android/MainActivity;
+    .line 456
+    iget-object p1, p0, Lba/vaktija/android/MainActivity$4;->this$0:Lba/vaktija/android/MainActivity;
 
-    invoke-static {v0}, Lba/vaktija/android/AlarmActivity;->cancelAlarm(Landroid/app/Activity;)V
+    new-instance v0, Landroid/content/Intent;
 
-    .line 560
+    iget-object v1, p0, Lba/vaktija/android/MainActivity$4;->this$0:Lba/vaktija/android/MainActivity;
+
+    const-class v2, Lba/vaktija/android/SystemSettingsHelperActivity;
+
+    invoke-direct {v0, v1, v2}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
+
+    const/16 v1, 0x64
+
+    invoke-virtual {p1, v0, v1}, Lba/vaktija/android/MainActivity;->startActivityForResult(Landroid/content/Intent;I)V
+
     return-void
 .end method

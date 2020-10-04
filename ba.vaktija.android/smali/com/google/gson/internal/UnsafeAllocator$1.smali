@@ -1,4 +1,4 @@
-.class final Lcom/google/gson/internal/UnsafeAllocator$1;
+.class Lcom/google/gson/internal/UnsafeAllocator$1;
 .super Lcom/google/gson/internal/UnsafeAllocator;
 .source "UnsafeAllocator.java"
 
@@ -9,7 +9,7 @@
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
-    accessFlags = 0x8
+    accessFlags = 0x0
     name = null
 .end annotation
 
@@ -24,8 +24,7 @@
 .method constructor <init>(Ljava/lang/reflect/Method;Ljava/lang/Object;)V
     .locals 0
 
-    .prologue
-    .line 44
+    .line 45
     iput-object p1, p0, Lcom/google/gson/internal/UnsafeAllocator$1;->val$allocateInstance:Ljava/lang/reflect/Method;
 
     iput-object p2, p0, Lcom/google/gson/internal/UnsafeAllocator$1;->val$unsafe:Ljava/lang/Object;
@@ -44,8 +43,8 @@
             "<T:",
             "Ljava/lang/Object;",
             ">(",
-            "Ljava/lang/Class",
-            "<TT;>;)TT;"
+            "Ljava/lang/Class<",
+            "TT;>;)TT;"
         }
     .end annotation
 
@@ -55,9 +54,10 @@
         }
     .end annotation
 
-    .prologue
-    .line 48
-    .local p1, "c":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
+    .line 49
+    invoke-static {p1}, Lcom/google/gson/internal/UnsafeAllocator$1;->assertInstantiable(Ljava/lang/Class;)V
+
+    .line 50
     iget-object v0, p0, Lcom/google/gson/internal/UnsafeAllocator$1;->val$allocateInstance:Ljava/lang/reflect/Method;
 
     iget-object v1, p0, Lcom/google/gson/internal/UnsafeAllocator$1;->val$unsafe:Ljava/lang/Object;
@@ -72,7 +72,7 @@
 
     invoke-virtual {v0, v1, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object p1
 
-    return-object v0
+    return-object p1
 .end method

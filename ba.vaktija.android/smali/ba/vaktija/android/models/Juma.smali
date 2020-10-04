@@ -15,7 +15,6 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
     .line 5
     const-class v0, Lba/vaktija/android/models/Juma;
 
@@ -31,13 +30,12 @@
 .method public constructor <init>()V
     .locals 1
 
-    .prologue
     .line 3
     invoke-direct {p0}, Lba/vaktija/android/models/Prayer;-><init>()V
 
-    .line 7
     const/4 v0, 0x6
 
+    .line 7
     iput v0, p0, Lba/vaktija/android/models/Juma;->id:I
 
     return-void

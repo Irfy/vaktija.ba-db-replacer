@@ -7,8 +7,7 @@
 .field private static final pendingPostPool:Ljava/util/List;
     .annotation system Ldalvik/annotation/Signature;
         value = {
-            "Ljava/util/List",
-            "<",
+            "Ljava/util/List<",
             "Lde/greenrobot/event/PendingPost;",
             ">;"
         }
@@ -28,7 +27,6 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
     .line 22
     new-instance v0, Ljava/util/ArrayList;
 
@@ -41,10 +39,7 @@
 
 .method private constructor <init>(Ljava/lang/Object;Lde/greenrobot/event/Subscription;)V
     .locals 0
-    .param p1, "event"    # Ljava/lang/Object;
-    .param p2, "subscription"    # Lde/greenrobot/event/Subscription;
 
-    .prologue
     .line 28
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -54,67 +49,57 @@
     .line 30
     iput-object p2, p0, Lde/greenrobot/event/PendingPost;->subscription:Lde/greenrobot/event/Subscription;
 
-    .line 31
     return-void
 .end method
 
 .method static obtainPendingPost(Lde/greenrobot/event/Subscription;Ljava/lang/Object;)Lde/greenrobot/event/PendingPost;
-    .locals 5
-    .param p0, "subscription"    # Lde/greenrobot/event/Subscription;
-    .param p1, "event"    # Ljava/lang/Object;
+    .locals 3
 
-    .prologue
     .line 34
-    sget-object v3, Lde/greenrobot/event/PendingPost;->pendingPostPool:Ljava/util/List;
+    sget-object v0, Lde/greenrobot/event/PendingPost;->pendingPostPool:Ljava/util/List;
 
-    monitor-enter v3
+    monitor-enter v0
 
     .line 35
     :try_start_0
-    sget-object v2, Lde/greenrobot/event/PendingPost;->pendingPostPool:Ljava/util/List;
+    sget-object v1, Lde/greenrobot/event/PendingPost;->pendingPostPool:Ljava/util/List;
 
-    invoke-interface {v2}, Ljava/util/List;->size()I
+    invoke-interface {v1}, Ljava/util/List;->size()I
 
     move-result v1
 
-    .line 36
-    .local v1, "size":I
     if-lez v1, :cond_0
 
     .line 37
     sget-object v2, Lde/greenrobot/event/PendingPost;->pendingPostPool:Ljava/util/List;
 
-    add-int/lit8 v4, v1, -0x1
+    add-int/lit8 v1, v1, -0x1
 
-    invoke-interface {v2, v4}, Ljava/util/List;->remove(I)Ljava/lang/Object;
+    invoke-interface {v2, v1}, Ljava/util/List;->remove(I)Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object v1
 
-    check-cast v0, Lde/greenrobot/event/PendingPost;
+    check-cast v1, Lde/greenrobot/event/PendingPost;
 
     .line 38
-    .local v0, "pendingPost":Lde/greenrobot/event/PendingPost;
-    iput-object p1, v0, Lde/greenrobot/event/PendingPost;->event:Ljava/lang/Object;
+    iput-object p1, v1, Lde/greenrobot/event/PendingPost;->event:Ljava/lang/Object;
 
     .line 39
-    iput-object p0, v0, Lde/greenrobot/event/PendingPost;->subscription:Lde/greenrobot/event/Subscription;
+    iput-object p0, v1, Lde/greenrobot/event/PendingPost;->subscription:Lde/greenrobot/event/Subscription;
+
+    const/4 p0, 0x0
 
     .line 40
-    const/4 v2, 0x0
-
-    iput-object v2, v0, Lde/greenrobot/event/PendingPost;->next:Lde/greenrobot/event/PendingPost;
+    iput-object p0, v1, Lde/greenrobot/event/PendingPost;->next:Lde/greenrobot/event/PendingPost;
 
     .line 41
-    monitor-exit v3
+    monitor-exit v0
 
-    .line 44
-    .end local v0    # "pendingPost":Lde/greenrobot/event/PendingPost;
-    :goto_0
-    return-object v0
+    return-object v1
 
     .line 43
     :cond_0
-    monitor-exit v3
+    monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -123,26 +108,23 @@
 
     invoke-direct {v0, p1, p0}, Lde/greenrobot/event/PendingPost;-><init>(Ljava/lang/Object;Lde/greenrobot/event/Subscription;)V
 
-    goto :goto_0
+    return-object v0
+
+    :catchall_0
+    move-exception p0
 
     .line 43
-    .end local v1    # "size":I
-    :catchall_0
-    move-exception v2
-
     :try_start_1
-    monitor-exit v3
+    monitor-exit v0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    throw v2
+    throw p0
 .end method
 
 .method static releasePendingPost(Lde/greenrobot/event/PendingPost;)V
     .locals 3
-    .param p0, "pendingPost"    # Lde/greenrobot/event/PendingPost;
 
-    .prologue
     const/4 v0, 0x0
 
     .line 48
@@ -155,41 +137,39 @@
     iput-object v0, p0, Lde/greenrobot/event/PendingPost;->next:Lde/greenrobot/event/PendingPost;
 
     .line 51
-    sget-object v1, Lde/greenrobot/event/PendingPost;->pendingPostPool:Ljava/util/List;
+    sget-object v0, Lde/greenrobot/event/PendingPost;->pendingPostPool:Ljava/util/List;
 
-    monitor-enter v1
+    monitor-enter v0
 
     .line 53
     :try_start_0
-    sget-object v0, Lde/greenrobot/event/PendingPost;->pendingPostPool:Ljava/util/List;
+    sget-object v1, Lde/greenrobot/event/PendingPost;->pendingPostPool:Ljava/util/List;
 
-    invoke-interface {v0}, Ljava/util/List;->size()I
+    invoke-interface {v1}, Ljava/util/List;->size()I
 
-    move-result v0
+    move-result v1
 
     const/16 v2, 0x2710
 
-    if-ge v0, v2, :cond_0
+    if-ge v1, v2, :cond_0
 
     .line 54
-    sget-object v0, Lde/greenrobot/event/PendingPost;->pendingPostPool:Ljava/util/List;
+    sget-object v1, Lde/greenrobot/event/PendingPost;->pendingPostPool:Ljava/util/List;
 
-    invoke-interface {v0, p0}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+    invoke-interface {v1, p0}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
     .line 56
     :cond_0
-    monitor-exit v1
+    monitor-exit v0
 
-    .line 57
     return-void
 
-    .line 56
     :catchall_0
-    move-exception v0
+    move-exception p0
 
-    monitor-exit v1
+    monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw v0
+    throw p0
 .end method

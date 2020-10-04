@@ -24,13 +24,15 @@
 
 .field public static final DEBUG:Z = true
 
-.field public static DEFAULT_THEME_COLOR:Ljava/lang/String; = null
+.field public static DEFAULT_THEME_COLOR:Ljava/lang/String; = "#5ebb46"
 
-.field public static DHUHD_REAL:Ljava/lang/String; = null
+.field public static DHUHD_REAL:Ljava/lang/String; = "0"
 
-.field public static DHUHR_NORMALIZED:Ljava/lang/String; = null
+.field public static DHUHR_NORMALIZED:Ljava/lang/String; = "1"
 
 .field public static final DHUHR_TIME_COUNTING:Ljava/lang/String; = "dhuhrTime"
+
+.field public static final DND_GRANTED:Ljava/lang/String; = "DND_GRANTED"
 
 .field public static final EXPORT:Ljava/lang/String; = "export"
 
@@ -53,6 +55,8 @@
 .field public static final SEPARATE_JUMA_SETTINGS:Ljava/lang/String; = "separateJumaSettings"
 
 .field public static final SHOW_DATE:Ljava/lang/String; = "showDate"
+
+.field public static final SILENT_BLOCKED_BY_DND_REVOKE:Ljava/lang/String; = "SILENT_BLOCKED_BY_DND_REVOKE"
 
 .field public static final SILENT_BY_APP:Ljava/lang/String; = "silentByApp"
 
@@ -79,23 +83,7 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 1
-
-    .prologue
-    .line 7
-    const-string v0, "#5ebb46"
-
-    sput-object v0, Lba/vaktija/android/prefs/Prefs;->DEFAULT_THEME_COLOR:Ljava/lang/String;
-
-    .line 8
-    const-string v0, "1"
-
-    sput-object v0, Lba/vaktija/android/prefs/Prefs;->DHUHR_NORMALIZED:Ljava/lang/String;
-
-    .line 9
-    const-string v0, "0"
-
-    sput-object v0, Lba/vaktija/android/prefs/Prefs;->DHUHD_REAL:Ljava/lang/String;
+    .locals 0
 
     return-void
 .end method
@@ -103,7 +91,6 @@
 .method public constructor <init>()V
     .locals 0
 
-    .prologue
     .line 3
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 

@@ -24,10 +24,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/FragmentPrayer;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/FragmentPrayer;
 
-    .prologue
-    .line 252
+    .line 254
     iput-object p1, p0, Lba/vaktija/android/FragmentPrayer$2;->this$0:Lba/vaktija/android/FragmentPrayer;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -38,33 +36,26 @@
 
 # virtual methods
 .method public onClick(Landroid/view/View;)V
-    .locals 3
-    .param p1, "v"    # Landroid/view/View;
+    .locals 2
 
-    .prologue
-    .line 255
-    iget-object v0, p0, Lba/vaktija/android/FragmentPrayer$2;->this$0:Lba/vaktija/android/FragmentPrayer;
+    .line 257
+    iget-object p1, p0, Lba/vaktija/android/FragmentPrayer$2;->this$0:Lba/vaktija/android/FragmentPrayer;
+
+    invoke-static {p1}, Lba/vaktija/android/FragmentPrayer;->access$000(Lba/vaktija/android/FragmentPrayer;)Landroidx/appcompat/app/AppCompatActivity;
+
+    move-result-object v0
 
     iget-object v1, p0, Lba/vaktija/android/FragmentPrayer$2;->this$0:Lba/vaktija/android/FragmentPrayer;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mActivity:Landroid/support/v7/app/AppCompatActivity;
-    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$000(Lba/vaktija/android/FragmentPrayer;)Landroid/support/v7/app/AppCompatActivity;
+    invoke-static {v1}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
 
     move-result-object v1
 
-    iget-object v2, p0, Lba/vaktija/android/FragmentPrayer$2;->this$0:Lba/vaktija/android/FragmentPrayer;
+    invoke-static {v0, v1}, Lba/vaktija/android/PrayerActivity;->getLaunchIntent(Landroid/content/Context;Lba/vaktija/android/models/Prayer;)Landroid/content/Intent;
 
-    # getter for: Lba/vaktija/android/FragmentPrayer;->mPrayer:Lba/vaktija/android/models/Prayer;
-    invoke-static {v2}, Lba/vaktija/android/FragmentPrayer;->access$100(Lba/vaktija/android/FragmentPrayer;)Lba/vaktija/android/models/Prayer;
+    move-result-object v0
 
-    move-result-object v2
+    invoke-virtual {p1, v0}, Lba/vaktija/android/FragmentPrayer;->startActivity(Landroid/content/Intent;)V
 
-    invoke-static {v1, v2}, Lba/vaktija/android/PrayerActivity;->getLaunchIntent(Landroid/content/Context;Lba/vaktija/android/models/Prayer;)Landroid/content/Intent;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Lba/vaktija/android/FragmentPrayer;->startActivity(Landroid/content/Intent;)V
-
-    .line 256
     return-void
 .end method

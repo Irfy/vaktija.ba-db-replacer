@@ -15,8 +15,7 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    .prologue
-    .line 33
+    .line 34
     const-class v0, Lba/vaktija/android/prefs/SettingsActivity;
 
     invoke-virtual {v0}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
@@ -31,8 +30,7 @@
 .method public constructor <init>()V
     .locals 0
 
-    .prologue
-    .line 31
+    .line 32
     invoke-direct {p0}, Lba/vaktija/android/BaseActivity;-><init>()V
 
     return-void
@@ -41,247 +39,216 @@
 
 # virtual methods
 .method protected onCreate(Landroid/os/Bundle;)V
-    .locals 11
-    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
+    .locals 4
 
-    .prologue
-    const/4 v10, 0x1
+    .line 40
+    sget-object v0, Lba/vaktija/android/prefs/SettingsActivity;->TAG:Ljava/lang/String;
 
-    const/4 v9, 0x0
+    invoke-virtual {p0, v0}, Lba/vaktija/android/prefs/SettingsActivity;->setTheme(Ljava/lang/String;)V
 
-    .line 39
-    sget-object v6, Lba/vaktija/android/prefs/SettingsActivity;->TAG:Ljava/lang/String;
-
-    invoke-virtual {p0, v6}, Lba/vaktija/android/prefs/SettingsActivity;->setTheme(Ljava/lang/String;)V
-
-    .line 41
+    .line 42
     invoke-super {p0, p1}, Lba/vaktija/android/BaseActivity;->onCreate(Landroid/os/Bundle;)V
 
-    .line 43
-    const v6, 0x7f030021
+    const p1, 0x7f0b0025
 
-    invoke-virtual {p0, v6}, Lba/vaktija/android/prefs/SettingsActivity;->setContentView(I)V
-
-    .line 45
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;
-
-    move-result-object v6
-
-    invoke-virtual {v6, v9}, Landroid/support/v7/app/ActionBar;->setDisplayShowHomeEnabled(Z)V
+    .line 44
+    invoke-virtual {p0, p1}, Lba/vaktija/android/prefs/SettingsActivity;->setContentView(I)V
 
     .line 46
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->getSupportActionBar()Landroidx/appcompat/app/ActionBar;
 
-    move-result-object v6
+    move-result-object p1
 
-    invoke-virtual {v6, v10}, Landroid/support/v7/app/ActionBar;->setDisplayHomeAsUpEnabled(Z)V
+    const/4 v0, 0x0
 
-    .line 48
-    invoke-static {p0}, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;
+    invoke-virtual {p1, v0}, Landroidx/appcompat/app/ActionBar;->setDisplayShowHomeEnabled(Z)V
 
-    move-result-object v6
+    .line 47
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->getSupportActionBar()Landroidx/appcompat/app/ActionBar;
 
-    const v7, 0x7f03001b
+    move-result-object p1
 
-    const/4 v8, 0x0
+    const/4 v1, 0x1
 
-    invoke-virtual {v6, v7, v8}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;)Landroid/view/View;
-
-    move-result-object v1
+    invoke-virtual {p1, v1}, Landroidx/appcompat/app/ActionBar;->setDisplayHomeAsUpEnabled(Z)V
 
     .line 49
-    .local v1, "customAb":Landroid/view/View;
-    const v6, 0x7f0e0022
+    invoke-static {p0}, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;
 
-    invoke-virtual {v1, v6}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    move-result-object p1
 
-    move-result-object v5
+    const v2, 0x7f0b001f
 
-    check-cast v5, Landroid/widget/TextView;
+    const/4 v3, 0x0
 
-    .line 51
-    .local v5, "title":Landroid/widget/TextView;
-    const-string v6, "POSTAVKE"
+    invoke-virtual {p1, v2, v3}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;)Landroid/view/View;
 
-    invoke-virtual {v5, v6}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    move-result-object p1
+
+    const v2, 0x7f08002f
+
+    .line 50
+    invoke-virtual {p1, v2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object v2
+
+    check-cast v2, Landroid/widget/TextView;
+
+    const-string v3, "POSTAVKE"
 
     .line 52
-    sget-object v6, Lba/vaktija/android/App;->robotoCondensedRegular:Landroid/graphics/Typeface;
+    invoke-virtual {v2, v3}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    invoke-virtual {v5, v6}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V
+    .line 53
+    sget-object v3, Lba/vaktija/android/App;->robotoCondensedRegular:Landroid/graphics/Typeface;
 
-    .line 54
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;
-
-    move-result-object v0
+    invoke-virtual {v2, v3}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V
 
     .line 55
-    .local v0, "ab":Landroid/support/v7/app/ActionBar;
-    invoke-virtual {v0, v9}, Landroid/support/v7/app/ActionBar;->setDisplayShowHomeEnabled(Z)V
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->getSupportActionBar()Landroidx/appcompat/app/ActionBar;
+
+    move-result-object v2
 
     .line 56
-    invoke-virtual {v0, v9}, Landroid/support/v7/app/ActionBar;->setDisplayShowTitleEnabled(Z)V
+    invoke-virtual {v2, v0}, Landroidx/appcompat/app/ActionBar;->setDisplayShowHomeEnabled(Z)V
 
     .line 57
-    invoke-virtual {v0, v10}, Landroid/support/v7/app/ActionBar;->setDisplayShowCustomEnabled(Z)V
+    invoke-virtual {v2, v0}, Landroidx/appcompat/app/ActionBar;->setDisplayShowTitleEnabled(Z)V
 
     .line 58
-    invoke-virtual {v0, v1}, Landroid/support/v7/app/ActionBar;->setCustomView(Landroid/view/View;)V
+    invoke-virtual {v2, v1}, Landroidx/appcompat/app/ActionBar;->setDisplayShowCustomEnabled(Z)V
 
-    .line 60
-    new-instance v4, Lba/vaktija/android/prefs/SettingsFragment;
+    .line 59
+    invoke-virtual {v2, p1}, Landroidx/appcompat/app/ActionBar;->setCustomView(Landroid/view/View;)V
 
-    invoke-direct {v4}, Lba/vaktija/android/prefs/SettingsFragment;-><init>()V
+    .line 61
+    new-instance p1, Lba/vaktija/android/prefs/SettingsFragment;
 
-    .line 62
-    .local v4, "sf":Lba/vaktija/android/prefs/SettingsFragment;
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->getIntent()Landroid/content/Intent;
-
-    move-result-object v6
-
-    const-string v7, "EXTRA_FIRST_VISIBLE_ITEM"
-
-    invoke-virtual {v6, v7}, Landroid/content/Intent;->hasExtra(Ljava/lang/String;)Z
-
-    move-result v6
-
-    if-eqz v6, :cond_0
+    invoke-direct {p1}, Lba/vaktija/android/prefs/SettingsFragment;-><init>()V
 
     .line 63
     invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->getIntent()Landroid/content/Intent;
 
-    move-result-object v6
+    move-result-object v1
 
-    const-string v7, "EXTRA_FIRST_VISIBLE_ITEM"
+    const-string v2, "EXTRA_FIRST_VISIBLE_ITEM"
 
-    invoke-virtual {v6, v7, v9}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
+    invoke-virtual {v1, v2}, Landroid/content/Intent;->hasExtra(Ljava/lang/String;)Z
 
-    move-result v3
+    move-result v1
+
+    if-eqz v1, :cond_0
 
     .line 64
-    .local v3, "scrollPosition":I
     invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->getIntent()Landroid/content/Intent;
 
-    move-result-object v6
+    move-result-object p1
 
-    const-string v7, "EXTRA_ITEM_TOP"
+    invoke-virtual {p1, v2, v0}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
 
-    invoke-virtual {v6, v7, v9}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
-
-    move-result v2
+    move-result p1
 
     .line 65
-    .local v2, "itemTop":I
-    sget-object v6, Lba/vaktija/android/prefs/SettingsActivity;->TAG:Ljava/lang/String;
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->getIntent()Landroid/content/Intent;
 
-    new-instance v7, Ljava/lang/StringBuilder;
+    move-result-object v1
 
-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
+    const-string v2, "EXTRA_ITEM_TOP"
 
-    const-string v8, "scrollPosition="
+    invoke-virtual {v1, v2, v0}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
 
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    invoke-virtual {v7, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v7
-
-    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-static {v6, v7}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+    move-result v0
 
     .line 66
-    sget-object v6, Lba/vaktija/android/prefs/SettingsActivity;->TAG:Ljava/lang/String;
+    sget-object v1, Lba/vaktija/android/prefs/SettingsActivity;->TAG:Ljava/lang/String;
 
-    new-instance v7, Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v8, "itemTop="
+    const-string v3, "scrollPosition="
 
-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v7
+    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v7, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v7
+    move-result-object v2
 
-    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-static {v1, v2}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    move-result-object v7
+    .line 67
+    sget-object v1, Lba/vaktija/android/prefs/SettingsActivity;->TAG:Ljava/lang/String;
 
-    invoke-static {v6, v7}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    .line 68
-    invoke-static {v3, v2}, Lba/vaktija/android/prefs/SettingsFragment;->newInstance(II)Lba/vaktija/android/prefs/SettingsFragment;
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    move-result-object v4
+    const-string v3, "itemTop="
 
-    .line 71
-    .end local v2    # "itemTop":I
-    .end local v3    # "scrollPosition":I
-    :cond_0
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->getSupportFragmentManager()Landroid/support/v4/app/FragmentManager;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v6
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 69
+    invoke-static {p1, v0}, Lba/vaktija/android/prefs/SettingsFragment;->newInstance(II)Lba/vaktija/android/prefs/SettingsFragment;
+
+    move-result-object p1
 
     .line 72
-    invoke-virtual {v6}, Landroid/support/v4/app/FragmentManager;->beginTransaction()Landroid/support/v4/app/FragmentTransaction;
+    :cond_0
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->getSupportFragmentManager()Landroidx/fragment/app/FragmentManager;
 
-    move-result-object v6
-
-    const v7, 0x7f0e006a
+    move-result-object v0
 
     .line 73
-    invoke-virtual {v6, v7, v4}, Landroid/support/v4/app/FragmentTransaction;->replace(ILandroid/support/v4/app/Fragment;)Landroid/support/v4/app/FragmentTransaction;
+    invoke-virtual {v0}, Landroidx/fragment/app/FragmentManager;->beginTransaction()Landroidx/fragment/app/FragmentTransaction;
 
-    move-result-object v6
+    move-result-object v0
 
-    invoke-virtual {v6}, Landroid/support/v4/app/FragmentTransaction;->commit()I
+    const v1, 0x7f080046
 
     .line 74
+    invoke-virtual {v0, v1, p1}, Landroidx/fragment/app/FragmentTransaction;->replace(ILandroidx/fragment/app/Fragment;)Landroidx/fragment/app/FragmentTransaction;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Landroidx/fragment/app/FragmentTransaction;->commit()I
+
     return-void
 .end method
 
 .method public onOptionsItemSelected(Landroid/view/MenuItem;)Z
-    .locals 1
-    .param p1, "item"    # Landroid/view/MenuItem;
+    .locals 2
 
-    .prologue
-    .line 78
+    .line 79
     invoke-interface {p1}, Landroid/view/MenuItem;->getItemId()I
 
     move-result v0
 
-    packed-switch v0, :pswitch_data_0
+    const v1, 0x102002c
 
-    .line 84
+    if-eq v0, v1, :cond_0
+
+    .line 85
     invoke-super {p0, p1}, Lba/vaktija/android/BaseActivity;->onOptionsItemSelected(Landroid/view/MenuItem;)Z
 
-    move-result v0
+    move-result p1
 
-    :goto_0
-    return v0
-
-    .line 80
-    :pswitch_0
-    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->finish()V
+    return p1
 
     .line 81
-    const/4 v0, 0x1
+    :cond_0
+    invoke-virtual {p0}, Lba/vaktija/android/prefs/SettingsActivity;->finish()V
 
-    goto :goto_0
+    const/4 p1, 0x1
 
-    .line 78
-    nop
-
-    :pswitch_data_0
-    .packed-switch 0x102002c
-        :pswitch_0
-    .end packed-switch
+    return p1
 .end method

@@ -21,12 +21,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/FragmentPrayer;JJ)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/FragmentPrayer;
-    .param p2, "x0"    # J
-    .param p4, "x1"    # J
 
-    .prologue
-    .line 313
+    .line 315
     iput-object p1, p0, Lba/vaktija/android/FragmentPrayer$3;->this$0:Lba/vaktija/android/FragmentPrayer;
 
     invoke-direct {p0, p2, p3, p4, p5}, Landroid/os/CountDownTimer;-><init>(JJ)V
@@ -39,8 +35,7 @@
 .method public onFinish()V
     .locals 2
 
-    .prologue
-    .line 322
+    .line 324
     iget-object v0, p0, Lba/vaktija/android/FragmentPrayer$3;->this$0:Lba/vaktija/android/FragmentPrayer;
 
     iget-object v0, v0, Lba/vaktija/android/FragmentPrayer;->mPrayerTimer:Landroid/widget/TextView;
@@ -49,16 +44,13 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setVisibility(I)V
 
-    .line 323
     return-void
 .end method
 
 .method public onTick(J)V
-    .locals 3
-    .param p1, "millisUntilFinished"    # J
+    .locals 2
 
-    .prologue
-    .line 317
+    .line 319
     iget-object v0, p0, Lba/vaktija/android/FragmentPrayer$3;->this$0:Lba/vaktija/android/FragmentPrayer;
 
     iget-object v0, v0, Lba/vaktija/android/FragmentPrayer;->mPrayerTimer:Landroid/widget/TextView;
@@ -67,10 +59,9 @@
 
     invoke-static {p1, p2, v1}, Lba/vaktija/android/util/FormattingUtils;->getFormattedTime(JZ)Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object p1
 
-    invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    invoke-virtual {v0, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 318
     return-void
 .end method

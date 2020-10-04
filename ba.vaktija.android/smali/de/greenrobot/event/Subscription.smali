@@ -15,12 +15,8 @@
 
 # direct methods
 .method constructor <init>(Ljava/lang/Object;Lde/greenrobot/event/SubscriberMethod;I)V
-    .locals 1
-    .param p1, "subscriber"    # Ljava/lang/Object;
-    .param p2, "subscriberMethod"    # Lde/greenrobot/event/SubscriberMethod;
-    .param p3, "priority"    # I
+    .locals 0
 
-    .prologue
     .line 28
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -33,56 +29,48 @@
     .line 31
     iput p3, p0, Lde/greenrobot/event/Subscription;->priority:I
 
+    const/4 p1, 0x1
+
     .line 32
-    const/4 v0, 0x1
+    iput-boolean p1, p0, Lde/greenrobot/event/Subscription;->active:Z
 
-    iput-boolean v0, p0, Lde/greenrobot/event/Subscription;->active:Z
-
-    .line 33
     return-void
 .end method
 
 
 # virtual methods
 .method public equals(Ljava/lang/Object;)Z
-    .locals 4
-    .param p1, "other"    # Ljava/lang/Object;
-
-    .prologue
-    const/4 v1, 0x0
+    .locals 3
 
     .line 37
-    instance-of v2, p1, Lde/greenrobot/event/Subscription;
+    instance-of v0, p1, Lde/greenrobot/event/Subscription;
 
-    if-eqz v2, :cond_0
+    const/4 v1, 0x0
 
-    move-object v0, p1
+    if-eqz v0, :cond_0
 
     .line 38
-    check-cast v0, Lde/greenrobot/event/Subscription;
+    check-cast p1, Lde/greenrobot/event/Subscription;
 
     .line 39
-    .local v0, "otherSubscription":Lde/greenrobot/event/Subscription;
-    iget-object v2, p0, Lde/greenrobot/event/Subscription;->subscriber:Ljava/lang/Object;
+    iget-object v0, p0, Lde/greenrobot/event/Subscription;->subscriber:Ljava/lang/Object;
 
-    iget-object v3, v0, Lde/greenrobot/event/Subscription;->subscriber:Ljava/lang/Object;
+    iget-object v2, p1, Lde/greenrobot/event/Subscription;->subscriber:Ljava/lang/Object;
 
-    if-ne v2, v3, :cond_0
+    if-ne v0, v2, :cond_0
 
-    iget-object v2, p0, Lde/greenrobot/event/Subscription;->subscriberMethod:Lde/greenrobot/event/SubscriberMethod;
+    iget-object v0, p0, Lde/greenrobot/event/Subscription;->subscriberMethod:Lde/greenrobot/event/SubscriberMethod;
 
-    iget-object v3, v0, Lde/greenrobot/event/Subscription;->subscriberMethod:Lde/greenrobot/event/SubscriberMethod;
+    iget-object p1, p1, Lde/greenrobot/event/Subscription;->subscriberMethod:Lde/greenrobot/event/SubscriberMethod;
 
-    invoke-virtual {v2, v3}, Lde/greenrobot/event/SubscriberMethod;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, p1}, Lde/greenrobot/event/SubscriberMethod;->equals(Ljava/lang/Object;)Z
 
-    move-result v2
+    move-result p1
 
-    if-eqz v2, :cond_0
+    if-eqz p1, :cond_0
 
     const/4 v1, 0x1
 
-    .line 42
-    .end local v0    # "otherSubscription":Lde/greenrobot/event/Subscription;
     :cond_0
     return v1
 .end method
@@ -90,7 +78,6 @@
 .method public hashCode()I
     .locals 2
 
-    .prologue
     .line 48
     iget-object v0, p0, Lde/greenrobot/event/Subscription;->subscriber:Ljava/lang/Object;
 

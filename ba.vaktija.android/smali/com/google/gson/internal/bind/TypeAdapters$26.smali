@@ -1,4 +1,4 @@
-.class final Lcom/google/gson/internal/bind/TypeAdapters$26;
+.class Lcom/google/gson/internal/bind/TypeAdapters$26;
 .super Ljava/lang/Object;
 .source "TypeAdapters.java"
 
@@ -7,12 +7,12 @@
 
 
 # annotations
-.annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lcom/google/gson/internal/bind/TypeAdapters;->newEnumTypeHierarchyFactory()Lcom/google/gson/TypeAdapterFactory;
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lcom/google/gson/internal/bind/TypeAdapters;
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
-    accessFlags = 0x8
+    accessFlags = 0x0
     name = null
 .end annotation
 
@@ -21,8 +21,7 @@
 .method constructor <init>()V
     .locals 0
 
-    .prologue
-    .line 752
+    .line 572
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -31,68 +30,45 @@
 
 # virtual methods
 .method public create(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
-    .locals 2
-    .param p1, "gson"    # Lcom/google/gson/Gson;
+    .locals 1
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<T:",
             "Ljava/lang/Object;",
             ">(",
             "Lcom/google/gson/Gson;",
-            "Lcom/google/gson/reflect/TypeToken",
-            "<TT;>;)",
-            "Lcom/google/gson/TypeAdapter",
-            "<TT;>;"
+            "Lcom/google/gson/reflect/TypeToken<",
+            "TT;>;)",
+            "Lcom/google/gson/TypeAdapter<",
+            "TT;>;"
         }
     .end annotation
 
-    .prologue
-    .line 755
-    .local p2, "typeToken":Lcom/google/gson/reflect/TypeToken;, "Lcom/google/gson/reflect/TypeToken<TT;>;"
+    .line 575
     invoke-virtual {p2}, Lcom/google/gson/reflect/TypeToken;->getRawType()Ljava/lang/Class;
 
-    move-result-object v0
+    move-result-object p2
 
-    .line 756
-    .local v0, "rawType":Ljava/lang/Class;, "Ljava/lang/Class<-TT;>;"
-    const-class v1, Ljava/lang/Enum;
+    const-class v0, Ljava/sql/Timestamp;
 
-    invoke-virtual {v1, v0}, Ljava/lang/Class;->isAssignableFrom(Ljava/lang/Class;)Z
+    if-eq p2, v0, :cond_0
 
-    move-result v1
+    const/4 p1, 0x0
 
-    if-eqz v1, :cond_0
+    return-object p1
 
-    const-class v1, Ljava/lang/Enum;
-
-    if-ne v0, v1, :cond_1
-
-    .line 757
+    .line 579
     :cond_0
-    const/4 v1, 0x0
+    const-class p2, Ljava/util/Date;
 
-    .line 762
-    :goto_0
-    return-object v1
+    invoke-virtual {p1, p2}, Lcom/google/gson/Gson;->getAdapter(Ljava/lang/Class;)Lcom/google/gson/TypeAdapter;
 
-    .line 759
-    :cond_1
-    invoke-virtual {v0}, Ljava/lang/Class;->isEnum()Z
+    move-result-object p1
 
-    move-result v1
+    .line 580
+    new-instance p2, Lcom/google/gson/internal/bind/TypeAdapters$26$1;
 
-    if-nez v1, :cond_2
+    invoke-direct {p2, p0, p1}, Lcom/google/gson/internal/bind/TypeAdapters$26$1;-><init>(Lcom/google/gson/internal/bind/TypeAdapters$26;Lcom/google/gson/TypeAdapter;)V
 
-    .line 760
-    invoke-virtual {v0}, Ljava/lang/Class;->getSuperclass()Ljava/lang/Class;
-
-    move-result-object v0
-
-    .line 762
-    :cond_2
-    new-instance v1, Lcom/google/gson/internal/bind/TypeAdapters$EnumTypeAdapter;
-
-    invoke-direct {v1, v0}, Lcom/google/gson/internal/bind/TypeAdapters$EnumTypeAdapter;-><init>(Ljava/lang/Class;)V
-
-    goto :goto_0
+    return-object p2
 .end method

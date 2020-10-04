@@ -3,12 +3,12 @@
 .source "SettingsFragment.java"
 
 # interfaces
-.implements Landroid/content/DialogInterface$OnClickListener;
+.implements Ljava/lang/Runnable;
 
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lba/vaktija/android/prefs/SettingsFragment;->showFileExistsDialog()V
+    value = Lba/vaktija/android/prefs/SettingsFragment;->onPreferenceChange(Landroidx/preference/Preference;Ljava/lang/Object;)Z
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -24,10 +24,8 @@
 # direct methods
 .method constructor <init>(Lba/vaktija/android/prefs/SettingsFragment;)V
     .locals 0
-    .param p1, "this$0"    # Lba/vaktija/android/prefs/SettingsFragment;
 
-    .prologue
-    .line 487
+    .line 290
     iput-object p1, p0, Lba/vaktija/android/prefs/SettingsFragment$4;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -37,33 +35,21 @@
 
 
 # virtual methods
-.method public onClick(Landroid/content/DialogInterface;I)V
-    .locals 4
-    .param p1, "dialog"    # Landroid/content/DialogInterface;
-    .param p2, "which"    # I
+.method public run()V
+    .locals 1
 
-    .prologue
-    .line 490
-    new-instance v0, Lba/vaktija/android/prefs/SettingsFragment$SettingsExporter;
+    .line 293
+    iget-object v0, p0, Lba/vaktija/android/prefs/SettingsFragment$4;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
 
-    iget-object v1, p0, Lba/vaktija/android/prefs/SettingsFragment$4;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
+    invoke-virtual {v0}, Lba/vaktija/android/prefs/SettingsFragment;->requireContext()Landroid/content/Context;
 
-    iget-object v2, p0, Lba/vaktija/android/prefs/SettingsFragment$4;->this$0:Lba/vaktija/android/prefs/SettingsFragment;
+    move-result-object v0
 
-    invoke-virtual {v2}, Lba/vaktija/android/prefs/SettingsFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
+    invoke-static {v0}, Lba/vaktija/android/service/NotifManagerFactory;->getNotifManager(Landroid/content/Context;)Lba/vaktija/android/service/NotifManager;
 
-    move-result-object v2
+    move-result-object v0
 
-    const/4 v3, 0x1
+    invoke-interface {v0}, Lba/vaktija/android/service/NotifManager;->updateNotification()V
 
-    invoke-direct {v0, v1, v2, v3}, Lba/vaktija/android/prefs/SettingsFragment$SettingsExporter;-><init>(Lba/vaktija/android/prefs/SettingsFragment;Landroid/content/Context;Z)V
-
-    const/4 v1, 0x0
-
-    new-array v1, v1, [Ljava/lang/Void;
-
-    invoke-virtual {v0, v1}, Lba/vaktija/android/prefs/SettingsFragment$SettingsExporter;->execute([Ljava/lang/Object;)Landroid/os/AsyncTask;
-
-    .line 491
     return-void
 .end method

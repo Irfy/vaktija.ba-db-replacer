@@ -8,8 +8,8 @@
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
-            "Ljava/lang/Class",
-            "<*>;)Z"
+            "Ljava/lang/Class<",
+            "*>;)Z"
         }
     .end annotation
 .end method

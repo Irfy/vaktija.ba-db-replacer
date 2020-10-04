@@ -1,6 +1,5 @@
 .class public final Lba/vaktija/android/R$array;
 .super Ljava/lang/Object;
-.source "R.java"
 
 
 # annotations
@@ -15,17 +14,15 @@
 
 
 # static fields
-.field public static final dhuhrTimeEntries:I = 0x7f0c0000
+.field public static final dhuhrTimeEntries:I = 0x7f020000
 
-.field public static final dhuhrTimeValues:I = 0x7f0c0001
+.field public static final dhuhrTimeValues:I = 0x7f020001
 
 
 # direct methods
-.method public constructor <init>()V
+.method private constructor <init>()V
     .locals 0
 
-    .prologue
-    .line 29
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
