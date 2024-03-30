@@ -52,8 +52,8 @@ while (my $line = <$fh>) {
     }
     die "No prototype for first-ever line" unless $prototype;
 
-    $line = substr($line, -$prototype->{length}); # shorten line according to prototype => avoid utf8 chars
-    print "processing shortened line [$line]\n" if $debug;
+    $line = substr((my $orgline = $line), -$prototype->{length}); # shorten line according to prototype => avoid utf8 chars
+    print "processing [-$prototype->{length}] shortened line [$orgline] -> [$line]\n" if $debug;
 
     printf("%02d.%02d.", $day, $month);
     printf $csv "%d,%02d-%02d", ++$nrecords, $month, $day;
@@ -113,6 +113,7 @@ sub deduce_prototype {
     # make sure to begin with two spaces to match the regex below
     # for consistency with other overrides, use 01 for january, etc.
     my $override = $conf->{prototypes}{sprintf("%02d", $month)};
+    print "Overriding line [$line] with override [$override] from config\n" if $debug && $override;
     $line = $override if $override;
 
     my $regex = qr/  (?: +\d\d? +\d\d){6}$/;
